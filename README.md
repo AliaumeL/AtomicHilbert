@@ -1,3 +1,5 @@
+[![CI](https://github.com/AliaumeL/AtomicHilbert/actions/workflows/ci.yaml/badge.svg)](https://github.com/AliaumeL/AtomicHilbert/actions/workflows/ci.yaml)
+
 # AtomicHilbert
 
 > Equivariant Ideal Membership: Hilbert at the atomic age
