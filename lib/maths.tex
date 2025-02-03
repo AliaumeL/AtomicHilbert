@@ -5,6 +5,8 @@
 \NewDocumentCommand{\seqof}{ m O{n \in \Nat} }{\left( #1 \right)_{#2}}
 \NewDocumentCommand{\defined}{ }{\triangleq}
 
+\newcommand{\subfin}{\subset_{\text{fin}}}
+
 \NewDocumentCommand{\range}{ O{1} m }{[#1, #2]}
 
 % functions of all sorts (injective, partial, surjective)
@@ -55,6 +57,9 @@
 \newcommand{\K}{\mathbb{K}}
 \newcommand{\X}{\mathcal{X}}
 \newcommand{\Y}{\mathcal{Y}}
+
+\NewDocumentCommand{\Basis}{O{B}}{\mathcal{#1}}
+\NewDocumentCommand{\LBasis}{O{B} m}{\mathcal{#1}_{#2}}
 
 \newcommand{\poly}[2]{#1[#2]}
 \newcommand{\aut}[2][]{\mathsf{Aut}_{#1}{(#2)}}
