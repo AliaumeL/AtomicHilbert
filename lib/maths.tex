@@ -1,0 +1,56 @@
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\poly}[2]{#1[#2]}
+\newcommand{\aut}[2][]{\mathsf{Aut}_{#1}{(#2)}}
+\newcommand{\mon}[2][]{\mathsf{Mon}_{#1}(#2)}
+\newcommand{\perm}[1]{\mathsf{Perm}(#1)}
+\newcommand{\otu}[2]{#1^{(#2)}}
+\newcommand{\group}{\mathcal{G}}
+\newcommand{\gen}[2]{\langle #1\rangle_{#2}}
+\newcommand{\radoG}{\mathbb{G}_{\mathsf{Rado}}}
+\newcommand{\radoV}{\mathbb{V}_{\mathsf{Rado}}}
+\newcommand{\radoE}{\mathbb{E}_{\mathsf{Rado}}}
+\newcommand{\cycleSet}[1][]{\mathsf{Cycles}_{#1}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\ordinal}{\eta}
+\newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
+\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
+\newcommand{\hbp}{\text{Hilbert's basis property}}
+\newcommand{\orbit}[2][]{\mathsf{orbit}_{#1}{(#2)}}
+\newcommand{\order}[1][]{\prec_{#1}}
+\newcommand{\ordereq}[1][]{\preceq_{#1}}
+\newcommand{\revlex}[1][]{<_{\mathsf{RevLex}}^{#1}}
+\newcommand{\revlexeq}[1][]{\leq_{\mathsf{RevLex}}^{#1}}
+\newcommand{\gr}{Gr\"obner}
+\newcommand{\dom}{\mathsf{dom}}
+\newcommand{\spoly}[2]{\mathsf{S}(#1,#2)}
+\newcommand{\spolyset}[2]{\mathsf{Sset}_{#1}(#2)}
+\newcommand{\spolytext}{$\mathsf{S}$-polynomial}
+\newcommand{\lcm}{\mathsf{LCM}}
+\newcommand{\lc}[1][]{\mathsf{LC}_{#1}}
+\newcommand{\lt}[1][]{\mathsf{LT}_{#1}}
+\newcommand{\reducstep}[1]{\to_{#1}}
+\newcommand{\reduc}[1]{\to^*_{#1}}
+\newcommand{\rem}[2]{\mathsf{Rem}_{#1}(#2)}
+\newcommand{\closure}[1]{\widehat{#1}}
+\newcommand{\wforder}{\triangleleft}
+
+\newcommand{\probBasic}[4]
+{
+\begin{flalign*}
+\quad
+\begin{tabular}{l  l}
+  \multicolumn{2}{l}{\mathsf{#1}}\\
+  \textbf{Input:}    & #2 \\
+  \textbf{#4} & #3
+\end{tabular}
+&&
+\end{flalign*}
+}
+
+\newcommand{\prob}[3]
+{
+\probBasic{#1}{#2}{#3}{Question:}
+}
