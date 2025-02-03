@@ -1,0 +1,36 @@
+title: Deciding the Equivariant Ideal Membership Problem
+repository: "https://github.com/AliaumeL/AtomicHilbert"
+author:
+  - name: Aliaume Lopez
+    initials: A. Lopez
+    email: ad.lopez@uw.edu.pl
+    affiliation: University of Warsaw, Poland
+    orcid: "0000-0002-4205-327X"
+  - name: Arka Ghosh
+    email: a.ghosh@uw.edu.pl
+    initials: A. Ghosh
+    affiliation: Université de Bordeaux, France
+    orcid: "0000-0003-3839-8459"
+abstract: |
+  Polynomials with infinite number of variables do not have the
+  Hilbert basis property. However, if the variables are considered
+  up to the action of a group, one can focus on the equivariant
+  ideals, for which it has recently been proven that
+  they do have the Hilbert basis property, under mild
+  assumptions on the group action. We extend this result
+  by showing that the ideal membership problem (that is, given a polynomial,
+  does it belong to a given equivariant ideal) is decidable
+  under similar assumptions. This is significant because
+  it paves the way towards decision procedures based on the Hilbert
+  method in the presence of infinite data sturctures with symmetries.
+classification:
+  ccdesc:
+    - Mathematics of computing~Algebra~Polynomials
+    - Theory of computation~Logic and verification~Model checking
+keywords:
+  - equivariant ideal
+  - Hilbert basis
+  - ideal membership problem
+  - orbit finite
+  - oligomorphic
+  - well-quasi-ordering
