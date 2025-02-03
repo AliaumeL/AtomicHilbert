@@ -19,3 +19,8 @@ P = \sum_{i=1}^n q_i \pi_i(p_i) s_i
 $$
 
 
+## How to build
+
+```bash 
+make atomic.pdf
+```
