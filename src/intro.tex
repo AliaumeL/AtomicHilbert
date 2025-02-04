@@ -5,6 +5,12 @@ Hilbert’s bases theorem and Gröbner basis computations
 are central tools. But people want to use infinite sets
 of indeterminates.
 
+\cite{CLO15}
+\cite{KS91}
+\cite{KRTH90}
+\cite{BRDR11,HIKRLE18}.
+
+
 
 \cite{GHOLAS24} provides a relatively tight understanding of sets $\X$ of
 indeterminates equipped with a \kl{group action} $\group \curvearrowright \X$
@@ -19,6 +25,26 @@ that have the Hilbert basis property, based on a property of the
     \item The set of \kl{monomials} is well-quasi-ordered
         by the divisibility up-to $\group$ relation.
 \end{itemize}
+
+\begin{tikzpicture}[
+    prop/.style={draw, 
+                 rectangle,
+                 text width=0.2\textwidth,
+                 minimum height=2cm,
+                 rounded corners, 
+                 fill=D5hint,
+                 align=center},
+    impl/.style={->, >=stealth, thick},
+    ]
+    % one node per property of the itemize above
+    \node[prop] (prop1) at (0,0) {WQO + $\exists$ linear ordering};
+    \node[prop] (prop2) at (4,0) {The Hilbert basis property holds};
+    \node[prop] (prop3) at (8,0) {WQO};
+
+    % arrows between the nodes
+    \draw[impl] (prop1) -- (prop2);
+    \draw[impl] (prop2) -- (prop3);
+\end{tikzpicture}
 
 However, even in the strong case where the \kl{group action} was supposed to
 \kl{respect a linear order}, the decidability of the corresponding ideal
