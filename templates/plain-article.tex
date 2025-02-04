@@ -59,6 +59,9 @@ $endif$
 \tikzset{every state/.style={minimum size=1pt}}
 \usepackage{tikz-cd}
 
+% ornaments
+\usepackage{pgfornament}
+
 
 % links inside the document
 \usepackage{hyperref}
@@ -81,6 +84,19 @@ $endif$
 
 % Colors 
 \usepackage{ensps-colorscheme}
+% parametrize knowledge colors and style
+% intro => A4 + emph 
+% kl    => normal color, normal size not emph
+\knowledgestyle{intro notion}{color={A2}, emphasize}
+\knowledgestyle{notion}{color={C1}}
+\hypersetup{
+    colorlinks=true,
+    breaklinks=true,
+    linkcolor=A4,
+    citecolor=A4,
+    urlcolor=A4,
+    filecolor=A4,
+}
 
 
 % we include whatever the user wants to include in the header
@@ -121,6 +137,8 @@ $else$
 \newcommand{\repositoryUrl}{\url{$if(repository.url)$$repository.url$$else$$repository$$endif$}}
 $endif$
 
+\knowledge{notion}
+ | kl-usage
 
 % Now, we create the document itself.
 \begin{document}
@@ -133,7 +151,16 @@ $if(abstract)$
 $else$
     Please write an abstract in the \texttt{paper-meta.yaml} file.
 $endif$
+$if(keywords)$
+    \paragraph{Keywords:}
+    $for(keywords)$$it$$sep$, $endfor$
+$endif$
+\paragraph{Repository:} \repositoryUrl
 \end{abstract}
+
+\klogo\ This document uses \href{https://ctan.org/pkg/knowledge}{knowledge}:
+\kl[kl-usage]{notion} points to its \intro[kl-usage]{definition}. 
+
 
 % Include the content of the paper
 $body$

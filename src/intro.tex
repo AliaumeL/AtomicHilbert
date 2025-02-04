@@ -24,6 +24,31 @@ However, even in the strong case where the \kl{group action} was supposed to
 \kl{respect a linear order}, the decidability of the corresponding ideal
 membership problem was left open.
 
+\paragraph{Contributions.}
+
+\begin{theorem}
+    \label{thm:decid-equiv-idl}
+    Let $(\X, \group)$ be an \kl{effectively oligomorphic} set of indeterminates, such that the 
+    action of $\group$ on $\X$ \kl{respects a computable linear order}.
+    Then, the following implication holds:
+    \begin{enumerate}
+        \item \label{item:mono-wqo-om1}
+            The set of \kl{$(\omega+1)$-monomials}
+            is \kl{well-quasi-ordered} by 
+            the \kl{divisibility up-to $\group$} relation.
+        \item \label{item:decid-equiv-idl}
+            The \kl{equivariant ideal membership problem} is decidable in $\poly{\K}{\X}$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{conjecture}
+    \label{lem:undecid-equiv-idl}
+    Let $(\X, \group)$ be any 
+    set of indeterminates equipped with a \kl{group action} $\group \curvearrowright \X$. If 
+    $\mon{\X}$ is not a \kl{well-quasi-order}
+    for the \kl{divisibility up-to $\group$} relation, then the \kl{equivariant ideal membership problem} is undecidable in $\poly{\K}{\X}$.
+\end{conjecture}
+
 
 \paragraph{Organisation of the paper.}
 \begin{enumerate}

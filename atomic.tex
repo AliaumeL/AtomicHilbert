@@ -57,6 +57,9 @@
 \tikzset{every state/.style={minimum size=1pt}}
 \usepackage{tikz-cd}
 
+% ornaments
+\usepackage{pgfornament}
+
 
 % links inside the document
 \usepackage{hyperref}
@@ -79,6 +82,19 @@
 
 % Colors 
 \usepackage{ensps-colorscheme}
+% parametrize knowledge colors and style
+% intro => A4 + emph 
+% kl    => normal color, normal size not emph
+\knowledgestyle{intro notion}{color={A2}, emphasize}
+\knowledgestyle{notion}{color={C1}}
+\hypersetup{
+    colorlinks=true,
+    breaklinks=true,
+    linkcolor=A4,
+    citecolor=A4,
+    urlcolor=A4,
+    filecolor=A4,
+}
 
 
 % we include whatever the user wants to include in the header
@@ -101,10 +117,12 @@ Arka Ghosh\thanks{Université de Bordeaux, France}
 
 % For the date, we first check if the user has provided a date,
 % and otherwise use the git meta inforamtion (if available).
-\date{2025-02-03 14:22:31 +0100\footnote{9ba15fb8cdf5804759ee2f56ea07d83ca096e8f6 -- branch main at git@github.com:AliaumeL/AtomicHilbert.git}}
+\date{2025-02-03 17:12:55 +0100\footnote{7a27f1a8fef921082f34231b20f38cc1c68bb5c1 -- branch main at git@github.com:AliaumeL/AtomicHilbert.git}}
 
 \newcommand{\repositoryUrl}{\url{https://github.com/AliaumeL/AtomicHilbert}}
 
+\knowledge{notion}
+ | kl-usage
 
 % Now, we create the document itself.
 \begin{document}
@@ -113,7 +131,14 @@ Arka Ghosh\thanks{Université de Bordeaux, France}
 % Print the abstract
 \begin{abstract}
     Polynomials with infinite number of variables do not have the Hilbert basis property. However, if the variables are considered up to the action of a group, one can focus on the equivariant ideals, for which it has recently been proven that they do have the Hilbert basis property, under mild assumptions on the group action. We extend this result by showing that the ideal membership problem (that is, given a polynomial, does it belong to a given equivariant ideal) is decidable under similar assumptions. This is significant because it paves the way towards decision procedures based on the Hilbert method in the presence of infinite data sturctures with symmetries.
+    \paragraph{Keywords:}
+    equivariant ideal, Hilbert basis, ideal membership problem, orbit finite, oligomorphic, well-quasi-ordering
+\paragraph{Repository:} \repositoryUrl
 \end{abstract}
+
+\klogo\ This document uses \href{https://ctan.org/pkg/knowledge}{knowledge}:
+\kl[kl-usage]{notion} points to its \intro[kl-usage]{definition}. 
+
 
 % Include the content of the paper
 \input{src/intro.tex}
