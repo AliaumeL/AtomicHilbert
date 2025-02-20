@@ -1,15 +1,13 @@
+% LTeX: language=en
 \section{Preliminaries}
 \label{sec:preliminaries}
 
-\paragraph{Orders.} We assume basic familiarity with
-ordinals, and in particular with the ordinal $\omega+1$.
-\todo{define ordinals? really?} A sequence $\seqof{x_i}[i
-\in \N]$ of a quasi-ordered set $(X,\leq)$ is
-\intro(wqo){good} if it contains an increasing pair $i <
-j$ such that $x_i \leq x_j$. A sequence that is not
-\kl(wqo){good} is a \reintro{bad sequence}. A set
-$(X,\leq)$ is \intro{well-quasi-orderded} if it does not
-contain any infinite \kl{bad sequence}.
+\paragraph{Orders.} We assume basic familiarity with ordinals, and in
+particular with the ordinal $\omega+1$. A sequence $\seqof{x_i}[i \in \N]$ of a
+quasi-ordered set $(X,\leq)$ is \intro(wqo){good} if it contains an increasing
+pair $i < j$ such that $x_i \leq x_j$. A sequence that is not \kl(wqo){good} is
+a \reintro{bad sequence}. A set $(X,\leq)$ is \intro{well-quasi-orderded} if it
+does not contain any infinite \kl{bad sequence}.
 
 \paragraph{Polynomials, monomials, divisibility and
 ideals.} We write $\poly{\K}{\X}$ for the ring of
@@ -32,34 +30,31 @@ of all polynomials that can be written as follows:
 $\,\sum_{i=1}^n q_i s_i$ for some $n \in \N$, $q_i \in
 \poly{\K}{\X}$ and $s_i \in S$.
 
-\todo[inline]{
-    Monomials = labelled structures,
-    we can label them with $\N$ (usual monomials)
-    or with any well-quasi-ordered set (WQO) $X$.
-}
-Among \kl{polynomials}, we will be interested in \intro{monomials}, which are
-products of indeterminates, the set of which we denote by $\mon{\X}$. Because a
-monomial is essentially a multiset of indeterminates, we can see it as a
-function from $\X \to \N$ with finite support. In particular, a monomial $m$
-\kl{divides} a monomial $n$ if and only if $m(x) \leq n(x)$ for all $x \in \X$.
-Given an \kl{ordinal} $\alpha$, we will write $\mon[\alpha]{\X}$ for the
-extension of \kl{monomials} to the set of all functions from $\X$ to $\alpha$
-with finite support, with the same notion of \kl{divisibility}.
-
+\AP Among \kl{polynomials}, we will be interested in \intro{monomials}, which
+are products of indeterminates, the set of which we denote by $\mon{\X}$. Note
+that a monomial is simply a function $M \colon \X \topartial \N$ with finite
+domain. We will extend the notion of monomials to functions of the form $M
+\colon \X \topartial (X, \leq)$, where $(X, \leq)$ is a quasi-ordered set, and
+write $\mon[X]{\X}$ for the set of all such functions. The notion of
+\kl{divisibility} is naturally extended: given two generalized monomials $M_1,
+M_2 \in \mon[X]{\X}$, we say that $M_1$ divides $M_2$ if for all $x \in
+\dom(M_1)$, we have $M_1(x) \leq M_2(x)$. We will mostly be interested in the
+case where $(X, \leq)$ is an \kl{ordinal} $\alpha$, or a finite set equipped
+with the equality relation.
 
 \paragraph{Group actions and equivariant ideals.} Recall that a \intro{group}
 $\group$ is a set equipped with a binary operation that is associative, has an
 identity element and has inverses. In our setting, we are interested in
 infinite sets $\X$ of indeterminates that is equipped with a \intro{group
-action} $\group \curvearrowright \X$. This means that for each $g \in \group$,
+action} $\group \actson \X$. This means that for each $g \in \group$,
 we have a bijection $\X \tobij \X$ that we denote by $x \mapsto g \cdot x$. A
 set $S \subseteq \X$ is \intro{equivariant} under the action of $\group$ if for
 all $g \in \group$ and $x \in S$, we have $g \cdot x \in S$.
 
-Given a group action $\group \curvearrowright \X$, we can extend it to a group
-action $\group \curvearrowright \poly{\K}{\X}$ by defining $g \cdot p$ as the
+Given a group action $\group \actson \X$, we can extend it to a group
+action $\group \actson \poly{\K}{\X}$ by defining $g \cdot p$ as the
 polynomial obtained by applying $g$ to each indeterminate of $p$, that is
-extending $\group \curvearrowright \X$ by linearity additively, and
+extending $\group \actson \X$ by linearity additively, and
 multiplicatively for \kl{monomials}. In this case, an \intro{equivariant ideal}
 is an ideal $I$ of $\poly{\K}{\X}$ that is \kl{equivariant} under the action of
 $\group$. We give in \cref{ex:idl-equiv} an example and a
@@ -114,3 +109,28 @@ a linear order}, i.e., such that $X$ is equipped with a linear order $\leq$
 that is \kl{invariant} under the action of $\group$. This means that for all $g
 \in \group$ and $x,y \in \X$, we have $x \leq y \iff g \cdot x \leq g \cdot y$.
 
+
+
+\paragraph{Gröbner Bases.} \AP Given a total ordering $\order$ on $\X$, one can
+consider the \intro{monomial ordering} $\revlex$ on $\mon{\X}$ defined by $M_1
+\revlex M_2$ if and only if there exists $x \in \dom(M_1) \cap \dom(M_2)$ such
+that $M_1(x) < M_2(x)$ and for all $x \order y$, we have $M_1(y) = M_2(y)$
+
+This is in turned used to define the notions of \intro{leading monomial},
+\intro{leading coefficient}, \intro{leading term}, and \intro{characteristic
+monomial}.
+\begin{description}
+    \item[The leading monomial] of a polynomial $p$ is the largest monomial
+        appearing in $p$ with respect to $\revlex$.
+    \item[The leading coefficient] of a polynomial $p$ is the coefficient of
+        its leading monomial.
+    \item[The leading term] of a polynomial $p$ is the product of its leading
+        coefficient and its leading monomial.
+    \item[The characteristic monomial] of a polynomial $p$ is the monomial
+        obtained by multiplying its \kl{leading monomial} with all indeterminates
+        appearing in $p$.
+\end{description}
+
+A \intro{Gröbner basis} $\Basis$ of an ideal $I$ is a set of polynomials such
+that for all $p \in I$, there exists $q \in \Basis$ such that the \kl{leading
+monomial} of $q$ \kl{divides} the \kl{leading monomial} of $p$.

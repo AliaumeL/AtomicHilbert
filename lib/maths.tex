@@ -2,8 +2,11 @@
 \NewDocumentCommand{\set}{ m }{\{ #1 \}}
 \NewDocumentCommand{\setof}{ m m }{\{ #1 \mid #2 \}}
 \NewDocumentCommand{\card}{ m }{\left| #1 \right|}
-\NewDocumentCommand{\seqof}{ m O{n \in \Nat} }{\left( #1 \right)_{#2}}
+\NewDocumentCommand{\seqof}{ m O{n \in \N} }{\left( #1 \right)_{#2}}
+
 \NewDocumentCommand{\defined}{ }{\triangleq}
+\newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
+\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
 
 \newcommand{\subfin}{\subset_{\text{fin}}}
 
@@ -58,6 +61,18 @@
 \newcommand{\X}{\mathcal{X}}
 \newcommand{\Y}{\mathcal{Y}}
 
+% group actions
+\newcommand{\actson}{\curvearrowright}
+
+% orders 
+\NewDocumentCommand{\divleq}{}{
+    \mathrel{\sqsubseteq^{\mathrm{div}}}
+}
+\NewDocumentCommand{\gdivleq}{ O{\group} }{
+    \mathrel{\sqsubseteq^{\mathrm{div}}_{#1}}
+}
+
+
 \NewDocumentCommand{\Basis}{O{B}}{\mathcal{#1}}
 \NewDocumentCommand{\LBasis}{O{B} m}{\mathcal{#1}_{#2}}
 
@@ -72,19 +87,25 @@
 \newcommand{\radoV}{\mathbb{V}_{\mathsf{Rado}}}
 \newcommand{\radoE}{\mathbb{E}_{\mathsf{Rado}}}
 \newcommand{\cycleSet}[1][]{\mathsf{Cycles}_{#1}}
+
 \newcommand{\ordinal}{\eta}
-\newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
-\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
+
+
 \newcommand{\hbp}{\text{Hilbert's basis property}}
 \newcommand{\orbit}[2][]{\mathsf{orbit}_{#1}{(#2)}}
+
 \newcommand{\order}[1][]{\prec_{#1}}
 \newcommand{\ordereq}[1][]{\preceq_{#1}}
+
+\NewDocumentCommand{\sOrderLt}{O{S}}{\prec_{#1}}
+\NewDocumentCommand{\sOrderLeq}{O{S}}{\preceq_{#1}}
+
 \newcommand{\revlex}[1][]{<_{\mathsf{RevLex}}^{#1}}
 \newcommand{\revlexeq}[1][]{\leq_{\mathsf{RevLex}}^{#1}}
 \newcommand{\gr}{Gr\"obner}
 \newcommand{\dom}{\mathsf{dom}}
-\newcommand{\spoly}[2]{\mathsf{S}(#1,#2)}
-\newcommand{\spolyset}[2]{\mathsf{Sset}_{#1}(#2)}
+\newcommand{\spoly}[2]{\mathsf{D}(#1,#2)}
+\newcommand{\spolyset}{\mathsf{DSet}}
 \newcommand{\spolytext}{$\mathsf{S}$-polynomial}
 \newcommand{\lcm}{\mathsf{LCM}}
 \newcommand{\lc}[1][]{\mathsf{LC}_{#1}}
@@ -94,6 +115,9 @@
 \newcommand{\rem}[2]{\mathsf{Rem}_{#1}(#2)}
 \newcommand{\closure}[1]{\widehat{#1}}
 \newcommand{\wforder}{\triangleleft}
+
+\newcommand{\lm}[1][]{\mathop{\mathsf{LM}_{#1}}}
+\newcommand{\cm}[1][]{\mathop{\mathsf{CM}_{#1}}}
 
 \newcommand{\probBasic}[4]
 {

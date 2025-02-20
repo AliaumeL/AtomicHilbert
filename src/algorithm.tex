@@ -1,9 +1,9 @@
+% LTeX: language=en
 \section{Decision Procedure for the Equivariant Ideal Membership Problem}
 \label{sec:algorithm}
 
 \todo[inline]{
-    This is probably incorrect written as-is. Do the actual 
-    proof and then rewrite this introduction.
+    It is known that an equivariant Gröbner basis exists.
 }
 
 In \cite{GHOLAS24}, an \intro{equivariant Gröbner basis} 
@@ -48,6 +48,30 @@ Gröbner basis that works ``for this $S$'', as formalised hereafter.
     for some finite set $S \subfin \X$.
 \end{definition}
 
+The following lemma states that computing \kl{local Gröbner bases} is enough to
+decide the \kl{equivariant ideal membership problem}. It is not known whether
+one can use the computability of \kl{local Gröbner bases} to compute an
+\kl{equivariant Gröbner basis}, even in simple cases.
+
+\begin{lemma}
+    Assume that for all finite set $S$ and 
+    finitely presented \kl{equivariant ideal} $I$,
+    one can compute an 
+    \kl{$S$-local Gröbner basis} $\Basis$ of $I$.
+    Then, the
+    \kl{equivariant ideal membership problem}
+    is decidable.
+\end{lemma}
+\begin{proof}
+    Let $p \in \poly{\K}{S}$, 
+    and $\Basis$ be an \kl{$S$-local Gröbner basis}.
+    To decide whether $p \in \gen{\Basis}{\group}$,
+    it suffices to compute $\Basis \cap \poly{\K}{S}$
+    and check whether 
+    $p \in \gen{\Basis \cap \poly{\K}{S}}{}$, which is possible
+    because $S$ is a finite set and one can therefore use 
+    the classical ideal membership decision procedure.
+\end{proof}
 
 \paragraph{Finitely supported ideal membership problem.}
 In order to compute a \kl{local Gröbner basis}, we will first compute
@@ -70,39 +94,331 @@ such bases using an adaptation of the Buchberger algorithm
 \cite{BUCH76}.
 
 \begin{lemma}
-    From \kl{$S$-supported Gröbner bases}, we can compute
+    Assume that $\X$ is \kl{effectively oligomorphic}.
+    Then,
+    from an \kl{$S$-supported Gröbner basis}, we can compute
     an \kl{$S$-local Gröbner basis}.
 \end{lemma}
+\begin{proof}
+    Let $\Basis$ be an \kl{$S$-supported Gröbner basis}, and let $p \in \Basis$
+    be a polynomial. We write $p_S \defined \setof{p_i}{1 \leq i \leq k_p}$ the
+    set of representatives of \kl{$\group_S$-orbits} inside $\poly{\K}{\X}$
+    that are included in the \kl{$\group$-orbit} of $p$. 
 
-\begin{lemma}
-    From an \kl{$S$-local Gröbner basis}, we can can decide
-    the \kl{equivariant ideal membership problem}
-    for polynomials in $\poly{\K}{S}$.
-\end{lemma}
+    Given a polynomial $p$, $p_S$ is effectively computable because $\X$ is
+    \kl{effectively oligomorphic}: one can compute representatives of all the
+    \kl{$\group_S$-orbits} of $p$, and then check which ones belong to $O$.
 
-\subsection{Existence of $S$-supported Gröbner Bases}
+    Let us write $\Basis_S \defined \bigcup_{p \in \Basis} p_S$. It is clear
+    that $\gen{\Basis_S}{\group_S} \subseteq \gen{\Basis}{\group}$. Conversely,
+    let $q \in \gen{\Basis}{\group}$, then $q = \sum_{1 \leq j \leq \ell} q_j
+    \pi(p_j)$, with $p_j \in \Basis$, and $\pi \in \group$. By definition,
+    $\pi(p_j)$ is in the \kl{$\group$-orbit} of $p_j$, hence there exists $p_j'
+    \in \Basis_S$ such that $\pi(p_j)$ and $p_j'$ are in the same
+    \kl{$\group_S$-orbit}. Therefore, $q \in \gen{\Basis_S}{\group_S}$.
+
+    We have proven that 
+    \begin{equation*}
+        \gen{\Basis}{\group} = \gen{\Basis_S}{\group_S} \quad ,
+    \end{equation*}
+    hence effectively transformed an \kl{$S$-supported Gröbner basis}
+    into an \kl{$S$-local Gröbner basis}.
+\end{proof}
+
+
+\subsection{Existence of $S$-supported Bases}
 \label{subsec:weakgb}
 
 In this subsection, we fix $S \subfin \X$, and will work only with the group
 $\group_S$ that fixes all indeterminates in $S$. We furthermore assume that
 $\X$ is equipped with an (effective) linear order $\order$ that is
-\kl{respected by the group action}.
+\kl{respected by the group action}. Our goal is to prove the existence of an
+\kl{$S$-supported basis}, without caring (yet) for effective
+procedures. The main technical content of this subsection consists in the
+understanding of the action of $\group_S$ on $\poly{\K}{S}$.
 
-\begin{itemize}
-    \item divisibility up to $\group_S$
-    \item WQO when restricted to $S$
-    \item Defining a new linear ordering 
-    \item Consequence: existence of finite $S$-supported Gröbner bases.
-    \item Defining a total ordering on monomials
-\end{itemize}
+\AP Let us recall that for any \kl{group action} $\group \actson \X$ yields a
+notion of \kl{divisibility up-to $\group$} that we write $p \gdivleq[\group]
+q$. As $\group_S$ is a subgroup of $\group$, the action of $\group$ on $\X$
+induces an action of $\group_S$ on $S$, and therefore a notion of divisibility
+up-to $\group_S$ that we write $p \gdivleq[\group_S] q$. Remark that a
+necessary condition for the existence of \kl{$S$-supported Gröbner bases} is
+that the \kl{divisibility up-to $\group_S$} is a \kl{well-quasi-ordering} on
+$\mon{S}$. This follows the usual pattern (see \cite{GHOLAS24}). 
+
+\begin{lemma}
+    \label{lem:wqo-needed-g-s}
+    Assume that every \kl{equivariant ideal} $I$
+    for $\group_S$ in $\poly{\K}{\X}$
+    has an \kl{$S$-supported Gröbner basis}.
+    Then, the \kl{divisibility up-to $\group_S$} is a \kl{well-quasi-ordering}.
+\end{lemma}
+\begin{proof}[Proof Sketch]
+    Assume that there exists an infinite bad sequence 
+    $\seqof{m_i}[i \in \N]$ for the \kl{divisibility up-to $\group_S$}.
+    Then, let us write $I_i \defined \gen{\setof{m_j}{j \leq i}}{\group_S}$
+    for $i \in \N$. By assumption, there exists a \kl{$S$-supported Gröbner basis}
+    $\Basis$ of $\bigcup_{i \in \N} I_i$. This means that
+    the union stabilises, that is, there exists $N \in \N$ such that
+    $I_i = I_N$ for all $i \geq N$. 
+    In particular, $m_i \in I_N$ for all $i \geq N$.
+    We conclude that $m_{N+1} = \sum_{j \leq N} q_j \pi_j(m_j)$ for some 
+    $q_j \in \poly{\K}{\X}$,
+    $\pi_j \in \group_S$, and $m_j \in \setof{m_j}{j \leq N}$.
+    But this immediately shows that $m_{N+1}$ is \kl{divisible up-to
+    $\group_S$} by some $m_j$ for $j \leq N$, which is a contradiction.
+\end{proof}
+
+In order to derive the fact that \kl{divisibility up-to $\group_S$} is a
+\kl{well-quasi-ordering}, we enforce that the $\mon[\omega+1]{\X}$ is a
+\kl{well-quasi-ordering} with respect to the \kl{divisibility up-to $\group$}.
+
+\begin{lemma}
+    \label{def:wqo-g-implies-g-s}
+    Assume that $\mon[\omega+1]{\X}$ is a \kl{well-quasi-ordering} with respect to
+    the \kl{divisibility up-to $\group$}. Then, the \kl{divisibility up-to
+    $\group_S$} is a \kl{well-quasi-ordering}.
+\end{lemma}
+\begin{proof}
+
+    Let $\seqof{m_i}[i \in \N]$ be an infinite sequence of \kl{monomials}. Let
+    us write $s_i$ to be the \kl{monomial} obtained by restricting $m_i$ to the
+    set of indeterminates in $S$, an $r_i$ be such that $m_i = s_i r_i$. We can
+    build $s'$ to be the monomial $\prod_{x \in S} x^{\omega+1}$, which belongs
+    to $\mon[\omega+1]{\X}$. Using this monomial, one can build a new sequence
+    $\seqof{m_i'}[i \in \N]$ of monomials, defined by $m_i' \defined s' r_i$.
+
+    Because $\mon[\omega+1]{\X}$ is a \kl{well-quasi-ordering} for the
+    \kl{divisibility up-to $\group$}, one can assume without loss of generality
+    that for all $i < j$, there exists an element $\pi_{i,j} \in \group$ and
+    $q_{i,j} \in \mon[\omega+1]{\X}$ such that $q_{i,j} \pi_{i,j}(m_i') =
+    m_j'$. Let us first remark that $q_{i,j}$ belongs to $\mon{\X}$, i.e., does
+    not use the exponent $\omega+1$. Furthermore, we claim that for all $i <
+    j$, $\pi_{i,j}(S) = S$. Indeed, indeterminates of $S$ are exactly the ones
+    with exponent $\omega+1$ in the monomials $m_i'$ for all $i \in \N$.
+
+    Using a Ramsey argument, one can assume that $\pi_{i,j}$ acts as the
+    identity over $S$. In particular, $\pi_{i,j} \in \group_S$ for all $i < j$.
+    Because $\N^{|S|}$ is a \kl{well-quasi-ordering} for the pointwise
+    comparison relation, one can also assume that for all $i < j$, $s_i \divleq
+    s_j$. In particular, one obtains monomials $p_{i,j} \in \mon{S}$ such that
+    $s_i p_{i,j} = s_j$.
+
+    Finally, we have 
+    \begin{align*}
+        m_j'      &= q_{i,j} \cdot \pi_{i,j}(m_i')
+                  = q_{i,j} \cdot \pi_{i,j}(s' r_i) \\
+        s' r_j    &= q_{i,j} s' \cdot \pi_{i,j}(r_i) \\
+        r_j    &= q_{i,j} \cdot \pi_{i,j}(r_i) \\
+        s_j r_j    &= s_j q_{i,j} \cdot \pi_{i,j}(r_i) \\
+        m_j    &= p_{i,j} q_{i,j} s_i \cdot \pi_{i,j}(r_i) \\
+        m_j    &= p_{i,j} q_{i,j} \cdot \pi_{i,j}(s_i r_i) \\
+        m_j    &= p_{i,j} q_{i,j} \cdot \pi_{i,j}(m_i) 
+    \end{align*}
+    Hence, $m_i \gdivleq[\group_S] m_j$ for all $i < j$, which concludes the proof.
+\end{proof}
+
+\AP
+Provided that one has a total ordering $\order$ on $\X$ that is 
+\kl{respected by the group action} (of $\group$), we can adapt $\order$
+by conserving the same relative ordering for elements that are in $S$
+(resp. not in $S$) but placing all elements of $S$ \emph{below} all
+elements not in $S$:
+\begin{equation}
+    x \sOrderLt y \iff 
+    \begin{cases}
+        x \order y & \text{if } x,y \in S \lor x,y \not\in S  \\
+        \top       & \text{if } x \in S \land y \not \in S \\
+        \bot       & \text{if } x \not\in S \land y \in S \\
+    \end{cases}
+\end{equation}
+
+\begin{lemma}
+    \label{lem:total-ordering}
+    The ordering $\sOrderLt$ is a total ordering on $\X$,
+    that is \kl{respected by} $\group_S$,
+    and is \kl(order){effective} whenever $\order$ is.
+\end{lemma}
+\begin{proof}
+    Because $\order$ is a \kl{total ordering}, 
+    so is $\sOrderLt$. 
+    Assume that $x \sOrderLt y$, and let $\pi \in \group_S$.
+    If $x,y \in S$, then $\pi(x) = x$ and $\pi(y) = y$, hence
+    $\pi(x) \sOrderLt \pi(y)$, the same happens if
+    both elements are not in $S$. The last case is when
+    $x \in S$ and $y \not \in S$, in which case $\pi(x) = x$
+    and $\pi(y) \not \in S$ (because $\pi$ is a bijection that \kl{fixes} $S$).
+
+    Finally,
+    assuming that one can test equality of elements in $\X$ and that
+    $\order$ is \kl{effective}, it is clear that $\sOrderLt$ is \kl{effective}
+    too.
+\end{proof}
+
+\AP The construction of $\sOrderLeq$ is such that its corresponding
+\kl{monomial ordering} $\revlex[S]$ ensures that whenever the \kl{leading
+monomial} of a polynomial $p$ belongs to $\mon{S}$, then $p$ belongs to
+$\poly{\K}{S}$ (\cref{lem:g-s-lm-in-S}), and that the action of $\group_S$ on
+$\poly{\K}{S}$ preserves \kl{leading monomials}, \kl{leading coefficients},
+\kl{leading terms}, and \kl{characteristic monomials}
+(\cref{lem:g-s-acts-preserves-lead}).
+
+\begin{lemma}
+    \label{lem:g-s-acts-preserves-lead}
+    Let $\pi \in \group_S$ and $p \in \poly{\K}{\X}$.
+    Then, $\lm[S](\pi(p)) = \pi(\lm[S](p))$,
+    and similarly for $\cm[S]$, $\lt[S]$, and $\lc[S]$.
+\end{lemma}
+\begin{proof}
+    This follows from the fact that for every pair of monomials
+    $m,m' \in \mon{\X}$,
+    $m \revlex[S] m'$ if and only if $\pi(m) \revlex[S] \pi(m')$.
+\end{proof}
+
+\begin{lemma}
+    \label{lem:g-s-lm-in-S}
+    Let $p \in \poly{\K}{\X}$,
+    be such that $\lm[S](p) \in \mon{S}$.
+    Then, $p \in \poly{\K}{S}$.
+\end{lemma}
+\begin{proof}
+    We prove that if $m \revlex[S] m'$ and $m' \in \mon{S}$, then $m \in
+    \mon{S}$. Let us order the indeterminates appearing in $m$ and $m'$ $x_1
+    \sOrderLt x_2 \sOrderLt \cdots \sOrderLt x_n$. Let us write $m = \prod_{1
+    \leq i \leq n} x_i^{\ell_i}$ and $m' = \prod_{1 \leq i \leq n} x_i^{k_i}$.
+    Because $m \revlex[S] m'$, there exists $i$ such that $k_i < \ell_i$ and
+    $k_j = \ell_j$ for all $i < j$. In particular, $k_i \neq 0$, hence $x_i \in
+    S$. As a consequence, $x_j \in S$ for all $j \leq i$ by definition of
+    $\sOrderLt$. Assume by contraction that $x_j \not\in S$ for some $j > i$,
+    then $k_j = l_j$, but since $x_j \not\in S$, we have $k_j = 0$, hence $l_j
+    = 0$, which is absurd because $x_j$ appears in $m$ or $m'$.
+\end{proof}
+
+\begin{lemma}
+    \label{lem:g-s-gb-is-gb}
+    Let $\Basis$ be a finite set such that,
+    for every $p \in \gen{\Basis}{\group_S}$,
+    there exists $q \in \Basis$
+    satisfying $\lm[S](q) \gdivleq[\group_S] \lm[S](q)$.
+    Then, $\Basis$ is an \kl{$S$-supported Gröbner basis}.
+\end{lemma}
+\begin{proof}
+    Let $p \in \poly{\K}{S} \cap \gen{\Basis}{\group_S}$.
+    Let us remark that $\lm[S](p) \in \mon{S}$,
+    and that $\revlex[S]$ is \kl{well-founded} on $\mon{S}$,
+    since $S$ is finite. Assume by contradiction that 
+    $p \not \in \gen{\Basis \cap \poly{\K}{S}}{}$,
+    and that $p$ is a counter-example with a $\revlex[S]$ minimal
+    \kl{leading monomial}.
+
+    By construction, there exists $q \in \Basis$ such that $\lm[S](q)
+    \gdivleq[\group_S] \lm[S](p)$. This provides a $\pi \in \group_S$ and an $r
+    \in \mon{\X}$ such that $\pi(\lm[S](q)) \cdot r = \lm[S](p)$.
+    Because $\lm[S](p) \in \mon{S}$, we conclude 
+    that $\pi(\lm[S](q)) \in \mon{S}$ and $r \in \mon{S}$.
+    Since, $\pi$ \kl{fixes} $S$, we conclude that $\lm[S](q) \in \mon{S}$,
+    hence $q \in \poly{\K}{S}$ by \cref{lem:g-s-lm-in-S}.
+    Finally, 
+    $(p - r \cdot q) \in \gen{\Basis}{\group_S}$,
+    has a \kl{leading monomial} that is strictly smaller than $\lm[S](p)$,
+    and belongs to $\poly{\K}{S}$, which is a contradiction.
+\end{proof}
 
 \subsection{Computing $S$-supported Gröbner Bases}
 \label{subsec:weakgbcomp}
 
+\AP In this subsection, we prove that one can compute given a finite set
+$\Basis$ of polynomials, a finite set $\Basis_S$ that has the following
+property: for every $p \in \gen{\Basis}{\group_S}$, there exists $q \in
+\Basis_S$ such that $\lm[S](q) \gdivleq[\group_S] \lm[S](p)$. This will prove
+the (effective) existence of an \kl{$S$-supported Gröbner basis}
+thanks to \cref{lem:g-s-gb-is-gb}.
+
+\AP The algorithm is a variation of the Buchberger algorithm \cite{BUCH76},
+which we will briefly comment on. First, any finite set $\Basis$ of polynomials
+can be used to define a rewriting relation $\reducstep{\Basis}$, and its
+reflexive transitive closure $\reduc{\Basis}$.
+Namely, we write $p \reducstep{\Basis} q$
+if there exists $\pi \in \group_S$, $r \in \Basis$ and $s \in \poly{\K}{\X}$
+such that:
 \begin{itemize}
-    \item Rewriting step
-    \item Finite remainders
-    \item Orbit-finite rewritings (stable under the group action)
+    \item $q = p - s \cdot \pi(r)$,
+    \item $\dom(\pi(r)) \subseteq \dom(p)$,
+    \item $\lt[S](\pi(r)) = s \cdot \lt[S](p)$.
+\end{itemize}
+That is, we can use an element of $\Basis$ (up to $\group_S$),
+to cancel the \kl{leading monomial}
+of a polynomial $p$, without the introduction of new indeterminates.
+We write $p \reduc{\Basis} q$ if there exists a
+sequence $p = p_0 \reducstep{\Basis} p_1 \reducstep{\Basis} \cdots
+\reducstep{\Basis} p_n = q$. 
+
+The inability to introduce new indeterminates is crucial
+to ensure that this rewriting system is terminating.
+\begin{lemma}
+    \label{lem:finite-remainders}
+    Let $p \in \poly{\K}{\X}$,
+    the set of polynomials $q$ such that $p \reduc{\Basis} q$
+    is finite.
+\end{lemma}
+\begin{proof}
+    Let us first prove that there are no infinite rewriting sequences.
+    To that end, let $\seqof{p_i}[i \in \N]$ be a sequence of 
+    polynomial such that $p_i \reducstep{\Basis} p_{i+1}$
+    for all $i \in \N$.
+    Remark that $\lm[S](p_i)$ is a strictly decreasing 
+    sequence of \kl{monomials} in $\mon{\dom(p_0)}$
+    for $\revlex[S]$. Because $\mon{\dom(p_0)}$ is finite,
+    this is absurd.
+
+    Let us now prove that there are finitely many 
+    possible \kl{rewrite steps} for a given polynomial $p$.
+    Indeed, such a step $p \reducstep{\Basis} q$ is
+    uniquely determined by a polynomial $r \in \Basis$
+    and a bijection $\pi \in \group_S$ such that
+    $\dom(\pi(r)) \subseteq \dom(p)$. Because $\Basis$ is finite,
+    and $\dom(p)$ is finite, there are only finitely many such $\pi(r)$
+    to choose from.
+
+    We conclude thanks to König's lemma that there are only finitely
+    many polynomials $q$ such that $p \reduc{\Basis} q$.
+\end{proof}
+
+\AP As a consequence of \cref{lem:finite-remainders}, starting polynomial $p$,
+we can compute the (finite) set of all \kl{reduced polynomials} that can be obtained
+from $p$ by rewriting with $\Basis$, that we write $\rem{\Basis}{p}$. 
+
+\begin{lemma}
+    \label{lem:rewrite-equivariant}
+    Let $p,q \in \poly{\K}{\X}$, and $\pi \in \group_S$.
+    Then,
+    $p \reducstep{\Basis} q$ if and only if
+    $\pi(p) \reducstep{\Basis} \pi(q)$.
+    In particular, $\pi(\rem{\Basis}{p}) = \rem{\Basis}{\pi(p)}$,
+    i.e., the set of remainders is \kl{equivariant}
+    under the action of $\group_S$.
+\end{lemma}
+
+\AP It is clear that every element $p$ such that $0 \in \rem{\Basis}{p}$
+belongs to $\gen{\Basis}{\group_S}$. The Buchberger algorithm extends $\Basis$
+so that the converse holds, that is, every element in $\gen{\Basis}{\group_S}$
+has $0$ in its set of remainders. The saturation step consists in adding to
+$\Basis$ all the \intro{$\mathsf{D}$-polynomials} 
+\begin{equation}
+    \label{eq:d-polynomial}
+    \spoly{p}{q} \defined
+    \frac{\lcm(\lm[S](p), \lm[S](q))}{\lm[S](p)} \cdot p
+    - \frac{\lcm(\lm[S](p), \lm[S](q))}{\lm[S](q)} \cdot q
+    \quad .
+\end{equation}
+These polynomials clearly belong to $\gen{\Basis}{\group_S}$.
+Given a set $H$, we write $\spolyset(H) \defined \bigcup_{p,q \in H}
+\rem{\Basis}{\spoly{p}{q}}$.
+
+\begin{lemma}
+\end{lemma}
+
+\begin{itemize}
     \item Rewriting to zero -> in the ideal generated by the basis
     \item $S$-polynomials 
     \item The Buchberger algorithm
