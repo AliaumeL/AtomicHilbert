@@ -31,17 +31,6 @@
 % math packages
 \usepackage{amsmath,amsthm,amssymb,stmaryrd,thmtools,upgreek}
 
-% configure some theorems
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{example}[theorem]{Example}
-
 
 % graphics packages
 \usepackage{graphicx}
@@ -99,6 +88,22 @@
 
 % we include whatever the user wants to include in the header
 
+
+
+% configure some theorems
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{assumption}[theorem]{Assumption}
+\crefname{assumption}{assumption}{assumptions}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
 % we include libraries (tex files) usually written in the `lib` directory
 \input{lib/aliaume}
 \input{lib/maths}
@@ -112,7 +117,7 @@
 \author{
 Aliaume Lopez\thanks{University of Warsaw, Poland}
  \and
-Arka Ghosh\thanks{Université de Bordeaux, France}
+Arka Ghosh\thanks{University of Bordeaux, France}
 }
 
 % For the date, we first check if the user has provided a date,
@@ -146,6 +151,7 @@ Arka Ghosh\thanks{Université de Bordeaux, France}
 \input{src/algorithm.tex}
 \input{src/undecidability.tex}
 \input{src/examples.tex}
+\input{src/strong.tex}
 \input{src/conclusion.tex}
 
 % Include the bibliography
