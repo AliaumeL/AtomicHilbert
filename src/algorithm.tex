@@ -2,9 +2,22 @@
 \section{Decision Procedure for the Equivariant Ideal Membership Problem}
 \label{sec:algorithm}
 
-\todo[inline]{
-    It is known that an equivariant Gröbner basis exists.
-}
+In this section we provide a decision procedure for the \kl{equivariant ideal
+membership problem}. In order to do so, we will adapt the classical Buchberger
+algorithm \cite{BUCH76}: to a given set $H$ of polynomials, one can associate a
+rewriting system $\to_H$ that computes a ``reduced form'' of a polynomial $p$
+with respect to $H$, with the property that if $p$ reduces to zero, then $p$
+belongs to $\gen{H}{}$. The Buchberger algorithm starts with a set $H$ and
+iteratively adds new polynomials to $H$ without changing the generated ideal,
+until the ``reduction procudure'' is complete, that is, until a polynomial
+reduces to zero if and only if it belongs to $\gen{H}{}$.
+
+There are two main difficulties in adapting the Buchberger algorithm to the
+equivariant setting. First, the set of indeterminates is infinite, which
+requires a careful modification of the rewriting system to ensure its
+termination. Second, the saturation procedure uses a total well-founded
+ordering of the monomials, which is not clearly adaptable to the equivariant
+setting.
 
 In \cite{GHOLAS24}, an \intro{equivariant Gröbner basis} 
 is a finite set $\Basis$
@@ -18,6 +31,18 @@ satisfying:
     p \in \gen{\Basis \cap \poly{\K}{S}}
         \quad .
 \end{equation}
+
+% todo: differentiate between
+% - gererating set (H)
+% - Gröbner basis (B)
+% - local Gröbner basis (L_S)
+% - supported Gröbner basis (B_S)
+
+
+\todo[inline]{
+    It is known that an equivariant Gröbner basis exists.
+}
+
 In particular, once we have an \kl{equivariant Gröbner basis} $\Basis$,
 the \kl{equivariant ideal membership problem} is decidable: given a polynomial
 $p$, we can check whether $p$ belongs to $\gen{\Basis \cap \poly{\K}{S}}{}$
