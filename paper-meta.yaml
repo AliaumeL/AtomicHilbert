@@ -22,7 +22,7 @@ abstract: |
   does it belong to a given equivariant ideal) is decidable
   under similar assumptions. This is significant because
   it paves the way towards decision procedures based on the Hilbert
-  method in the presence of infinite data sturctures with symmetries.
+  method in the presence of infinite data structures with symmetries.
 classification:
   ccdesc:
     - Mathematics of computing~Algebra~Polynomials
