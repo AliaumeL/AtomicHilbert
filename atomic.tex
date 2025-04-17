@@ -31,20 +31,6 @@
 % math packages
 \usepackage{amsmath,amsthm,amssymb,stmaryrd,thmtools,upgreek}
 
-% configure some theorems
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{assumption}[theorem]{Assumption}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{example}[theorem]{Example}
-
-
-
 % graphics packages
 \usepackage{graphicx}
 \usepackage[obeyclassoptions,mode=tex]{standalone}
@@ -105,11 +91,27 @@
     filecolor=A4,
 }
 
+% configure some theorems
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{assumption}[theorem]{Assumption}
+\Crefname{assumption}{Assumption}{Assumptions}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+
 
 % we include whatever the user wants to include in the header
 
 % we include libraries (tex files) usually written in the `lib` directory
 \input{lib/aliaume}
+\input{lib/arka}
 \input{lib/maths}
 \input{lib/knowledges.kl}
 
