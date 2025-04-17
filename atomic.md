@@ -17,4 +17,5 @@ appendix:
 \input{src/fullbasis.tex}
 \input{src/undecidability.tex}
 \input{src/examples.tex}
+\input{src/strong.tex}
 \input{src/conclusion.tex}
