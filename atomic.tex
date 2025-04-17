@@ -31,6 +31,17 @@
 % math packages
 \usepackage{amsmath,amsthm,amssymb,stmaryrd,thmtools,upgreek}
 
+% configure some theorems
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
 
 % graphics packages
 \usepackage{graphicx}
@@ -53,7 +64,7 @@
 % links inside the document
 \usepackage{hyperref}
 \usepackage[capitalise,noabbrev,nameinlink]{cleveref}
-\usepackage[composition,hyperref,xcolor]{knowledge}
+\usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
 
 % Tables 
@@ -95,22 +106,6 @@
 
 % we include whatever the user wants to include in the header
 
-
-
-% configure some theorems
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{assumption}[theorem]{Assumption}
-\crefname{assumption}{assumption}{assumptions}
-
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{example}[theorem]{Example}
-
 % we include libraries (tex files) usually written in the `lib` directory
 \input{lib/aliaume}
 \input{lib/maths}
@@ -124,12 +119,12 @@
 \author{
 Aliaume Lopez\thanks{University of Warsaw, Poland}
  \and
-Arka Ghosh\thanks{University of Bordeaux, France}
+Arka Ghosh\thanks{Université de Bordeaux, France}
 }
 
 % For the date, we first check if the user has provided a date,
 % and otherwise use the git meta inforamtion (if available).
-\date{2025-02-20 18:28:18 +0100\footnote{a364767a92f1ba36bc5f3fa46e8aa315f189b0db -- branch main at git@github.com:AliaumeL/AtomicHilbert.git}}
+\date{2025-04-15 15:35:55 +0200\footnote{c337a43ce955db77b6918f5ca2c13b26e05d9a3b -- branch main at git@github.com:AliaumeL/AtomicHilbert.git}}
 
 \newcommand{\repositoryUrl}{\url{https://github.com/AliaumeL/AtomicHilbert}}
 
@@ -142,7 +137,7 @@ Arka Ghosh\thanks{University of Bordeaux, France}
 \maketitle
 % Print the abstract
 \begin{abstract}
-    Polynomials with infinite number of variables do not have the Hilbert basis property. However, if the variables are considered up to the action of a group, one can focus on the equivariant ideals, for which it has recently been proven that they do have the Hilbert basis property, under mild assumptions on the group action. We extend this result by showing that the ideal membership problem (that is, given a polynomial, does it belong to a given equivariant ideal) is decidable under similar assumptions. This is significant because it paves the way towards decision procedures based on the Hilbert method in the presence of infinite data sturctures with symmetries.
+    Polynomials with infinite number of variables do not have the Hilbert basis property. However, if the variables are considered up to the action of a group, one can focus on the equivariant ideals, for which it has recently been proven that they do have the Hilbert basis property, under mild assumptions on the group action. We extend this result by showing that the ideal membership problem (that is, given a polynomial, does it belong to a given equivariant ideal) is decidable under similar assumptions. This is significant because it paves the way towards decision procedures based on the Hilbert method in the presence of infinite data structures with symmetries.
     \paragraph{Keywords:}
     equivariant ideal, Hilbert basis, ideal membership problem, orbit finite, oligomorphic, well-quasi-ordering
 \paragraph{Repository:} \repositoryUrl
@@ -156,9 +151,9 @@ Arka Ghosh\thanks{University of Bordeaux, France}
 \input{src/intro.tex}
 \input{src/preliminaries.tex}
 \input{src/algorithm.tex}
+\input{src/fullbasis.tex}
 \input{src/undecidability.tex}
 \input{src/examples.tex}
-\input{src/strong.tex}
 \input{src/conclusion.tex}
 
 % Include the bibliography

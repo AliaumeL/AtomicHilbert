@@ -9,7 +9,7 @@ rewriting system $\to_H$ that computes a ``reduced form'' of a polynomial $p$
 with respect to $H$, with the property that if $p$ reduces to zero, then $p$
 belongs to $\gen{H}{}$. The Buchberger algorithm starts with a set $H$ and
 iteratively adds new polynomials to $H$ without changing the generated ideal,
-until the ``reduction procudure'' is complete, that is, until a polynomial
+until the ``reduction procedure'' is complete, that is, until a polynomial
 reduces to zero if and only if it belongs to $\gen{H}{}$.
 
 There are two main difficulties in adapting the Buchberger algorithm to the
@@ -19,7 +19,18 @@ termination. Second, the saturation procedure uses a total well-founded
 ordering of the monomials, which is not clearly adaptable to the equivariant
 setting.
 
-In \cite{GHOLAS24}, an \intro{equivariant Gröbner basis} 
+In \cite{GHOLAS24}, a definition of \kl{equivariant Gröbner basis} is given,
+together with an adaptation of the Buchberger algorithm to the equivariant
+setting under the extra assumption that the set of indeterminates is equipped
+with a \kl{well-founded} total ordering that is \kl{respected by the group
+action}. In particular, this result does not apply to the case of
+indeterminates $(\Q, \leq)$ together with all the order preserving
+automorphisms of $\Q$.
+To keep the presentation simple, we will use the following definition
+of \kl{equivariant Gröbner basis}, that essentially
+reduces an \kl{equivariant membership problem} to a classical
+\kl{ideal membership problem}.
+An \intro{equivariant Gröbner basis} 
 is a finite set $\Basis$
 satisfying:
 \begin{equation}
@@ -32,23 +43,15 @@ satisfying:
         \quad .
 \end{equation}
 
-% todo: differentiate between
-% - gererating set (H)
-% - Gröbner basis (B)
-% - local Gröbner basis (L_S)
-% - supported Gröbner basis (B_S)
-
-
-\todo[inline]{
-    It is known that an equivariant Gröbner basis exists.
-}
-
-In particular, once we have an \kl{equivariant Gröbner basis} $\Basis$,
-the \kl{equivariant ideal membership problem} is decidable: given a polynomial
-$p$, we can check whether $p$ belongs to $\gen{\Basis \cap \poly{\K}{S}}{}$
-where $S$ is the set of indeterminates appearing in $p$, which is possible
-using classical tools for Gröbner basis computations such as 
-the Buchberger algorithm \cite{BUCH76}.
+In particular, once we have an \kl{equivariant Gröbner basis} $\Basis$, the
+\kl{equivariant ideal membership problem} is decidable: given a polynomial $p$,
+we can check whether $p$ belongs to $\gen{\Basis \cap \poly{\K}{S}}{}$ where
+$S$ is the set of indeterminates appearing in $p$, which is possible using
+classical tools for Gröbner basis computations such as the Buchberger algorithm
+\cite{BUCH76}. In fact, our construction will be such that $\Basis \cap
+\poly{\K}{S}$ is already a (classical) Gröbner basis for the ideal $\gen{\Basis
+\cap \poly{\K}{S}}{}$, which means that the computation of the classical
+membership query is relatively straightforward.
 
 The key idea of this section is to swap quantifiers in \cref{eq:grob-eq-bas}
 to obtain a weaker notion of Gröbner basis that is somehow
@@ -98,69 +101,82 @@ one can use the computability of \kl{local Gröbner bases} to compute an
     the classical ideal membership decision procedure.
 \end{proof}
 
-\paragraph{Finitely supported ideal membership problem.}
-In order to compute a \kl{local Gröbner basis}, we will first compute
-a smaller set of polynomials.
-We will consider the subgroup $\group_S$ of $\group$ that fixes
-all indeterminates in $S$, that is, the set of all $g \in \group$
-such that $g \cdot x = x$ for all $x \in S$.
+In order to compute an \kl{$S$-local Gröbner basis}, for a given finite set $S$
+of indeterminates, we will reduce the problem to the computation of a similar
+object, but on a smaller set of allowed automorphisms: we will only consider
+those elements $g \in \group$ that fix all indeterminates in $S$, i.e. such
+that $g \cdot x = x$ for all $x \in S$. We write $\group_S$ for the subgroup of
+$\group$ that fixes all indeterminates in $S$.
+
 We say that
-an \intro{$S$-supported Gröbner basis} is a set $\Basis$
+an \intro{$S$-supported Gröbner basis} is a set $\Basis_S$
 satisfying:
 \begin{equation*}
     \label{eq:supp-grob}
     \forall p \in \poly{\K}{S},
-    p \in \gen{\Basis}{\group_S}
+    p \in \gen{\Basis_S}{\group_S}
     \iff
-    p \in \gen{\Basis \cap \poly{\K}{S}}{}
+    p \in \gen{\Basis_S \cap \poly{\K}{S}}{}
 \end{equation*}
-Fixing all indeterminates in $S$ will allow us to compute 
-such bases using an adaptation of the Buchberger algorithm
-\cite{BUCH76}.
+
+Let us immediately prove that being able to compute \kl{$S$-supported Gröbner
+bases} is sufficient to compute \kl{$S$-local Gröbner bases}, hence to
+answer the \kl{equivariant ideal membership problem}.
 
 \begin{lemma}
-    Assume that $\X$ is \kl{effectively oligomorphic}.
-    Then,
-    from an \kl{$S$-supported Gröbner basis}, we can compute
-    an \kl{$S$-local Gröbner basis}.
+  \label{lem:local-to-supported}
+  Let $S$ be a finite set of indeterminates.
+  Assume that one can compute an \kl{$S$-supported Gröbner basis}
+  of $\gen{H}{\group_S}$ for any finite set $H$ of polynomials.
+  Then, 
+  one can compute an \kl{$S$-local Gröbner basis}
+  for any finite set $H$ 
+  of polynomials.
 \end{lemma}
 \begin{proof}
-    Let $\Basis$ be an \kl{$S$-supported Gröbner basis}, and let $p \in \Basis$
-    be a polynomial. We write $p_S \defined \setof{p_i}{1 \leq i \leq k_p}$ the
-    set of representatives of \kl{$\group_S$-orbits} inside $\poly{\K}{\X}$
-    that are included in the \kl{$\group$-orbit} of $p$. 
+  Let $H$ be a finite set of polynomials.
+  We will compute a new finite set $H_S$ of polynomials
+  such that $\gen{H}{\group} = \gen{H_S}{\group_S}$.
+  To do so, we will use the fact that $\X$ is \kl{effectively oligomorphic}:
+  for every polynomial $p \in H$, we can compute a finite set
+  $p_S$ of representatives of the \kl{$\group_S$-orbits} of $p$.
+  We define $H_S$ to be the union of all the $p_S$ for $p \in H$.
 
-    Given a polynomial $p$, $p_S$ is effectively computable because $\X$ is
-    \kl{effectively oligomorphic}: one can compute representatives of all the
-    \kl{$\group_S$-orbits} of $p$, and then check which ones belong to $O$.
+  It is clear that $\gen{H_S}{\group_S} \subseteq \gen{H}{\group}$.
+  Conversely, let $p \in \gen{H}{\group}$, then $p$ is in the \kl{$\group$-orbit}
+  of some $p' \in H$. By definition, there exists a $\pi \in \group$ such that
+  $p = \pi(p')$. We can compute a representative $p_S$ of the
+  \kl{$\group_S$-orbit} of $p'$, and we can compute a $\pi_S \in \group_S$
+  such that $\pi_S(p_S) = p$. We conclude that $p$ is in the \kl{$\group_S$-orbit}
+  of $p_S$, hence $p \in \gen{H_S}{\group_S}$.
+  Hence, $\gen{H}{\group} = \gen{H_S}{\group_S}$.
 
-    Let us write $\Basis_S \defined \bigcup_{p \in \Basis} p_S$. It is clear
-    that $\gen{\Basis_S}{\group_S} \subseteq \gen{\Basis}{\group}$. Conversely,
-    let $q \in \gen{\Basis}{\group}$, then $q = \sum_{1 \leq j \leq \ell} q_j
-    \pi(p_j)$, with $p_j \in \Basis$, and $\pi \in \group$. By definition,
-    $\pi(p_j)$ is in the \kl{$\group$-orbit} of $p_j$, hence there exists $p_j'
-    \in \Basis_S$ such that $\pi(p_j)$ and $p_j'$ are in the same
-    \kl{$\group_S$-orbit}. Therefore, $q \in \gen{\Basis_S}{\group_S}$.
-
-    We have proven that 
-    \begin{equation*}
-        \gen{\Basis}{\group} = \gen{\Basis_S}{\group_S} \quad ,
-    \end{equation*}
-    hence effectively transformed an \kl{$S$-supported Gröbner basis}
-    into an \kl{$S$-local Gröbner basis}.
+  Let us now compute an \kl{$S$-supported Gröbner basis} of $\gen{H_S}{\group_S}$,
+  $\Basis_S$.  
+  Remark that
+  $\gen{\Basis_S}{\group} = \gen{\gen{\Basis_S}{\group_S}}{\group}
+                           = \gen{H}{\group} 
+                           = \gen{\Basis_S}{\group_S}$.
+  Hence,
+  $
+    \gen{\Basis_S}{\group} \cap \poly{\K}{S} 
+        = \gen{\Basis_S}{\group_S} \cap \poly{\K}{S}  
+        = \gen{\Basis_S \cap \poly{\K}{S}}{} 
+        $.
+  And we have proven that $\Basis_S$ is an \kl{$S$-local Gröbner basis}
+  for $\gen{H}{\group}$.
 \end{proof}
 
 
-\subsection{Existence of $S$-supported Bases}
+\subsection{Preliminaries on $S$-supported Bases}
 \label{subsec:weakgb}
 
 In this subsection, we fix $S \subfin \X$, and will work only with the group
 $\group_S$ that fixes all indeterminates in $S$. We furthermore assume that
 $\X$ is equipped with an (effective) linear order $\order$ that is
-\kl{respected by the group action}. Our goal is to prove the existence of an
-\kl{$S$-supported basis}, without caring (yet) for effective
-procedures. The main technical content of this subsection consists in the
-understanding of the action of $\group_S$ on $\poly{\K}{S}$.
+\kl{respected by the group action}. The main technical content of this
+subsection consists in the understanding of the action of $\group_S$ on
+$\poly{\K}{S}$.
 
 \AP Let us recall that for any \kl{group action} $\group \actson \X$ yields a
 notion of \kl{divisibility up-to $\group$} that we write $p \gdivleq[\group]
@@ -352,19 +368,18 @@ $\poly{\K}{S}$ preserves \kl{leading monomials}, \kl{leading coefficients},
 \subsection{Computing $S$-supported Gröbner Bases}
 \label{subsec:weakgbcomp}
 
-\AP In this subsection, we prove that one can compute given a finite set
-$\Basis$ of polynomials, a finite set $\Basis_S$ that has the following
-property: for every $p \in \gen{\Basis}{\group_S}$, there exists $q \in
-\Basis_S$ such that $\lm[S](q) \gdivleq[\group_S] \lm[S](p)$. This will prove
-the (effective) existence of an \kl{$S$-supported Gröbner basis}
-thanks to \cref{lem:g-s-gb-is-gb}.
+\AP In this subsection, we prove that one can compute given a finite set $H$ of
+polynomials, a finite set $\Basis_S$ that has the following property: for every
+$p \in \gen{H}{\group_S}$, there exists $q \in \Basis_S$ such that $\lm[S](q)
+\gdivleq[\group_S] \lm[S](p)$. This will prove the (effective) existence of an
+\kl{$S$-supported Gröbner basis} thanks to \cref{lem:g-s-gb-is-gb}.
 
 \AP The algorithm is a variation of the Buchberger algorithm \cite{BUCH76},
-which we will briefly comment on. First, any finite set $\Basis$ of polynomials
-can be used to define a rewriting relation $\reducstep{\Basis}$, and its
-reflexive transitive closure $\reduc{\Basis}$.
-Namely, we write $p \reducstep{\Basis} q$
-if there exists $\pi \in \group_S$, $r \in \Basis$ and $s \in \poly{\K}{\X}$
+which we will briefly comment on. First, any finite set $H$ of polynomials
+can be used to define a rewriting relation $\reducstep{H}$, and its
+reflexive transitive closure $\reduc{H}$.
+Namely, we write $p \reducstep{H} q$
+if there exists $\pi \in \group_S$, $r \in H$ and $s \in \poly{\K}{\X}$
 such that:
 \begin{itemize}
     \item $q = p - s \cdot \pi(r)$,
@@ -423,6 +438,31 @@ from $p$ by rewriting with $\Basis$, that we write $\rem{\Basis}{p}$.
     i.e., the set of remainders is \kl{equivariant}
     under the action of $\group_S$.
 \end{lemma}
+\begin{proof}
+  \todo[inline]{do it}
+\end{proof}
+
+
+\AP Let $p,q$ be two polynomials in $\poly{\K}{\X}$. Then we write $[p;q]$ for
+the collection of \kl{polynomials} $\delta = a \mon p + b \mon q$ such that
+$\lm[S](\delta) < \max(\lm[S](p), \lm[S](q))$. These are the potential
+cancellations of leading monomials.
+The core of the Buchberger algorithm is the fact that
+local completeness is enough to ensure global completeness.
+
+\begin{lemma}
+  \label{lem:weak-complete-impl-strong}
+  Assume that $H$ is a finite set of polynomials
+  such that for every $p, q \in H$, and $\delta \in [p;q]$,
+  $\delta \reduc{H} 0$.
+  Then, for every $p \in \gen{H}{\group_S}$,
+  $p \reduc{H} 0$.
+\end{lemma}
+\begin{proof}
+  Assume towards a contradiction that $p \in \gen{H}{\group_S}$
+  and that $p \not\reduc{H} 0$.
+  We can consider a minimal
+\end{proof}
 
 \AP It is clear that every element $p$ such that $0 \in \rem{\Basis}{p}$
 belongs to $\gen{\Basis}{\group_S}$. The Buchberger algorithm extends $\Basis$
@@ -469,15 +509,7 @@ Given a set $H$, we write $\spolyset(H) \defined \bigcup_{p,q \in H}
     The \cref{alg:weakgb} terminates on every input.
 \end{lemma}
 \begin{proof}
-    Let us write $H_0 \defined \Basis$,
-    $R_0 \defined H_0$,
-    $H_{i+1} \defined H_i \cup \spolyset(R_i)$
-    $R_{i+1} \defined \textrm{ orbit representatives of } H_{i+1} \textrm{ under } \group_S$.
-
-    It is clear that $\seqof{H_i}[i \in \N]$ is an increasing sequence, 
-    because we assume that computing the orbit representatives is idempotent.
-
-
+  TODO.
 \end{proof}
 
 \begin{lemma}
