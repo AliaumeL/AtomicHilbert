@@ -79,6 +79,23 @@
 \NewDocumentCommand{\Basis}{O{B}}{\mathcal{#1}}
 \NewDocumentCommand{\LBasis}{O{B} m}{\mathcal{#1}_{#2}}
 
+
+\NewDocumentCommand{\Indets}{}{\mathcal{X}}
+
+\NewDocumentCommand{\idl}{O{I}}{\mathcal{#1}}
+\NewDocumentCommand{\IdlGen}{ m }{\withkl{\kl[\IdlGen]}{
+  \mathopen{\cmdkl{\langle}}
+  #1
+\mathclose{\cmdkl{\rangle}}}}
+\knowledge{\IdlGen}{notion}
+
+\NewDocumentCommand{\EqIdlGen}{ O{\group} m }{\withkl{\kl[\EqIdlGen]}{
+  \mathopen{\cmdkl{\langle}}
+  #2 
+  \mathclose{\cmdkl{\rangle}}_{#1}}}
+\knowledge{\EqIdlGen}{notion}
+
+
 \newcommand{\poly}[2]{#1[#2]}
 \newcommand{\aut}[2][]{\mathsf{Aut}_{#1}{(#2)}}
 \newcommand{\mon}[2][]{\mathsf{Mon}_{#1}(#2)}
@@ -91,8 +108,12 @@
 \newcommand{\radoE}{\mathbb{E}_{\mathsf{Rado}}}
 \newcommand{\cycleSet}[1][]{\mathsf{Cycles}_{#1}}
 
+\NewDocumentCommand{\monelt}{ O{m} }{\mathfrak{#1}}
+
 \newcommand{\ordinal}{\eta}
 
+
+\NewDocumentCommand{\gelem}{ O{\pi} }{\mathgr{#1}}
 
 \newcommand{\hbp}{\text{Hilbert's basis property}}
 \newcommand{\orbit}[2][]{\mathsf{orbit}_{#1}{(#2)}}
