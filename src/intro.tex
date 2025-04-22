@@ -170,3 +170,19 @@ slightly more control on the divisibility relation $\gdivleq$.
   compute an \kl{equivariant Gröbner basis} from a finite set $H$ of generators.
 \end{theorem}
 
+
+\paragraph{Proof Method and Organization.} \AP 
+Notice that if one has an \kl{equivariant Gröbner basis} $\Basis$ of an
+\kl{equivariant ideal} $\idl$, then one can decide the \kl{equivariant ideal
+membership problem} by reducing it to a classical ideal membership problem
+since:
+\begin{equation}
+  \forall S \subfin \X,
+  \EqIdlGen{\Basis} \cap \poly{\K}{S} = \IdlGen{\orbit{\Basis} \cap \poly{\K}{S}}
+\end{equation}
+
+
+We first will construct, without
+extra assumptions, \kl{weak Gröbner bases} from a finite set of generators $H$.
+Then, we will
+
