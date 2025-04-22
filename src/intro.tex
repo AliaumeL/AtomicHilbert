@@ -29,7 +29,7 @@ the 90s with the notion of register automata \cite{KAFR94}, it has been revived
 in with the development of the theory of \emph{orbit finite sets}. In this
 setting, the decidability of the equivalence for \emph{weighted register
 automata} has been shown to be decidable \cite{BOKLMO24,BOKLMO21} by leveraging
-an analogue of \kl{Hilbert's basis theorem} for vector spaces.
+an analogue of \kl{Hilbert's basis theorem} for vector spaces (that is, a dimension argument).
 
 \AP We should mention that the \kl{Hilbert's basis theorem} does not hold for
 infinite sets of variables. Let us consider in the rest of this introduction
@@ -48,7 +48,7 @@ x_1^2 + x_2$ is sent to $5 x_2^2 + x_3$ by the action of $(+1)$. When
 considering subsets $H$ of $\poly{\K}{\X}$, we will be interested in those that
 are \intro{equivariant}, i.e., invariant under the action of $\group$: $\group
 \cdot H = H$. For instance, Note that the \intro{orbit} of a set $H$, denoted
-$\intro*\orbit{H} = \group \cdot H$ is always \kl{equivariant}. In this
+$\intro*\orbit{H} \defined \group \cdot H$ is always \kl{equivariant}. In this
 setting, we can state an analogue of \kl{Hilbert's basis theorem}: \intro{the
 Equivariant Hilbert basis property}, stating that there exists no infinite
 increasing sequence of \kl{equivariant} \kl{ideals} in $\poly{\K}{\X}$. Note
@@ -95,44 +95,48 @@ many applications \cite{BOKLMO24}.
 
 \paragraph{Contributions.} \AP In this paper, we continue the work of
 \cite{GHOLAS24} and show that the \kl{equivariant ideal membership problem} is
-decidable under mild assumptions. Let us recall from \cite{GHOLAS24} that a
-necessary condition for the \kl{equivariant Hilbert basis property} to hold is
-that for every sequence of monomials $\seqof{\monelt_i}[i \in \N]$, there
-exists a pair $i < j$ and an element $\gelem \in \group$ such that $\monelt_i$
-divides $\gelem \cdot \monelt_j$. Let us recall that a set $(X, \leq)$ is a
+decidable under mild assumptions. In order to explain these requirements and
+how they relate to previous works, let us first recall that a set $(X, \leq)$ is a
 \intro{well-quasi-ordering} (WQO) if every infinite sequence $\seqof{x_i}[i \in
-\N]$ of elements of $X$ contains a pair $i < j$ such that $x_i \leq x_j$. The
-necesarry condition for the \kl{Equivariant Hilbert basis property} to hold can
-therefore be rephrased as the fact that the set of monomials $\mon{\X}$ is a
+\N]$ of elements of $X$ contains a pair $i < j$ such that $x_i \leq x_j$.
+We know from \cite{GHOLAS24} that a
+necessary condition for the \kl{equivariant Hilbert basis property} to hold is
+that the set  $\mon{\X}$  of monomials is a
 \kl{well-quasi-ordering} when endowed with the \intro{divisibility up-to
 $\group$} relation ($\intro*\gdivleq$), which is defined as follows: for
 $\monelt_1, \monelt_2 \in \mon{\X}$, we write $\monelt_1 \gdivleq
 \monelt_2$ if there exists $\gelem \in \group$ such that $\monelt_1$ divides
 $\gelem \cdot \monelt_2$.
 
-\AP In order to state our requirements, let us notice that one can extend the
+
+\AP Notice that one can extend the
 notion of monomials, that are functions from $\X$ to $\N$ having a finite
 support, to the case of $\mon[\alpha]{\X}$, where $\alpha$ is any partially
 ordered set. With this convention, $\mon[\omega]{\X} = \mon{\X}$. Note that
 divisibility extends to $\mon[\alpha]{\X}$ naturally, and that we can therefore
-ask whether $(\mon[\alpha]{\X}, \gdivleq)$ is a \kl{WQO}.
+ask whether $(\mon[\alpha]{\X}, \gdivleq)$ is a \kl{WQO}. A well-known
+result from Dickson states that in the case of finite sets of variables,
+$(\mon[\alpha]{\X}, \gdivleq)$ is a \kl{WQO} if and only if $\alpha$ is
+itself a \kl{WQO}, hence our approach will not lose any generality in the finite case \cite{SCSC12}.
 
-\AP In order to devise a decision procedure, we also need to assume that basic
+
+\AP In order to devise a decision procedure, we also will assume that basic
 operations on the set of indeterminates and on the group action are decidable.
 Namely, we will assume that the action of $\group$ on $\X$ is
-\intro{effectively oligomorphic}, which means that for every two tuples
+\intro{effectively oligomorphic}, which means that: for every two tuples
 $(x_1,\dots,x_n), (y_1,\dots,y_n)\in \X^n$, one can decide whether they are in
 the same $\group$-orbit, i.e., whether there exists $\gelem \in \group$ such
-that $\gelem \cdot x_i = y_i$ for all $i \leq n$. And that for every finite
+that $\gelem \cdot x_i = y_i$ for all $i \leq n$ ; And that for every finite
 subset $S \subfin \X$ and every $n \in \N$, one can compute a finite set of
-representatives for the $\group_S$-orbits of $\X^n$, where $\group_S$ is the
+representatives for the $\FixG{S}$-orbits of $\X^n$, where $\intro*\FixG{S}$ is the
 subgroup of $\group$ that fixes the elements of $S$.
 
 \AP We will also assume that there exists a total ordering $\leq$ on $\X$ that
 is \kl{compatible} with the action of $\group$, i.e., if $x \leq y$, but
-crucially, we do not assume that $\leq$ is well-founded. To compute with this
-ordering, we will assume that one can decide whether $x \leq y$ for all $x,y
-\in \X$.
+crucially, we do not assume that $\leq$ is well-founded. Again, to devise our algorithm
+we will assume that this ordering is \intro(ordering){effective}, i.e. To compute with this
+we will assume that one can decide whether $x \leq y$ for all $x,y
+\in \X$. The first and main result of this paper is the following:
 
 \begin{theorem}
   \label{thm:decide-equiv-ideal-mem}
@@ -146,21 +150,32 @@ ordering, we will assume that one can decide whether $x \leq y$ for all $x,y
 \end{theorem}
 
 \AP
-We also show that one can compute an \kl{equivariant Gröbner basis}
-from a finite set $H$ of generators, whenever one has 
-slightly more control on the divisibility relation $\gdivleq$.
+We then build on this result to compute so-called 
+\kl{equivariant Gröbner bases} for equivariant ideals.
+Note that already in the case of finite sets of variables, there are 
+multiple (equivalent) definitions of \kl{Gröbner bases}, and will defer 
+their presentation to our preliminaries section.
+In the case of infinite sets of variables, we define an
+\intro{equivariant Gröbner basis} as a finite set of generators $\Basis$ of
+an \kl{equivariant ideal} $\idl$ such that, for every finite set $S \subfin \X$,
+the set $\orbit{\Basis} \cap \poly{\K}{S}$ is a \kl{Gröbner basis} of the \kl{ideal} $\idl \cap
+\poly{\K}{S}$.
+In particular, if $\Basis$ is an \kl{equivariant Gröbner basis}, then
+the following holds:
+\begin{equation}
+  \forall S \subfin \X,
+  \EqIdlGen{H} \cap \poly{\K}{S} = \IdlGen{\orbit{\Basis} \cap \poly{\K}{S}}
+  \quad .
+\end{equation}
+In particular, having an \kl{equivariant Gröbner basis} allows one to efficiently compute membership
+queries, as they reduce to the case of finite sets of variables, and that
+a \kl{Gröbner basis} of the corresponding (non-equivariant) ideal can be computed 
+easily from $\Basis$, as a finite set of representatives of
+$\orbit{\Basis} \cap \poly{\K}{S}$.
 
-\todo[inline]{
-  Define what a Gröbner basis is in general, and 
-  what it means in the equivariant case.
-  The definition of \cite{GHOLAS24}
-  depends on leading monomials + well-founded
-  ordering, and should therefore be avoided here 
-  for clarity
-}
 
 \begin{theorem}
-  \label{thm:decide-equiv-ideal-mem}
+  \label{thm:compute-egb}
   Let $(\X, \group, \leq)$ be a set of indeterminates, a group acting \kl{effectively
   oligomorphically}
   on $\X$ and an
@@ -170,19 +185,38 @@ slightly more control on the divisibility relation $\gdivleq$.
   compute an \kl{equivariant Gröbner basis} from a finite set $H$ of generators.
 \end{theorem}
 
-
-\paragraph{Proof Method and Organization.} \AP 
-Notice that if one has an \kl{equivariant Gröbner basis} $\Basis$ of an
-\kl{equivariant ideal} $\idl$, then one can decide the \kl{equivariant ideal
-membership problem} by reducing it to a classical ideal membership problem
-since:
-\begin{equation}
-  \forall S \subfin \X,
-  \EqIdlGen{\Basis} \cap \poly{\K}{S} = \IdlGen{\orbit{\Basis} \cap \poly{\K}{S}}
-\end{equation}
+Note that the requirement that $(\mon[\omega + \omega]{\X}, \gdivleq)$ is a
+\kl{WQO} is a generalisation of the requirement that $(\mon[\omega+1]{\X},
+\gdivleq)$ is a \kl{WQO} in the previous \cref{thm:decide-equiv-ideal-mem}.
 
 
-We first will construct, without
-extra assumptions, \kl{weak Gröbner bases} from a finite set of generators $H$.
-Then, we will
+\paragraph{Organisation.} \AP
+The rest of the paper is organised as follows.
+In \cref{sec:preliminaries}, we introduce formally what a
+\kl{Gröbner basis} is, and present the background on 
+how to compute them using \kl{Buchberger's algorithm}.
+Then, we will present in \cref{sec:weakgb} an adaptation of 
+\kl{Buchberger's algorithm} to the \kl{equivariant case}, that computes
+a \kl{weak equivariant Gröbner basis} of an \kl{equivariant ideal}.
+In \cref{sec:algorithm}, we use \kl{weak equivariant Gröbner bases} to devise a decision
+procedure for the \kl{equivariant ideal membership problem}, and prove
+our \cref{thm:decide-equiv-ideal-mem}.
+The procedure will be based on the following idea:
+given a finite set $S \subfin \X$ of indeterminates, and a finite set $H$ of generators, we will compute a \kl{weak equivariant Gröbner basis} 
+$\Basis_S$ that has the property that 
+$\EqIdlGen{H} \cap \poly{\K}{S} = \IdlGen{\Basis_S \cap \poly{\K}{S}}$, for this 
+particular set $S$.
+We will call such sets \kl{$S$-strong equivariant Gröbner bases} for 
+$\EqIdlGen{H}$.
+Then, in \cref{sec:equivariant-grobner-basis},
+we will show how to transform our algorithm that computes 
+\kl{$S$-strong equivariant Gröbner bases} into an algorithm that computes
+\kl{equivariant Gröbner bases} for \kl{equivariant ideals}.
+In \cref{sec:examples}
+we will show how to use our algorithm to solve some non-trivial examples. This will also be a way
+to show that our restrictions are very mild, and that one can really apply our theoretical
+results.
+Finally, in \cref{sec:conclusion}, we will discuss on the need 
+for a total ordering on the set of indeterminates, and the possibility
+to relax the hypotheses of our results.
 
