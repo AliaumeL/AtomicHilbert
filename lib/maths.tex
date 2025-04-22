@@ -72,8 +72,10 @@
     \mathrel{\sqsubseteq^{\mathrm{div}}}
 }
 \NewDocumentCommand{\gdivleq}{ O{\group} }{
-    \mathrel{\sqsubseteq^{\mathrm{div}}_{#1}}
+  \mathrel{\kl[\gdivleq]{\sqsubseteq^{\mathrm{div}}_{#1}}}
 }
+\knowledge{\gdivleq}{notion}
+
 
 
 \NewDocumentCommand{\Basis}{O{B}}{\mathcal{#1}}
@@ -115,6 +117,7 @@
 \NewDocumentCommand{\monelt}{ O{m} }{\mathfrak{#1}}
 
 \newcommand{\ordinal}{\eta}
+
 
 
 \NewDocumentCommand{\gelem}{ O{\pi} }{\mathgr{#1}}
@@ -168,3 +171,11 @@
 \NewDocumentOrdering{pmon}{\preceq}{\prec}
 \NewDocumentCommand{\pmoneq}{}{\mathrel{\kl[pmon]{\equiv}}}
 
+
+%  ORDINALS, PARTIAL ORDERINGS, AND THEIR OPERATIONS
+\newcommand{\ordfin}[1]{\kl[\ordfin]{#1}}
+\newcommand{\om}{\kl[\om]{\omega}}
+\newcommand{\ordplus}{\mathrel{\kl[\ordplus]{+}}}
+\knowledge{\ordplus}{notion}
+\knowledge{\ordfin}{notion}
+\knowledge{\om}{notion}
