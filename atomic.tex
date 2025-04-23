@@ -31,6 +31,20 @@
 % math packages
 \usepackage{amsmath,amsthm,amssymb,stmaryrd,thmtools,upgreek}
 
+% configure some theorems
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+
+
 % graphics packages
 \usepackage{graphicx}
 \usepackage[obeyclassoptions,mode=tex]{standalone}
@@ -91,27 +105,11 @@
     filecolor=A4,
 }
 
-% configure some theorems
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{assumption}[theorem]{Assumption}
-\Crefname{assumption}{Assumption}{Assumptions}
-
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{example}[theorem]{Example}
-
-
 
 % we include whatever the user wants to include in the header
 
 % we include libraries (tex files) usually written in the `lib` directory
 \input{lib/aliaume}
-\input{lib/arka}
 \input{lib/maths}
 \input{lib/knowledges.kl}
 
@@ -128,7 +126,7 @@ Arka Ghosh\thanks{Université de Bordeaux, France}
 
 % For the date, we first check if the user has provided a date,
 % and otherwise use the git meta inforamtion (if available).
-\date{2025-04-17 16:33:36 +0200\footnote{90c5261a458ff5854d913b618d233678f118e4d7 -- branch main at git@github.com:AliaumeL/AtomicHilbert.git}}
+\date{2025-04-23 10:20:48 +0200\footnote{1b0a7dfa0ea2cdc5dd7ae967e9c4b58c12b8fbe8 -- branch main at git@github.com:AliaumeL/AtomicHilbert.git}}
 
 \newcommand{\repositoryUrl}{\url{https://github.com/AliaumeL/AtomicHilbert}}
 
@@ -154,6 +152,8 @@ Arka Ghosh\thanks{Université de Bordeaux, France}
 % Include the content of the paper
 \input{src/intro.tex}
 \input{src/preliminaries.tex}
+\input{src/weakgb.tex}
+
 \input{src/algorithm.tex}
 \input{src/fullbasis.tex}
 \input{src/undecidability.tex}

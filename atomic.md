@@ -12,9 +12,9 @@ appendix:
 ---
 
 \input{src/intro.tex}
+\input{src/preliminaries.tex}
 \input{src/weakgb.tex}
 
-\input{src/preliminaries.tex}
 \input{src/algorithm.tex}
 \input{src/fullbasis.tex}
 \input{src/undecidability.tex}
