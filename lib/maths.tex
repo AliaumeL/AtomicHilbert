@@ -76,7 +76,10 @@
 }
 \knowledge{\gdivleq}{notion}
 
+\NewDocumentCommand{\monord}{}{\sqsubseteq}
 
+\NewDocumentOrdering{revlex}{\sqsubseteq_{\mathsf{RevLex}}}{\sqsubset_{\mathsf{RevLex}}}
+\NewDocumentOrdering{lex}{\sqsubseteq_{\mathsf{Lex}}}{\sqsubset_{\mathsf{Lex}}}
 
 \NewDocumentCommand{\Basis}{O{B}}{\mathcal{#1}}
 \NewDocumentCommand{\LBasis}{O{B} m}{\mathcal{#1}_{#2}}

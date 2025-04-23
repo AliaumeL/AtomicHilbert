@@ -85,41 +85,126 @@ will be crucial to understand the algorithm we will present in \cref{sec:algorit
 In order to obtain a decision procedure for the ideal membership problem, a natural approach
 is to generalise the Euclidean division to the case of polynomials with multiple
 indeterminates. Namely, 
-we write $p \to_{q} r$ if there exists $\monelt \in \mon{\X}$ such that
+we write $p \to_{q} r$ if there exists $\monelt \in \mon{\X}$ and $a \in \K$ such that
 \begin{equation}
     \label{eq:euclidian}
-    p = q \cdot \monelt + r
-  \end{equation}
+    p = a  \monelt q  + r
+\end{equation}
+Based on this rewriting relation, 
+it is clear that 
+$p \to_{H}^* 0$ if and only if
+$p \in \IdlGen{H}$. To turn this remark into a decision procedure, we can
+to orient the reduction relation to make it \intro{terminating}, i.e. such that
+every rewriting sequence $x_1 \to x_2 \to \dots$ is finite.
+The simplest way to do so is to select a \kl{well-ordering} $\preceq$ on polynomials
+and to orient the rewriting relation by $p \to_{q,\preceq} r$ if and only if
+there exists
+$\monelt \in \mon{\X}$ and $a \in \K$ such that
+\begin{equation}
+    \label{eq:euclidian-ord}
+    p = a  \monelt q  + r \text{ and } r \preceq p
+\end{equation}
+If the relation is \intro{confluent}, i.e. if
+for all $p \to_{q}^* r_1$ and $p \to_{q}^* r_2$, there exists $r_3$ such that
+$r_1 \to_{q}^* r_3$ and $r_2 \to_{q}^* r_3$, then we obtain a simple decision
+procdure for the ideal membership problem: we can compute the normal form of $p$ with
+respect to $H$, by applying reductions of $\to_{H,\preceq}$ until no transitions can be taken, and check if it is equal to $0$.
 
-\begin{itemize}
-  \item Generalized euclidian division
-  \item Order on polynomials that is wqo
-  \item Abstract \kl{Gröbner bases} (rewriting is complete and confluent)
-  \item Monomial orderings / admissible orderings
-  \item Gröbner bases and their equivalent characterizations
-  \item Critical pairs and S-polynomials + Buchberger's algorithm
-\end{itemize}
 
-Given a total ordering $\order$ on $\X$, one can
-consider the \intro{monomial ordering} $\revlex$ on $\mon{\X}$ defined by $M_1
-\revlex M_2$ if and only if there exists $x \in \dom(M_1) \cap \dom(M_2)$ such
-that $M_1(x) < M_2(x)$ and for all $x \order y$, we have $M_1(y) = M_2(y)$
+\AP
+Abstractly, we can define a \intro{Gröbner basis} of an ideal $\idl$, with respect to an
+ordering $\preceq$ on polynomials, as a finite 
+set of polynomials $\Basis$ such that 
+$\to_{\Basis,\preceq}$ is \kl{terminating} and \kl{confluent}, and such that
+for all $p \in \poly{\K}{\X}$,
+$p \to_{\Basis,\preceq}^* 0$ if and only if $p \in \idl$.
 
-This is in turned used to define the notions of \intro{leading monomial},
-\intro{leading coefficient}, \intro{leading term}, and \intro{characteristic
-monomial}.
-\begin{description}
-    \item[The leading monomial] of a polynomial $p$ is the largest monomial
-        appearing in $p$ with respect to $\revlex$.
-    \item[The leading coefficient] of a polynomial $p$ is the coefficient of
-        its leading monomial.
-    \item[The leading term] of a polynomial $p$ is the product of its leading
-        coefficient and its leading monomial.
-    \item[The characteristic monomial] of a polynomial $p$ is the monomial
-        obtained by multiplying its \kl{leading monomial} with all indeterminates
-        appearing in $p$.
-\end{description}
+\AP In practice, the algorithm to compute \kl{Gröbner bases} will be similar to
+the Knuth-Bendix completion algorithm for term rewriting systems
+\cite{KNBEND70}, and will be based on orderings on polynomials that interact in
+a specific way with the notion of \kl{division}. Indeed, there is a natural
+(partial) ordering on monomials: the \kl{divisibility ordering}. To lift this
+ordering to polynomials, one uses the notion of \intro{monomial orderings}
+$\monord$ that are: total, refining the divisibility ordering, and such that the
+product operation on monomials is monotone.
+Classical examples of \kl{monomial orderings} are the 
+\kl{lexicographic ordering} $\lexleq$ and the \kl{reverse lexicographic ordering} $\revlexleq$, 
+that are obtained by considesing a total ordering $<$ on the set of indeterminates
+$\Indets$ to linearise the \kl{divisibility ordering}, and are respectively defined as
+\begin{align*}
+  \monelt \intro*\revlexlt \monelt[n] & \iff \exists X \in \Indets, \monelt(X) < \monelt[n](Y) 
+    \land
+    \forall Y > X, \monelt(Y) = \monelt[n](Y) \\
+    \monelt \intro*\lexlt \monelt[n] & \iff \exists X \in \Indets, \monelt(X) < \monelt[n](Y)
+    \land
+    \forall Y < X, \monelt(Y) = \monelt[n](Y) \\
+  \end{align*}
 
-A \intro{Gröbner basis} $\Basis$ of an ideal $I$ is a set of polynomials such
-that for all $p \in I$, there exists $q \in \Basis$ such that the \kl{leading
-monomial} of $q$ \kl{divides} the \kl{leading monomial} of $p$.
+\begin{example}
+  Let $\X = \set{x_1, x_2, x_3}$ and assume that $x_1 < x_2 < x_3$.
+  A monomial $\monelt$ is uniquely defined by its exponents $(e_1, e_2, e_3)$
+  such that $\monelt = x_1^{e_1} x_2^{e_2} x_3^{e_3}$.
+  Let us consider another monomial $\monelt[n]$ defined by its exponents $(f_1, f_2, f_3)$.
+  Then, we have:
+  \begin{itemize}
+    \item $\monelt \divleq \monelt[n]$ if and only if 
+      $e_i \leq f_i$ for all $i \in \set{1,2,3}$,
+    \item $\monelt \revlexleq \monelt[n]$ if and only if
+      \textbf{todo}
+    \item $\monelt \lexleq \monelt[n]$ if and only if
+      \textbf{todo}
+  \end{itemize}
+\end{example}
+
+\AP Having fixed a total ordering $\monord$ on monomials, we can define the
+\intro{leading monomial} of a polynomial $p$ as the largest monomial appearing
+in $p$ with respect to $\monord$. We can then define the \intro{leading term}
+of $p$ as the product of its \kl{leading monomial} and its \intro{leading
+coefficient}, and the \intro{characteristic monomial} of $p$ as the product of
+its \kl{leading monomial} and all the indeterminates appearing in $p$.
+
+\begin{example}
+  todo
+\end{example}
+
+\AP
+We can now compare polynomials with respect to their \kl{leading monomial}:
+$p \pmonleq q$ if and only if their \kl{leading monomials}
+$\lm(p)$ and $\lm(q)$ satisfy $\lm(p) \monord \lm(q)$.
+Note that because there are finitely many indeterminates,
+$\monord$ is \kl{well-founded} and therefore $\pmonleq$
+is \kl{well-quasi-ordered}.
+The core of the Buchberger algorithm is to start from a generating
+set $H$ of an ideal $\idl$, and to saturate it into a
+\kl{Gröbner basis} $\Basis$. The theory of \kl{Gröbner bases} is
+stating that, given a \kl{monomial ordering} $\monord$, the following
+are equivalent statements:
+\begin{enumerate}
+  \item The relation $\to_{\Basis,\pmonleq}$ is terminating and confluent.
+  \item For every polynomial $p \in \poly{\K}{\X}$, we have
+    $p \to_{\Basis,\pmonleq}^* 0$ if and only if $p \in \idl$.
+  \item For every polynomial $p \in \idl$, there exists a polynomial $q \in \Basis$ such that
+    $\lm(q) \divleq \lm(p)$.
+  \item For every two polynomials 
+    $p,q \in \Basis$,
+    coefficients $a,b \in \K$ and monomials $\monelt,\monelt[n] \in \mon{\X}$, we have
+    \begin{align*}
+      a \monelt p + b \monelt[n] q & \to_{\Basis,\pmonleq}^* 0
+    \end{align*}
+\end{enumerate}
+The Buchberger algorithm consists of
+saturating a generating set $H$ of an ideal $\idl$ into a \kl{Gröbner basis} $\Basis$ by
+adding the \kl{critical pairs} of the polynomials in $\Basis$.
+Correctness is ensured by the last item, and termination is ensured by the first item,
+because the ordering $\pmonleq$ is a \kl{well-quasi-ordering} on polynomials.
+
+\paragraph{Equivariant Gröbner bases.}
+\AP
+When adapting the above theory to the equivariant setting, one faces
+several challenges. First, the lexicographic orderings are not well founded
+anymore. Second, the equivalent notions of 
+\kl{Gröbner bases} are not so clearly equivalent anymore.
+
+\begin{example}
+  example of infinite reduction if one uses the revlex ordering 
+\end{example}
