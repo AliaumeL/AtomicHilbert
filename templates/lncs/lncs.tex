@@ -10,6 +10,9 @@
 %   edit the `templates/lncs/lncs.tex` file instead.
 \documentclass[runningheads]{llncs}
 
+% create a new LNCS environment for assumptions
+\newtheorem{assumption}[theorem]{Assumption}{\bfseries}{\itshape}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
@@ -54,8 +57,10 @@ $endif$
 % links inside the document
 \usepackage{hyperref}
 \usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+\Crefname{assumption}{Assumption}{Assumptions}
 \usepackage[$if(draft)$composition$else$electronic$endif$,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
+
 
 % Tables 
 \usepackage{booktabs}
@@ -69,6 +74,13 @@ $endif$
 
 % Proof trees
 \usepackage{bussproofs}
+
+% Algorithms
+\usepackage{algorithm2e}
+\Crefname{algocfline}{Algorithm}{Algorithms}
+\crefname{algocfline}{Algorithm}{Algorithms}
+\crefname{algocf}{Algorithm}{Algorithms}
+\Crefname{algocf}{Algorithm}{Algorithms}
 
 % Colors 
 \usepackage{ensps-colorscheme}

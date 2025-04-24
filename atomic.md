@@ -5,6 +5,7 @@ final: false
 anonymous: false
 libraries:
     - lib/aliaume
+    - lib/arka
     - lib/maths
     - lib/knowledges.kl
 appendix:
