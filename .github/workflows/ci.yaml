@@ -22,9 +22,14 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: |
+            atomic.tex
             atomic.lncs.tex
+            atomic.asmart.tex
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
           name: pdfs
-          path: atomic.lncs.pdf
+          path: |
+            atomic.pdf
+            atomic.lncs.pdf
+            atomic.asmart.pdf
