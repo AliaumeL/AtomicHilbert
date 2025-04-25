@@ -2,7 +2,7 @@
 bibliography: papers.bib
 draft: true
 final: false
-anonymous: false
+anonymous: true 
 libraries:
     - lib/aliaume
     - lib/arka

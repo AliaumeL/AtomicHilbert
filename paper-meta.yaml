@@ -4,12 +4,20 @@ author:
   - name: Aliaume Lopez
     initials: A. Lopez
     email: ad.lopez@uw.edu.pl
-    affiliation: University of Warsaw, Poland
+    affiliation: University of Warsaw
+    funding: |
+      Aliaume Lopez was supported by the Polish National Science Centre (NCN) grant "Polynomial finite state computation" (2022/46/A/ST6/00072).
+    location:
+      country: Poland
+      city: Warsaw
     orcid: "0000-0002-4205-327X"
   - name: Arka Ghosh
     email: a.ghosh@uw.edu.pl
     initials: A. Ghosh
-    affiliation: Université de Bordeaux, France
+    affiliation: Université de Bordeaux
+    location:
+      country: France
+      city: Bordeaux
     orcid: "0000-0003-3839-8459"
 abstract: |
   Polynomials with infinite number of variables do not have the

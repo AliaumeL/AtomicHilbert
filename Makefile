@@ -12,7 +12,8 @@ SRC=src/*.tex             \
 TEMPLATES=templates/plain-article.tex \
 	  templates/git-meta.lua      \
 	  templates/lipics/lipics.tex \
-	  templates/lncs/lncs.tex
+	  templates/lncs/lncs.tex     \
+		templates/asmart/asmart-small.tex
 
 FIGURES=
 
@@ -46,7 +47,7 @@ $(PAPER).lipics.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
 		   -o $(PAPER).lipics.tex \
 		   $(PAPER).md
 
-# Create a lipics document for submission
+# Create an lncs document for submission
 $(PAPER).lncs.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
 	pandoc --template=templates/lncs/lncs.tex \
 		   --lua-filter=templates/git-meta.lua \
@@ -54,7 +55,15 @@ $(PAPER).lncs.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
 		   --wrap=none \
 		   -o $(PAPER).lncs.tex \
 		   $(PAPER).md
-
+	
+# Create an asmart document for submission
+$(PAPER).asmart.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
+	pandoc --template=templates/asmart/asmart-small.tex \
+		   --lua-filter=templates/git-meta.lua \
+		   --metadata-file=./paper-meta.yaml \
+		   --wrap=none \
+		   -o $(PAPER).asmart.tex \
+		   $(PAPER).md
 
 # Create a single file tex document for arXiv
 $(PAPER).arxiv.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
