@@ -41,9 +41,91 @@ Define $\cmin{T}(f),\cmout{T}(f)\in\mon{\X}$ as
 \qquad
 \cmout{T}(f) \defined y_1^{\ell_1 + 1} \cdot\dots\cdot y_n^{\ell_n + 1} \ ,
 \]
+Finally, define
+\[
+\cm[T](f) \defined (\cmin{T}(f),\cmout{T}(f)) \ .
+\]
 \end{definition}
 %
-\begin{proof}[Proof of \Cref{lem:strong exists}]
-
+\begin{lemma}\label{lem:cm equiv}
+For every $T\subseteqfin \X$, $f\in\poly{\K}{\X}$ and $\pi\in\group$ we have
+\[
+\pi(\cm[T](f)) = \cm[\pi(T)](\pi(f)) \ .
+\]
+\end{lemma}
+%
+\begin{proof}
+\arka{TODO}
 \end{proof}
+%
+\begin{lemma}\label{lem:cm equiv}
+For every $T\subseteqfin \X$, $f\in\poly{\K}{\X}$ we have
+\[
+\cm[T](f) = \cm[T\cap \var(f)](f) \ .
+\]
+\end{lemma}
+%
+\begin{proof}
+\arka{TODO}
+\end{proof}
+%
+\begin{proof}[Proof of \Cref{lem:strong exists}]
+\arka{todo}
+\end{proof}
+%
+\begin{lemma}
+Every strong basis is also a Gr\"{o}bner basis.
+\end{lemma}
+%
+\begin{definition}
+For every orbit-finite $\Basis\subseteq \poly{\K}{\X}$ define
+\[
+\width(\Basis) \defined
+\max_{b\in \Basis} |\var(f)| \ .
+\]
+\end{definition}
+%
+\begin{lemma}
+For every orbit-finite $\Basis\subseteq \poly{\K}{\X}$,
+$\width(\Basis)$ is finite.
+\end{lemma}
+%
+\begin{proof}
+    \arka{TODO}
+\end{proof}
+%
+\begin{definition}
+\arka{Define $\reducstep{\Basis,T}, \reduc{\Basis,T}, \rem[T]{\Basis}{f}$}
+\end{definition}
+%
+Fix an orbit-finite set $\Basis\subseteq \poly{\K}{\X}$.
+Define a sequence of subsets $(\Basis_n)_{n\in\N}$ of $\poly{\K}{\X}$ as
+%
+\begin{align*}
+\Basis_0 &= \Basis \\
+\Basis_{n + 1} &= \bigcup_{f,g\in\Basis_{n},
+T\subseteq \var(f)\cup \var(g)}
+\rem[T]{\Basis_{n}}{\spolyset(f,g)} \ .
+\end{align*}
+%
+\begin{lemma}
+$\IdlGen{\Basis} = \IdlGen{\Basis_0} =
+\IdlGen{\Basis_1} = \dots$.
+\end{lemma}
+%
+\begin{lemma}
+There exists $N\in\N$ such that
+$
+\Basis_N = \Basis_{N+1} = \dots
+$.
+\end{lemma}
+%
+\begin{lemma}
+If $\Basis_n = \Basis_{n+1}$,
+then $\Basis_n$ is a strong basis of $\IdlGen{\Basis}$.
+\end{lemma}
+%
+\begin{lemma}
+$\Basis_{n}$ is orbit-finite for every $n\in\N$.
+\end{lemma}
 %
