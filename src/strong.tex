@@ -1,11 +1,10 @@
-%!TEX root = ../atomic.tex
+%!TEX root = ../atomic.asmart.tex
 
 \section{Strong Basis}\label{sec:strong}
 %
 \begin{definition}\label{def:strong}
-For $T\subseteqfin\X$, a set $B\subseteq\poly{\K}{\X}$ is called a $T$-strong basis for an equivariant ideal $I\subseteqfin\poly{\K}{\X}$ if for all $f\in I$ there exists $b\in B$ such that $\lm[T](b)$ divides $\lm[T](f)$.
-
-The set $B$ is called a strong basis for $I$ if it is a $T$-strong basis for $I$ for every $T\subseteqfin \X$.
+For $T\subseteqfin\X$, a set $B\subseteq\poly{\K}{\X}$ is called a \kl{$T$-strong basis} for an equivariant ideal $I\subseteqfin\poly{\K}{\X}$ if for all $f\in I$ there exists $b\in B$ such that $\lm[T](b)$ divides $\lm[T](f)$.
+The set $B$ is called a \kl{strong basis} for $I$ if it is a $T$-strong basis for $I$ for every $T\subseteqfin \X$.
 \end{definition}
 %
 \begin{definition}
@@ -20,6 +19,29 @@ $(\mon{X}{\times}\mon{X},\gdivleq)$ is a WQO.
 \begin{lemma}\label{lem:strong exists}
 Under \Cref{assume:mon mon wqo}, every equivariant ideal in $\poly{\K}{\X}$ has an orbit-finite strong basis.
 \end{lemma}
+%
+Recall the definitions of $\lm[T]$ and $\var()$ (\Cref{def:LM T})
+%
+\begin{definition}
+For $T\subseteqfin \X$ and $f\in \poly{\K}{\X}$ define $\varin{T}(f),\varout{T}(f)\subseteqfin \X$ as
+\[
+\varin{T}(f) \defined \var(f) \cap T
+\qquad
+\varout{T}(f) \defined \var(f) \setminus T \ .
+\]
+Let $\varin{T}(f) = \set{x_1,\dots,x_m} $, $\varout{T}(f) \defined \set{y_1,\dots,y_n}$.
+Then,
+\[
+\lm[T](f) = x_1^{k_1} \cdot\dots\cdot x_m^{k_m} \cdot y_1^{\ell_1} \cdot\dots\cdot y_n^{\ell_n} \ .
+\]
+for some $k_1,\dots,k_m,\ell_1,\dots,\ell_n\in\N$.
+Define $\cmin{T}(f),\cmout{T}(f)\in\mon{\X}$ as
+\[
+\cmin{T}(f) \defined x_1^{k_1 + 1} \cdot\dots\cdot x_m^{k_m + 1}
+\qquad
+\cmout{T}(f) \defined y_1^{\ell_1 + 1} \cdot\dots\cdot y_n^{\ell_n + 1} \ ,
+\]
+\end{definition}
 %
 \begin{proof}[Proof of \Cref{lem:strong exists}]
 

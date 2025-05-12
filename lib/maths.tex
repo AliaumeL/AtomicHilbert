@@ -1,4 +1,5 @@
 % Little math macros
+%!TEX root = ../atomic.asmart.tex
 \NewDocumentCommand{\set}{ m }{\{ #1 \}}
 \NewDocumentCommand{\setof}{ m m }{\{ #1 \mid #2 \}}
 \NewDocumentCommand{\card}{ m }{\left| #1 \right|}
@@ -153,6 +154,11 @@
 
 \newcommand{\lm}[1][]{\mathop{\mathsf{LM}_{#1}}}
 \newcommand{\cm}[1][]{\mathop{\mathsf{CM}_{#1}}}
+\newcommand{\cmin}[1]{\cm[\in #1]}
+\newcommand{\cmout}[1]{\cm[\notin #1]}
+\newcommand{\var}{\mathop{\mathsf{var}}}
+\newcommand{\varin}[1]{\var_{\in #1}}
+\newcommand{\varout}[1]{\var_{\notin #1}}
 
 \newcommand{\probBasic}[4]
 {
