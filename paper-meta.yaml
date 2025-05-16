@@ -1,4 +1,5 @@
-title: Deciding the Equivariant Ideal Membership Problem
+title: Computability of Equivariant Gröbner bases
+short-title: Equivariant Gröbner bases
 repository: "https://github.com/AliaumeL/AtomicHilbert"
 author:
   - name: Aliaume Lopez

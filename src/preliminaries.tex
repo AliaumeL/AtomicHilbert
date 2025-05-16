@@ -3,6 +3,86 @@
 \section{Preliminaries}
 \label{sec:preliminaries}
 
+In order to explain these requirements and
+how they relate to previous works, let us first recall that a set $(X, \leq)$ is a
+\intro{well-quasi-ordering} (WQO) if every infinite sequence $\seqof{x_i}[i \in
+\N]$ of elements of $X$ contains a pair $i < j$ such that $x_i \leq x_j$.
+We know from \cite{GHOLAS24} that a
+necessary condition for the \kl{equivariant Hilbert basis property} to hold is
+that the set  $\mon{\X}$  of monomials is a
+\kl{well-quasi-ordering} when endowed with the \intro{divisibility up-to
+$\group$} relation ($\intro*\gdivleq$), which is defined as follows: for
+$\monelt_1, \monelt_2 \in \mon{\X}$, we write $\monelt_1 \gdivleq
+\monelt_2$ if there exists $\gelem \in \group$ such that $\monelt_1$ \kl{divides}
+$\gelem \cdot \monelt_2$.
+Let us recall that a monomial $\monelt[m]$ \intro{divides} a monomial $\monelt[n]$ if
+there exists a monomial $\monelt[k]$ such that $\monelt[m] \times \monelt[k] = \monelt[n]$.
+
+
+\AP Notice that one can extend the
+notion of monomials, that are functions from $\X$ to $\N$ having a finite
+support, to the case of $\mon[\alpha]{\X}$, where $\alpha$ is any partially
+ordered set. With this convention, $\mon[\omega]{\X} = \mon{\X}$. Note that
+\kl{divisibility} extends to $\mon[\alpha]{\X}$ naturally, and that we can therefore
+ask whether $(\mon[\alpha]{\X}, \gdivleq)$ is a \kl{WQO}. A well-known
+result from Dickson states that in the case of finite sets of variables,
+$(\mon[\alpha]{\X}, \gdivleq)$ is a \kl{WQO} if and only if $\alpha$ is
+itself a \kl{WQO}, hence our approach will not lose any generality in the finite case \cite{SCSC12}.
+
+
+\AP In order to devise a decision procedure, we also will assume that basic
+operations on the set of indeterminates and on the group action are decidable.
+Namely, we will assume that the action of $\group$ on $\X$ is
+\intro{effectively oligomorphic}, which means that: for every two tuples
+$(x_1,\dots,x_n), (y_1,\dots,y_n)\in \X^n$, one can decide whether they are in
+the same $\group$-orbit, i.e., whether there exists $\gelem \in \group$ such
+that $\gelem \cdot x_i = y_i$ for all $i \leq n$ ; And that for every finite
+subset $S \subfin \X$ and every $n \in \N$, one can compute a finite set of
+representatives for the $\FixG{S}$-orbits of $\X^n$, where $\intro*\FixG{S}$ is the
+subgroup of $\group$ that fixes the elements of $S$.
+
+\AP We will also assume that there exists a total ordering $\leq$ on $\X$ that
+is \kl{compatible} with the action of $\group$, i.e., if $x \leq y$, but
+crucially, we do not assume that $\leq$ is well-founded. Again, to devise our algorithm
+we will assume that this ordering is \intro(ordering){effective}, i.e. To compute with this
+we will assume that one can decide whether $x \leq y$ for all $x,y
+\in \X$. The first and main result of this paper is the following:
+
+
+
+\AP
+We then build on this result to compute so-called 
+\kl{equivariant Gröbner bases} for equivariant ideals.
+Note that already in the case of finite sets of variables, there are 
+multiple (equivalent) definitions of \kl{Gröbner bases}, and will defer 
+their presentation to our preliminaries section.
+In the case of infinite sets of variables, we define an
+\intro{equivariant Gröbner basis} as a finite set of generators $\Basis$ of
+an \kl{equivariant ideal} $\idl$ such that, for every finite set $S \subfin \X$,
+the set $\orbit{\Basis} \cap \poly{\K}{S}$ is a \kl{Gröbner basis} of the \kl{ideal} $\idl \cap
+\poly{\K}{S}$.
+In particular, if $\Basis$ is an \kl{equivariant Gröbner basis}, then
+the following holds:
+\begin{equation}
+  \forall S \subfin \X,
+  \EqIdlGen{H} \cap \poly{\K}{S} = \IdlGen{\orbit{\Basis} \cap \poly{\K}{S}}
+  \quad .
+\end{equation}
+In particular, having an \kl{equivariant Gröbner basis} allows one to efficiently compute membership
+queries, as they reduce to the case of finite sets of variables, and that
+a \kl{Gröbner basis} of the corresponding (non-equivariant) ideal can be computed 
+easily from $\Basis$, as a finite set of representatives of
+$\orbit{\Basis} \cap \poly{\K}{S}$.
+
+
+
+
+Note that the requirement that $(\mon[\omega + \omega]{\X}, \gdivleq)$ is a
+\kl{WQO} is a generalisation of the requirement that $(\mon[\omega+1]{\X},
+\gdivleq)$ is a \kl{WQO} in the previous \cref{thm:decide-equiv-ideal-mem}.
+
+
+
 \paragraph{Orders.}
 We assume basic familiarity with partial orders and ordinals.
 In particular, we will use the notation $\intro*\om$ 
