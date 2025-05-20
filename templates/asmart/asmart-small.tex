@@ -196,15 +196,15 @@ $body$
 % Include acknowledgements
 $if(anonymous)$
 $else$
-$if(acknowledgements)$
 \begin{acks}
+$if(acknowledgements)$
 $acknowledgements$
 
+$endif$
 $for(author)$
 $author.funding$
 $endfor$
 \end{acks}
-$endif$
 $endif$
 
 % Include the bibliography

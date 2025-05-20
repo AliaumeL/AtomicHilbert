@@ -20,6 +20,12 @@ author:
       country: France
       city: Bordeaux
     orcid: "0000-0003-3839-8459"
+    funding: |
+      Arka Ghosh was supported by
+      the SAIF
+      project, funded by the “France 2030” government investment plan managed by the French National
+      Research Agency, under the reference ANR-23-PEIA-0006, and by the CNRS IRP Le Trójkąt project
+      for collaboration between France and Poland
 abstract: |
   Polynomials with infinite number of variables do not have the
   Hilbert basis property. However, if the variables are considered
