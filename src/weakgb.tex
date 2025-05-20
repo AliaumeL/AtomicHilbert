@@ -2,21 +2,43 @@
 \section{Weak Equivariant Gröbner Bases}
 \label{sec:weakgb}
 
-\AP In this section we will prove that one can compute a good enough basis
-using an adaptation of \kl{Buchberger's algorithm} to the equivariant case.
+\AP In this section we prove that a natural adaptation of \kl{Buchberger's
+algorithm} to the equivariant setting computes a \kl{weak equivariant Gröbner
+basis} of an \kl{equivariant ideal}. This can be seen as a characterisation
+result.
 
-\begin{itemize}
-  \item define the ordering on polynomials with the support
-  \item explain that it is wqo
-  \item explain that one can work with orbit finite sets
-    without talking about representatives every time
-  \item construct the buchberger algorithm using this ordering
-  \item We obtain a set that is a \kl{weak equivariant Gröbner basis}:
-    for every element of the ideal, we can find a polynomial in the
-    \kl{weak equivariant Gröbner basis} that can be used to reduce it without
-    respecting the support condition.
-  \item Example of why it is not enough to obtain a real 
-    decision procedure.
-  (reducing and adding new indeterminates every time)
-\end{itemize}
+\AP
+Given a set of indeterminates $\X$ equipped with a group $\group$ acting
+effectively oligomorphically on $\X$, and such that 
+$\X$ is equipped with a total ordering $\leq$ that is compatible with the
+action of $\group$, we will define a total ordering on the set of monomials
+
+\AP A \intro{weak equivariant Gröbner basis} is a finite set $\Basis$ of
+polynomials such that for every polynomial 
+\begin{enumerate}
+  \item $\Basis$ is a generating set of an equivariant ideal $\idl$,
+  \item $p \in \EqIdlGen{\Basis}$, there
+exists a polynomial $q \in \Basis$ such that $p \toeucl{\pmonleq}{q}^* p'$, and
+$p'$ is a polynomial that only contains indeterminates that are smaller or
+equal than the indeterminates of $p$ with respect to the ordering $\leq$.
+\end{enumerate}
+
+\AP
+\begin{enumerate}
+  \item First, we define the revlex ordering, show that it has some 
+    basic properties.
+  \item Then, we define leading monomials, leading terms, etc.
+  \item Then, we define S-polynomials, and show that it is equivariant
+  \item Then, we explain the saturation algorithm, show 
+    that it is equivariant.
+  \item Then, we show that the saturation algorithm terminates.
+  \item We conclude that we compute a \kl{weak equivariant Gröbner basis}.
+\end{enumerate}
+
+\AP Having fixed a total ordering $\monord$ on monomials, we can define the
+\intro{leading monomial} of a polynomial $p$ as the largest monomial appearing
+in $p$ with respect to $\monord$. We can then define the \intro{leading term}
+of $p$ as the product of its \kl{leading monomial} and its \intro{leading
+coefficient}, and the \intro{characteristic monomial} of $p$ as the product of
+its \kl{leading monomial} and all the indeterminates appearing in $p$.
 
