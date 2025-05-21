@@ -84,7 +84,11 @@
 
 \NewDocumentCommand{\monord}{}{\sqsubseteq}
 
-\NewDocumentOrdering{revlex}{\sqsubseteq_{\mathsf{RevLex}}}{\sqsubset_{\mathsf{RevLex}}}
+\NewDocumentOrdering{var}{\leq_\X}{<_\X}
+
+
+\NewDocumentOrdering{revlex}{\sqsubseteq^{\mathsf{RevLex}}}{\sqsubset^{\mathsf{RevLex}}}
+\NewDocumentOrdering{grevlex}{\sqsubseteq^{\mathsf{RevLex}}_\group}{\sqsubset^{\mathsf{RevLex}}_\group}
 \NewDocumentOrdering{lex}{\sqsubseteq_{\mathsf{Lex}}}{\sqsubset_{\mathsf{Lex}}}
 
 \NewDocumentCommand{\Basis}{O{B}}{\mathcal{#1}}
@@ -145,8 +149,8 @@
 \newcommand{\revlexeq}[1][]{\leq_{\mathsf{RevLex}}^{#1}}
 \newcommand{\gr}{Gr\"{o}bner}
 \newcommand{\dom}{\mathsf{dom}}
-\newcommand{\spoly}[2]{\mathsf{D}(#1,#2)}
-\newcommand{\spolyset}{\mathsf{DSet}}
+\newcommand{\spoly}[2]{\mathsf{S}(#1,#2)}
+\newcommand{\spolyset}{\mathsf{SSet}}
 \newcommand{\spolytext}{$\mathsf{S}$-polynomial}
 \newcommand{\lcm}{\mathsf{LCM}}
 \newcommand{\lc}[1][]{\mathsf{LC}_{#1}}
@@ -205,3 +209,5 @@
   \mathrel{\kl[\toeucl]{\to_{(#1,#2)}}}
 }
 \knowledge{\toeucl}{notion}
+
+\NewDocumentCommand{\CancelPoly}{ m m }{\mathsf{C}_{#1,#2}}

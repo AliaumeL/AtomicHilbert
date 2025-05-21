@@ -41,7 +41,7 @@ $a \in \K$,
 and $\monelt \in \mon{\X}$ such that
 \begin{equation}
     \label{eq:euclidian-ord}
-    p = a \monelt h + q \text{ and } q \preceq p
+    p = a \monelt h + q \text{ and } q \prec p
 \end{equation}
 This relation generalises the classical notion of \kl{division} of polynomials
 to the case of multiple variables.
@@ -65,8 +65,11 @@ it is a \kl{Gröbner basis} of the \kl{generated ideal} $\IdlGen{\Basis}$. It is
 clear that given a \kl{Gröbner basis} $\Basis$ of an ideal $\idl$, one can
 decide the \kl{ideal membership problem} by computing the normal form of $p$
 with respect to $\Basis$ by computing the normal form of $p$ in this rewriting
-system and checking if it is equal to $0$.
-
+system and checking if it is equal to $0$.\footnote{
+  This is a very abstract definition of \kl{Gröbner bases}. In practice, one
+  would use particular orderings, and expect $\preceq$ to be computable 
+  in a reasonable time \cite[Chapter 2, Section 2]{CLO15}.
+}
 
 \paragraph{Group actions and equivariant ideals.}  A \intro{group} $\group$ is
 a set equipped with a binary operation that is associative, has an identity
@@ -118,6 +121,11 @@ an example and a non-example of \kl{equivariant ideals}.
 ordering $\leq$ on $\X$ if for all $g \in \group$ and $x,y \in \X$, we have $x
 \leq y$ if and only if $g \cdot x \leq g \cdot y$. We say that the action is
 \intro{effectively oligomorphic} if \todo{do it}.
+
+\AP Given a monomial $\monelt[m] \in \mon{\X}$, we define the \intro{domain} of
+$\monelt[m]$ as the set $\dom(\monelt[m])$ of indeterminates $x \in \X$ such
+that $\monelt[m](x) \neq 0$. Note that the domain of a monomial is equivariant:
+if $g \in \group$, then $g \cdot \dom(\monelt[m]) = \dom(g \cdot \monelt[m])$.
 
 \paragraph{Equivariant Gröbner bases.} \AP
 We say that a set $\Basis \subseteq \poly{\K}{\X}$ is an
