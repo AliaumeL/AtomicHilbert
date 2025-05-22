@@ -22,7 +22,7 @@ Under \Cref{assume:mon mon wqo}, every equivariant ideal in $\poly{\K}{\X}$ has 
 %
 Recall the definitions of $\lm[T]$ and $\var()$ (\Cref{def:LM T})
 %
-\begin{definition}
+\begin{definition}\label{def:cmp T f}
 For $T\subseteqfin \X$ and $f\in \poly{\K}{\X}$ define $\varin{T}(f),\varout{T}(f)\subseteqfin \X$ as
 \[
 \varin{T}(f) \defined \var(f) \cap T
@@ -43,30 +43,30 @@ Define $\cmin{T}(f),\cmout{T}(f)\in\mon{\X}$ as
 \]
 Finally, define
 \[
-\cm[T](f) \defined (\cmin{T}(f),\cmout{T}(f)) \ .
+\cmp[T](f) \defined (\cmin{T}(f),\cmout{T}(f)) \ .
 \]
 \end{definition}
 %
-\begin{lemma}\label{lem:cm equiv}
+\begin{lemma}\label{lem:cmp equiv}
 For every $T\subseteqfin \X$, $f\in\poly{\K}{\X}$ and $\pi\in\group$ we have
 \[
-\pi(\cm[T](f)) = \cm[\pi(T)](\pi(f)) \ .
+\pi(\cmp[T](f)) = \cmp[\pi(T)](\pi(f)) \ .
 \]
 \end{lemma}
 %
 \begin{proof}
-\arka{TODO}
+Follows from the definition of $\cmp[T](f)$ (\Cref{def:cmp T f}) and the fact that $\pi(\var{f}\cap T) = \pi(\var(f))\cap \pi(T) = \var(\pi(f))\cap \pi(T)$.
 \end{proof}
 %
-\begin{lemma}\label{lem:cm equiv}
+\begin{lemma}\label{lem:cmp equiv}
 For every $T\subseteqfin \X$, $f\in\poly{\K}{\X}$ we have
 \[
-\cm[T](f) = \cm[T\cap \var(f)](f) \ .
+\cmp[T](f) = \cmp[T\cap \var(f)](f) \ .
 \]
 \end{lemma}
 %
 \begin{proof}
-\arka{TODO}
+Follows from the definition of $\cmp[T](f)$ (\Cref{def:cmp T f}).
 \end{proof}
 %
 \begin{proof}[Proof of \Cref{lem:strong exists}]
@@ -91,7 +91,10 @@ $\width(\Basis)$ is finite.
 \end{lemma}
 %
 \begin{proof}
-    \arka{TODO}
+Follows from the fact that for every $\pi\in\group$ and $f\in\poly{\K}{\X}$ we have
+\[
+\width(\pi(f)) = \width(f)
+\]
 \end{proof}
 %
 \begin{definition}

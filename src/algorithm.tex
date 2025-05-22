@@ -321,8 +321,17 @@ $\poly{\K}{S}$ preserves \kl{leading monomials}, \kl{leading coefficients},
 (\cref{lem:g-s-acts-preserves-lead}).
 %
 \begin{definition}\label{def:LM T}
-\arka{TODO : Define $\lm[T]$, $\var(f)$ and other related stuff}
+For a polynomial $f$,
+\begin{enumerate}
+    \item its \emph{leading monomial} $\lm[S](f)$ is the biggest monomial appearing in $f$ with respect to $\revlex[S]$,
+    \item its \emph{leading coefficient} $\lc[S](f)$ is the coefficient of $\lm[S](f)$,
+    \item its \emph{leading term} $\lt[S](f) = \lc[S](f)\cdot\lm[S](f)$,
+    \item its \emph{domain} $\var(f)$ is the finite set of all variables appearing in it, and
+    \item its \emph{characteristic monomial} $\cm[S](f) = v_f \cdot \lm[S](f)$ where $v_f$ is the product of all variables in $\dom(f)$.
+\end{enumerate}
 \end{definition}
+%
+\arka{Can we use $\cmp$ instead of $\cmp$ (\Cref{def:cmp T f} here?}
 %
 \begin{lemma}
     \label{lem:g-s-acts-preserves-lead}
@@ -497,6 +506,8 @@ $\Basis$ all the \intro{$\mathsf{D}$-polynomials}
     \quad .
 \end{equation}
 
+\arka{Maybe we should use $T$ instead of $S$ to avoid confusion with $\spoly{}{}$.}
+
 These polynomials clearly belong to $\gen{\Basis}{\group_S}$.
 Given a set $H$, we write $\spolyset(H) \defined \bigcup_{p,q \in H}
 \rem{\Basis}{\spoly{p}{q}}$.
@@ -524,6 +535,8 @@ Given a set $H$, we write $\spolyset(H) \defined \bigcup_{p,q \in H}
     \label{fig:weakgb}
 \end{figure}
 
+
+\arka{I suggest splitting this into a lemma and a corollary, or simply two lemmas} 
 \begin{lemma}
     \label{lem:weakgb-terminates}
     The \cref{alg:weakgb} terminates on every input.
