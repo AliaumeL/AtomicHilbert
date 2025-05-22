@@ -2,16 +2,6 @@ title: Computability of Equivariant Gröbner bases
 short-title: Equivariant Gröbner bases
 repository: "https://github.com/AliaumeL/AtomicHilbert"
 author:
-  - name: Aliaume Lopez
-    initials: A. Lopez
-    email: ad.lopez@uw.edu.pl
-    affiliation: University of Warsaw
-    funding: |
-      Aliaume Lopez was supported by the Polish National Science Centre (NCN) grant "Polynomial finite state computation" (2022/46/A/ST6/00072).
-    location:
-      country: Poland
-      city: Warsaw
-    orcid: "0000-0002-4205-327X"
   - name: Arka Ghosh
     email: a.ghosh@uw.edu.pl
     initials: A. Ghosh
@@ -27,6 +17,16 @@ author:
       project, funded by the “France 2030” government investment plan managed by the French National
       Research Agency, under the reference ANR-23-PEIA-0006, and by the CNRS IRP Le Trójkąt project
       for collaboration between France and Poland.
+  - name: Aliaume Lopez
+    initials: A. Lopez
+    email: ad.lopez@uw.edu.pl
+    affiliation: University of Warsaw
+    funding: |
+      Aliaume Lopez was supported by the Polish National Science Centre (NCN) grant "Polynomial finite state computation" (2022/46/A/ST6/00072).
+    location:
+      country: Poland
+      city: Warsaw
+    orcid: "0000-0002-4205-327X"
 abstract: |
   Polynomials with infinite number of variables do not have the
   Hilbert basis property. However, if the variables are considered
