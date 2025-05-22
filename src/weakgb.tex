@@ -168,7 +168,7 @@ some \emph{critical pairs} of the rewriting relation $\toeucl{\pmonleq}{H}$.
 Namely, given two polynomials $p$ and $q$ in $H$, we compute the set
 $\CancelPoly{p}{q}$ of cancellations between $p$ and $q$ as the set of
 polynomials of the form $r = \alpha \monelt[n] p + \beta \monelt[m] q$ such
-that $\lm(r) < \max(\lm(p), \lm(q))$, where $\alpha,\beta \in \K$, and where
+that $\lm(r) < \max(\monelt[n] \lm(p), \monelt[m]\lm(q))$, where $\alpha,\beta \in \K$, and where
 $\monelt[n], \monelt[m] \in \mon{\X}$. 
 
 \begin{lemma}
@@ -180,13 +180,38 @@ $\monelt[n], \monelt[m] \in \mon{\X}$.
   \begin{equation}
     \label{eq:spoly}
     \spoly{p}{q} \defined
-    \frac{\lcm(\lm(p), \lm(q))}{\lm(p)} \times p
-    - \frac{\lcm(\lm(p), \lm(q))}{\lm(q)} \times q
+    \frac{\lcm(\lm(p), \lm(q))}{\lt(p)} \times p
+    - \frac{\lcm(\lm(p), \lm(q))}{\lt(q)} \times q
     \quad .
   \end{equation}
 \end{lemma}
 \begin{proof}
-todo easy
+  Let $p,q \in \poly{\K}{\X}$, and let $r \in \CancelPoly{p}{q}$.
+  By definition, there exists $\alpha,\beta \in \K$ and $\monelt[n], \monelt[m]
+  \in \mon{\X}$ such that $r = \alpha \monelt[n] p + \beta \monelt[m] q$ and
+  $\lm(r) < \max(\monelt[n] \lm(p), \monelt[m] \lm(q))$.
+  In particular,
+  we conclude that $\lm(\monelt[n] p) = \lm(\monelt[m] q)$, and that 
+  $\alpha \lc(\monelt[n] p) + \beta \lc(\monelt[m] q) = 0$.
+
+  Let us write $\Delta = \lcm(\lm(p), \lm(q))$.
+  Because $\lm(\monelt[n] p) = \lm(\monelt[m] q)$, there exists a monomial 
+  $\monelt[l] \in \mon{\X}$ such that 
+  $\lm(\monelt[n] p) = \monelt[l] \Delta = \lm(\monelt[m] q)$.
+  Furthermore,
+  we know that $\lc(p) \beta = - \lc(q) \alpha$.
+  As a consequence, one can rewrite $r$ as follows:
+  \begin{equation*}
+    r = 
+    \monelt[l] \alpha \lc(p) 
+    \left[
+      \frac{\Delta}{\lt(p)} \times p
+      - \frac{\Delta}{\lt(q)} \times q
+    \right]
+    = 
+    \monelt[l] \alpha \lc(p) \times \spoly{p}{q} \ .
+  \end{equation*}
+  We have concluded.
 \end{proof}
 
 Remark that the \kl{S-polynomial} is equivariant: if $g \in \group$, then
@@ -232,6 +257,12 @@ effectivity assumptions.
   algorithm \cref{alg:weakgb} is an actual algorithm,
   that can be run on a finite representation of the input set $H$.
 \end{lemma}
+\begin{proof}
+  \todo[inline]{
+    use the effectivity assumptions: one can compute the orbits of
+    pairs of elements
+    }
+\end{proof}
 
 \begin{lemma}
   \label{lem:weakgb-termination}
@@ -300,10 +331,44 @@ effectivity assumptions.
       of its leading monomial, hence smaller or equal to the indeterminates of $p$.
 
     \item[Case 2:] $\monelt[l] \neq \lm(p)$.
-      In this case, it must be that the set $J$ of indices such that
-      $\lm(\monelt_i p_i) = \monelt[l]$ has size at least $2$.
+      In this case, it must be that the set $J$ the set of indices such that
+      $\lm(\monelt_i p_i) = \monelt[l]$.
+      Let us remark that 
+      the sum of leading coefficients 
+      of the polynomials in $J$ must vanish: $\sum_{i \in J} \alpha_i \lc(p_i) = 0$.
+      As a concequence, the set $J$ has size at least $2$.
+      Let us distinguish one element $\star \in J$, and 
+      write $J_\star = J \setminus \set{\star}$.
+      We conclude that 
+      $\alpha_\star = - \sum_{i \in J_\star} \alpha_i \lc(p_i) / \lc(p_\star)$.
+      Let us now rewrite $p$ as follows:
+      \begin{equation}
+        p = \sum_{i \in J_\star} \alpha_i 
+        \left(\monelt_i p_i - \frac{\lc(p_i)}{\lc(p_\star)} \monelt_\star p_\star\right)
+        + \sum_{i \in I \setminus J} \alpha_i \monelt_i p_i
+        \quad .
+      \end{equation}
+      Now, by definition,
+      polynomials $\alpha_i \monelt_i p_i$ for $i \in J \setminus J$ have 
+      leading monomials
+      strictly smaller than $\monelt[l]$.
+      Furthermore,
+      the polynomials
+      $\monelt_i p_i - \frac{\lc(p_i)}{\lc(p_\star)} \monelt_\star p_\star$ for $i \in J_\star$
+      cancel their leading monomials, hence they belong
+      to the set $\CancelPoly{p_i}{p_\star}$.
+      By \cref{lem:spoly}, we know that these polynomials are obtained by
+      multiplying the \kl{S-polynomial} $\spoly{p_i}{p_\star}$ by some monomial.
+      Because \cref{alg:weakgb} terminated, we know that 
+      $\spoly{p_i}{p_\star} \toeucl{\pmonleq}{\Basis}^* 0$ by contruction.
 
-      \todo[inline]{continue}
+      By definition of the rewriting relation, we conclude that 
+      one can rewrite $\spoly{p_i}{p_\star}$ as combination of 
+      polynomials in $\Basis$ that have smaller or equal leading 
+      monomials. We conclude that
+      the whole sum is composed of polynomials with leading monomials 
+      strictly smaller than $\monelt[l]$, leading to a contradiction
+      because we assumed $\monelt[l]$ to be minimal.
+      \qedhere
   \end{description}
-
 \end{proof}
