@@ -100,8 +100,26 @@ The first step is to remark that decidability condictions are preserved
 by the construction of $\varleq_S$ and $\group_S$.
 
 \begin{lemma}
-todo
+  \label{lem:decidability-preserved}
+  Let $(\X, \group, \leq)$ be a set of indeterminates, a group acting
+  \kl{effectively oligomorphically} on $\X$ and an
+  \kl{effective total ordering} $\leq$ on $\X$ that is compatible with the
+  action of $\group$.
+  Then, the set $(\X, \group_S, \varleq_S)$ is a set of indeterminates, a group acting
+  \kl{effectively oligomorphically} on $\X$ and an
+  \kl{effective total ordering} $\varleq_S$ on $\X$ that is compatible with the
+  action of $\group_S$.
 \end{lemma}
+\begin{proof}
+  It is clear that $\varleq_S$ is an \kl{effective total ordering} on $\X$, and that it is
+  compatible with the action of $\group_S$.
+  Let us now show that $\group_S$ is \kl{effectively oligomorphic}.
+
+  \todo[inline]{what we want to show is that 
+    the orbits of tuples of elements in
+    $\group_S$ can be computed.
+    }
+\end{proof}
 
 Then, we will prove that a mild assumption on the monomials allows us to
 conclude that $(\mon[\omega]{\X}, \gdivleq[\group_S])$ is a
@@ -116,6 +134,41 @@ conclude that $(\mon[\omega]{\X}, \gdivleq[\group_S])$ is a
   Assume that $(\mon[\omega + 1]{\X}, \gdivleq[\group])$ is a \kl{well-quasi-ordering}.
   Then, $(\mon[\omega]{\X}, \gdivleq[\group_S])$ is a \kl{well-quasi-ordering}.
 \end{lemma}
+\begin{proof}
+  Let $\seqof{\monelt_i}[i \in \N]$ be an infinite sequence of elements of
+  $\mon[\omega]{\X}$. We will show that there exists $i < j$ such that
+  $\monelt_i \gdivleq[\group_S] \monelt_j$.
+  We will assume without loss of generality that the elements of 
+  $\monelt_i$ contain all variables in $S$.
+
+  To that end, let us define the function $h \colon \mon[\omega]{\X} \to
+  \mon[\omega + 1]{\X}$ that maps a monomial $m$ to itself but with the
+  elements of $S$ having exponent $\omega$.
+  Because $(\mon[\omega + 1]{\X}, \gdivleq[\group])$ is a
+  \kl{well-quasi-ordering},
+  there exists an infinite subsequence of indices $J$ such that 
+  for all $i < j$ in $J$, we have $h(\monelt_i) \gdivleq[\group] h(\monelt_j)$.
+  By definition, this provides us with a sequence of 
+  group elements $\gelem_{i,j} \in \group$ such that
+  for all  $i < j$ in $J$, we have
+  \begin{equation*}
+    \gelem_{i,j}(h(\monelt_i)) \divleq h(\monelt_j)
+  \end{equation*}
+  In particular, 
+  the elements $\gelem_{i,j}$ must send elements of $S$ to elements of $S$.
+  Because $S$ is a finite set, one can further refine the extraction
+  so that $\gelem_{i,j}$ is the identity fuction on $S$ for all $i < j$ in $J$. 
+  Therefore, we have $\gelem_{i,j} \in \group_S$.
+  Finally,
+  consider the sequence of monomials
+  $\monelt[s]_i$ defined as the restriction of $\monelt_i$ to the elements
+  of $S$. Since $S$ is finite, $(\mon{S}, \divleq)$ is a \kl{well-quasi-ordering},
+  and one can further extract $J$ to assume that for all 
+  $i < j$ in $J$, we have $\monelt[s]_i \divleq \monelt[s]_j$.
+  Finally,
+  we conclude that $\gelem_{i,j}(\monelt_i) \divleq \monelt_j$,
+  for all $i < j$ in $J$, and in particular for one such pair.
+\end{proof}
 
 
 We can now conclude with our first main result, which is the
