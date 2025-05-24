@@ -85,7 +85,7 @@ $if(short-title)$
 $endif$
 $for(author)$
 \author{$author.name$}
-       {$author.affiliation$}
+       {$for(author.affiliation)$$it.name$$sep$\and $endfor$}
        {$author.email$}
        {$if(author.orcid)$https://orcid.org/$author.orcid$$endif$}
        {$author.acknowledgements$}
