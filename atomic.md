@@ -21,4 +21,5 @@ appendix:
 \input{src/undecidability.tex}
 \input{src/examples.tex}
 \input{src/strong.tex}
+\input{src/colourful.tex}
 \input{src/conclusion.tex}

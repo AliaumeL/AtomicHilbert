@@ -1,0 +1,18 @@
+%!TEX root = ../atomic.asmart.tex
+%
+\section{Colourful ideas}
+%
+For this section, let $\col \defined \{0,1\}$ and $\paint{\X} \defined \X{\times}\col$.
+%
+\begin{definition}
+Define $\forget : \poly{\K}{\paint{\X}} \to \poly{\K}{\X}$ as the extension of the map $(x,c) \mapsto x$ for $x\in\X$ and $c\in\col$.
+\end{definition}
+%
+\begin{definition}
+A polynomial $f\in\poly{\K}{\paint{\X}}$ is called \kl{consistently coloured} if
+\[
+\var(f) \cap \{(x,0),(x,1)\} \subsetneq \{(x,0),(x,1)\}
+\]
+for every $x\in\X$.
+\end{definition}
+%
