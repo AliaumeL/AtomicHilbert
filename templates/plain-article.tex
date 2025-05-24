@@ -126,7 +126,7 @@ $if(title)$
 $endif$
 \author{
 $for(author)$
-$author.name$$for(author.affiliation)$\thanks{$author.affiliation$}$endfor$
+$author.name$$for(author.affiliation)$\thanks{$author.affiliation.name$}$endfor$
 $sep$ \and
 $endfor$
 }

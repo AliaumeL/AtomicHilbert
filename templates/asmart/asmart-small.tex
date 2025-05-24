@@ -124,11 +124,13 @@ $else$
   \author{$author.name$}
   \email{$author.email$}
   \orcid{$author.orcid$}
-  \affiliation{
-    \institution{$author.affiliation$}
-    \city{$author.location.city$}
-    \country{$author.location.country$}
-  }
+  $for(author.affiliation)$
+    \affiliation{
+      \institution{$it.name$}
+      \city{$it.city$}
+      \country{$it.country$}
+    }
+  $endfor$
   $endfor$
   \renewcommand{\shortauthors}{%
     $for(author)$$author.initials$$sep$, $endfor$%
