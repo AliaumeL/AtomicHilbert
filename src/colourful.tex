@@ -64,11 +64,76 @@ Under \Cref{assume:mon mon wqo},
 Let $\paint{\Basis[D]}$ be the output of \Cref{alg:weakgb} on the input $\paint{\Basis}$.
 Let $\Basis[D] = \forget(\paint{\Basis[D]})$.
 %
-\begin{lemma}\label{lem:strong buch}
+\begin{theorem}\label{lem:strong buch}
+For every $f\in\IdlGen{\Basis[D]}$,
+$f \in \IdlGen{\Basis[D]\cap\var(f)}$.
+\end{theorem}
+%
+\begin{corollary}\label{cor:strong buch}
 The set $\Basis[D]$ is an orbit-finite \gr{} basis of $\IdlGen{\Basis}$.
-\end{lemma}
+\end{corollary}
 %
 \subsection{Proof of \Cref{lem:strong buch}}
+%
+Clearly $\Basis[B] \subseteq \Basis[D] \subseteq \IdlGen{\Basis}$.
+Hence $\IdlGen{\Basis[D]} = \IdlGen{\Basis}$.
 
+Pick $f\in\IdlGen{\Basis[D]}$.
+A \kl{representation} of $f$ using $\Basis[D]$ is a finite set of tuples
+\[
+R \subseteq \K\times\mon{\X}\times\Basis[D]
+\]
+such that
+\[
+f = \sum_{(r,p,h)\in R} r\cdot p\cdot h \ .
+\]
+For a representation $R$, define
+\[
+\var(R) = \bigcup_{(r,p,h)\in R} \var(p)\cup\var(h)
+\]
+Define $\repaint{R} : \X \to \paint{\X}$ as
+\[
+\repaint{R}(x) =
+\begin{cases}
+(x,0) & \text{if }x\in\var(f) \\
+(x,1) & \text{otherwise.}
+\end{cases}
+\]
+%
+Define $\paint{R}$ to be the the tuple
+\[
+\setof{(r,\repaint{R}(p),\repaint{R}(h))}{(r,p,h)\in R} \ .
+\]
+The definition of $\var$ is extended to $\var(\paint{R})$ in the obvious way.
+The leading monomial of $\paint{R}$ is defined as:
+\[
+\lm(\paint{R}) \defined
+\max_{(r,p,h)\in R} \lm(p\cdot h) \ .
+\]
+
+Define an order $\repL$ on representations of $f$ as
+\[
+R \repL R'
+\quad\iff\quad
+\var(\paint{R})\subseteq\var(\paint{R'})
+\text{ and }
+\lm(\paint{R}) \revlexeq \lm(\paint{R'})
+\]
+%
+\arka{Maybe define a ``claim'' environment?}
+%
+\begin{lemma}
+The order $\repL$ is well founded.
+\end{lemma}
+%
+\begin{proof}
+\todo[inline]{TODO}
+\end{proof}
+%
+Let $R$ be a representation of $f$ using $H$ which is minimal w.r.t.\ $\repL$.
+We prove that $\var(\paint{R}) \subseteq \setof{(x,0)}{x\in\X}$.
+Since $\var(\paint{R}) \cap \setof{(x,0)}{x\in\X} \subseteq \var(f)$ by definition,
+this finishes the proof of \Cref{lem:strong buch}.
+%
 \qed
 %
