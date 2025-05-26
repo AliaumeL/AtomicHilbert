@@ -135,5 +135,40 @@ We prove that $\var(\paint{R}) \subseteq \setof{(x,0)}{x\in\X}$.
 Since $\var(\paint{R}) \cap \setof{(x,0)}{x\in\X} \subseteq \var(f)$ by definition,
 this finishes the proof of \Cref{lem:strong buch}.
 %
+
+Let $p = \lm(R)$.
+%
+\begin{lemma}
+If $\var(p) \subseteq \setof{(x,0)}{x\in\X}$,
+then $\var(\paint{R}) \subseteq \setof{(x,0)}{x\in\X}$.
+\end{lemma}
+%
+\begin{proof}
+\arka{Follows from the fact that we use $\revlex$. TODO:expand}.
+\end{proof}
+%
+To finish the proof, we show $\var(p) \subseteq \setof{(x,0)}{x\in\X}$.
+This follows from the next lemma.
+%
+\arka{This should be shifted to weak \gr{} basis section.}
+%
+\begin{lemma}
+Let $\Basis[K]$ be a weak \gr{} basis,
+and $R$ be a representation of some polynomial $h$ using $\Basis[K]$.
+If $\max(\var(R)) > \max(\var(h))$,
+then there exists another representation $R'$ of $h$ using $\Basis[K]$ such that
+\[
+\var(R') \subseteq \var(R)
+\quad\text{and}\quad
+\lm(R') \revlex \lm(R) \ .
+\]
+\end{lemma}
+%
+Applying the above lemma we get a representation $Q$ of $\repaint{R}(f)$ using $\repaint{R}(H)$ such that $\var(Q) \subseteq \var(\paint{R})$.
+Hence, there exists a representation $R'$ of $f$ using $H$ such that
+$Q = \repaint{R}(f) = \repaint{R'}(f)$.
+%
+\arka{Needs a lot of polishing :(}
+%
 \qed
 %
