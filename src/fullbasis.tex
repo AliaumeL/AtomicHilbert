@@ -92,12 +92,13 @@ are morphisms that preserve variable names.
   of $\EqIdlGen{H}$.
 \end{lemma}
 \begin{proof}
-  Let us remark that $\forgetCol{\freeColor(H)} = H$.
-  Because we know that $\mathsf{weakgb}{\freeColor(H)}$
+  Let us remark that $\forgetCol(\freeColor(H)) = H$.
+  Because we know that $\mathsf{weakgb}(\freeColor(H))$
   generates the same ideal as $\freeColor(H)$,
   and since $\forgetCol$ is a morphism,
   we conclude that 
-  $\forgetCol(\mathsf{weakgb}{\freeColor(H)})$
+  the set of polynomial
+  $\forgetCol(\mathsf{weakgb}(\freeColor(H)))$
   generates the same ideal as
   $\forgetCol(\freeColor(H)) = H$.
 \end{proof}
@@ -114,16 +115,10 @@ regarding the computation of $\mathsf{weakgb}$.
   Let $H_\star \defined \freeColor(H)$
   and $H_V \defined \colorWith{V}(H)$.
   Then, 
-  $\mathsf{weakgb}(H_V) \subseteq 
-  \mathsf{weakgb}(H_\star)$,
-  and $\mathsf{weakgb}(H_V)$ is 
-  a \kl{$V$-compatible} subset.
-
-  \begin{equation*}
-   \mathsf{weakgb}(H_V)
-   =
-   \colorWith{V}(\forgetCol(\mathsf{weakgb}(H_\star)))
-  \end{equation*}
+  $\mathsf{weakgb}(H_V)$ is 
+  a \kl{$V$-compatible} subset, 
+  and 
+  $\mathsf{weakgb}(H_V) \subseteq \mathsf{weakgb}(H_\star)$.
 \end{lemma}
 \begin{proof}
   Let us first remark that 
@@ -138,8 +133,7 @@ regarding the computation of $\mathsf{weakgb}$.
   the resulting set is
   \kl{$V$-compatible} by induction.
 
-  For the inclusion, 
-  we prove it by induction on the computation of the algorithm,
+  We prove the inclusion by induction on the computation of the algorithm,
   the base case being trivial. 
   The set of \kl{$S$-polynomials} are clearly included,
   and the only thing to remark is that 
@@ -162,45 +156,29 @@ We now have all the ingredients to conclude our proof
   and $\Basis_V = \mathsf{weakgb}(H_V)$.
   Finally, $\Basis = \forgetCol(\Basis_\star)$.
 
-  Because of 
-  \cref{lem:correct-gen-set}
-  $p \in \EqIdlGen{\Basis}$,
-  hence, one can write
-  $p = \sum_{i \in I} a_i \monelt_i h_i$, 
-  where $a_i \in \K$, $\monelt_i \in \mon{\Indets}$
-  and $h_i \in \Basis$.
-
-  Now, we obtain, thanks to 
-  \cref{lem:weakgb-color-compatible}, the following
-  equation:
-  \begin{equation*}
-    \colorWith{V}(p) \in 
-    \IdlGen{\colorWith{V}(\Basis)}
-    =
-    \IdlGen{\colorWith{V}(\forget(\mathsf{weakgb}(H_\star)))}
-    =
-    \IdlGen{\mathsf{weakgb}(H_V)}
-    = 
-    \IdlGen{\Basis_V}
-  \end{equation*}
-
-  Because $\Basis_V$ is a 
-  \kl{weak Gröbner basis},
-  there exists an element $h \in \Basis_V$
-  such that
+  It is clear that $\colorWith{V}(p)$
+  belongs to $\EqIdlGen{H_V}$.
+  Hence, there exists an $h \in \mathsf{weakgb}(H_V)$
+  such that 
   $\lm(h)$ divides $\lm(\colorWith{V}(p))$,
-  and indeterminates of $h$ are smaller or 
-  equal to the indeterminates of $\colorWith{V}(p)$.
-  Since all the indeterminates of the latter
-  are all colored with $\mathsf{first}$, this means
-  that all variables in $h$ must be labelled with 
-  $\mathsf{first}$. Because $h$ is a \kl{$V$-compatible}
-  polynomial, this means that $h$ actually only uses
-  variables from $\colorWith{V}(p)$.
+  and such that indeterminates of $h$ are smaller or equal
+  to indeterminates of $p$.
+  Because all indeterminates of $p$ are in $V$,
+  all indeterminates of $h$ must be in the
+  $\mathsf{first}$ component. Furthermore,
+  because $h$ is \kl{$V$-compatible} (\cref{lem:weakgb-color-compatible}),
+  it means that $k \defined \forgetCol(h)$ has all its variables
+  included in $\dom(p)$.
+  In particular, $\forgetCol(\lm(h)) = \lm(k)$
+  and therefore, $\lm(k)$ divides $\lm(p)$.
 
-  A fortiori, $\forget(h)$ only uses variables in $V$,
-  and $\lm(h)$ divides $\lm(p)$. We conclude
-  that $\Basis$ is an \kl{equivariant Gröbner basis}.
+  To conclude that $\Basis$ is an \kl{equivariant Gröbner basis},
+  it remains to show that $k \in \Basis$.
+  Since $h \in \mathsf{weakgb}(H_V) \subseteq
+  \mathsf{weakgb}(H_\star) = \Basis_\star$ 
+  (\cref{lem:weakgb-color-compatible}),
+  we conclude
+  that $k \in \Basis$.
 \end{proof}
 
 
