@@ -105,80 +105,45 @@ are morphisms that preserve variable names.
 
 Let us now prove that the resulting set in indeed
 an \kl{equivariant Gröbner basis} of $\EqIdlGen{H}$.
-To notice this, we will first prove one claim
-regarding the computation of $\mathsf{weakgb}$.
 
-\begin{lemma}
-  \label{lem:weakgb-color-compatible}
-  Let $H \subseteq \poly{\K}{\Indets}$
-  and $V \subfin \Indets$.
-  Let $H_\star \defined \freeColor(H)$
-  and $H_V \defined \colorWith{V}(H)$.
-  Then, 
-  $\mathsf{weakgb}(H_V)$ is 
-  a \kl{$V$-compatible} subset, 
-  and 
-  $\mathsf{weakgb}(H_V) \subseteq \mathsf{weakgb}(H_\star)$.
-\end{lemma}
-\begin{proof}
-  Let us first remark that 
-  $\mathsf{weakgb}(H_V)$ is 
-  a \kl{$V$-compatible} subset. To that end,
-  notice that if $p$ and $q$ are \kl{$V$-compatible},
-  then so is $\spoly{p}{q}$ by definition.
-  Furthermore,
-  if $p$ reduces to $q$, and $p$ is \kl{$V$-compatible},
-  then $q$ is too, because its variables are included in
-  those of $p$. Finally, it is clear that 
-  the resulting set is
-  \kl{$V$-compatible} by induction.
-
-  We prove the inclusion by induction on the computation of the algorithm,
-  the base case being trivial. 
-  The set of \kl{$S$-polynomials} are clearly included,
-  and the only thing to remark is that 
-  if a \kl{$V$-compatible} polynomial is reducible
-  in the freely colored setting, then it must be reducible
-  by \kl{$V$-compatible} polynomials. 
-\end{proof}
-
-We now have all the ingredients to conclude our proof
 \begin{lemma}
   \label{lem:strong-gb-correct}
   \Cref{alg:stronggb} is correct.
 \end{lemma}
 \begin{proof}
-  Let $p \in \EqIdlGen{H}$,
+  Let $p \in \IdlGen{H}$,
   $H_\star = \freeColor(H)$,
   $V \defined \dom(p)$,
   $H_V \defined \colorWith{V}(H)$.
-  We let $\Basis_\star = \mathsf{weakgb}(H_\star)$,
-  and $\Basis_V = \mathsf{weakgb}(H_V)$.
+  We let $\Basis_\star = \mathsf{weakgb}(H_\star)$.
   Finally, $\Basis = \forgetCol(\Basis_\star)$.
 
   It is clear that $\colorWith{V}(p)$
-  belongs to $\EqIdlGen{H_V}$.
-  Hence, there exists an $h \in \mathsf{weakgb}(H_V)$
-  such that 
-  $\lm(h)$ divides $\lm(\colorWith{V}(p))$,
-  and such that indeterminates of $h$ are smaller or equal
-  to indeterminates of $p$.
-  Because all indeterminates of $p$ are in $V$,
-  all indeterminates of $h$ must be in the
-  $\mathsf{first}$ component. Furthermore,
-  because $h$ is \kl{$V$-compatible} (\cref{lem:weakgb-color-compatible}),
-  it means that $k \defined \forgetCol(h)$ has all its variables
-  included in $\dom(p)$.
-  In particular, $\forgetCol(\lm(h)) = \lm(k)$
-  and therefore, $\lm(k)$ divides $\lm(p)$.
+  belongs to $\IdlGen{H_V}$.
+  
+  Let us write 
+  \begin{equation*}
+    \colorWith{V}(p) = \sum_{i=1}^n a_i \monelt_i h_i
+  \end{equation*}
+  Where $a_i \in \K$, $\monelt_i \in \mon{\IndetsCol}$,
+  and $h_i \in \Basis_\star$ is \kl{$V$-compatible}.
+  Such a decomposition exists
+  because $H_V \subseteq H_\star \subseteq \Basis_\star$.
+  We order decompositions based on their maximal leading 
+  monomial and the set of indeterminates present in the
+  decomposition. This is a well-founded ordering, and 
+  we can assume that our decomposition was minimal.
 
-  To conclude that $\Basis$ is an \kl{equivariant Gröbner basis},
-  it remains to show that $k \in \Basis$.
-  Since $h \in \mathsf{weakgb}(H_V) \subseteq
-  \mathsf{weakgb}(H_\star) = \Basis_\star$ 
-  (\cref{lem:weakgb-color-compatible}),
-  we conclude
-  that $k \in \Basis$.
+  Assume by contradiction that $\lm(\colorWith{V}(p))$ is not the maximal
+  monomial of the decomposition. Then one can use \kl{$S$-polynomials} to
+  reduce the leading monomial of the decomposition, keeping the same set of
+  indeterminates, and therefore remaining $V$-compatible.
+
+  This means that the leading monomial of $\colorWith{V}(p)$ is exactly
+  the leading monomial of some polynomial $\monelt_i h_i \in \Basis_\star$
+  appearing in the decomposition, and therefore 
+  $\colorWith{V}(p) - b \monelt_i h_i$ is a valid 
+  reduction for some $b \in \K$.
 \end{proof}
 
 
