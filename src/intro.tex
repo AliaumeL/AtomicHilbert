@@ -73,7 +73,7 @@ But to obtain decision procedures, one still lacks a generalisation of
 extra assumptions: the set of indeterminates should come equipped with a
 \emph{total} and \emph{well-founded} ordering \cite[Section 6]{GHOLAS24}.
 \arka{It is slightly different. I would rather say the conditions are artificial/strong and not explain them.
-I prefer artificial since I think we can prove that this artificial condition is satisfied under \Cref{assume:mon mon wqo}}
+I prefer artificial since I think we can prove that this artificial condition is satisfied under}
 
 \AP In this paper, we develop an equivariant generalisation of \kl{Buchberger's
 algorithm}, to effectively compute \kl{Gr\"{o}bner bases} of \kl{equivariant
@@ -87,7 +87,7 @@ defining all the concepts appearing in them to aid readability.
 Our first theorem is that the \kl{equivariant ideal membership problem} is decidable
 under very weak effectivity assumptions.
 
-\begin{theorem}
+\begin{theorem}[name={Equivariant Ideal Membership},restate=thm:decide-equiv-ideal-mem]
   \label{thm:decide-equiv-ideal-mem}
   Let $(\X, \group, \leq)$ be a set of indeterminates, a group acting \kl{effectively
   oligomorphically}
@@ -102,7 +102,7 @@ Next, we show that one can strengthen the conclusion an obtain a fully-fledged
 \kl{Gr\"{o}bner basis} algorithm, under the same effectivity assumptions, but
 with a slightly stronger structural requirement on the set of indeterminates.
 
-\begin{theorem}
+\begin{theorem}[name={Equivariant Gröbner Basis},restate=thm:compute-equiv-gb]
   \label{thm:compute-egb}
   Let $(\X, \group, \leq)$ be a set of indeterminates, a group acting \kl{effectively
   oligomorphically}

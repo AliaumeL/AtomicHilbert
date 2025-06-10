@@ -20,95 +20,85 @@ $V \subfin \Indets$ of indeterminates.
   $\pmonleq$.
 \end{definition}
 
-\AP To compute an \kl{$S$-strong equivariant Gröbner basis} of an
+\AP To compute a \kl{$V$-strong equivariant Gröbner basis} of an
 \kl{equivariant ideal} $\idl$, we will compute a \kl{weak equivariant Gröbner
-basis} of the ideal $\idl$ but with respect to a new ordering $\varleq_S$ and a
-new group action $\group_S \actson \X$ that is the restriction of $\group$ to
-the operations that fix the indeterminates in $S$, i.e., such that for all
-$\gelem \in \group_S$ and $x \in S$, we have $\gelem(x) = x$. The ordering
-$\varleq_S$ is defined as $\varleq$ on $S$ and $\X \setminus S$, and orders all
-elements of $S$ below all elements of $\X \setminus S$.
-\begin{equation}
-  \label{eq:order-S}
-  x \varleq_S y \iff
-  \begin{cases}
-    x \varleq y & \text{if } x,y \in S \lor x,y \not\in S  \\
-    \top        & \text{if } x \in S \land y \not\in S \\
-    \bot        & \text{if } x \not\in S \land y \in S
-  \end{cases}
-\end{equation}
+basis} of the ideal $\idl$ with respect to a new ordering of the indeterminates
+and a new group action. Let us write $\IndetsV[V] \defined V + (\Indets
+\setminus V)$, that is the totally ordered set of indeterminates having the
+same elements as $\Indets$, but with the elements of $V$ ordered below all
+other elements of $\Indets$.
+We will define a new group $\group_V$ that acts on $\IndetsV[V]$ by
+restricting the action of $\group$ to the operations that fix the
+indeterminates in $V$, i.e., such that for all $\gelem \in \group_V$ and
+$x \in V$, we have $\gelem(x) = x$.
 
-\AP Let us first show that if one can compute \kl{weak equivariant Gröbner
-bases} in $(\X, \group_S, \varleq_S)$, then one can compute \kl{$S$-strong
-equivariant Gröbner bases} in $(\X, \group, \varleq)$. This will crucially rely
-on the fact that whenever $q$ has indeterminates smaller (for $\varleq_S$) than
-$p \in \poly{\K}{S}$, then $q$ is in $\poly{\K}{S}$ too, because of the choice
-to put all elements of $S$ below all elements not in $S$.
+Let us call $\iota_V \colon \Indets \to \IndetsV[V]$ the identity map that maps
+every element of $\Indets$ to itself. We extend this map as a morphism from
+$\poly{\K}{\Indets}$ to $\poly{\K}{\IndetsV[V]}$. Beware that $\iota_V$ is not
+an order-preserving map. Similarly, let us introduce $\upsilon_V \colon
+\IndetsV[V] \to \Indets$ that maps every element of $\IndetsV[V]$ to itself,
+and extends as a morphism from $\poly{\K}{\IndetsV[V]}$ to
+$\poly{\K}{\Indets}$. Again, $\upsilon_V$ is not an order-preserving map.
+Using these two constructions, we are ready to define the algorithm that computes
+a \kl{$V$-strong equivariant Gröbner basis} of an \kl{equivariant ideal}
+in \cref{alg:v-stronggb}.
+
+\begin{algorithm}
+    \caption{Computing a \kl{$V$-strong equivariant Gröbner bases}}
+    \label{alg:v-stronggb}
+    \KwIn{An orbit finite set $H$ of polynomials, a finite set $V$ of indeterminates}
+    \KwOut{A \kl{$V$-strong equivariant Gröbner basis} of
+      $\EqIdlGen{H}$}
+    \Begin{
+        $H_V \gets \iota_V(H)$\;
+        $\Basis_V \gets \mathsf{weakgb}(H_V)$\;
+        $\Basis \gets \upsilon_V(\Basis_V)$\;
+        \Return{$\Basis$}\;
+    }
+\end{algorithm}
+
+For \cref{alg:v-stronggb} to be valid, it suffices to check that: $\iota_V(H)$
+is an orbit finite set of polynomials in $\poly{\K}{\IndetsV[V]}$ under the
+action of $\group_V$, that the hypotheses of
+  \cref{thm:weakgb-comput}
+are satisfied for $(\IndetsV[V],
+\group_V)$, and that the result $\upsilon_V(\Basis_V)$ is indeed a
+\kl{$V$-strong equivariant Gröbner basis} of $\EqIdlGen{H}$.
+
+Let us first check that $\iota_V(H)$ is an orbit finite set of
+polynomials in $\poly{\K}{\IndetsV[V]}$ under the action of $\group_V$,
+and that it is effectively computable from $V$ and $H$.
 
 \begin{lemma}
-  \label{lem:local-to-supported}
-  Let $\X$ be a set of indeterminates, $\group$ a group acting
-  on $\X$ \kl{effectively oligomorphically}, and $\varleq$ a total ordering
-  on $\X$ that is \kl{respected by the group action}.
-  Let $S$ be a finite set of indeterminates, and 
-  assume that one can compute \kl{weak equivariant Gröbner bases}
-  in $(\X, \group_S, \varleq_S)$.
-  Then, one can compute an \kl{$S$-strong equivariant Gröbner basis}
-  for any finitely presented \kl{equivariant ideal} $\idl$ in $(\X, \group, \varleq)$.
+  \label{lem:iota-V-orbit-finite}
+  Let $H$ be an orbit finite set of polynomials in $\poly{\K}{\Indets}$.
+  Then, $\iota_V(H)$ is an orbit finite set of polynomials in
+  $\poly{\K}{\IndetsV[V]}$ under the action of $\group_V$.
 \end{lemma}
 \begin{proof}
-  Let $H$ be a finite set of polynomials
-  that generates the \kl{equivariant ideal} $\idl$.
-  We will compute a new finite set $H_S$ of polynomials
-  such that $\gen{H}{\group} = \gen{H_S}{\group_S}$.
-  To do so, we will use the fact that $\X$ is \kl{effectively oligomorphic}:
+  Let $H$ be a finite set of polynomials.
+  Because $\group \actson \Indets$ is \kl{effectively oligomorphic}:
   for every polynomial $p \in H$, we can compute a finite set
-  $p_S$ of representatives of the \kl{$\group_S$-orbits} of $p$.
-  We define $H_S$ to be the union of all the $p_S$ for $p \in H$.
+  $P_V$ of representatives of the \kl{$\group_V$-orbits} of $p$.
+  We define $H_V$ to be the union of all the $P_V$ for $p \in H$.
+  This union is \kl{orbit finite}.
 
-  It is clear that $\EqIdlGen[\group_S]{H_S} \subseteq \EqIdlGen{H}$.
-  Conversely, let $p \in \EqIdlGen{H}$, then $p$ is in the \kl{$\group$-orbit}
-  of some $p' \in H$. By definition, there exists a $\pi \in \group$ such that
-  $p = \pi(p')$. We can compute a representative $p_S$ of the
-  \kl{$\group_S$-orbit} of $p'$, and we can compute a $\pi_S \in \group_S$
-  such that $\pi_S(p_S) = p$. We conclude that $p$ is in the \kl{$\group_S$-orbit}
-  of $p_S$, hence $p \in \EqIdlGen[\group_S]{H_S}$.
-  Hence, $\EqIdlGen{H} = \EqIdlGen[\group_S]{H_S}$.
+  \todo[inline]{Is it just not that 
+    $\iota_V$ is finitely supported by $V$? Maybe there is a
+    one liner argument here.}
 
-
-  
-  Let us now compute  \kl{weak equivariant Gröbner basis} of
-  $\EqIdlGen[\group_S]{H_S}$, that we call $\Basis_S$. Remark that for every
-  polynomial $p \in \poly{\K}{S} \cap \EqIdlGen[\group_S]{H_S}$, there exists
-  some $q \in \Basis_S$ such that $\lm[S](q) \divleq \lm[S](p)$, and such that
-  the variables appearing in $\lm[S](q)$ are all smaller than some variable of
-  $\lm[S](p)$. In particular, one concludes that $q$ is in $\poly{\K}{S}$.
-  Furthermore, because of the way one defined $\varleq_S$, we have that
-  $\lm[S](p) = \lm(p)$ and $\lm[S](q) = \lm(q)$.
-
-  Hence, we conclude that $\Basis_S$ is a \kl{Gröbner basis} of the ideal
-  $\EqIdlGen{H} \cap \poly{\K}{S}$, as expected.
-  \todo[inline]{this is actually false, we have a problem because 
-  we still care about the domains in our order $\pmonleq$, but I think
-  we should just handwave this.}
 \end{proof}
-
-We will now focus on proving that one can compute \kl{weak equivariant
-Gröbner bases} in $(\X, \group_S, \varleq_S)$, under mild assumptions 
-on the original group action $\group$.
-The first step is to remark that decidability condictions are preserved
-by the construction of $\varleq_S$ and $\group_S$.
 
 \begin{lemma}
   \label{lem:decidability-preserved}
-  Let $(\X, \group, \leq)$ be a set of indeterminates, a group acting
-  \kl{effectively oligomorphically} on $\X$ and an
-  \kl{effective total ordering} $\leq$ on $\X$ that is compatible with the
+  Let $(\Indets, \group)$ be a set of indeterminates, a group acting
+  \kl{effectively oligomorphically} on $\Indets$ and an
+  \kl{effective total ordering} $\varleq$ on $\Indets$ that is compatible with the
   action of $\group$.
-  Then, the set $(\X, \group_S, \varleq_S)$ is a set of indeterminates, a group acting
+  Then, the set $(\IndetsV, \group_V)$ is a set of indeterminates, a group acting
   \kl{effectively oligomorphically} on $\X$ and an
-  \kl{effective total ordering} $\varleq_S$ on $\X$ that is compatible with the
-  action of $\group_S$.
+  \kl{effective total ordering} on $\IndetsV$ that is compatible with the
+  action of $\group_V$.
 \end{lemma}
 \begin{proof}
   It is clear that $\varleq_S$ is an \kl{effective total ordering} on $\X$, and that it is
@@ -122,8 +112,8 @@ by the construction of $\varleq_S$ and $\group_S$.
 \end{proof}
 
 Then, we will prove that a mild assumption on the monomials allows us to
-conclude that $(\mon[\omega]{\X}, \gdivleq[\group_S])$ is a
-\kl{well-quasi-ordering}: it suffices to assume that $(\mon[\omega + 1]{\X},
+conclude that $(\mon[\omega]{\IndetsV}, \gdivleq[\group_V])$ is a
+\kl{well-quasi-ordering}: it suffices to assume that $(\mon[\omega + 1]{\Indets},
 \gdivleq[\group])$ is a \kl{well-quasi-ordering} itself.
 
 \begin{lemma}
@@ -132,7 +122,7 @@ conclude that $(\mon[\omega]{\X}, \gdivleq[\group_S])$ is a
   on $\X$ \kl{effectively oligomorphically}, and $\varleq$ a total ordering
   on $\X$ that is \kl{respected by the group action}.
   Assume that $(\mon[\omega + 1]{\X}, \gdivleq[\group])$ is a \kl{well-quasi-ordering}.
-  Then, $(\mon[\omega]{\X}, \gdivleq[\group_S])$ is a \kl{well-quasi-ordering}.
+  Then, $(\mon[\omega]{\IndetsV}, \gdivleq[\group_V])$ is a \kl{well-quasi-ordering}.
 \end{lemma}
 \begin{proof}
   Let $\seqof{\monelt_i}[i \in \N]$ be an infinite sequence of elements of
@@ -170,9 +160,67 @@ conclude that $(\mon[\omega]{\X}, \gdivleq[\group_S])$ is a
   for all $i < j$ in $J$, and in particular for one such pair.
 \end{proof}
 
+Now that we have all the ingredients to show that 
+\cref{alg:v-stronggb} is an algorithm, let us prove that it is correct.
 
-We can now conclude with our first main result, which is the
-decidability of the \kl{equivariant ideal membership problem}.
+\begin{lemma}
+  \label{lem:correct-v-strong-gb}
+  Let $H$ be an orbit finite set of polynomials in $\poly{\K}{\Indets}$,
+  and let $V \subseteq \Indets$ be a finite set of indeterminates.
+  Then, the result of \cref{alg:v-stronggb} is a
+  \kl{$V$-strong equivariant Gröbner basis} of $\EqIdlGen{H}$.
+\end{lemma}
+\begin{proof}
+  Let $H_V = \iota_V(H)$, $\Basis_V
+  = \mathsf{weakgb}(H_V)$, and $\Basis = \upsilon_V(\Basis_V)$.
+  Let us first check that $\Basis$ is indeed a
+  generating set of the ideal $\EqIdlGen{H}$. It is clear that
+  $\upsilon_V(\IdlGen{\iota_V(H)}) = \IdlGen{H}$, because $\upsilon_V$ is a
+  morphism of polynomial rings. Furthermore, because $\Basis_S$ is a \kl{weak
+  equivariant Gröbner basis} of $\EqIdlGen[\group_V]{H_V}$, we have that
+  $\IdlGen{\Basis_S} = \IdlGen{H_S}$, and therefore
+  $\upsilon_V(\IdlGen{\Basis_S}) = \IdlGen{H}$.
 
-\todo[inline]{restate}
+  Let us prove that $\Basis$ is a \kl{$V$-strong equivariant Gröbner basis} of
+  $\EqIdlGen{H}$. Let $p \in \poly{\K}{V} \cap \EqIdlGen{H}$, and let us
+  consider a decomposition $\mathfrak{d} = \seqof{a_i \monelt_i h_i}[i \in I]$
+  of $p$ such that $p = \sum_{i \in I} a_i \monelt_i h_i$, where $a_i \in \K$,
+  $\monelt_i \in \mon{\Indets}$, and $h_i \in H$. Then, $\iota_V(p) = \sum_{i
+  \in I} a_i \iota_V(\monelt_i) \iota_V(h_i)$, and $\iota_V(h_i) \in H_V$ for
+  all $i \in I$, because $\iota_V$ is a morphism.
+  Because $\Basis_S$ is a \kl{weak equivariant Gröbner basis} of
+  $\IdlGen{H_V}$, there exists a decomposition
+  $\mathfrak{d}'$ of $\iota_V(p)$ such that:
+  \begin{equation*}
+    \iota_V(p) = \sum_{j \in J} b_j \monelt'_j h'_j
+    \quad ,
+  \end{equation*}
+  where $b_j \in \K$, $\monelt'_j \in \mon{\IndetsV[V]}$, and $h'_j \in
+  \Basis_V$, and such that
+  $\lm[\IndetsV](\iota_V(p)) = \lm[\IndetsV](\mathfrak{d}')$,
+  and $\dom(\mathfrak{d}') \subseteq \dom(\iota_V(\mathfrak{d}))$.
 
+  Remark that $\lm[\IndetsV](\iota_V(p)) = \iota_V(\lm[\Indets](p)) \in
+  \mon{V}$, because all variables of $p$ are in $V$. As a consequence, we know
+  that all the variables appearing in $\mathfrak{d}'$ are in $V$, since leading
+  monomials are computed using the $\revlexleq$ ordering, and variables in $V$
+  are ordered below all other variables in $\IndetsV[V]$. As a consequence, for
+  the rest of the proof, we will assume that $\mathfrak{d}'$, $p$ and
+  $\iota_V(p)$ are all in $\poly{\K}{V}$, where $V$ equipped with the ordering induced by
+  $\Indets$ (which is the same as the one induced by $\IndetsV[V]$).
+
+  Finally, let us consider a term $\monelt_i' h_i'$ appearing in
+  $\mathfrak{d}'$, with maximal leading monomial. We know that $\lm(p) =
+  \lm(\monelt_i' h_i') = \monelt_i' \cdot \lm(h_i')$. In particular, $\lm(h_i')
+  \divleq \lm(p)$, and $h_i' \in \poly{\K}{V}$.
+
+  We have shown that $\Basis \cap \poly{\K}{V}$ is a \kl{Gröbner basis} of the
+  ideal $\IdlGen{H} \cap \poly{\K}{V}$,
+  i.e., that $\Basis$ is a \kl{$V$-strong equivariant Gröbner basis} of
+  $\EqIdlGen{H}$.
+\end{proof}
+
+As a corollary, we obtain that \cref{alg:v-stronggb} is a decision procedure for the
+\kl{equivariant ideal membership problem}. 
+
+\csname thm:decide-equiv-ideal-mem\endcsname*

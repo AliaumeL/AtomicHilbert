@@ -282,7 +282,7 @@ effectivity assumptions.
 
   Because of \cref{lem:chm}, we know that the ordering $\pmonleq$ is
   \kl{well-founded}. As a consequence, one can find a minimal decomposition
-  $\mathfrak{d}'$ of $p$ with respect to $\Basis$ such that $\mathrak{d}'
+  $\mathfrak{d}'$ of $p$ with respect to $\Basis$ such that $\mathfrak{d}'
   \pmonleq \mathfrak{d}$. We now distinguish two cases, depending on whether
   the leading monomial $\monelt[l]$ of the decomposition $\mathfrak{d}'$ is
   equal to the leading monomial of $p$ or not.
@@ -343,7 +343,10 @@ ideal $\EqIdlGen{H}$, as stated in \cref{thm:weakgb-comput}.
 
 \begin{theorem}
   \label{thm:weakgb-comput}
-  The algorithm $\mathsf{weakgb}$ that takes as input a finite set $H$ of generators of an
+  Assume that $(\mon[\omega]{\X}, \gdivleq)$ is a \kl{WQO}, and that the order
+  $\varleq$ is effectively computable, and that the action of $\group$ is
+  \kl{effectively oligomorphic}. 
+  Then, the algorithm $\mathsf{weakgb}$ that takes as input a finite set $H$ of generators of an
   \kl{equivariant ideal} $\idl$ and computes a \kl{weak equivariant Gröbner
   basis} $\Basis$ of $\idl$.
 \end{theorem}
