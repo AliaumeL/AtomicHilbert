@@ -52,7 +52,7 @@ an \kl{equivariant Gröbner basis}.
     \caption{Computing \kl{equivariant Gröbner bases}}
     \label{alg:stronggb}
     \KwIn{An orbit finite set $H$ of polynomials}
-    \KwOut{An orbit finite set $\Basis$ that is a \kl{equivariant Gröbner basis} of
+    \KwOut{An \kl{equivariant Gröbner basis} of
       $\EqIdlGen{H}$}
     \Begin{
         $H_C \gets \freeColor(H)$\;
@@ -127,23 +127,32 @@ an \kl{equivariant Gröbner basis} of $\EqIdlGen{H}$.
   \end{equation*}
   Where $a_i \in \K$, $\monelt_i \in \mon{\IndetsCol}$,
   and $h_i \in \Basis_\star$ is \kl{$V$-compatible}.
-  Such a decomposition exists
+  Such a decomposition $\mathfrak{d}$ exists
   because $H_V \subseteq H_\star \subseteq \Basis_\star$.
-  We order decompositions based on their maximal leading 
-  monomial and the set of indeterminates present in the
-  decomposition. This is a well-founded ordering, and 
-  we can assume that our decomposition was minimal.
 
-  Assume by contradiction that $\lm(\colorWith{V}(p))$ is not the maximal
-  monomial of the decomposition. Then one can use \kl{$S$-polynomials} to
-  reduce the leading monomial of the decomposition, keeping the same set of
-  indeterminates, and therefore remaining $V$-compatible.
+  Now, because $\Basis_\star$ is a \kl{weak equivariant Gröbner basis} of $\IdlGen{H_\star}$,
+  there exists a decomposition $\mathfrak{d}'$ of $\colorWith{V}(p)$
+  such that
+  $\lm(\colorWith{V}(p)) = \lm(\mathfrak{d}') \revlexleq \lm(\mathfrak{d})$,
+  and 
+  $\dom(\mathfrak{d}') \subseteq \dom(\mathfrak{d})$.
+  In particular, $\mathfrak{d}'$ is a decomposition of $\colorWith{V}(p)$
+  using only \kl{$V$-compatible} polynomials in $\Basis_\star$.
 
-  This means that the leading monomial of $\colorWith{V}(p)$ is exactly
-  the leading monomial of some polynomial $\monelt_i h_i \in \Basis_\star$
-  appearing in the decomposition, and therefore 
-  $\colorWith{V}(p) - b \monelt_i h_i$ is a valid 
-  reduction for some $b \in \K$.
+  This proves that there exists $\monelt \in \mon{\IndetsCol}$ and $h \in
+  \Basis_\star$ such that $\lm(\colorWith{V}(p)) = \lm(\monelt h)$ and $\monelt
+  h$ is \kl{$V$-compatible}. In particular, $\monelt h$ must have all its
+  variables in $V$, and therefore $\lm(\colorWith{V}(p)) =
+  \colorWith{V}(\lm(p)) = \lm(\forgetCol(\monelt h))$. We conclude that
+  $\lm(\forgetCol(h)) \divleq \lm(p)$, and that $\forgetCol(h)$ has all its
+  variables in $V$.
+
+  We have proven that $\forgetCol(\Basis_\star)$ is 
+  an \kl{equivariant Gröbner basis} of $\EqIdlGen{H}$.
 \end{proof}
 
 
+
+We can now state our main result of this section.
+
+\csname thm:compute-equiv-gb\endcsname*
