@@ -1,9 +1,54 @@
+%!TEX root = ../atomic.asmart.tex
+% LTeX: language=en
 \section{Undecidability Results}
 \label{sec:undecidability}
+
+In this section, we will show that under certain conditions,
+the \kl{equivariant ideal membership problem} is undecidable. We aim to show
+that it is the case when we assume the usual effectiveness conditions on the
+group action, but we do not assume that 
+$(\mon{\Indets}, \gdivleq)$ is a well-quasi-ordering.
+Beware though that there are some pathological cases where
+the \kl{equivariant ideal membership problem} is undecidable even when
+$(\mon{\Indets}, \gdivleq)$ is not a well-quasi-ordering,
+as illustrated by the following example.
+
+\begin{example}
+  \label{ex:non-wqo-undecidable}
+  Let $\Indets = \{x_1, x_2, \ldots\}$ be an infinite set of indeterminates,
+  and let $\group$ be trivial group acting on $\Indets$.
+  Then, the \kl{equivariant ideal membership problem} is decidable.
+\end{example}
+\begin{proof}
+  Because the group is trivial, whenever one provides a finite set
+  $H$ of generators of an \kl{equivariant ideal} $I$, one can
+  in fact work in $\poly{\K}{V}$, where $V$ is the set of indeterminates
+  that appear in $H$.
+  Then, the \kl{equivariant ideal membership problem} is reduces to 
+  the \kl{ideal membership problem} in $\poly{\K}{V}$, which is decidable.
+\end{proof}
 
 \subsection{Interpreting Paths}
 \label{subsec:paths}
 
+In this section, we will assume that the set of indeterminates $\Indets$
+contains an infinite path $P \defined \seqof{x_i}[i \in \N] \subseteq \Indets$,
+that is, a set of indeterminates such that $\group$ acts on $\Indets$ as a
+translation of the indices, that is, for all $\gelem \in \group$ such that
+$\gelem \cdot P \subseteq P$, there exists $n \in \N$ such that $\gelem \cdot
+x_i = x_{i + n}$ for all $i \in \N$.
+
+\todo[inline]{
+  We can encode the PCP problem 
+  in this case. The idea is to 
+  write the words over a binary alphabet 
+  as monomials, we distinguish "last" letters of both words
+  and encode the PCP problem as follows:
+  $1 \in \IdlGen{H}$, where $H$ is a set of \emph{binomials},
+  that encode the fact that one can replace both "last" letters
+  by corresponding words simultaneously, and that 
+  one can remove "identified letters".
+}
 
 \subsection{Infinite Vector Space}
 \label{subsec:vector}
