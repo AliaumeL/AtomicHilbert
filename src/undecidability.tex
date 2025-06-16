@@ -91,21 +91,22 @@ x_i = x_{i + n}$ for all $i \in \N$.
   \monelt'_i)$, and whose edges are the directed weighted edges labelled by
   $a_i$ (in a direction that makes the weight positive).
 
-  Let us remark that $\monelt_s$ must be a vertex of $G$, because $\monelt_s -
-  \monelt_t$ is a linear combination of the elements of $H$. Similarly,
-  $\monelt_t$ must be a vertex of $G$. Even more, we know that the sum of the
-  weights of the edges having $\monelt_s$ as a source or target equals $1$,
-  because of \cref{eq:mon-rewrite-red-membership}. Similarly, the sum of the
-  weights of the edges having $\monelt_t$ as a source or target equals $-1$.
-  Finally, for every vertex $v$ of $G$ that is not 
-  $\monelt_s$ or $\monelt_t$, the sum of the weights of the edges
-  having $v$ as a source or target is $0$, again because of an analysis
-  of the coefficient of $v$ in the sum of \cref{eq:mon-rewrite-red-membership}.
+  Let us now analyse \cref{eq:mon-rewrite-red-membership}, and notice that
+  identifying monomials in the left and right-hand sides of the equation allows
+  us to show that $\monelt_s$ and $\monelt_t$ are vertices of $G$. Furthermore,
+  we deduce that the sum of the weights of the edges having $\monelt_s$ as a
+  source or target equals $1$, and that the sum of the weights of the edges
+  having $\monelt_t$ as a source or target equals $-1$. Finally, for every
+  vertex $v$ of $G$ that is not $\monelt_s$ or $\monelt_t$, the sum of the
+  weights of the edges having $v$ as a source or target is $0$, again because
+  of an analysis of the coefficient of the monomial $v$ in the sum of
+  \cref{eq:mon-rewrite-red-membership}.
 
   Hence, the graph $G$ is a flow network, with a flow value of at least $1$
   from $\monelt_s$ to $\monelt_t$. As a consequence, there must exist a path
-  from $\monelt_s$ to $\monelt_t$ in $G$.
-  Therefore, one can rewrite $\monelt_s$ into $\monelt_t$ using the rules of $R$.
+  from $\monelt_s$ to $\monelt_t$ in $G$, which is a witness
+  of the fact that 
+  one can rewrite $\monelt_s$ into $\monelt_t$ using the rules of $R$.
 \end{proof}
 \todo[inline]{
   We can encode the PCP problem 
