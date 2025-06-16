@@ -3,21 +3,68 @@
 \section{Preliminaries}
 \label{sec:preliminaries}
 
-We assume basic familiarity with the theory of commutative algebra, and
-polynomials. We will use the notation $\poly{\K}{\X}$ for the ring of
-polynomials with coefficients from a field $\K$ and indeterminates/variables
-from a set $\X$, and $\mon{\X}$ for the set of monomials in $\poly{\K}{\X}$.
-Letters $p,q,r$ are used to denote polynomials,  $\monelt,\monelt[n]$ are used
-to denote monomials, and $a,b,\alpha,\beta$ are used to denote coefficients in
-$\K$.
+\paragraph{Partial orders, ordinals, and well-quasi-ordered sets.} \AP We
+assume basic familiarity with partial orders and ordinals. In particular, we
+will use the notation $\intro*\om$ for the first infinite ordinal (that is,
+$(\N, \leq)$), and write $X \intro*\ordplus Y$ for the lexicographic sum of two
+partial orders $X$ and $Y$. We will also use the usual notations for finite
+ordinals, writing $\intro*\ordfin{n}$ for the finite ordinal of size $n$. For
+instance, $\om \ordplus \ordfin{1}$ is the total order $\N \uplus
+\set{+\infty}$, where $+\infty$ is the new largest element.
 
-We also assume basic familiarity with partial orders and ordinals. In
-particular, we will use the notation $\intro*\om$ for the first infinite
-ordinal (that is, $(\N, \leq)$), and write $X \intro*\ordplus Y$ for the
-lexicographic sum of two partial orders $X$ and $Y$. We will also use the usual
-notations for finite ordinals, writing $\intro*\ordfin{n}$ for the finite
-ordinal of size $n$. For instance, $\om \ordplus \ordfin{1}$ is the total order
-$\N \uplus \set{+\infty}$, where $+\infty$ is the new largest element.
+\AP In order to guarantee the termination of the algorithms presented in this
+paper, a key ingredient will be the notion of \intro{well-quasi-ordering}
+(WQO), that are sets $(X, \leq)$ such that every infinite sequence
+$\seqof{x_i}[i \in \N]$ of elements of $X$ contains a pair $i < j$ such that
+$x_i \leq x_j$.
+
+\paragraph*{Polynomials.} \AP 
+We assume basic familiarity with the theory of
+commutative algebra, and polynomials. We will use the notation $\poly{\K}{\X}$
+for the ring of polynomials with coefficients from a field $\K$ and
+indeterminates/variables from a set $\X$, and $\mon{\X}$ for the set of
+monomials in $\poly{\K}{\X}$. Letters $p,q,r$ are used to denote polynomials,
+$\monelt,\monelt[n]$ are used to denote monomials, and $a,b,\alpha,\beta$ are
+used to denote coefficients in $\K$.
+
+A classical example of a \kl{WQO} is the set of monomials $\mon{\X}$, endowed
+with the \kl{divisibility} relation $\divleq$ whenever $\X$ is finite. We
+recall that a monomial $\monelt[m]$ \intro{divides} a monomial $\monelt[n]$ if
+there exists a monomial $\monelt[l]$ such that $\monelt[m] \times \monelt[l] =
+\monelt[n]$. In this case, we write $\monelt[m] \divleq \monelt[n]$. Note that
+monomials can be seen as functions from $\X$ to $\N$ having a finite support,
+and that the \kl{divisibility} relation can be extended to monomials that are
+functions from $\X$ to $(X,\leq)$, where $X$ is any partially ordered set. In
+this case, we write $\monelt[m] \divleq \monelt[n]$ if for every $x \in \X$, we
+have $\monelt[m](x) \leq \monelt[n](x)$. We will write
+$\intro*\mon[\omega+1]{\X}$ (resp. $\mon[\omega+\omega]{\X}$) for the set of
+monomials that are functions from $\X$ to $\omega + 1$ (resp. $\omega +
+\omega$).
+
+
+
+Given an ordering $\varleq$ on the set of indeterminates $\Indets$, we define
+the \intro{reverse lexicographic} (revlex) ordering on monomials as follows:
+$\monelt[n] \revlexlt \monelt[m]$ if there exists an indeterminate $x \in \X$
+such that $\monelt[n](x) < \monelt[m](x)$, and such that for every $y \in \X$,
+if $x \varlt y$ then $\monelt[n](y) = \monelt[m](y)$. Remark that if
+$\monelt[n] \revlexleq \monelt[m]$, then in particular $\monelt[n] \divleq
+\monelt[m]$. 
+
+\AP We can now use the \kl{revlex} ordering to identify particular elements in
+a given polynomial. Namely, for a polynomial $p \in \poly{\K}{\X}$, we define
+the \intro{leading monomial} $\lm(p)$ of $p$ as the largest monomial appearing
+in $p$ with respect to the \kl{revlex} ordering, and the \intro{leading
+coefficient} $\lc(p)$ of $p$ as the coefficient of $\lm(p)$ in $p$. We can then
+define the \intro{leading term} $\lt(p)$ of $p$ as the product of its
+\kl{leading monomial} and its \intro{leading coefficient}, and the
+\intro{characteristic monomial} $\cm(p)$ of $p$ as the product of its
+\kl{leading monomial} and all the indeterminates appearing in $p$. Because the
+coefficients and monomial in question are highly dependent on the ordering
+$\varleq$, we allow ourselves to write $\lm[\Indets](p)$ to highlight the
+precise ordered set of variables that was used to compute the \kl{leading
+monomial} of $p$.
+
 
 \paragraph{Gröbner Bases.} \AP An \intro{ideal} $\idl$ of $\poly{\K}{\X}$ is a
 non-empty subset of $\poly{\K}{\X}$ that is closed under addition and
@@ -29,58 +76,24 @@ a set of polynomials $H \subseteq \poly{\K}{\X}$, decide whether $p$ belongs to
 the ideal $\IdlGen{H}$ generated by $H$. We know that this problem is decidable
 when $\X$ is finite, and that it is even $\EXPTIME$-complete \cite{MAME82}.
 
-\AP
-The classical approach to the \kl{ideal membership problem} is to use the
+\AP The classical approach to the \kl{ideal membership problem} is to use the
 \kl{Gröbner basis} theory that was developed in the 70s by Buchberger
-\cite{BUCH76}. Given a set $H \subseteq \poly{\K}{\X}$, 
-and ordering $\preceq$ on polynomials, one can define 
-a rewriting relation $\intro*\toeucl{\preceq}{H}$ 
-on $\poly{\K}{\X}$ as follows:
-$p \toeucl{\preceq}{H} q$ if and only if there exists $h \in H$,
-$a \in \K$,
-and $\monelt \in \mon{\X}$ such that
-\begin{equation}
-    \label{eq:euclidian-ord}
-    p = a \monelt h + q \text{ and } q \prec p
-\end{equation}
-This relation generalises the classical notion of \kl{division} of polynomials
-to the case of multiple variables.
-In this setting, a set $\Basis$ of polynomials is called a \intro{Gröbner basis} of an ideal $\idl$
-for the ordering $\preceq$ if
-the following properties hold:
-\begin{enumerate}
-  \item $\Basis$ is a generating set of $\idl$, i.e. $\IdlGen{\Basis} = \idl$.
-  \item For every polynomial $p \in \poly{\K}{\X}$, we have
-    $p \toeucl{\preceq}{\Basis}^* 0$ if and only if $p \in \idl$.
-  \item The relation $\toeucl{\preceq}{\Basis}$ is \kl{terminating}, i.e. every
-    rewriting sequence $p \toeucl{\preceq}{\Basis}^* q$ is finite.
-  \item The relation $\toeucl{\preceq}{\Basis}$ is \kl{confluent}, i.e. for all
-    $p \toeucl{\preceq}{\Basis}^* r_1$ and $p \toeucl{\preceq}{\Basis}^* r_2$,
-    there exists $r_3$ such that $r_1 \toeucl{\preceq}{\Basis}^* r_3$ and
-    $r_2 \toeucl{\preceq}{\Basis}^* r_3$.
-\end{enumerate}
-\AP
-We say that $\Basis$ is a \reintro{Gröbner basis} for an ordering $\preceq$ if
-it is a \kl{Gröbner basis} of the \kl{generated ideal} $\IdlGen{\Basis}$. It is
-clear that given a \kl{Gröbner basis} $\Basis$ of an ideal $\idl$, one can
-decide the \kl{ideal membership problem} by computing the normal form of $p$
-with respect to $\Basis$ by computing the normal form of $p$ in this rewriting
-system and checking if it is equal to $0$.\footnote{
-  This is a very abstract definition of \kl{Gröbner bases}. In practice, one
-  would use particular orderings, and expect $\preceq$ to be computable 
-  in a reasonable time \cite[Chapter 2, Section 2]{CLO15}.
-}
+\cite{BUCH76}. Having fixed and ordering $\varleq$ on $\Indets$, a set $\Basis$
+of polynomials is called a \intro{Gröbner basis} of an ideal $\idl$ if,
+$\IdlGen{\Basis} = \idl$ and for every polynomial $p \in \idl$, there exists a
+polynomial $q \in \Basis$ such that $\lm[\Indets](q) \divleq \lm[\Indets](p)$.
+
+
 
 \paragraph{Group actions and equivariant ideals.}  A \intro{group} $\group$ is
 a set equipped with a binary operation that is associative, has an identity
 element and has inverses. In our setting, we are interested in infinite sets
 $\X$ of indeterminates that is equipped with a \intro{group action} $\group
-\actson \X$. This means that for each $g \in \group$, we have a bijection $\X
-\tobij \X$ that we denote by $x \mapsto g \cdot x$. A set $S \subseteq \X$ is
-\intro{equivariant} under the action of $\group$ if for all $g \in \group$ and
-$x \in S$, we have $g \cdot x \in S$. We give in \cref{ex:idl-equiv}
-an example and a non-example of \kl{equivariant ideals}.
-
+\actson \X$. This means that for each $\gelem \in \group$, we have a bijection
+$\X \tobij \X$ that we denote by $x \mapsto \gelem  \cdot x$. A set $S
+\subseteq \X$ is \intro{equivariant} under the action of $\group$ if for all
+$\gelem \in \group$ and $x \in S$, we have $\gelem \cdot x \in S$. We give in
+\cref{ex:idl-equiv} an example and a non-example of \kl{equivariant ideals}.
 
 \begin{example}
     \label{ex:idl-equiv}
@@ -104,64 +117,39 @@ an example and a non-example of \kl{equivariant ideals}.
     = 0 \times r(1, \dots, 1) + 0 = 0$, hence that
     $p \times r + q$ belongs to $S_0$. 
     Because $0$ is in $S_0$, we conclude that $S_0$ is an \kl{ideal}.
-    Furthermore, if $g \in \group$ and $p \in S_0$, then
-    the sum of the coefficients $g \cdot p$ is exactly
+    Furthermore, if $\gelem \in \group$ and $p \in S_0$, then
+    the sum of the coefficients $\gelem \cdot p$ is exactly
     the sum of the coefficients of $p$, hence is $0$ too.
     This shows that $S_0$ is \kl(ideal){equivariant}.
 
     It is clear that all multiples of a given polynomial $x \in \X$
     is an ideal of $\poly{\K}{\X}$. This is not an \kl{equivariant ideal}:
-    take any bijection $g \in \group$ that does not map $x$ to $x$ (it
+    take any bijection $\gelem \in \group$ that does not map $x$ to $x$ (it
     exists because $\X$ is infinite and $\group$ is all permutations),
-    then $g \cdot x$ is not a multiple of $x$, and therefore does 
+    then $\gelem \cdot x$ is not a multiple of $x$, and therefore does 
     not belong to the ideal.
 \end{proof}
 
 \AP A group action $\group \actson \X$ is said to be \intro{compatible} with an
-ordering $\leq$ on $\X$ if for all $g \in \group$ and $x,y \in \X$, we have $x
-\leq y$ if and only if $g \cdot x \leq g \cdot y$. We say that the action is
+ordering $\leq$ on $\X$ if for all $\gelem \in \group$ and $x,y \in \X$, we
+have $x \leq y$ if and only if $\gelem \cdot x \leq \gelem \cdot y$. Let us
+point out that in this case, $\revlexleq$ is also \kl{compatible} with the
+action of $\group$ on $\mon{\X}$, i.e. for all $\gelem \in \group$ and
+monomials $\monelt[m], \monelt[n] \in \mon{\X}$, we have
+$\monelt[m] \revlexleq \monelt[n]$ if and only if $\gelem \cdot \monelt[m]
+\revlexleq \gelem \cdot \monelt[n]$.
+
+
+\AP Given a monomial $\monelt[m] \in \mon{\X}$, we define the
+\intro(monomial){domain} of $\monelt[m]$ as the set $\dom(\monelt[m])$ of
+indeterminates $x \in \X$ such that $\monelt[m](x) \neq 0$. Note that the
+domain of a monomial is equivariant: if $\gelem \in \group$, then $\gelem \cdot
+\dom(\monelt[m]) = \dom(\gelem \cdot \monelt[m])$.
+
+
+
+We say that the action is
 \intro{effectively oligomorphic} if \todo{do it}.
-
-\AP Given a monomial $\monelt[m] \in \mon{\X}$, we define the \intro{domain} of
-$\monelt[m]$ as the set $\dom(\monelt[m])$ of indeterminates $x \in \X$ such
-that $\monelt[m](x) \neq 0$. Note that the domain of a monomial is equivariant:
-if $g \in \group$, then $g \cdot \dom(\monelt[m]) = \dom(g \cdot \monelt[m])$.
-
-\paragraph{Equivariant Gröbner bases.} \AP
-We say that a set $\Basis \subseteq \poly{\K}{\X}$ is an
-\intro{equivariant Gröbner basis} of an equivariant ideal $\idl$ and 
-a partial ordering $\preceq$ on $\poly{\K}{\X}$ that is \intro{compatible with the action}
-of $\group$ if
-the following properties hold:
-\begin{enumerate}
-  \item $\Basis$ is a generating set of $\idl$, i.e. $\EqIdlGen{\Basis} = \idl$.
-  \item For every polynomial $p \in \poly{\K}{\X}$, we have
-    $p \toeucl{\preceq}{\Basis}^* 0$ if and only if $p \in \idl$.
-  \item The relation $\toeucl{\preceq}{\Basis}$ is \kl{terminating}.
-  \item The relation $\toeucl{\preceq}{\Basis}$ is \kl{confluent}.
-\end{enumerate}
-
-
-\paragraph{Orderings.} \AP In order to guarantee the termination of the
-rewriting relation, a key ingredient will be the notion of
-\intro{well-quasi-ordering} (WQO), that are sets $(X, \leq)$
-such that every infinite sequence $\seqof{x_i}[i \in
-\N]$ of elements of $X$ contains a pair $i < j$ such that $x_i \leq x_j$.
-
-A classical example of a \kl{WQO} is the set of monomials $\mon{\X}$, endowed
-with the \kl{divisibility} relation $\divleq$ whenever $\X$ is finite. We
-recall that a monomial $\monelt[m]$ \intro{divides} a monomial $\monelt[n]$ if
-there exists a monomial $\monelt[l]$ such that $\monelt[m] \times \monelt[l] =
-\monelt[n]$. In this case, we write $\monelt[m] \divleq \monelt[n]$. Note that
-monomials can be seen as functions from $\X$ to $\N$ having a finite support,
-and that the \kl{divisibility} relation can be extended to monomials that are
-functions from $\X$ to $(X,\leq)$, where $X$ is any partially ordered set. In
-this case, we write $\monelt[m] \divleq \monelt[n]$ if for every $x \in \X$, we
-have $\monelt[m](x) \leq \monelt[n](x)$. We will write
-$\intro*\mon[\omega+1]{\X}$ (resp. $\mon[\omega+\omega]{\X}$) for the set of
-monomials that are functions from $\X$ to $\omega + 1$ (resp. $\omega +
-\omega$).
-
 
 We know from \cite{GHOLAS24} that a necessary condition for the \kl{equivariant
 Hilbert basis property} to hold is that the set  $\mon{\X}$  of monomials is a
@@ -175,3 +163,14 @@ $\monelt[m] \times \monelt[l] = \monelt[n]$. This relation also extends to
 monomials that are functions from $\X$ to $(X,\leq)$ with finite support, where
 $X$ is any partially ordered set.
 
+\AP Having fixed an ordering $\varleq$ on the set $\Indets$ of indeterminates,
+we say that a set $\Basis \subseteq \poly{\K}{\X}$ is an \intro{equivariant
+Gröbner basis} of an equivariant ideal $\idl$ if $\Basis$ is \kl{equivariant},
+$\IdlGen{\Basis} = \idl$, and for every polynomial $p \in \idl$, there exists
+$q \in \Basis$ such that $\lm[\varleq](q) \gdivleq \lm[\varleq](p)$ and
+$\dom(q) \subseteq \dom(p)$.
+
+Beware that even in the case of a finite set of variables, a \kl{Gröbner basis}
+is not necessarily an \kl{equivariant Gröbner basis}, because of the
+\kl{domain} condition. However, every \kl{equivariant Gröbner basis} is a
+\kl{Gröbner basis}.
