@@ -108,17 +108,120 @@ x_i = x_{i + n}$ for all $i \in \N$.
   of the fact that 
   one can rewrite $\monelt_s$ into $\monelt_t$ using the rules of $R$.
 \end{proof}
-\todo[inline]{
-  We can encode the PCP problem 
-  in this case. The idea is to 
-  write the words over a binary alphabet 
-  as monomials, we distinguish "last" letters of both words
-  and encode the PCP problem as follows:
-  $1 \in \IdlGen{H}$, where $H$ is a set of \emph{binomials},
-  that encode the fact that one can replace both "last" letters
-  by corresponding words simultaneously, and that 
-  one can remove "identified letters".
-}
+
+\AP It will be easier for us to work with rewriting systems than the
+\kl{equivariant ideal membership problem} to prove undecidability results. In
+particular, they will be particularly useful to encode the \intro{Post
+Correspondence Problem} (PCP), which is a well-known undecidable problem that
+can be stated as follows: given two finite sets of words $A \defined \set{u_1,
+\dots, u_n}$ and $B \defined \set{v_1, \dots, v_n}$ over a binary alphabet,
+does there exist a sequence of indices $i_1, \ldots, i_n$ such that $u_{i_1}
+\cdots u_{i_n} = v_{i_1} \cdots v_{i_n}$. We can further assume that the
+$i_1 = 1$.
+
+\AP To simplify our translation, let us first assume that one can use colored
+variables, that is, one has access to monomials with exponents in $\N \times Q$
+for some finite set $Q$. We will use $Q \defined \set{ \mathsf{u}, \mathsf{v},
+\mathsf{endU}, \mathsf{endV} }$. Then, we can encode a word $u$ over the binary
+alphabet $\set{0, 1}$ as a monomial $\monelt[w]$ as follows: $\mathsf{encU}_{i}
+(\varepsilon) = x_i^{(1, \mathsf{endU})}$ and $\mathsf{encU}_{i} (a u') =
+x_i^{(1 + a, \mathsf{u})} \cdot \mathsf{encU}_{i+1} (u')$. Similarly, one can
+define a monomial $\mathsf{encV}_{i} (v)$ that encodes a word $v$ over the
+binary alphabet $\set{0, 1}$ as a monomial in the same way. Then, given a pair
+of words $u \in A$ and $v \in B$, we can encode their pairing as a monomial
+as follows: $\mathsf{enc} (u,v) = \mathsf{encU}_0(u) \cdot
+\mathsf{encV}_0 (v)$.
+
+Let us now define a rewriting system $R$ that encodes the PCP problem. The
+rules of $R$ are separated in two parts:
+\begin{itemize}
+  \item A forward part: that replaces
+    $x_i^{\alpha} \cdot x_{j+1}^{\mathsf{endU}} \cdot x_{j}^{\beta} x_{j+1}^{\mathsf{endV}}$
+    by 
+    $x_i^{\alpha} \mathsf{encU}_{i+1}(u_k) \cdot x_{j}^{\beta} \mathsf{encV}_{j+1}(v_k)$
+    for some $k \in \set{1, \ldots, n}$,
+    where $i \neq j$,
+    and $\alpha, \beta$ are non-empty exponents.
+  \item A backward part: that replaces
+    $x_i^{(a, \mathsf{u})}
+     x_i^{(a, \mathsf{v})}
+     x_{i+1}^{\mathsf{endU}}
+     x_{i+1}^{\mathsf{endV}}$
+    by 
+     $x_{i}^{\mathsf{endU}}
+      x_{i}^{\mathsf{endV}}$, 
+    where $a \in \set{1, 2}$.
+\end{itemize}
+
+\AP The set of rules defined here is infinite, but it is finitely generated,
+and a representation of the rules can be computed from the PCP instance because
+$\Indets$ is \kl{effectively oligomorphic}. It is clear that if there is a
+positive answer to the PCP problem, then there exists a sequence of rewrites
+that transforms the monomial $\mathsf{enc} (u_1, v_1)$ into the monomial
+$x_0^{(1, \mathsf{endU})} \cdot x_0^{(1, \mathsf{endV})}$, that is obtained by
+replacing the end markers of the words until the matching is complete, and then
+removing letters by applying the backward rules until both end markers reach
+the start of the word.
+The converse implication is slightly more involved, 
+and is stated in \cref{lem:reachable-correct}.
+
+\begin{lemma}
+  \label{lem:reachable-correct}
+  Assume that $\mathsf{enc} (u_1, v_1)$ can be rewritten into
+  $x_0^{(1, \mathsf{endU})} \cdot x_0^{(1, \mathsf{endV})}$ using the rules of
+  the rewriting system $R$ defined above.
+  Then there is a positive answer to the PCP problem.
+\end{lemma}
+\begin{proof}
+
+  We first remark that the backward rules can only be applied when the two end
+  markers are on the same indeterminate, and that in this case, the two end
+  markers are replaced by the same indeterminate. On the other hand, the
+  forward rules can only be applied when the two end markers are on different
+  indeterminates. As a consequence, the rewrite sequence must be starting with
+  forward rules, and ending with backward rules.
+
+   It is an easy check that reaching the final monomial by applying only the
+   backward rules can only be obtained from monomials where every variable
+   $x_i$ has the same $u$ and $v$ exponents.
+
+   It suffices now to prove that if the forward rules create a monomial
+   where every variable $x_i$ has the same $u$ and $v$ exponents, then
+   there is a solution to the PCP problem.
+
+   We will first analyse the shape of the monomials obtained by applying 
+   only forward rules, and claim that they are \emph{path-like}
+   in the sense that no rule can introduce a variable that was already present
+   in the monomial (except for the end markers, that are moved)
+   and that the variables in the reachable monomials form paths.
+
+   \todo[inline]{
+     There is a problem: we do not ensure that the reachable monomials
+     are path like. We can make sure of it by adding a check
+     rule that moves a cursor along the monomial starting from
+     the beginning of the word.
+   }
+
+\end{proof}
+
+\begin{theorem}
+  \label{thm:undecidable-pcp}
+  One can reduce the \kl{Post Correspondence Problem} to the
+  \kl{monomial reachability problem}, assuming that one
+  has access to colored variables.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+
+
+Now, let us argue that one can get rid of colors by using 
+finitely many numbers to encode them. 
+The first remark is that some colors (most) appear only once 
+in the monomial and can be replaced by a unique (big) number.
+The second remark is that the encoding of $u$ and $v$ can be interleaved
+instead of using the same variables for both and distinguishing them
+by their color. 
 
 \subsection{Infinite Vector Space}
 \label{subsec:vector}
