@@ -133,33 +133,24 @@ equivariant membership problem is undecidable.
   todo.
 \end{theorem}
 
-\paragraph{Organisation.} \AP
-The rest of the paper is organised as follows.
-In \cref{sec:preliminaries}, we introduce formally what a
-\kl{Gröbner basis} is, and present the background on 
-how to compute them using \kl{Buchberger's algorithm}.
-Then, we will present in \cref{sec:weakgb} an adaptation of 
-\kl{Buchberger's algorithm} to the \kl{equivariant case}, that computes
-a \kl{weak equivariant Gröbner basis} of an \kl{equivariant ideal}.
-In \cref{sec:algorithm}, we use \kl{weak equivariant Gröbner bases} to devise a decision
-procedure for the \kl{equivariant ideal membership problem}, and prove
-our \cref{thm:decide-equiv-ideal-mem}.
-The procedure will be based on the following idea:
-given a finite set $S \subfin \X$ of indeterminates, and a finite set $H$ of generators, we will compute a \kl{weak equivariant Gröbner basis} 
-$\Basis_S$ that has the property that 
-$\EqIdlGen{H} \cap \poly{\K}{S} = \IdlGen{\Basis_S \cap \poly{\K}{S}}$, for this 
-particular set $S$.
-We will call such sets \kl{$S$-strong equivariant Gröbner bases} for 
-$\EqIdlGen{H}$.
-Then, in \cref{sec:equivariant-grobner-basis},
-we will show how to transform our algorithm that computes 
-\kl{$S$-strong equivariant Gröbner bases} into an algorithm that computes
-\kl{equivariant Gröbner bases} for \kl{equivariant ideals}.
-In \cref{sec:examples}
-we will show how to use our algorithm to solve some non-trivial examples. This will also be a way
-to show that our restrictions are very mild, and that one can really apply our theoretical
-results.
-Finally, in \cref{sec:conclusion}, we will discuss on the need 
-for a total ordering on the set of indeterminates, and the possibility
-to relax the hypotheses of our results.
+\paragraph{Organisation.} \AP The rest of the paper is organised as follows. In
+\cref{sec:preliminaries}, we introduce formally what a \kl{Gröbner basis} is,
+and present the background on how to compute them using \kl{Buchberger's
+algorithm}. Then, we will present in \cref{sec:weakgb} an adaptation of
+\kl{Buchberger's algorithm} to the equivariant case, that computes a \kl{weak
+equivariant Gröbner basis} of an \kl{equivariant ideal}. This is the central
+object of our paper, and will be used to derive our two positive results. In
+\cref{sec:algorithm}, we use \kl{weak equivariant Gröbner bases} to devise a
+decision procedure for the \kl{equivariant ideal membership problem}, and prove
+our \cref{thm:decide-equiv-ideal-mem}. Then, in
+\cref{sec:equivariant-grobner-basis}, we push further the same proof scheme to
+obtain \kl{equivariant Gröbner bases} and prove our \cref{thm:compute-egb}. In
+\cref{sec:examples} we will show how to use our algorithm to solve some
+non-trivial examples. This will also be a way to show that our restrictions are
+very mild, and that one can really apply our theoretical results. Then, we will
+argue that our hypothesis are close to optimal, by illustrating a variety of
+cases where the \kl{equivariant ideal membership problem} is undecidable.
+Finally, in \cref{sec:conclusion}, we will discuss on the need for a total
+ordering on the set of indeterminates, and the possibility to relax the
+hypotheses of our results.
 

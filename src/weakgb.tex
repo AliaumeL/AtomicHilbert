@@ -16,19 +16,15 @@ action of $\group$.
   Let $H$ be a set of polynomials. A \intro{decomposition} of $p$
   with respect to $H$ is given by a finite sequence 
   $\mathfrak{d} \defined \seqof{(a_i, \monelt_i, h_i)}[i \in I]$ such that
-  \begin{equation}
-    p = \sum_{i \in I} a_i \monelt_i h_i
-    \quad ,
-  \end{equation}
+   $ p = \sum_{i \in I} a_i \monelt_i h_i$,
   where $a_i \in \K$, $\monelt_i \in \mon{\X}$, and $h_i \in H$ for all $i \in I$.
   The \intro{domain of the decomposition}
-  that we write $\dom(\mathfrak{d})$ is defined as the union
+  that we write $\domdec(\mathfrak{d})$ is defined as the union
   of the domains of the polynomials $\monelt_i h_i$ for all $i \in I$.
   The \intro{leading monomial of the decomposition} is defined as
-  \begin{equation}
-    \lm(\mathfrak{d}) \defined \max(\seqof{\lm(\monelt_i h_i)}[i \in I])
-    \quad .
-  \end{equation}
+  $
+    \lmdec(\mathfrak{d}) \defined \max(\seqof{\lm(\monelt_i h_i)}[i \in I])
+  $.
 \end{definition}
 
 Leveraging the notion of decomposition, we can define a weakening of the notion
@@ -40,20 +36,19 @@ of \kl{equivariant Gröbner basis} that we will use in this section.
   $\idl$ if $\IdlGen{\Basis} = \idl$, and if for every polynomial $p \in \idl$,
   and decomposition $\mathfrak{d}$ of $p$ with respect to $\Basis$, there
   exists a decomposition $\mathfrak{d}'$ of $p$ with respect to $\Basis$ such that
-  \begin{enumerate}
-    \item $\dom(\mathfrak{d}') \subseteq \dom(\mathfrak{d})$,
-    \item $\lm(\mathfrak{d}') = \lm(p)$.
-  \end{enumerate}
+  $\domdec(\mathfrak{d}') \subseteq \domdec(\mathfrak{d})$,
+  and 
+  such that $\lmdec(\mathfrak{d}') = \lm(p)$.
 \end{definition}
 
 \AP To compute \kl{weak equivariant Gröbner bases}, we will use a rewriting
-relation. Given $p,r \in \poly{\K}{\X}$, we write $p \intro*\toeucl{\varleq}{H}
+relation. Given $p,r \in \poly{\K}{\X}$, we write $p \intro*\toeucl{H}
 r$ if and only if there exists $q \in H$, $a \in \K$, and $\monelt \in
 \mon{\X}$ such that $p = a \monelt q + r$, $\dom(r) \subseteq \dom(p)$, and
-$\lm[\varleq](r) \revlexlt \lm[\varleq](p)$. In order to simplify the
+$\lm[\Indets](r) \revlexlt \lm[\Indets](p)$. In order to simplify the
 notations, we will write $p \intro*\pmonleq r$ to denote $\dom(r) \subseteq
-\dom(p)$, and $\lm[\varleq](r) \revlexlt \lm[\varleq](p)$, leaving the ordering
-$\varleq$ implicit. 
+\dom(p)$, and $\lm[\Indets](r) \revlexlt \lm[\Indets](p)$, leaving the
+ordered set of indeterminates $\Indets$ implicit.
 
 \begin{lemma}
   \label{lem:chm}
@@ -71,16 +66,16 @@ $\varleq$ implicit.
 \end{proof}
 
 As a consequence of \cref{lem:chm}, we know that the rewriting relation
-$\toeucl{\varleq}{H}$ is \kl{terminating} for every set $H$.
+$\toeucl{H}$ is \kl{terminating} for every set $H$.
 
 \begin{definition}
   \label{def:normalisation}
   Let $H$ be a set of polynomials, and let $p \in \poly{\K}{\X}$ be a
   polynomial. We say that $p$ is \intro{normalised} with respect to $H$ if
-  there are no transitions $p \toeucl{\varleq}{H} r$. 
+  there are no transitions $p \toeucl{H} r$. 
   The set of \intro{remainders} of $p$ with respect to $H$ is 
   denoted $\rem{H}{p}$, and is defined as the set of all polynomials $r$ such that
-  $p \toeucl{\varleq}{H}^* r$ and $r$ is normalised with respect to $H$.
+  $p \toeucl{H}^* r$ and $r$ is normalised with respect to $H$.
 \end{definition}
 
 In order to compute in the equivariant setting, we will actually prefer to
@@ -100,10 +95,10 @@ with their orbits directly.
 \begin{proof}
   Let us write $H = \orbit[\group]{H'}$, where $H'$ is a finite set of
   polynomials.
-  Because the relation $\toeucl{\varleq}{H}$ is \kl{terminating}, it suffices to 
+  Because the relation $\toeucl{H}$ is \kl{terminating}, it suffices to 
   show that for every polynomial $p$, there are finitely many polynomials $r$ 
-  such that $p \toeucl{\varleq}{H} r$. This is because 
-  $p \toeucl{\varleq}{H} r$ implies that 
+  such that $p \toeucl{H} r$. This is because 
+  $p \toeucl{H} r$ implies that 
   $p = \alpha \monelt[n] (\gelem\cdot q) + r$ for some $q \in H'$, 
   $\alpha \in \K$, $\monelt[n] \in \mon{\X}$, and $\gelem \in \group$.
   Because, $\lm(r) \revlexlt \lm(q)$, we  
@@ -120,7 +115,7 @@ Now that we have a quasi-ordering on polynomials, we will prove that given an
 Gröbner basis}. The computation will closely follow the classical
 \kl{Buchberger's algorithm}. The main idea being to saturate the set of
 generators $H$ to remove some \emph{critical pairs} of the rewriting relation
-$\toeucl{\varleq}{H}$. Namely, given two polynomials $p$ and $q$ in $H$, we
+$\toeucl{H}$. Namely, given two polynomials $p$ and $q$ in $H$, we
 compute the set $\CancelPoly{p}{q}$ of cancellations between $p$ and $q$ as the
 set of polynomials of the form $r = \alpha \monelt[n] p + \beta \monelt[m] q$
 such that $\lm(r) < \max(\monelt[n] \lm(p), \monelt[m]\lm(q))$, where
@@ -255,7 +250,7 @@ effectivity assumptions.
   Assume that $(\mon[\omega]{\X}, \gdivleq)$ is a \kl{WQO}. Then, the set $\Basis$ computed
   by \cref{alg:weakgb} 
   is a \kl{weak equivariant Gröbner basis} of the ideal
-  $\EqIdlGen{H}$ for the ordering $\pmonleq$.
+  $\EqIdlGen{H}$.
 \end{lemma}
 \begin{proof}
   It is clear that $\Basis$ is a generating set of $\EqIdlGen{H}$, because
@@ -322,7 +317,7 @@ effectivity assumptions.
       By \cref{lem:spoly}, we know that these polynomials are obtained by
       multiplying the \kl{S-polynomial} $\spoly{p_i}{p_\star}$ by some monomial.
       Because \cref{alg:weakgb} terminated, we know that 
-      $\spoly{p_i}{p_\star} \toeucl{\pmonleq}{\Basis}^* 0$ by contruction.
+      $\spoly{p_i}{p_\star} \toeucl{\Basis}^* 0$ by contruction.
 
       By definition of the rewriting relation, we conclude that one can rewrite
       $\spoly{p_i}{p_\star}$ as combination of polynomials in $\Basis$ that

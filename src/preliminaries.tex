@@ -61,8 +61,9 @@ define the \intro{leading term} $\lt(p)$ of $p$ as the product of its
 \intro{characteristic monomial} $\cm(p)$ of $p$ as the product of its
 \kl{leading monomial} and all the indeterminates appearing in $p$. Because the
 coefficients and monomial in question are highly dependent on the ordering
-$\varleq$, we allow ourselves to write $\lm[\varleq](p)$ to highlight the
-precise ordering that was used to compute the \kl{leading monomial} of $p$.
+$\varleq$, we allow ourselves to write $\lm[\Indets](p)$ to highlight the
+precise ordered set of variables that was used to compute the \kl{leading
+monomial} of $p$.
 
 
 \paragraph{Gröbner Bases.} \AP An \intro{ideal} $\idl$ of $\poly{\K}{\X}$ is a
@@ -80,7 +81,7 @@ when $\X$ is finite, and that it is even $\EXPTIME$-complete \cite{MAME82}.
 \cite{BUCH76}. Having fixed and ordering $\varleq$ on $\Indets$, a set $\Basis$
 of polynomials is called a \intro{Gröbner basis} of an ideal $\idl$ if,
 $\IdlGen{\Basis} = \idl$ and for every polynomial $p \in \idl$, there exists a
-polynomial $q \in \Basis$ such that $\lm[\varleq](q) \divleq \lm[\varleq](p)$.
+polynomial $q \in \Basis$ such that $\lm[\Indets](q) \divleq \lm[\Indets](p)$.
 
 
 

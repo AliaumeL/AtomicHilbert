@@ -13,17 +13,20 @@ $V \subfin \Indets$ of indeterminates.
   \label{def:strong-equiv-grob}
   Let $V \subseteq \X$ be a set of indeterminates.
   An orbit finite set $\Basis_V$
-  of polynomials is called an \intro{$V$-strong equivariant Gröbner basis}
-  of an \kl{equivariant ideal} $\idl$ with respect to $\pmonleq$
+  of polynomials is called a \intro{$V$-strong equivariant Gröbner basis}
+  of an \kl{equivariant ideal} $\idl$ 
   whenever $\Basis_V \cap \poly{\K}{V}$ is a
-  \kl{Gröbner basis} of the ideal $\idl \cap \poly{\K}{V}$ with respect to
-  $\pmonleq$.
+  \kl{Gröbner basis} of the ideal $\idl \cap \poly{\K}{V}$.
 \end{definition}
+
+Let us note that a set in as \kl{equivariant Gröbner basis}
+if and only if it is a \kl{$V$-strong equivariant Gröbner basis} for
+every finite set $V \subseteq \Indets$ of indeterminates.
 
 \AP To compute a \kl{$V$-strong equivariant Gröbner basis} of an
 \kl{equivariant ideal} $\idl$, we will compute a \kl{weak equivariant Gröbner
 basis} of the ideal $\idl$ with respect to a new ordering of the indeterminates
-and a new group action. Let us write $\IndetsV[V] \defined V + (\Indets
+and a new group action. Let us write $\IndetsV[V] \defined V \ordplus (\Indets
 \setminus V)$, that is the totally ordered set of indeterminates having the
 same elements as $\Indets$, but with the elements of $V$ ordered below all
 other elements of $\Indets$.
@@ -101,13 +104,15 @@ and that it is effectively computable from $V$ and $H$.
   action of $\group_V$.
 \end{lemma}
 \begin{proof}
-  It is clear that $\varleq_S$ is an \kl{effective total ordering} on $\X$, and that it is
-  compatible with the action of $\group_S$.
-  Let us now show that $\group_S$ is \kl{effectively oligomorphic}.
+  It is clear that $\IndetsV$ 
+  is equipped with an \kl{effective total ordering}, and it is 
+  \kl{compatible} with the action of $\group_V$ because the latter fixes
+  the elements of $V$.
+  Let us now show that $\group_V$ is \kl{effectively oligomorphic}.
 
   \todo[inline]{what we want to show is that 
     the orbits of tuples of elements in
-    $\group_S$ can be computed.
+    $\group_V$ can be computed.
     }
 \end{proof}
 
@@ -118,11 +123,9 @@ conclude that $(\mon[\omega]{\IndetsV}, \gdivleq[\group_V])$ is a
 
 \begin{lemma}
   \label{lem:wqo-mon-S}
-  Let $\X$ be a set of indeterminates, $\group$ a group acting
-  on $\X$ \kl{effectively oligomorphically}, and $\varleq$ a total ordering
-  on $\X$ that is \kl{respected by the group action}.
   Assume that $(\mon[\omega + 1]{\X}, \gdivleq[\group])$ is a \kl{well-quasi-ordering}.
-  Then, $(\mon[\omega]{\IndetsV}, \gdivleq[\group_V])$ is a \kl{well-quasi-ordering}.
+  Then, the set 
+  $(\mon[\omega]{\IndetsV}, \gdivleq[\group_V])$ is \kl{well-quasi-ordered}.
 \end{lemma}
 \begin{proof}
   Let $\seqof{\monelt_i}[i \in \N]$ be an infinite sequence of elements of
@@ -197,23 +200,23 @@ Now that we have all the ingredients to show that
   \end{equation*}
   where $b_j \in \K$, $\monelt'_j \in \mon{\IndetsV[V]}$, and $h'_j \in
   \Basis_V$, and such that
-  $\lm[\IndetsV](\iota_V(p)) = \lm[\IndetsV](\mathfrak{d}')$,
-  and $\dom(\mathfrak{d}') \subseteq \dom(\iota_V(\mathfrak{d}))$.
+  $\lm[\IndetsV](\iota_V(p)) = \lmdec[\IndetsV](\mathfrak{d}')$,
+  and $\domdec(\mathfrak{d}') \subseteq \domdec(\iota_V(\mathfrak{d}))$.
 
   Remark that $\lm[\IndetsV](\iota_V(p)) = \iota_V(\lm[\Indets](p)) \in
   \mon{V}$, because all variables of $p$ are in $V$. As a consequence, we know
-  that all the variables appearing in $\mathfrak{d}'$ are in $V$, since leading
-  monomials are computed using the $\revlexleq$ ordering, and variables in $V$
-  are ordered below all other variables in $\IndetsV[V]$. As a consequence, for
-  the rest of the proof, we will assume that $\mathfrak{d}'$, $p$ and
-  $\iota_V(p)$ are all in $\poly{\K}{V}$, where $V$ equipped with the ordering induced by
-  $\Indets$ (which is the same as the one induced by $\IndetsV[V]$).
+  that all the variables appearing in $\mathfrak{d}'$ are in $V$, since
+  \kl{leading monomials} are computed using the \kl{reverse lexicographic
+  ordering}, and variables in $V$ are ordered below all other variables in
+  $\IndetsV[V]$. As a consequence, for the rest of the proof, we will assume
+  that $\mathfrak{d}'$, $p$ and $\iota_V(p)$ are all in $\poly{\K}{V}$, where
+  $V$ equipped with the ordering induced by $\Indets$ (which is the same as the
+  one induced by $\IndetsV[V]$).
 
   Finally, let us consider a term $\monelt_i' h_i'$ appearing in
-  $\mathfrak{d}'$, with maximal leading monomial. We know that $\lm(p) =
+  $\mathfrak{d}'$, with maximal \kl{leading monomial}. We know that $\lm(p) =
   \lm(\monelt_i' h_i') = \monelt_i' \cdot \lm(h_i')$. In particular, $\lm(h_i')
   \divleq \lm(p)$, and $h_i' \in \poly{\K}{V}$.
-
   We have shown that $\Basis \cap \poly{\K}{V}$ is a \kl{Gröbner basis} of the
   ideal $\IdlGen{H} \cap \poly{\K}{V}$,
   i.e., that $\Basis$ is a \kl{$V$-strong equivariant Gröbner basis} of

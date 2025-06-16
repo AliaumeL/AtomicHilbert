@@ -186,5 +186,10 @@
 
 \knowledge{notion}
  | normalised
+\knowledge{notion}
+ | terminating 
+\knowledge{notion}
+ | remainders
+ | remainder
 
 
