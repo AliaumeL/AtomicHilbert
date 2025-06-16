@@ -38,6 +38,64 @@ translation of the indices, that is, for all $\gelem \in \group$ such that
 $\gelem \cdot P \subseteq P$, there exists $n \in \N$ such that $\gelem \cdot
 x_i = x_{i + n}$ for all $i \in \N$.
 
+The following two lemmas show that the existence of an infinite path is a
+sufficient condition to ensure that $(\mon{\Indets}, \gdivleq)$ is not a
+\kl{well-quasi-ordering}, and that it is close to being a sufficient condition
+in the case of finite relational structures.
+
+\begin{lemma}
+  If $\Indets$ contains an infinite path $P$, then the
+  $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
+\end{lemma}
+\begin{proof}
+  Consider the monomials
+  $x_0^2 x_1 \cdots x_n x_{n+1}^2$ for all $n \in \N$.
+  They are pairwise incomparable with respect to $\gdivleq$,
+  hence form an infinite antichain.
+\end{proof}
+
+
+\begin{conjecture}[Schmitz]
+  Let $\mathcal{C}$ be a class of finite relational sturctures
+  that is not $2$-well-quasi-ordered, then 
+  there exists in existential formula $\phi(x,y)$ that defines
+  arbitrarily long paths in the structures of $\mathcal{C}$.
+\end{conjecture}
+
+\begin{corollary}
+  Assume that $\mathbb{A}$ is an infinite relational structure,
+  and that its age is not $2$-well-quasi-ordered.
+  Then, there exists an infinite structure $\mathbb{B}$
+  that is elementarily equivalent to $\mathbb{A}$,
+  and where an existential formula $\phi(x,y)$ defines
+  an infinite path.
+\end{corollary}
+\begin{proof}
+  It suffices to use the conjecture above and the compactness theorem 
+  for first-order logic.
+\end{proof}
+
+\begin{corollary}
+  Let $\mathbb{A}$ be an infinite relational structure,
+  and assume that its age is not $2$-well-quasi-ordered.
+  Then, if $\Indets$ is the elements of $\mathbb{A}$,
+  and $\group$ is the automorphism group of $\mathbb{A}$,
+  then one can assume that $\mathbb{A}$
+  contains in infinite path.
+\end{corollary}
+\begin{proof}
+  We first replace $\mathbb{A}$ by an infinite structure
+  $\mathbb{B}$ that is elementarily equivalent to $\mathbb{A}$.
+  Because we only ever write finite sets of indeterminates,
+  equivariant ideal membership problems are the same in $\mathbb{A}$
+  and $\mathbb{B}$.
+  Finally, because of $\phi(x,y)$, we can add a binary relation to 
+  $\mathbb{B}$ that defines an infinite path, without changing the
+  \kl{equivariant ideal membership problem}.
+\end{proof}
+
+
+
 \begin{definition}
   \label{def:mon-rewrite-system}
   A \intro{monomial rewrite system} is a finite set of pairs of the form
