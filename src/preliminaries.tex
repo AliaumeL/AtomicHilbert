@@ -10,7 +10,10 @@ $(\N, \leq)$), and write $X \intro*\ordplus Y$ for the lexicographic sum of two
 partial orders $X$ and $Y$. We will also use the usual notations for finite
 ordinals, writing $\intro*\ordfin{n}$ for the finite ordinal of size $n$. For
 instance, $\om \ordplus \ordfin{1}$ is the total order $\N \uplus
-\set{+\infty}$, where $+\infty$ is the new largest element.
+\set{+\infty}$, where $+\infty$ is the new largest element. Finally, we will
+also use the ordinal $\om^2$, that is obtained as pairs of elements of $\om$,
+ordered lexicographically (i.e., a linearisaton of the Cartesian product $\N
+\times \N$ equipped with the product ordering).
 
 \AP In order to guarantee the termination of the algorithms presented in this
 paper, a key ingredient will be the notion of \intro{well-quasi-ordering}
@@ -27,20 +30,18 @@ monomials in $\poly{\K}{\X}$. Letters $p,q,r$ are used to denote polynomials,
 $\monelt,\monelt[n]$ are used to denote monomials, and $a,b,\alpha,\beta$ are
 used to denote coefficients in $\K$.
 
-A classical example of a \kl{WQO} is the set of monomials $\mon{\X}$, endowed
-with the \kl{divisibility} relation $\divleq$ whenever $\X$ is finite. We
+A classical example of a \kl{WQO} is the set of monomials $\mon{\Indets}$, endowed
+with the \kl{divisibility} relation $\divleq$ whenever $\Indets$ is finite. We
 recall that a monomial $\monelt[m]$ \intro{divides} a monomial $\monelt[n]$ if
 there exists a monomial $\monelt[l]$ such that $\monelt[m] \times \monelt[l] =
 \monelt[n]$. In this case, we write $\monelt[m] \divleq \monelt[n]$. Note that
-monomials can be seen as functions from $\X$ to $\N$ having a finite support,
+monomials can be seen as functions from $\Indets$ to $\N$ having a finite support,
 and that the \kl{divisibility} relation can be extended to monomials that are
-functions from $\X$ to $(X,\leq)$, where $X$ is any partially ordered set. In
-this case, we write $\monelt[m] \divleq \monelt[n]$ if for every $x \in \X$, we
+functions from $\Indets$ to $(X,\leq)$, where $X$ is any partially ordered set. In
+this case, we write $\monelt[m] \divleq \monelt[n]$ if for every $x \in \Indets$, we
 have $\monelt[m](x) \leq \monelt[n](x)$. We will write
-$\intro*\mon[\omega+1]{\X}$ (resp. $\mon[\omega+\omega]{\X}$) for the set of
-monomials that are functions from $\X$ to $\omega + 1$ (resp. $\omega +
-\omega$).
-
+$\intro*\mon[\om \ordplus 1]{\Indets}$ (resp. $\mon[\om^2]{\Indets}$) for the set of
+monomials that are functions from $\Indets$ to $\om \ordplus 1$ (resp. $\om^2$).
 
 
 Given an ordering $\varleq$ on the set of indeterminates $\Indets$, we define

@@ -9,17 +9,14 @@ libraries:
     - lib/maths
     - lib/knowledges.kl
 appendix:
+    - src/algorithm.tex
     - src/appendix.tex
 ---
 
 \input{src/intro.tex}
 \input{src/preliminaries.tex}
 \input{src/weakgb.tex}
-
-\input{src/algorithm.tex}
 \input{src/fullbasis.tex}
 \input{src/undecidability.tex}
 \input{src/examples.tex}
-\input{src/strong.tex}
-\input{src/colourful.tex}
 \input{src/conclusion.tex}

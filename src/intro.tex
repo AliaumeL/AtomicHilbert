@@ -89,12 +89,12 @@ under very weak effectivity assumptions.
 
 \begin{theorem}[name={Equivariant Ideal Membership},restate=thm:decide-equiv-ideal-mem]
   \label{thm:decide-equiv-ideal-mem}
-  Let $(\X, \group, \leq)$ be a set of indeterminates, a group acting \kl{effectively
+  Let $(\Indets, \group, \leq)$ be a set of indeterminates, a group acting \kl{effectively
   oligomorphically}
   on $\X$ and an
-  \kl{effective total ordering} $\leq$ on $\X$ that is compatible with the action of
+  \kl{effective total ordering} $\leq$ on $\Indets$ that is compatible with the action of
   $\group$. 
-  If $(\mon[\omega + 1]{\X}, \gdivleq)$ is a \kl{WQO}, then one can decide the
+  If $(\mon[\om \ordplus 1]{\Indets}, \gdivleq)$ is a \kl{WQO}, then one can decide the
   \kl{equivariant ideal membership problem}.
 \end{theorem}
 
@@ -104,12 +104,12 @@ with a slightly stronger structural requirement on the set of indeterminates.
 
 \begin{theorem}[name={Equivariant Gröbner Basis},restate=thm:compute-equiv-gb]
   \label{thm:compute-egb}
-  Let $(\X, \group, \leq)$ be a set of indeterminates, a group acting \kl{effectively
+  Let $(\Indets, \group, \leq)$ be a set of indeterminates, a group acting \kl{effectively
   oligomorphically}
   on $\X$ and an
-  \kl{effective total ordering} $\leq$ on $\X$ that is compatible with the action of
+  \kl{effective total ordering} $\leq$ on $\Indets$ that is compatible with the action of
   $\group$. 
-  If $(\mon[\omega + \omega]{\X}, \gdivleq)$ is a \kl{WQO}, then one can
+  If $(\mon[\om^2]{\Indets}, \gdivleq)$ is a \kl{WQO}, then one can
   compute an \kl{equivariant Gröbner basis} from a finite set $H$ of generators.
 \end{theorem}
 
@@ -120,9 +120,9 @@ action of the group, and that one can effectively compute on the representation
 these natural assumptions, we also require a \kl{well-quasi-ordering} property
 on the set of \kl{monomials}. Note that it is shown in \cite{GHOLAS24} that for
 the \kl{equivariant Hilbert basis property} to hold, it is necessary that
-$(\mon[\omega]{\X}, \gdivleq)$ is a \kl{WQO}. Furthermore, it is conjectured
-that whenever $(\mon[\omega]{\X}, \gdivleq)$ is a \kl{WQO}, then $(\mon[\omega
-+ 1]{\X}, \gdivleq)$ and $(\mon[\omega + \omega]{\X}, \gdivleq)$ are also
+$(\mon[\om]{\X}, \gdivleq)$ is a \kl{WQO}. Furthermore, it is conjectured
+that whenever $(\mon[\om]{\X}, \gdivleq)$ is a \kl{WQO}, then $(\mon[\om
+\ordplus 1]{\X}, \gdivleq)$ and $(\mon[\om^2]{\X}, \gdivleq)$ are also
 \kl{WQOs}.
 
 Finally, we show that if one can interpret paths, then the 
