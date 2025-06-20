@@ -27,8 +27,6 @@ following example.
   the \kl{ideal membership problem} in $\poly{\K}{V}$, which is decidable.
 \end{proof}
 
-
-
 \subsection{Interpreting Paths}
 \label{subsec:paths}
 
@@ -96,12 +94,10 @@ in the case of finite relational structures.
   \kl{equivariant ideal membership problem}.
 \end{proof}
 
-
-
 \begin{definition}
   \label{def:mon-rewrite-system}
   A \intro{monomial rewrite system} is a finite set of pairs of the form
-  $(\monelt, \monelt')$ where $\monelt, \monelt' \in \mon{\Indets}$.
+  $\set{\monelt, \monelt'}$ where $\monelt, \monelt' \in \mon{\Indets}$.
   The \intro{monomial reachability problem} is the problem of deciding whether
   there exists a sequence of rewrites that transforms $\monelt_s$ into $\monelt_t$
   using the rules of a monomial rewrite system $R$, where
@@ -110,7 +106,7 @@ in the case of finite relational structures.
     \monelt[n] (\gelem \cdot \monelt)
     \to_R 
     \monelt[n] (\gelem \cdot \monelt')
-    \text{ if } (\monelt, \monelt') \in R
+    \text{ if } \set{\monelt, \monelt'} \in R
     \text{ and } \gelem \in \group
     \quad .
   \end{equation*}
@@ -169,112 +165,118 @@ in the case of finite relational structures.
   one can rewrite $\monelt_s$ into $\monelt_t$ using the rules of $R$.
 \end{proof}
 
-\AP It will be easier for us to work with rewriting systems than the
-\kl{equivariant ideal membership problem} to prove undecidability results. In
-particular, they will be particularly useful to encode the \intro{Post
-Correspondence Problem} (PCP), which is a well-known undecidable problem that
-can be stated as follows: given two finite sets of words $A \defined \set{u_1,
-\dots, u_n}$ and $B \defined \set{v_1, \dots, v_n}$ over a binary alphabet,
-does there exist a sequence of indices $i_1, \ldots, i_n$ such that $u_{i_1}
-\cdots u_{i_n} = v_{i_1} \cdots v_{i_n}$. We can further assume that the
-$i_1 = 1$.
+\paragraph{Reversible Turing Machines}
+\AP In the presence of an infinite path, one can easily encode words, hence
+configurations of a Turing machine, as monomials. However, because the
+rewriting systems are reversible by nature, it will be easier for us to encode
+the Halting problem for \emph{reversible} Turing machines \cite{BENN73}.
+Given a reversible Turing machine $M$ over a binary alphabet, we will
+create the following \kl{monomial rewrite system} $R_M$, composed of
+four distinct phases:
+\begin{enumerate}
+  \item \label{item:undecidability-1}
+    \textbf{Tape creation.} This phase creates a long monomial 
+    of the form $x_0^{\mathsf{as}} x_1^{\mathsf{1}} \cdots x_{n-1}^{1} x_n^{\mathsf{ac}}$.
+    It is obtained via rules of the form
+    $x_0^{\mathsf{as}} x_i^{\mathsf{ac}} \leftrightarrow x_0^{\mathsf{as}} x_i^{1} x_{i+1}^{\mathsf{ac}}$
+  \item \label{item:undecidability-2}
+    \textbf{Linearity check.}
+    This phase ensures that the tape is a long path, i.e., that the tape creation
+    did not introduce a loop by reusing a variable name twice.
+    It does so by using the well-known \emph{Floyd cycle-finding algorithm},
+    which uses two pointers moving at different speeds.
+    The two pointers are represented by exponents $\mathsf{bc1}$ and $\mathsf{bc2}$,
+    and the rules are of the form
+    $x_0^{\mathsf{bs}} x_i^{\mathsf{bc1}} x_{i+1}^1 x_j^{\mathsf{bc2}} x_{j+1}^1 x_{j+2}^1 x_n^{\mathsf{be}} \leftrightarrow 
+     x_0^{\mathsf{bs}} x_i^{1} 
+     x_{i+1}^{\mathsf{bc1}}
+     x_j^{1} 
+     x_{j+1}^{1} 
+     x_{j+2}^{\mathsf{bc2}}
+     x_{n}^{\mathsf{be}}$,
+     whenever $x_j \neq x_i$.
+  \item \label{item:undecidability-3}
+    \textbf{Machine simulation.}
+    This phase simulates the reversible Turing machine $M$ over the input monomial
+    by using rules of the form
+    $x_0^{\mathsf{cs}} x_0^{q} x_{i-1}^{a} x_i^{b} x_{i}^{\mathsf{cc}} x_{i+1}^{c}
+    \leftrightarrow
+    x_0^{\mathsf{cs}} x_0^{q'} x_{i-1}^{a} x_i^{b} x_{i}^{\mathsf{cc}} x_{i+1}^{c'}$,
+    where $q,q'$ are the states of the Turing machine, and $a,b,c$ are letters
+    on the tape.
 
-\AP To simplify our translation, let us first assume that one can use colored
-variables, that is, one has access to monomials with exponents in $\N \times Q$
-for some finite set $Q$. We will use $Q \defined \set{ \mathsf{u}, \mathsf{v},
-\mathsf{endU}, \mathsf{endV} }$. Then, we can encode a word $u$ over the binary
-alphabet $\set{0, 1}$ as a monomial $\monelt[w]$ as follows: $\mathsf{encU}_{i}
-(\varepsilon) = x_i^{(1, \mathsf{endU})}$ and $\mathsf{encU}_{i} (a u') =
-x_i^{(1 + a, \mathsf{u})} \cdot \mathsf{encU}_{i+1} (u')$. Similarly, one can
-define a monomial $\mathsf{encV}_{i} (v)$ that encodes a word $v$ over the
-binary alphabet $\set{0, 1}$ as a monomial in the same way. Then, given a pair
-of words $u \in A$ and $v \in B$, we can encode their pairing as a monomial
-as follows: $\mathsf{enc} (u,v) = \mathsf{encU}_0(u) \cdot
-\mathsf{encV}_0 (v)$.
-
-Let us now define a rewriting system $R$ that encodes the PCP problem. The
-rules of $R$ are separated in two parts:
-\begin{itemize}
-  \item A forward part: that replaces
-    $x_i^{\alpha} \cdot x_{j+1}^{\mathsf{endU}} \cdot x_{j}^{\beta} x_{j+1}^{\mathsf{endV}}$
-    by 
-    $x_i^{\alpha} \mathsf{encU}_{i+1}(u_k) \cdot x_{j}^{\beta} \mathsf{encV}_{j+1}(v_k)$
-    for some $k \in \set{1, \ldots, n}$,
-    where $i \neq j$,
-    and $\alpha, \beta$ are non-empty exponents.
-  \item A backward part: that replaces
-    $x_i^{(a, \mathsf{u})}
-     x_i^{(a, \mathsf{v})}
-     x_{i+1}^{\mathsf{endU}}
-     x_{i+1}^{\mathsf{endV}}$
-    by 
-     $x_{i}^{\mathsf{endU}}
-      x_{i}^{\mathsf{endV}}$, 
-    where $a \in \set{1, 2}$.
-\end{itemize}
-
-\AP The set of rules defined here is infinite, but it is finitely generated,
-and a representation of the rules can be computed from the PCP instance because
-$\Indets$ is \kl{effectively oligomorphic}. It is clear that if there is a
-positive answer to the PCP problem, then there exists a sequence of rewrites
-that transforms the monomial $\mathsf{enc} (u_1, v_1)$ into the monomial
-$x_0^{(1, \mathsf{endU})} \cdot x_0^{(1, \mathsf{endV})}$, that is obtained by
-replacing the end markers of the words until the matching is complete, and then
-removing letters by applying the backward rules until both end markers reach
-the start of the word.
-The converse implication is slightly more involved, 
-and is stated in \cref{lem:reachable-correct}.
+  \item \label{item:undecidability-4}
+    \textbf{Cleanup.}
+    This phase cleans up the monomial, eating every variable that is 
+    not the first one.
+    $x_0^{\mathsf{ds}} y \leftrightarrow x_0^{\mathsf{ds}}$.
+\end{enumerate}
+Note that because of the usage of a distinguishing colour on the variable $x_0$,
+the four phases described here cannot interact. Let us now add 
+the following \emph{inter-phase} rules to the system:
+\begin{enumerate}
+  \setcounter{enumi}{4}
+  \item \label{item:undecidability-5}
+    \textbf{Tape creation to linearity check.}
+    This single rule allows to non-deterministically
+    switch from the tape creation phase to the linearity check phase.
+    It is a rule of the form
+    $x_0^{\mathsf{as}} x_1^{1} x_2^{1} x_n^{\mathsf{ac}} 
+    \leftrightarrow
+    x_0^{\mathsf{bs}} x_1^{\mathsf{bc1}} x_2^{\mathsf{bc2}} x_n^{\mathsf{be}}$.
+  \item \label{item:undecidability-6}
+    \textbf{Linearity check to machine simulation.}
+    This rule allows switching from the linearity check phase to the machine
+    simulation phase, and is of the form
+    $x_0^{\mathsf{bs}} x_1 x_2 x_3 x_n^{\mathsf{bc2}} x_n^{\mathsf{be}} \leftrightarrow 
+    x_0^{\mathsf{cs}} x_0^{q_0} x_1 x_2 x_2^{\mathsf{cc}} x_3 x_n^{\mathsf{ce}}$,
+    where $q_0$ is the initial state of the Turing machine.
+  \item \label{item:undecidability-7}
+    \textbf{Machine simulation to cleanup.}
+    This rule allows switching from the machine simulation phase to the cleanup
+    phase, and is of the form
+    $x_0^{\mathsf{cs}} x_0^{q_f}  x_n^{\mathsf{cc}} \leftrightarrow 
+    x_0^{\mathsf{ds}}$.
+\end{enumerate}
 
 \begin{lemma}
-  \label{lem:reachable-correct}
-  Assume that $\mathsf{enc} (u_1, v_1)$ can be rewritten into
-  $x_0^{(1, \mathsf{endU})} \cdot x_0^{(1, \mathsf{endV})}$ using the rules of
-  the rewriting system $R$ defined above.
-  Then there is a positive answer to the PCP problem.
+  \label{lem:undecidability}
+  Let $M$ be a reversible Turing machine, and let $R_M$ be the monomial rewrite
+  system defined above. Then, 
+  $x_0^{\mathsf{as}} x_1^{\mathsf{ac}} \to_{R_M}^* x_0^{\mathsf{ds}}$ if and only if
+  $M$ halts on the empty word,
 \end{lemma}
 \begin{proof}
 
-  We first remark that the backward rules can only be applied when the two end
-  markers are on the same indeterminate, and that in this case, the two end
-  markers are replaced by the same indeterminate. On the other hand, the
-  forward rules can only be applied when the two end markers are on different
-  indeterminates. As a consequence, the rewrite sequence must be starting with
-  forward rules, and ending with backward rules.
+  The proof will be done by first showing that every rewriting from
+  $x_0^{\mathsf{as}}$ to $x_0^{\mathsf{ds}}$ can be decomposed into four
+  phases, and that each of these phases is correct. Note that the phase
+  \ref{item:undecidability-1} creates a long sequence of variables by
+  definition. And that the phase \ref{item:undecidability-2} is correct because
+  of the correctness of the Floyd cycle-finding algorithm, but also is
+  \emph{deterministic} ind \emph{co-deterministic} since it only moves pointers
+  on the monomials. As a consequence, \ref{item:undecidability-2} does not
+  interact with the other phases \ref{item:undecidability-1} and
+  \ref{item:undecidability-3}, even in the presence of
+  \ref{item:undecidability-5} and \ref{item:undecidability-6}.
 
-   It is an easy check that reaching the final monomial by applying only the
-   backward rules can only be obtained from monomials where every variable
-   $x_i$ has the same $u$ and $v$ exponents.
+  Similarly, the phase \ref{item:undecidability-3} is deterministic and
+  co-deterministic, hence cannot influence the shape of the monomial,
+  and only changes the (positive) exponents of its variables.
 
-   It suffices now to prove that if the forward rules create a monomial
-   where every variable $x_i$ has the same $u$ and $v$ exponents, then
-   there is a solution to the PCP problem.
+  Finally, let us remark that to enter phase \ref{item:undecidability-4}, one
+  must have reached an accepting state in phase \ref{item:undecidability-3}.
 
-   We will first analyse the shape of the monomials obtained by applying 
-   only forward rules, and claim that they are \emph{path-like}
-   in the sense that no rule can introduce a variable that was already present
-   in the monomial (except for the end markers, that are moved)
-   and that the variables in the reachable monomials form paths.
+  Hence, the only way to reach $x_0^{\mathsf{ds}}$ is to have reached an accepting
+  state of the reversible Turing machine $M$, by simulating its computation
+  starting from the empty word, over some (linear) tape.
 
-   \todo[inline]{
-     There is a problem: we do not ensure that the reachable monomials
-     are path like. We can make sure of it by adding a check
-     rule that moves a cursor along the monomial starting from
-     the beginning of the word.
-   }
-
+  Conversely, if $M$ halts on the empty word, then there exists a maximal
+  size for the working tape of $M$, and one can go through the four phases
+  described above to reach $x_0^{\mathsf{ds}}$.
 \end{proof}
 
-\begin{theorem}
-  \label{thm:undecidable-pcp}
-  One can reduce the \kl{Post Correspondence Problem} to the
-  \kl{monomial reachability problem}, assuming that one
-  has access to colored variables.
-\end{theorem}
-\begin{proof}
-  
-\end{proof}
-
-
+\paragraph{Getting rid of colors.}
 Now, let us argue that one can get rid of colors by using 
 finitely many numbers to encode them. 
 The first remark is that some colors (most) appear only once 
