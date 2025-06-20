@@ -27,8 +27,11 @@ following example.
   the \kl{ideal membership problem} in $\poly{\K}{V}$, which is decidable.
 \end{proof}
 
+
+
 \subsection{Interpreting Paths}
 \label{subsec:paths}
+
 
 In this section, we will assume that the set of indeterminates $\Indets$
 contains an infinite path $P \defined \seqof{x_i}[i \in \N] \subseteq \Indets$,
@@ -280,10 +283,32 @@ The second remark is that the encoding of $u$ and $v$ can be interleaved
 instead of using the same variables for both and distinguishing them
 by their color. 
 
+
+
+
 \subsection{Infinite Vector Space}
 \label{subsec:vector}
 
+Let us consider an infinite set $\mathbb{A}$ of atoms with equality, and the
+infinite dimensional vector space $\mathbb{V}$ composed of equivariant
+functions from $\mathbb{A}$ to $\K$. We set $\Indets = \mathbb{V}$, and
+$\group$ is the group of all permutations of $\mathbb{A}$
+lifted to $\mathbb{V}$.
 
+Let us try to encode a path inside this structure. To that end, let us name the
+elements of $\mathbb{A}$ as $a_i$ for $i \in \N$, and let us write $\delta_i$
+for the function that maps $a_i$ to $1$ and all other atoms to $0$. We set $x_i
+\defined \delta_i + \delta_{i+1}$, and $P \defined \seqof{x_i}[i \in \N]$.
 
+Let us now consider an element $\gelem \in \group$ such that $\gelem \cdot P
+\subseteq P$. Then, $x_0 = \delta_0 + \delta_1$ is mapped to some $x_n =
+\delta_n + \delta_{n+1}$, but $\gelem \cdot x_0 = \delta_{\gelem 0} +
+\delta_{\gelem 1}$, and therefore $\gelem 0 = n$ and $\gelem 1 = n + 1$. Now,
+$\gelem \cdot x_1 = \delta_{\gelem 1} + \delta_{\gelem 2} = x_k$ for some $k$.
+We conclude that $\gelem \cdot x_1 = \delta_{n + 1} + \delta_{n + 2} = x_{n +
+1}$, and by induction that $\gelem \cdot x_i = x_{i + n}$ for all $i \in \N$.
+
+As a consequence, the \kl{equivariant ideal membership problem} is undecidable
+in this setting.
 
 
