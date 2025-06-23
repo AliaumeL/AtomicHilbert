@@ -108,7 +108,7 @@ in the case of finite relational structures.
   a \intro{rewrite step} is a pair of the form
   \begin{equation*}
     \monelt[n] (\gelem \cdot \monelt)
-    \to_R 
+    \leftrightarrow_R 
     \monelt[n] (\gelem \cdot \monelt')
     \text{ if } \set{\monelt, \monelt'} \in R
     \text{ and } \gelem \in \group
@@ -247,7 +247,7 @@ the following \emph{inter-phase} rules to the system:
   \label{lem:undecidability}
   Let $M$ be a reversible Turing machine, and let $R_M$ be the monomial rewrite
   system defined above. Then, 
-  $x_0^{\mathsf{as}} x_1^{\mathsf{ac}} \to_{R_M}^* x_0^{\mathsf{ds}}$ if and only if
+  $x_0^{\mathsf{as}} x_1^{\mathsf{ac}} \leftrightarrow_{R_M}^* x_0^{\mathsf{ds}}$ if and only if
   $M$ halts on the empty word,
 \end{lemma}
 \begin{proof}
