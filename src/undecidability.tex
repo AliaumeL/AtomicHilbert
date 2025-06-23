@@ -27,76 +27,13 @@ following \cref{ex:non-wqo-undecidable}.
   the \kl{ideal membership problem} in $\poly{\K}{V}$, which is decidable.
 \end{proof}
 
-\subsection{Interpreting Paths}
-\label{subsec:paths}
-
-\todo[inline]{
-  This definition of path is not practical: it does not talk about what is happening
-  outside the path at all.
-}
-In this section, we will assume that the set of indeterminates $\Indets$
-contains an infinite path $P \defined \seqof{x_i}[i \in \N] \subseteq \Indets$,
-that is, a set of indeterminates such that $\group$ acts on $\Indets$ as a
-translation of the indices, that is, for all $\gelem \in \group$ and for all
-segments $J \defined [k,l] \subfin \N$, we have such that $\gelem \cdot x_j
-\subseteq P$ for all $j \in J$, there exists $n \in \N$ such that $\gelem \cdot
-x_j = x_{j + n}$ for all $j \in J$.
-
-The following two lemmas show that the existence of an infinite path is a
-sufficient condition to ensure that $(\mon{\Indets}, \gdivleq)$ is not a
-\kl{well-quasi-ordering}, and that it is close to being a sufficient condition
-in the case of finite relational structures.
-
-\begin{lemma}
-  If $\Indets$ contains an infinite path $P$, then the
-  $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
-\end{lemma}
-\begin{proof}
-  Consider the monomials
-  $x_0^2 x_1 \cdots x_n x_{n+1}^2$ for all $n \in \N$.
-  They are pairwise incomparable with respect to $\gdivleq$,
-  hence form an infinite antichain.
-\end{proof}
-
-
-\begin{conjecture}[Schmitz]
-  Let $\mathcal{C}$ be a class of finite relational sturctures
-  that is not $2$-well-quasi-ordered, then 
-  there exists in existential formula $\phi(x,y)$ that defines
-  arbitrarily long paths in the structures of $\mathcal{C}$.
-\end{conjecture}
-
-\begin{corollary}
-  Assume that $\mathbb{A}$ is an infinite relational structure,
-  and that its age is not $2$-well-quasi-ordered.
-  Then, there exists an infinite structure $\mathbb{B}$
-  that is elementarily equivalent to $\mathbb{A}$,
-  and where an existential formula $\phi(x,y)$ defines
-  an infinite path.
-\end{corollary}
-\begin{proof}
-  It suffices to use the conjecture above and the compactness theorem 
-  for first-order logic.
-\end{proof}
-
-\begin{corollary}
-  Let $\mathbb{A}$ be an infinite relational structure,
-  and assume that its age is not $2$-well-quasi-ordered.
-  Then, if $\Indets$ is the elements of $\mathbb{A}$,
-  and $\group$ is the automorphism group of $\mathbb{A}$,
-  then one can assume that $\mathbb{A}$
-  contains in infinite path.
-\end{corollary}
-\begin{proof}
-  We first replace $\mathbb{A}$ by an infinite structure
-  $\mathbb{B}$ that is elementarily equivalent to $\mathbb{A}$.
-  Because we only ever write finite sets of indeterminates,
-  equivariant ideal membership problems are the same in $\mathbb{A}$
-  and $\mathbb{B}$.
-  Finally, because of $\phi(x,y)$, we can add a binary relation to 
-  $\mathbb{B}$ that defines an infinite path, without changing the
-  \kl{equivariant ideal membership problem}.
-\end{proof}
+The undecidability results we will present in this section regarding the
+\kl{equivariant ideal membership problem} will use the polynomials in a very
+limited way: we will only need to consider \emph{monomials}, and we only need to
+consider exponents that are in $\set{0,1,2}$.
+Before going into the details of our reductions, let us first introduce 
+an intermediate problem that will be easier to work with: the 
+\kl{monomial reachability problem}.
 
 \begin{definition}
   \label{def:mon-rewrite-system}
@@ -119,7 +56,7 @@ in the case of finite relational structures.
 
 \begin{lemma}
   \label{lem:mon-rewrite-red-membership}
-  One can solve the \kl{monomial reachability problem} in polynomial time
+  One can solve the \kl{monomial reachability problem}
   provided that one can solve the \kl{equivariant ideal membership problem}.
 \end{lemma}
 \begin{proof}
@@ -168,6 +105,48 @@ in the case of finite relational structures.
   of the fact that 
   one can rewrite $\monelt_s$ into $\monelt_t$ using the rules of $R$.
 \end{proof}
+
+In order to show that the \kl{equivariant ideal membership problem} is
+undecidable, it is therefore enough to show that the \kl{monomial reachability
+problem} is undecidable. To that end, we will encode the Halting problem of a
+Turing machine. There are two main obstacles to overcome: first, the
+reversibility of the rewriting system, which can be (partially) solved by
+considering \emph{reversible} Turing machines; and second, the fact that the
+configurations of the Turing machine cannot staightforwardly be encoded as
+monomials due to the commutativity of the multiplication.
+
+
+\subsection{Interpreting Paths}
+\label{subsec:paths}
+
+In this section, we will assume that the set of indeterminates $\Indets$
+contains an \intro(of){infinite path} $P \defined \seqof{x_i}[i \in \N]
+\subseteq \Indets$, that is, a set of indeterminates such that $\group$ acts on
+$\Indets$ as a translation of the indices. Formally, we require that, for all
+$\gelem \in \group$ and for all segments $J \defined [k,l] \subfin \N$
+such that $\gelem \cdot x_j \subseteq P$ for all $j \in J$, there exists $n \in
+\N$ such that $\gelem \cdot x_j = x_{j + n}$ for all $j \in J$ ; and there
+exists a $\gelem \in \group$ such that $\gelem \cdot x_i = x_{i + 1}$ for all
+$i \in \N$.
+
+Let us argue that the existence of such an infinite path $P$ is a sufficient
+condition to ensure that $(\mon{\Indets}, \gdivleq)$ is not a
+\kl{well-quasi-ordering}, hence that the hypothesis of our main 
+\cref{thm:decide-equiv-ideal-mem}
+is
+not satisfied.
+
+\begin{lemma}
+  If $\Indets$ contains an infinite path $P$, then the
+  $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
+\end{lemma}
+\begin{proof}
+  Consider the monomials
+  $x_0^2 x_1 \cdots x_n x_{n+1}^2$ for all $n \in \N$.
+  They are pairwise incomparable with respect to $\gdivleq$,
+  hence form an infinite antichain.
+\end{proof}
+
 
 \paragraph{Reversible Turing Machines}
 \AP In the presence of an infinite path, one can easily encode words, hence
@@ -289,32 +268,30 @@ The second remark is that the encoding of $u$ and $v$ can be interleaved
 instead of using the same variables for both and distinguishing them
 by their color. 
 
+\todo[inline]{There is a problem here with the encoding of a binary alphabet.
+  Indeed, even with nice prefix codes and such. The key is to use a \emph{fixed
+  size} encoding for letters, with well delimited markers. This uses now four
+  exponents: 0, 1 for blanks, 2, 3 for a and b, and 4 for the block delimiter.}
 
 
 
-\subsection{Infinite Vector Space}
+\subsection{Infinite Dimensional Vector Space}
 \label{subsec:vector}
 
-Let us consider an infinite set $\mathbb{A}$ of atoms with equality, and the
-infinite dimensional vector space $\mathbb{V}$ composed of equivariant
-functions from $\mathbb{A}$ to $\K$. We set $\Indets = \mathbb{V}$, and
-$\group$ is the group of all permutations of $\mathbb{A}$
-lifted to $\mathbb{V}$.
+\AP
+In this section, we will show that the \kl{equivariant ideal membership
+problem} is undecidable for the \intro{infinite dimensional vector space}
+$\Indets \defined \mathbb{V}$, that is, an infinite dimensional vector space
+over a field, where the group $\group$ acting on $\Indets$ is the group of
+linear automorphisms of $\mathbb{V}$.
 
-Let us try to encode a path inside this structure. To that end, let us name the
-elements of $\mathbb{A}$ as $a_i$ for $i \in \N$, and let us write $\delta_i$
-for the function that maps $a_i$ to $1$ and all other atoms to $0$. We set $x_i
-\defined \delta_i + \delta_{i+1}$, and $P \defined \seqof{x_i}[i \in \N]$.
+Note that it is unclear whether the \kl{infinite dimensional vector space}
+contains an \kl(of){infinite path} $P$ as defined in
+\cref{subsec:paths}. However, we can
+still show that the \kl{equivariant ideal membership problem} is undecidable in
+this case, again by encoding the reversible Turing machine Halting problem in
+the \kl{monomial reachability problem}.
 
-Let us now consider an element $\gelem \in \group$ such that $\gelem \cdot P
-\subseteq P$. Then, $x_0 = \delta_0 + \delta_1$ is mapped to some $x_n =
-\delta_n + \delta_{n+1}$, but $\gelem \cdot x_0 = \delta_{\gelem 0} +
-\delta_{\gelem 1}$, and therefore $\gelem 0 = n$ and $\gelem 1 = n + 1$. Now,
-$\gelem \cdot x_1 = \delta_{\gelem 1} + \delta_{\gelem 2} = x_k$ for some $k$.
-We conclude that $\gelem \cdot x_1 = \delta_{n + 1} + \delta_{n + 2} = x_{n +
-1}$, and by induction that $\gelem \cdot x_i = x_{i + n}$ for all $i \in \N$.
 
-As a consequence, the \kl{equivariant ideal membership problem} is undecidable
-in this setting.
 
 
