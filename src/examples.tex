@@ -1,10 +1,33 @@
 \section{Relation to Existing Results and Examples}
 \label{sec:examples}
 
-
 \paragraph{Sets with atoms.}
 
 
+\paragraph{Relational structures.} Let $\mathbb{A}$ be an infinite relational
+structure with finitely many relations. Then, one can consider the set of
+polynomials $\poly{\K}{\mathbb{A}}$, where indeterminates are elements of the
+universe of $\mathbb{A}$. The group of all automorphisms of $\mathbb{A}$ (i.e.,
+bijections of the universe that preserve the relations) acts on
+$\poly{\K}{\mathbb{A}}$ by permuting the indeterminates.
+
+Natural examples are polynomials whose indeterminates are indexed by the
+natural numbers (with inequality), or the rationals (with inequality). In this
+setting, \kl{effective oligomorphcity} means that \todo{do it}. The fact that
+$(\mon{\mathbb{A}}, \gdivleq)$ is a well-quasi-ordering corresponds to ordering
+\emph{finite substructures} of $\mathbb{A}$ by the \emph{labelled induced
+substructure} relation, and asking whether the class obtained is
+well-quasi-ordered. This is a well-studied question in graph theory, where a
+conjecture of Pouzet states that this holds with two labels if and only if it
+holds for every ordinal. In particular, for such structures, it is therefore
+conjectured that $(\mon{\Indets}, \gdivleq)$ is a well-quasi-ordering if and
+only if $(\mon[\om \ordplus \ordfin{1}]{\Indets}, \gdivleq)$, $(\mon[\om
+\ordplus \om]{\Indets}, \gdivleq)$, and $(\mon[\om^2]{\Indets}, \gdivleq)$ are
+well-quasi-orderings too.
+
 \paragraph{Decision procedures.}
 
-
+\begin{itemize}
+  \item zeroness of polynomial automata
+  \item etc
+\end{itemize}
