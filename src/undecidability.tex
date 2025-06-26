@@ -29,11 +29,10 @@ following \cref{ex:non-wqo-undecidable}.
 
 The undecidability results we will present in this section regarding the
 \kl{equivariant ideal membership problem} will use the polynomials in a very
-limited way: we will only need to consider \emph{monomials}, and we only need to
-consider exponents that are in $\set{0,1,2}$.
-Before going into the details of our reductions, let us first introduce 
-an intermediate problem that will be easier to work with: the 
-\kl{monomial reachability problem}.
+limited way: we will only need to consider \emph{monomials}, and there will
+even be a bound on the maximal exponent used. Before going into the details of
+our reductions, let us first introduce an intermediate problem that will be
+easier to work with: the \kl{monomial reachability problem}.
 
 \begin{definition}
   \label{def:mon-rewrite-system}
@@ -114,7 +113,166 @@ reversibility of the rewriting system, which can be (partially) solved by
 considering \emph{reversible} Turing machines; and second, the fact that the
 configurations of the Turing machine cannot staightforwardly be encoded as
 monomials due to the commutativity of the multiplication.
+To overcome the second issue, we will use the following notion of 
+\kl{word encoding}.
 
+\newcommand{\wenc}[1]{\llbracket #1 \rrbracket}
+
+\begin{definition}
+  \label{def:word-encoding}
+  Let $\Sigma$ be a finite alphabet.
+  A \intro{word encoding} is a function $\wenc{\cdot} \colon \Sigma^* \to \mon{\Indets}$ such
+  that:
+  \begin{enumerate}
+    \item For all words $u, v \in \Sigma^*$,
+      there exists a $\gelem \in \group$ such
+      that $\pi \cdot \wenc{u} \divleq \wenc{v}$
+      if and only if
+      there exists $x, y \in \Sigma^*$ such that 
+      $x u y = v$. 
+    \item 
+      Furthermore, for every other word
+      $u'$ of the same size as $u$,
+      $\wenc{x u' y} (\gelem \cdot \wenc{u}) = \wenc{x u y} (\gelem \cdot \wenc{u'})$.
+  \end{enumerate}
+\end{definition}
+
+The first condition of \cref{def:word-encoding} ensures that
+the \kl{word encoding} related correctly the \emph{infix} relation on words
+when considering divisibility up-to the group action $\group$. The second
+condition ensures that the \emph{substitutions} of infixes (having the same
+size) can be modelled using \kl{monomial rewriting}. It is therefore
+straightforward to simulate the runs of reversible Turing machines using
+\kl{monomial rewriting} when one has access to a suitable \kl{word encoding}.
+
+\begin{remark}
+  \label{rem:alphabet-size}
+  If there exists a \kl{word encoding} $\wenc{\cdot}$ for a binary alphabet $\Sigma$,
+  then one can construct a \kl{word encoding} for any finite alphabet $\Sigma'$
+  using a suitable binary encoding. The only difficulty is to ensure unique 
+  parsability of the encoding, which can be done using unambiguous codes.
+\end{remark}
+
+\begin{remark}
+  \label{rem:not-wqo}
+  If there exists a \kl{word encoding} for a binary alphabet $\Sigma$, then
+  $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
+  Indeed, the infix ordering relation on words over a binary alphabet is
+  not a \kl{well-quasi-ordering}, as shown by the infinite antichain
+  $\setof{ a b^n a}{n \in \N }$,
+  and the \kl{word encoding} $\wenc{\cdot}$ is an order embedding of
+  the infix ordering relation on words over $\Sigma$ into $(\mon{\Indets}, \gdivleq)$.
+\end{remark}
+
+
+Because of \cref{rem:alphabet-size}, we will be interested in the
+existence of \kl{word encodings} for arbitrary finite alphabets, which is the
+same as the existence of a \kl{word encoding} for a binary alphabet. Given a
+reversible Turing machine $M$ with a finite set $Q$ of states and tape alphabet
+$\Sigma$, we will consider the following alphabet $\Gamma \defined \set{
+\triangleleft, \triangleright } \times \set{ \text{pre}, \text{run},
+\text{post} } \uplus Q \uplus \Sigma \uplus \set{ \square}$. The letter
+$\square$ is a blank symbol, and the letters $\triangleleft$ and
+$\triangleright$ are used to delimit the beginning and the end of the tape,
+with some extra ``phase information''.
+
+\begin{lemma}
+  \label{lem:rev-turing-machine}
+  There exists a
+  \kl{monomial rewrite system} $R_M$ such that the following
+  are equivalent for every $n \geq 1$:
+  \begin{enumerate}
+    \item $\wenc{ \triangleright^{\text{pre}} \square^n 
+                  \triangleleft^{\text{pre}}
+     } \leftrightarrow_{R_M}^* 
+     \wenc{ \triangleright^{\text{post}} \square^n 
+                  \triangleleft^{\text{post}} }$,
+      \item $M$ halts on the empty word using a tape bounded by $n-1$ cells.
+  \end{enumerate}
+  Furthermore, every monomial that is 
+  reachable from $\wenc{ \triangleright^{\text{pre}} \square^n \triangleleft^{\text{pre}} }$
+  or $\wenc{ \triangleright^{\text{post}} \square^n \triangleleft^{\text{post}} }$
+  is the image of a word of the form
+  $\wenc{\triangleright^{\text{run}} u \triangleright^{\text{run}}}$  
+  where $u \in (Q \uplus \Sigma \uplus \square)^n$.
+\end{lemma}
+\begin{proof}
+  The rewrite system simply acts on the tape of the reversible Turing machine 
+  using blank symbols. Because transisions of the reversible Turing machine
+  are substitutions of strings having the same size if one does not create new
+  tape cells, the rewriting system can straigthforwardly simulate the 
+  substitutions because of \cref{def:word-encoding}.
+  To this monomial rewriting system, we add two rules,
+  respectively of the form
+  $\wenc{ \triangleright^{\text{pre}} \square^n \triangleleft^{\text{pre}} }
+  \leftrightarrow_{R_M}^*
+  \wenc{ \triangleright^{\text{run}} q_0 \square^{n-1} \triangleleft^{\text{run}} }$
+  and 
+  $\wenc{ \triangleright^{\text{post}} \square^n \triangleleft^{\text{post}} }
+  \leftrightarrow_{R_M}^*
+  \wenc{ \triangleright^{\text{run}} q_f \square^{n-1} \triangleleft^{\text{run}} }$,
+  where $q_0$ is the initial state of the Turing machine $M$ and $q_f$ is its
+  final state.
+  This is not problematic because one can 
+  simply write $\wenc{\triangleright^{\text{run}} q_0} (\gelem \cdot \wenc{\triangleleft^{\text{run}}})$
+  for a suitable $\gelem \in \group$, in order
+  to ignore the number of blank symbols in the tape and assume that the reversible Turing machine
+  starts with a clean tape and ends with a clean tape.
+\end{proof}
+
+\begin{lemma}
+  \label{lem:tape-creation}
+  There exists a \kl{monomial rewrite system} $R_\text{pre}$
+  such that for every monomial $\monelt \in \mon{\Indets}$, the following are
+  equivalent:
+  \begin{enumerate}
+    \item $\wenc{ \triangleright^{\text{pre}} \square \triangleleft^{\text{pre}}} 
+      \leftrightarrow_{R_\text{pre}}^* 
+      \monelt$
+    \item there exists $n \in \N$ such that
+      $\monelt = \wenc{ \triangleright^{\text{pre}} \square^n 
+                        \triangleleft^{\text{pre}} }$.
+  \end{enumerate}
+  Similarly, there exists a \kl{monomial rewrite system} $R_\text{post}$
+  with analogue properties.
+\end{lemma}
+\begin{proof}
+  The rewrite system is going to have two phases.
+  In a first phase, we will consider the rules
+  $\wenc{ \triangleleft^{\text{pre}} } \leftrightarrow_{R_\text{pre}}
+   \wenc{ \square \triangleleft^{\text{pre}} }$.
+  This will create a long \emph{tape like} monomial.
+  However, there is no guarantee that the reachable monomials are linear, i.e., that we do not
+  reuse the same indeterminate twice in our reduction.
+  To ensure that we do obtain a correct monomial, we will implement the 
+  Floyd cycle-finding algorithm, which uses two pointers moving at different speeds.
+  To that end, we will use two new blank symbols $\square_1$ and $\square_2$,
+  and the rules 
+  $\wenc{ \square_1 \square } ( \gelem \cdot \wenc{ \square_2 \square \square })
+  \leftrightarrow_{R_\text{pre}}
+  \wenc{ \square \square_1 } (\gelem \cdot \wenc{ \square \square \square_2 })$,
+  where $\pi$ is a permutation of the indeterminates that ensures that the
+  indetermitates of the two words are distinct.
+  Finally, one adds the possibility to switch to the sencond phase,
+  and end the second phase when pointer $\square_2$ reaches the end of the tape.
+\end{proof}
+
+\begin{corollary}
+  \label{cor:undecidability}
+  Let $\Indets$ be a set of indeterminates, and let $\group$ be a group acting
+  on $\Indets$ such that the action is effective. If there exists a
+  \kl{word encoding} for a binary alphabet, then the \kl{equivariant ideal
+  membership problem} is undecidable.
+\end{corollary}
+\begin{proof}
+  It suffices to combine the rewriting systems $R_M$, $R_\text{pre}$ and 
+  $R_\text{post}$ by taking their union.
+\end{proof}
+
+Now that we have obtained a general proof scheme to obtain the undecidability
+of the \kl{equivariant ideal membership problem}, let us illustrate more
+concrete conditions on the group action $\group$ that allow constructing such
+\kl{word encodings}.
 
 \subsection{Interpreting Paths}
 \label{subsec:paths}
@@ -126,154 +284,49 @@ $\Indets$ as a translation of the indices. Formally, we require that, for all
 $\gelem \in \group$ and for all segments $J \defined [k,l] \subfin \N$
 such that $\gelem \cdot x_j \subseteq P$ for all $j \in J$, there exists $n \in
 \N$ such that $\gelem \cdot x_j = x_{j + n}$ for all $j \in J$ ; and there
-exists a $\gelem \in \group$ such that $\gelem \cdot x_i = x_{i + 1}$ for all
+exists a $\gelem_{+1} \in \group$ such that $\gelem_{+1} \cdot x_i = x_{i + 1}$ for all
 $i \in \N$.
 
-Let us argue that the existence of such an infinite path $P$ is a sufficient
-condition to ensure that $(\mon{\Indets}, \gdivleq)$ is not a
-\kl{well-quasi-ordering}, hence that the hypothesis of our main 
-\cref{thm:decide-equiv-ideal-mem}
-is
-not satisfied.
+Let us now define a \kl{word encoding} for a binary alphabet $\Sigma =
+\set{a,b}$, leveraging the existence of such an \kl(of){infinite path} $P$. We
+define $\wenc{\varepsilon} \defined 1$, and $\wenc{a u} \defined x_0^{3} x_1^{2} x_2 x_3^3
+(\gelem_{+4} \cdot \wenc{u})$ and
+$\wenc{b u} \defined x_0^{2} x_1^{3} x_2^2 x_3 (\gelem_{+4} \cdot \wenc{u})$ for all
+$u \in \Sigma^*$. 
 
 \begin{lemma}
-  If $\Indets$ contains an infinite path $P$, then the
-  $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
+  \label{lem:word-encoding-paths}
+  The function $\wenc{\cdot}$ defined above is a \kl{word encoding} for the
+  binary alphabet $\Sigma = \set{a,b}$.
 \end{lemma}
 \begin{proof}
-  Consider the monomials
-  $x_0^2 x_1 \cdots x_n x_{n+1}^2$ for all $n \in \N$.
-  They are pairwise incomparable with respect to $\gdivleq$,
-  hence form an infinite antichain.
+  Let $u, v \in \Sigma^*$ be two words.
+  Assume that there exists $x,y$ such that $x u y = v$.
+  Then, it as clear that $\wenc{v} = \monelt (\gelem_{+n} \cdot \wenc{u})$ for some
+  $n \in \N$, hence $\wenc{u} \gdivleq \wenc{v}$.
+  Furthermore, if $u'$ is another word of the same size as $u$, then
+  $\wenc{x u' y} = \monelt' (\gelem_{+n} \cdot \wenc{u'})$ for the same $n \in \N$,
+  hence
+  $\wenc{x u' y} (\gelem_{+n} \cdot \wenc{u}) = \wenc{x u y} (\gelem_{+n} \cdot \wenc{u'})$.
+
+  Conversely,
+  assume that $\wenc{u} \gdivleq \wenc{v}$.
+  Then, there exists a $\gelem \in \group$ such that
+  $\wenc{v} = \monelt (\gelem \cdot \wenc{u})$ for some monomial $\monelt$.
+  In particular, $\gelem$ maps the elements of $\wenc{u}$ to $P$,
+  hence, there exists $n \in \N$ such that
+  $\gelem \cdot x_i = x_{i + n}$ for all $i$ such that $x_i$ appears in $\wenc{u}$.
+  It follows that 
+  $\wenc{v} = \monelt (\gelem_{+n} \cdot \wenc{u})$.
+
+  Now, because of the exponents in the definition of $\wenc{\cdot}$, the $n$
+  must be a multiple of $4$, and the exponents of the indeterminates in every
+  block of four consecutive indeterminates of the form $x_i^3 x_{i+1}^\alpha
+  x_{i+2}^\beta x_{i+3}^3$ must be such that $(\alpha, \beta) \in \set{(2,1),
+  (1,2)}$. It follows that the letters $a$ and $b$ must be the same in the 
+  words $u$ and the word $v[n / 4, n/ 4 + |u| - 1]$. In particular,
+  there exists $x, y \in \Sigma^*$ such that $x u y = v$.
 \end{proof}
-
-
-\paragraph{Reversible Turing Machines}
-\AP In the presence of an infinite path, one can easily encode words, hence
-configurations of a Turing machine, as monomials. However, because the
-rewriting systems are reversible by nature, it will be easier for us to encode
-the Halting problem for \emph{reversible} Turing machines \cite{BENN73}.
-Given a reversible Turing machine $M$ over a binary alphabet, we will
-create the following \kl{monomial rewrite system} $R_M$, composed of
-four distinct phases:
-\begin{enumerate}
-  \item \label{item:undecidability-1}
-    \textbf{Tape creation.} This phase creates a long monomial 
-    of the form $x_0^{\mathsf{as}} x_1^{\mathsf{1}} \cdots x_{n-1}^{1} x_n^{\mathsf{ac}}$.
-    It is obtained via rules of the form
-    $x_0^{\mathsf{as}} x_i^{\mathsf{ac}} \leftrightarrow x_0^{\mathsf{as}} x_i^{1} x_{i+1}^{\mathsf{ac}}$
-  \item \label{item:undecidability-2}
-    \textbf{Linearity check.}
-    This phase ensures that the tape is a long path, i.e., that the tape creation
-    did not introduce a loop by reusing a variable name twice.
-    It does so by using the well-known \emph{Floyd cycle-finding algorithm},
-    which uses two pointers moving at different speeds.
-    The two pointers are represented by exponents $\mathsf{bc1}$ and $\mathsf{bc2}$,
-    and the rules are of the form
-    $x_0^{\mathsf{bs}} x_i^{\mathsf{bc1}} x_{i+1}^1 x_j^{\mathsf{bc2}} x_{j+1}^1 x_{j+2}^1 x_n^{\mathsf{be}} \leftrightarrow 
-     x_0^{\mathsf{bs}} x_i^{1} 
-     x_{i+1}^{\mathsf{bc1}}
-     x_j^{1} 
-     x_{j+1}^{1} 
-     x_{j+2}^{\mathsf{bc2}}
-     x_{n}^{\mathsf{be}}$,
-     whenever $x_j \neq x_i$.
-  \item \label{item:undecidability-3}
-    \textbf{Machine simulation.}
-    This phase simulates the reversible Turing machine $M$ over the input monomial
-    by using rules of the form
-    $x_0^{\mathsf{cs}} x_0^{q} x_{i-1}^{a} x_i^{b} x_{i}^{\mathsf{cc}} x_{i+1}^{c}
-    \leftrightarrow
-    x_0^{\mathsf{cs}} x_0^{q'} x_{i-1}^{a} x_i^{b} x_{i}^{\mathsf{cc}} x_{i+1}^{c'}$,
-    where $q,q'$ are the states of the Turing machine, and $a,b,c$ are letters
-    on the tape.
-
-  \item \label{item:undecidability-4}
-    \textbf{Cleanup.}
-    This phase cleans up the monomial, eating every variable that is 
-    not the first one.
-    $x_0^{\mathsf{ds}} y \leftrightarrow x_0^{\mathsf{ds}}$.
-\end{enumerate}
-Note that because of the usage of a distinguishing colour on the variable $x_0$,
-the four phases described here cannot interact. Let us now add 
-the following \emph{inter-phase} rules to the system:
-\begin{enumerate}
-  \setcounter{enumi}{4}
-  \item \label{item:undecidability-5}
-    \textbf{Tape creation to linearity check.}
-    This single rule allows to non-deterministically
-    switch from the tape creation phase to the linearity check phase.
-    It is a rule of the form
-    $x_0^{\mathsf{as}} x_1^{1} x_2^{1} x_n^{\mathsf{ac}} 
-    \leftrightarrow
-    x_0^{\mathsf{bs}} x_1^{\mathsf{bc1}} x_2^{\mathsf{bc2}} x_n^{\mathsf{be}}$.
-  \item \label{item:undecidability-6}
-    \textbf{Linearity check to machine simulation.}
-    This rule allows switching from the linearity check phase to the machine
-    simulation phase, and is of the form
-    $x_0^{\mathsf{bs}} x_1 x_2 x_3 x_n^{\mathsf{bc2}} x_n^{\mathsf{be}} \leftrightarrow 
-    x_0^{\mathsf{cs}} x_0^{q_0} x_1 x_2 x_2^{\mathsf{cc}} x_3 x_n^{\mathsf{ce}}$,
-    where $q_0$ is the initial state of the Turing machine.
-  \item \label{item:undecidability-7}
-    \textbf{Machine simulation to cleanup.}
-    This rule allows switching from the machine simulation phase to the cleanup
-    phase, and is of the form
-    $x_0^{\mathsf{cs}} x_0^{q_f}  x_n^{\mathsf{cc}} \leftrightarrow 
-    x_0^{\mathsf{ds}}$.
-\end{enumerate}
-
-\begin{lemma}
-  \label{lem:undecidability}
-  Let $M$ be a reversible Turing machine, and let $R_M$ be the monomial rewrite
-  system defined above. Then, 
-  $x_0^{\mathsf{as}} x_1^{\mathsf{ac}} \leftrightarrow_{R_M}^* x_0^{\mathsf{ds}}$ if and only if
-  $M$ halts on the empty word,
-\end{lemma}
-\begin{proof}
-
-  The proof will be done by first showing that every rewriting from
-  $x_0^{\mathsf{as}}$ to $x_0^{\mathsf{ds}}$ can be decomposed into four
-  phases, and that each of these phases is correct. Note that the phase
-  \ref{item:undecidability-1} creates a long sequence of variables by
-  definition. And that the phase \ref{item:undecidability-2} is correct because
-  of the correctness of the Floyd cycle-finding algorithm, but also is
-  \emph{deterministic} ind \emph{co-deterministic} since it only moves pointers
-  on the monomials. As a consequence, \ref{item:undecidability-2} does not
-  interact with the other phases \ref{item:undecidability-1} and
-  \ref{item:undecidability-3}, even in the presence of
-  \ref{item:undecidability-5} and \ref{item:undecidability-6}.
-
-  Similarly, the phase \ref{item:undecidability-3} is deterministic and
-  co-deterministic, hence cannot influence the shape of the monomial,
-  and only changes the (positive) exponents of its variables.
-
-  Finally, let us remark that to enter phase \ref{item:undecidability-4}, one
-  must have reached an accepting state in phase \ref{item:undecidability-3}.
-
-  Hence, the only way to reach $x_0^{\mathsf{ds}}$ is to have reached an accepting
-  state of the reversible Turing machine $M$, by simulating its computation
-  starting from the empty word, over some (linear) tape.
-
-  Conversely, if $M$ halts on the empty word, then there exists a maximal
-  size for the working tape of $M$, and one can go through the four phases
-  described above to reach $x_0^{\mathsf{ds}}$.
-\end{proof}
-
-\paragraph{Getting rid of colors.}
-Now, let us argue that one can get rid of colors by using 
-finitely many numbers to encode them. 
-The first remark is that some colors (most) appear only once 
-in the monomial and can be replaced by a unique (big) number.
-The second remark is that the encoding of $u$ and $v$ can be interleaved
-instead of using the same variables for both and distinguishing them
-by their color. 
-
-\todo[inline]{There is a problem here with the encoding of a binary alphabet.
-  Indeed, even with nice prefix codes and such. The key is to use a \emph{fixed
-  size} encoding for letters, with well delimited markers. This uses now four
-  exponents: 0, 1 for blanks, 2, 3 for a and b, and 4 for the block delimiter.}
-
-
 
 \subsection{Infinite Dimensional Vector Space}
 \label{subsec:vector}
@@ -285,13 +338,43 @@ $\Indets \defined \mathbb{V}$, that is, an infinite dimensional vector space
 over a field, where the group $\group$ acting on $\Indets$ is the group of
 linear automorphisms of $\mathbb{V}$.
 
-Note that it is unclear whether the \kl{infinite dimensional vector space}
-contains an \kl(of){infinite path} $P$ as defined in
+It is unclear whether the \kl{infinite dimensional vector space} contains an
+\kl(of){infinite path} $P$ as defined in
 \cref{subsec:paths}. However, we can
-still show that the \kl{equivariant ideal membership problem} is undecidable in
-this case, again by encoding the reversible Turing machine Halting problem in
-the \kl{monomial reachability problem}.
+construct a \kl{word encoding} for a binary alphabet $\Sigma = \set{a,b}$. To
+that end, let us consider an infinite sequence $v_0, v_1, v_2, \ldots$ of
+vectors in $\mathbb{V}$ such that the set $\set{v_0, v_1, v_2, \ldots}$ is
+linearly independent, which is possible precisely because $\mathbb{V}$ is
+infinite dimensional. Let us write $\gelem_{+1} \in \group$ for the linear
+automorphism that sends $v_i$ to $v_{i + 1}$ for all $i \in \N$, and acts
+trivially on a supplement of the subspace spanned by $\set{v_0, v_1, v_2,
+\ldots}$. We then define $\wenc{\varepsilon} \defined v_0^4$, $\wenc{a u}
+\defined v_0^4 (v_0 + v_1)^2 v_1^4 (v_1 + v_2) (\gelem_{+2} \cdot \wenc{u})$
+and $\wenc{b u} \defined v_0^4 (v_0 + v_1)^1 v_1^4 (v_1 + v_2)^2 (\gelem_{+2}
+\cdot \wenc{u})$.
 
-
-
-
+\begin{lemma}
+  \label{lem:word-encoding-vector}
+  The function $\wenc{\cdot}$ defined above is a \kl{word encoding} for the
+  binary alphabet $\Sigma = \set{a,b}$.
+\end{lemma}
+\begin{proof}
+  The proof is similar to the one of \cref{lem:word-encoding-paths}.
+  The only difficulty is to ensure that if a linear automorphism $\gelem$ maps
+  $\wenc{u}$ to a subset of variables in $\wenc{v}$ for some $u,v$, then
+  it acts as a translation of the indices on the vectors $v_i$ that appear in
+  $u$.
+  The reason is that the indeterminates $v_i$ are the only ones that appear with
+  exponent $4$ in the definition of $\wenc{\cdot}$, hence $\gelem$ must 
+  send all the $v_i's$ that appear in $\wenc{u}$ to some $v_j$'s that appear 
+  in $\wenc{v}$.
+  Assume that $\gelem \cdot v_0 = v_k$ for some $k \in \N$,
+  and that $\gelem \cdot v_1 = v_l$ for some $l \in \N$.
+  Then, 
+  $\gelem \cdot (v_0 + v_1) = v_k + v_l$, or the only indeterminates 
+  that are sums of two vectors in $\wenc{v}$ are of the form
+  $v_j + v_{j+1}$ for some $j \in \N$.
+  We conclude that $l = k + 1$.
+  Similarly, one can prove that $\gelem \cdot v_2 = v_{k + 2}$, and
+  by induction conclude.
+\end{proof}
