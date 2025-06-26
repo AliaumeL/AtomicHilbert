@@ -5,7 +5,7 @@ author:
   - name: Arka Ghosh
     email: a.ghosh@uw.edu.pl
     initials: A. Ghosh
-    affiliation: 
+    affiliation:
       - name: Université de Bordeaux
         country: France
         city: Bordeaux
@@ -23,7 +23,7 @@ author:
   - name: Aliaume Lopez
     initials: A. Lopez
     email: ad.lopez@uw.edu.pl
-    affiliation: 
+    affiliation:
       name: University of Warsaw
       country: Poland
       city: Warsaw
@@ -44,8 +44,15 @@ abstract: |
   method in the presence of infinite data structures with symmetries.
 classification:
   ccdesc:
-    - Mathematics of computing~Algebra~Polynomials
-    - Theory of computation~Logic and verification~Model checking
+    - desc: "Mathematics of computing Computations on polynomials"
+      priority: 500
+      id: "10002950.10003714.10003715.10003720"
+    - desc: "Mathematics of computing Gröbner bases and other special bases"
+      priority: 500
+      id: "10002950.10003714.10003715.10003720.10003747"
+    - id: "10003752.10003766.10003770"
+      priority: 500
+      desc: "Theory of computation Automata over infinite objects"
 keywords:
   - equivariant ideal
   - Hilbert basis

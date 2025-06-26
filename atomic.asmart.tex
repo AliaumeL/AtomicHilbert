@@ -8,12 +8,16 @@
 %   in the `src` directory.
 % - If you want to update the template itself (e.g., change the layout), please
 %   edit the `templates/asmart/asmart-small.tex` file instead.
-\documentclass[acmsmall,review,]{acmart}
+\documentclass[acmsmall,screen,review,]{acmart}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-\newtheorem{assumption}{Assumption}
+\AtEndPreamble{%
+\theoremstyle{acmdefinition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+}
 
 \setcopyright{acmlicensed}
 \copyrightyear{2018}
@@ -61,6 +65,17 @@
 \Crefname{assumption}{Assumption}{Assumptions}
 \usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
+%\definecolor[named]{ACMBlue}{cmyk}{1,0.1,0,0.1}
+%\definecolor[named]{ACMYellow}{cmyk}{0,0.16,1,0}
+%\definecolor[named]{ACMOrange}{cmyk}{0,0.42,1,0.01}
+%\definecolor[named]{ACMRed}{cmyk}{0,0.90,0.86,0}
+%\definecolor[named]{ACMLightBlue}{cmyk}{0.49,0.01,0,0}
+%\definecolor[named]{ACMGreen}{cmyk}{0.20,0,1,0.19}
+%\definecolor[named]{ACMPurple}{cmyk}{0.55,1,0,0.15}
+%\definecolor[named]{ACMDarkBlue}{cmyk}{1,0.58,0,0.21}
+
+\knowledgestyle{intro notion}{color={ACMDarkBlue}, emphasize}
+\knowledgestyle{notion}{color={B1}}
 
 
 % Tables 
@@ -94,9 +109,16 @@
 \input{lib/maths}
 \input{lib/knowledges.kl}
 
+% sample knowledge
+\knowledge{notion}
+ | kl-usage
+
 \begin{document}
 
-\title[Equivariant Gröbner bases]{Computability of Equivariant Gröbner bases}
+\title[Equivariant Gröbner bases]{Computability of Equivariant Gröbner bases \\
+       main ce39c6813c8c04e82e3f2f3a1e90487139789480 \\
+       2025-06-26 15:10:58 +0200
+}
 
 
     \author{Arka Ghosh}
@@ -130,41 +152,36 @@
     Polynomials with infinite number of variables do not have the Hilbert basis property. However, if the variables are considered up to the action of a group, one can focus on the equivariant ideals, for which it has recently been proven that they do have the Hilbert basis property, under mild assumptions on the group action. We extend this result by showing that the ideal membership problem (that is, given a polynomial, does it belong to a given equivariant ideal) is decidable under similar assumptions. This is significant because it paves the way towards decision procedures based on the Hilbert method in the presence of infinite data structures with symmetries.
 \end{abstract}
 
+
+
 \begin{CCSXML}
 <ccs2012>
- <concept>
-  <concept_id>00000000.0000000.0000000</concept_id>
-  <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
-  <concept_significance>500</concept_significance>
+  <concept>
+  <concept_id>10002950.10003714.10003715.10003720</concept_id>
+  <concept_desc>Mathematics of computing Computations on polynomials</concept_desc>
+  <concept_significance></concept_significance>
  </concept>
- <concept>
-  <concept_id>00000000.00000000.00000000</concept_id>
-  <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
-  <concept_significance>300</concept_significance>
+  <concept>
+  <concept_id>10002950.10003714.10003715.10003720.10003747</concept_id>
+  <concept_desc>Mathematics of computing Gröbner bases and other special bases</concept_desc>
+  <concept_significance></concept_significance>
  </concept>
- <concept>
-  <concept_id>00000000.00000000.00000000</concept_id>
-  <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
-  <concept_significance>100</concept_significance>
+  <concept>
+  <concept_id>10003752.10003766.10003770</concept_id>
+  <concept_desc>Theory of computation Automata over infinite objects</concept_desc>
+  <concept_significance></concept_significance>
  </concept>
- <concept>
-  <concept_id>00000000.00000000.00000000</concept_id>
-  <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
-  <concept_significance>100</concept_significance>
- </concept>
-</ccs2012>
+ </ccs2012>
 \end{CCSXML}
 
-\ccsdesc[500]{Do Not Use This Code~Generate the Correct Terms for Your Paper}
-\ccsdesc[300]{Do Not Use This Code~Generate the Correct Terms for Your Paper}
-\ccsdesc{Do Not Use This Code~Generate the Correct Terms for Your Paper}
-\ccsdesc[100]{Do Not Use This Code~Generate the Correct Terms for Your Paper}
+\ccsdesc[500]{Mathematics of computing Computations on polynomials}
+\ccsdesc[500]{Mathematics of computing Gröbner bases and other special bases}
+\ccsdesc[500]{Theory of computation Automata over infinite objects}
 
 %%
 %% Keywords. The author(s) should pick words that accurately describe
 %% the work being presented. Separate the keywords with commas.
-\keywords{Do, Not, Us, This, Code, Put, the, Correct, Terms, for,
-  Your, Paper}
+\keywords{equivariant ideal, Hilbert basis, ideal membership problem, orbit finite, oligomorphic, well-quasi-ordering}
 
 \received{20 February 2007}
 \received[revised]{12 March 2009}
@@ -175,22 +192,22 @@
 %% information and builds the first part of the formatted document.
 \maketitle
 
+\klogo\ This document uses \href{https://ctan.org/pkg/knowledge}{knowledge}:
+\kl[kl-usage]{notion} points to its \intro[kl-usage]{definition}. 
+
 % Include the content of the paper
 \input{src/intro.tex}
 \input{src/preliminaries.tex}
 \input{src/weakgb.tex}
-
-\input{src/algorithm.tex}
 \input{src/fullbasis.tex}
 \input{src/undecidability.tex}
 \input{src/examples.tex}
-\input{src/strong.tex}
-\input{src/colourful.tex}
 \input{src/conclusion.tex}
 
 % Include acknowledgements
 \begin{acks}
 Arka Ghosh was supported by the Polish National Science Centre (NCN) grant ``Linear algebra in orbit-finite dimension'' (2022/45/N/ST6/03242), the SAIF project, funded by the ``France 2030'' government investment plan managed by the French National Research Agency, under the reference ANR-23-PEIA-0006, and by the CNRS IRP Le Trójkąt project for collaboration between France and Poland.
+
 Aliaume Lopez was supported by the Polish National Science Centre (NCN) grant ``Polynomial finite state computation'' (2022/46/A/ST6/00072).
 \end{acks}
 
@@ -200,6 +217,8 @@ Aliaume Lopez was supported by the Polish National Science Centre (NCN) grant ``
 
 % If there are any appendices, we include them here.
 \appendix
+\input{src/algorithm.tex}
 \input{src/appendix.tex}
-%
+
+
 \end{document}

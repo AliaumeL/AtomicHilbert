@@ -8,12 +8,16 @@
 %   in the `src` directory.
 % - If you want to update the template itself (e.g., change the layout), please
 %   edit the `templates/asmart/asmart-small.tex` file instead.
-\documentclass[acmsmall,$if(review)$anonymous,$endif$$if(final)$$else$review,$endif$]{acmart}
+\documentclass[acmsmall,screen,$if(review)$anonymous,$endif$$if(final)$$else$review,$endif$]{acmart}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-\newtheorem{assumption}{Assumption}
+\AtEndPreamble{%
+\theoremstyle{acmdefinition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+}
 
 \setcopyright{acmlicensed}
 \copyrightyear{2018}
@@ -63,6 +67,17 @@ $endif$
 \Crefname{assumption}{Assumption}{Assumptions}
 \usepackage[$if(draft)$composition$else$electronic$endif$,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
+%\definecolor[named]{ACMBlue}{cmyk}{1,0.1,0,0.1}
+%\definecolor[named]{ACMYellow}{cmyk}{0,0.16,1,0}
+%\definecolor[named]{ACMOrange}{cmyk}{0,0.42,1,0.01}
+%\definecolor[named]{ACMRed}{cmyk}{0,0.90,0.86,0}
+%\definecolor[named]{ACMLightBlue}{cmyk}{0.49,0.01,0,0}
+%\definecolor[named]{ACMGreen}{cmyk}{0.20,0,1,0.19}
+%\definecolor[named]{ACMPurple}{cmyk}{0.55,1,0,0.15}
+%\definecolor[named]{ACMDarkBlue}{cmyk}{1,0.58,0,0.21}
+
+\knowledgestyle{intro notion}{color={ACMDarkBlue}, emphasize}
+\knowledgestyle{notion}{color={B1}}
 
 
 % Tables 
@@ -97,6 +112,10 @@ $endfor$
 $for(libraries)$
 \input{$libraries$}
 $endfor$
+
+% sample knowledge
+\knowledge{notion}
+ | kl-usage
 
 \begin{document}
 
@@ -147,41 +166,28 @@ $else$
 $endif$
 \end{abstract}
 
+
+
 \begin{CCSXML}
 <ccs2012>
+ $for(classification.ccdesc)$
  <concept>
-  <concept_id>00000000.0000000.0000000</concept_id>
-  <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
-  <concept_significance>500</concept_significance>
+  <concept_id>$it.id$</concept_id>
+  <concept_desc>$it.desc$</concept_desc>
+  <concept_significance>$id.priority$</concept_significance>
  </concept>
- <concept>
-  <concept_id>00000000.00000000.00000000</concept_id>
-  <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
-  <concept_significance>300</concept_significance>
- </concept>
- <concept>
-  <concept_id>00000000.00000000.00000000</concept_id>
-  <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
-  <concept_significance>100</concept_significance>
- </concept>
- <concept>
-  <concept_id>00000000.00000000.00000000</concept_id>
-  <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
-  <concept_significance>100</concept_significance>
- </concept>
+ $endfor$
 </ccs2012>
 \end{CCSXML}
 
-\ccsdesc[500]{Do Not Use This Code~Generate the Correct Terms for Your Paper}
-\ccsdesc[300]{Do Not Use This Code~Generate the Correct Terms for Your Paper}
-\ccsdesc{Do Not Use This Code~Generate the Correct Terms for Your Paper}
-\ccsdesc[100]{Do Not Use This Code~Generate the Correct Terms for Your Paper}
+$for(classification.ccdesc)$
+\ccsdesc[$it.priority$]{$it.desc$}
+$endfor$
 
 %%
 %% Keywords. The author(s) should pick words that accurately describe
 %% the work being presented. Separate the keywords with commas.
-\keywords{Do, Not, Us, This, Code, Put, the, Correct, Terms, for,
-  Your, Paper}
+\keywords{$for(keywords)$$it$$sep$, $endfor$}
 
 \received{20 February 2007}
 \received[revised]{12 March 2009}
@@ -191,6 +197,9 @@ $endif$
 %% This command processes the author and affiliation and title
 %% information and builds the first part of the formatted document.
 \maketitle
+
+\klogo\ This document uses \href{https://ctan.org/pkg/knowledge}{knowledge}:
+\kl[kl-usage]{notion} points to its \intro[kl-usage]{definition}. 
 
 % Include the content of the paper
 $body$
@@ -205,6 +214,8 @@ $acknowledgements$
 $endif$
 $for(author)$
 $author.funding$
+$sep$
+
 $endfor$
 \end{acks}
 $endif$
