@@ -19,11 +19,11 @@ action of $\group$.
    $ p = \sum_{i \in I} a_i \monelt_i h_i$,
   where $a_i \in \K$, $\monelt_i \in \mon{\X}$, and $h_i \in H$ for all $i \in I$.
   The \intro{domain of the decomposition}
-  that we write $\domdec(\mathfrak{d})$ is defined as the union
+  that we write $\intro*\domdec(\mathfrak{d})$ is defined as the union
   of the domains of the polynomials $\monelt_i h_i$ for all $i \in I$.
   The \intro{leading monomial of the decomposition} is defined as
   $
-    \lmdec(\mathfrak{d}) \defined \max(\seqof{\lm(\monelt_i h_i)}[i \in I])
+    \intro*\lmdec(\mathfrak{d}) \defined \max(\seqof{\lm(\monelt_i h_i)}[i \in I])
   $.
 \end{definition}
 
@@ -109,17 +109,19 @@ with their orbits directly.
   $\gelem \in \group$ because both domains are finite.
 \end{proof}
 
-\AP
-Now that we have a quasi-ordering on polynomials, we will prove that given an
-\kl{orbit finite} set $H$ of generators, we can compute a \kl{weak equivariant
-Gröbner basis}. The computation will closely follow the classical
+\AP Now that we have a quasi-ordering on polynomials, we will prove that given
+an \kl{orbit finite} set $H$ of generators, we can compute a \kl{weak
+equivariant Gröbner basis}. The computation will closely follow the classical
 \kl{Buchberger's algorithm}. The main idea being to saturate the set of
 generators $H$ to remove some \emph{critical pairs} of the rewriting relation
-$\toeucl{H}$. Namely, given two polynomials $p$ and $q$ in $H$, we
-compute the set $\CancelPoly{p}{q}$ of cancellations between $p$ and $q$ as the
-set of polynomials of the form $r = \alpha \monelt[n] p + \beta \monelt[m] q$
-such that $\lm(r) < \max(\monelt[n] \lm(p), \monelt[m]\lm(q))$, where
-$\alpha,\beta \in \K$, and where $\monelt[n], \monelt[m] \in \mon{\X}$. 
+$\toeucl{H}$. Namely, given two polynomials $p$ and $q$ in $H$, we compute the
+set $\intro*\CancelPoly{p}{q}$ of cancellations between $p$ and $q$ as the set of
+polynomials of the form $r = \alpha \monelt[n] p + \beta \monelt[m] q$ such
+that $\lm(r) < \max(\monelt[n] \lm(p), \monelt[m]\lm(q))$, where $\alpha,\beta
+\in \K$, and where $\monelt[n], \monelt[m] \in \mon{\X}$. Let us recall that
+given two monomials $\monelt[n], \monelt[m] \in \mon{\X}$, one can compute
+$\intro*\lcm(\monelt[n], \monelt[m])$ as the least common multiple of the two
+monomials, and that this in an \kl{equivariant operation}.
 
 \begin{lemma}
   \label{lem:spoly}
@@ -129,7 +131,7 @@ $\alpha,\beta \in \K$, and where $\monelt[n], \monelt[m] \in \mon{\X}$.
   the \kl{S-polynomial} $\spoly{p}{q}$ of $p$ and $q$, defined as
   \begin{equation}
     \label{eq:spoly}
-    \spoly{p}{q} \defined
+    \intro*\spoly{p}{q} \defined
     \frac{\lcm(\lm(p), \lm(q))}{\lt(p)} \times p
     - \frac{\lcm(\lm(p), \lm(q))}{\lt(q)} \times q
     \quad .
@@ -168,7 +170,7 @@ Remark that the \kl{S-polynomial} is equivariant: if $\gelem \in \group$, then
 $\spoly{\gelem \cdot p}{\gelem \cdot q} = \gelem \cdot \spoly{p}{q}$. We are
 now ready to define our saturation algorithm. Whenever $p,q \in H$, these
 polynomials clearly belong to $\IdlGen{H}$. Given a set $H$, we write
-$\spolyset(H) \defined \bigcup_{p,q \in H} \rem{H}{\spoly{p}{q}}$.
+$\intro*\spolyset(H) \defined \bigcup_{p,q \in H} \rem{H}{\spoly{p}{q}}$.
 
 \begin{lemma}
   \label{lem:spoly-orbit-finite}

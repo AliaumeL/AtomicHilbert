@@ -9,6 +9,8 @@
 
 \knowledge{notion}
  | effectively oligomorphic
+ | effective oligomorphism
+ | effectively oligomorphically
 
 \knowledge{notion}
  | orbit finite
@@ -44,6 +46,7 @@
 
 \knowledge{notion}
  | leading monomial
+ | leading monomials
 \knowledge{notion}
  | leading coefficient
 \knowledge{notion}
@@ -148,6 +151,7 @@
  | Hilbert's basis theorem
  | Hilbert Basis Theorem
  | Hilbert Basis Property
+ | Hilbert's basis property
 
 \knowledge{notion}
  | Equivariant Hilbert basis property

@@ -30,23 +30,24 @@ monomials in $\poly{\K}{\X}$. Letters $p,q,r$ are used to denote polynomials,
 $\monelt,\monelt[n]$ are used to denote monomials, and $a,b,\alpha,\beta$ are
 used to denote coefficients in $\K$.
 
-A classical example of a \kl{WQO} is the set of monomials $\mon{\Indets}$, endowed
-with the \kl{divisibility} relation $\divleq$ whenever $\Indets$ is finite. We
-recall that a monomial $\monelt[m]$ \intro{divides} a monomial $\monelt[n]$ if
-there exists a monomial $\monelt[l]$ such that $\monelt[m] \times \monelt[l] =
-\monelt[n]$. In this case, we write $\monelt[m] \divleq \monelt[n]$. Note that
-monomials can be seen as functions from $\Indets$ to $\N$ having a finite support,
-and that the \kl{divisibility} relation can be extended to monomials that are
-functions from $\Indets$ to $(X,\leq)$, where $X$ is any partially ordered set. In
-this case, we write $\monelt[m] \divleq \monelt[n]$ if for every $x \in \Indets$, we
-have $\monelt[m](x) \leq \monelt[n](x)$. We will write
-$\intro*\mon[\om \ordplus 1]{\Indets}$ (resp. $\mon[\om^2]{\Indets}$) for the set of
-monomials that are functions from $\Indets$ to $\om \ordplus 1$ (resp. $\om^2$).
+A classical example of a \kl{WQO} is the set of monomials $\mon{\Indets}$,
+endowed with the \kl{divisibility} relation $\intro*\divleq$ whenever $\Indets$
+is finite. We recall that a monomial $\monelt[m]$ \intro{divides} a monomial
+$\monelt[n]$ if there exists a monomial $\monelt[l]$ such that $\monelt[m]
+\times \monelt[l] = \monelt[n]$. In this case, we write $\monelt[m]
+\reintro*\divleq \monelt[n]$. Note that monomials can be seen as functions from
+$\Indets$ to $\N$ having a finite support, and that the \kl{divisibility}
+relation can be extended to monomials that are functions from $\Indets$ to
+$(X,\leq)$, where $X$ is any partially ordered set. In this case, we write
+$\monelt[m] \divleq \monelt[n]$ if for every $x \in \Indets$, we have
+$\monelt[m](x) \leq \monelt[n](x)$. We will write $\intro*\mon[\om \ordplus
+1]{\Indets}$ (resp. $\mon[\om^2]{\Indets}$) for the set of monomials that are
+functions from $\Indets$ to $\om \ordplus \ordfin{1}$ (resp. $\om^2$).
 
 
 Given an ordering $\varleq$ on the set of indeterminates $\Indets$, we define
 the \intro{reverse lexicographic} (revlex) ordering on monomials as follows:
-$\monelt[n] \revlexlt \monelt[m]$ if there exists an indeterminate $x \in \X$
+$\monelt[n] \intro*\revlexlt \monelt[m]$ if there exists an indeterminate $x \in \X$
 such that $\monelt[n](x) < \monelt[m](x)$, and such that for every $y \in \X$,
 if $x \varlt y$ then $\monelt[n](y) = \monelt[m](y)$. Remark that if
 $\monelt[n] \revlexleq \monelt[m]$, then in particular $\monelt[n] \divleq
@@ -54,12 +55,12 @@ $\monelt[n] \revlexleq \monelt[m]$, then in particular $\monelt[n] \divleq
 
 \AP We can now use the \kl{revlex} ordering to identify particular elements in
 a given polynomial. Namely, for a polynomial $p \in \poly{\K}{\X}$, we define
-the \intro{leading monomial} $\lm(p)$ of $p$ as the largest monomial appearing
+the \intro{leading monomial} $\intro*\lm(p)$ of $p$ as the largest monomial appearing
 in $p$ with respect to the \kl{revlex} ordering, and the \intro{leading
-coefficient} $\lc(p)$ of $p$ as the coefficient of $\lm(p)$ in $p$. We can then
-define the \intro{leading term} $\lt(p)$ of $p$ as the product of its
-\kl{leading monomial} and its \intro{leading coefficient}, and the
-\intro{characteristic monomial} $\cm(p)$ of $p$ as the product of its
+coefficient} $\intro*\lc(p)$ of $p$ as the coefficient of $\lm(p)$ in $p$. We can then
+define the \intro{leading term} $\intro*\lt(p)$ of $p$ as the product of its
+\kl{leading monomial} and its \kl{leading coefficient}, and the
+\intro{characteristic monomial} $\intro*\cm(p)$ of $p$ as the product of its
 \kl{leading monomial} and all the indeterminates appearing in $p$. Because the
 coefficients and monomial in question are highly dependent on the ordering
 $\varleq$, we allow ourselves to write $\lm[\Indets](p)$ to highlight the
@@ -168,10 +169,10 @@ $X$ is any partially ordered set.
 we say that a set $\Basis \subseteq \poly{\K}{\X}$ is an \intro{equivariant
 Gröbner basis} of an equivariant ideal $\idl$ if $\Basis$ is \kl{equivariant},
 $\IdlGen{\Basis} = \idl$, and for every polynomial $p \in \idl$, there exists
-$q \in \Basis$ such that $\lm[\varleq](q) \gdivleq \lm[\varleq](p)$ and
+$q \in \Basis$ such that $\lm[\Indets](q) \gdivleq \lm[\Indets](p)$ and
 $\dom(q) \subseteq \dom(p)$.
 
 Beware that even in the case of a finite set of variables, a \kl{Gröbner basis}
 is not necessarily an \kl{equivariant Gröbner basis}, because of the
-\kl{domain} condition. However, every \kl{equivariant Gröbner basis} is a
-\kl{Gröbner basis}.
+\kl(polynomial){domain} condition. However, every \kl{equivariant Gröbner
+basis} is a \kl{Gröbner basis}.

@@ -70,13 +70,23 @@
 \newcommand{\X}{\mathcal{X}}
 \newcommand{\Y}{\mathcal{Y}}
 
-% group actions
-\newcommand{\actson}{\curvearrowright}
 
-% orders 
+
+% 
+% Polynomial rings, monomials, and related macros
+%
+\newcommand{\poly}[2]{#1[#2]}
+\newcommand{\mon}[2][]{\mathsf{Mon}_{#1}(#2)}
+\NewDocumentCommand{\monelt}{ O{m} }{\mathfrak{#1}}
+
+%
+% orders on polynomials and monomials
+%
 \NewDocumentCommand{\divleq}{}{
-    \mathrel{\sqsubseteq^{\mathrm{div}}}
+  \mathrel{\kl[\divleq]{\sqsubseteq^{\mathrm{div}}}}
 }
+\knowledge{\divleq}{notion}
+
 \NewDocumentCommand{\gdivleq}{ O{\group} }{
   \mathrel{\kl[\gdivleq]{\sqsubseteq^{\mathrm{div}}_{#1}}}
 }
@@ -91,18 +101,38 @@
 \NewDocumentOrdering{grevlex}{\sqsubseteq^{\mathsf{RevLex}}_\group}{\sqsubset^{\mathsf{RevLex}}_\group}
 \NewDocumentOrdering{lex}{\sqsubseteq_{\mathsf{Lex}}}{\sqsubset_{\mathsf{Lex}}}
 
-\NewDocumentCommand{\Basis}{O{B}}{\mathcal{#1}}
-\NewDocumentCommand{\LBasis}{O{B} m}{\mathcal{#1}_{#2}}
+\NewDocumentOrdering{pmon}{\preceq}{\prec}
+\NewDocumentCommand{\pmoneq}{}{\mathrel{\kl[pmon]{\equiv}}}
 
-\NewDocumentCommand{\Indets}{}{\mathcal{X}}
-\NewDocumentCommand{\IndetsCol}{}{\mathcal{Y}}
-\NewDocumentCommand{\IndetsV}{ O{V} }{\mathcal{X}_{#1}}
-\NewDocumentCommand{\idlZ}{}{\mathcal{Z}}
 
-\NewDocumentCommand{\forgetCol}{}{\mathop{\mathsf{forget}}}
-\NewDocumentCommand{\colorWith}{ m }{\mathop{\mathsf{col}_{#1}}}
-\NewDocumentCommand{\freeColor}{ }{\mathop{\mathsf{freecol}}}
+%
+% coefficients, leading monomials, etc
+%
+\newcommand{\lc}[1][]{\mathop{\kl[\lc]{\mathsf{LC}_{#1}}}}
+\knowledge{\lc}{notion}
+\newcommand{\lt}[1][]{\mathop{\kl[\lt]{\mathsf{LT}_{#1}}}}
+\knowledge{\lt}{notion}
+\newcommand{\lm}[1][]{\mathop{\kl[\lm]{\mathsf{LM}_{#1}}}}
+\knowledge{\lm}{notion}
+\newcommand{\cm}[1][]{\mathop{\kl[\cm]{\mathsf{CM}_{#1}}}}
+\knowledge{\cm}{notion}
 
+\newcommand{\dom}{\mathop{\kl[\dom]{\mathsf{dom}}}}
+\knowledge{\dom}{notion}
+
+% the same ones, but for *decompositions*
+\newcommand{\lmdec}[1][]{\mathop{\kl[\lmdec]{\mathsf{LM}_{#1}}}}
+\knowledge{\lmdec}{notion}
+\newcommand{\domdec}{\mathop{\kl[\domdec]{\mathsf{dom}}}}
+\knowledge{\domdec}{notion}
+
+% least common multiple
+\newcommand{\lcm}{\mathop{\kl[\lcm]{\mathsf{LCM}}}}
+\knowledge{\lcm}{notion}
+
+%
+% Ideal generation and related macros
+%
 \NewDocumentCommand{\idl}{O{I}}{\mathcal{#1}}
 \NewDocumentCommand{\IdlGen}{ m }{\withkl{\kl[\IdlGen]}{
   \mathopen{\cmdkl{\langle}}
@@ -116,94 +146,31 @@
   \mathclose{\cmdkl{\rangle}}_{#1}}}
 \knowledge{\EqIdlGen}{notion}
 
-
-\newcommand{\poly}[2]{#1[#2]}
-\newcommand{\aut}[2][]{\mathsf{Aut}_{#1}{(#2)}}
-\newcommand{\mon}[2][]{\mathsf{Mon}_{#1}(#2)}
-\newcommand{\perm}[1]{\mathsf{Perm}(#1)}
-\newcommand{\otu}[2]{#1^{(#2)}}
+%
+% Group actions
+%
 \newcommand{\group}{\mathcal{G}}
-\newcommand{\gen}[2]{\langle #1\rangle_{#2}}
-\newcommand{\radoG}{\mathbb{G}_{\mathsf{Rado}}}
-\newcommand{\radoV}{\mathbb{V}_{\mathsf{Rado}}}
-\newcommand{\radoE}{\mathbb{E}_{\mathsf{Rado}}}
-\newcommand{\cycleSet}[1][]{\mathsf{Cycles}_{#1}}
-
-
-\NewDocumentCommand{\FixG}{ O{\group} m }{{#1}^{\kl[\FixG]{\mathsf{fix}}}_{#2}}
-\knowledge{\FixG}{notion}
-
-\NewDocumentCommand{\monelt}{ O{m} }{\mathfrak{#1}}
-
-\newcommand{\ordinal}{\eta}
-\newcommand{\symgr}[1]{\mathbf{S}_{#1}}
-
-
+\newcommand{\actson}{\curvearrowright}
 \NewDocumentCommand{\gelem}{ O{\pi} }{\mathgr{#1}}
 
-\newcommand{\hbp}{\text{Hilbert's basis property}}
-\newcommand{\orbit}[2][]{\mathsf{orbit}_{#1}{(#2)}}
-
-\newcommand{\order}[1][]{\prec_{#1}}
-\newcommand{\ordereq}[1][]{\preceq_{#1}}
-
-\NewDocumentCommand{\sOrderLt}{O{S}}{\prec_{#1}}
-\NewDocumentCommand{\sOrderLeq}{O{S}}{\preceq_{#1}}
-
-\newcommand{\revlex}[1][]{<_{\mathsf{RevLex}}^{#1}}
-\newcommand{\revlexeq}[1][]{\leq_{\mathsf{RevLex}}^{#1}}
-\newcommand{\gr}{Gr\"{o}bner}
-\newcommand{\dom}{\mathsf{dom}}
-\newcommand{\spoly}[2]{\mathsf{S}(#1,#2)}
-\newcommand{\spolyset}{\mathsf{SSet}}
-\newcommand{\spolytext}{$\mathsf{S}$-polynomial}
-\newcommand{\lcm}{\mathsf{LCM}}
-\newcommand{\lc}[1][]{\mathsf{LC}_{#1}}
-\newcommand{\lt}[1][]{\mathsf{LT}_{#1}}
-\newcommand{\reducstep}[1]{\to_{#1}}
-\newcommand{\reduc}[1]{\to^*_{#1}}
-\newcommand{\rem}[3][]{\mathsf{Rem}^{#1}_{#2}(#3)}
-\newcommand{\closure}[1]{\widehat{#1}}
-\newcommand{\wforder}{\triangleleft}
-
-\newcommand{\lm}[1][]{\mathop{\mathsf{LM}_{#1}}}
-\newcommand{\cm}[1][]{\mathop{\mathsf{CM}_{#1}}}
-\newcommand{\cmin}[1]{\cm[\in #1]}
-\newcommand{\cmout}[1]{\cm[\notin #1]}
-\newcommand{\cmp}[1][]{\mathop{\mathsf{\widetilde{CM}}_{#1}}} % CM pair
-\newcommand{\var}{\mathop{\mathsf{var}}}
-\newcommand{\varin}[1]{\var_{\in #1}}
-\newcommand{\varout}[1]{\var_{\notin #1}}
-\newcommand{\width}{\mathsf{width}}
-
-\newcommand{\lmdec}[1][]{\mathop{\mathsf{LM}_{#1}}}
-\newcommand{\domdec}{\mathop{\mathsf{dom}}}
+\newcommand{\orbit}[2][]{\mathop{\kl[\orbit]{\mathsf{orbit}_{#1}}}{(#2)}}
+\knowledge{\orbit}{notion}
 
 
+%
+% Sets of indeterminates, bases
+%
+\NewDocumentCommand{\Basis}{O{B}}{\mathcal{#1}}
+\NewDocumentCommand{\LBasis}{O{B} m}{\mathcal{#1}_{#2}}
 
-\newcommand{\probBasic}[4]
-{
-\begin{flalign*}
-\quad
-\begin{tabular}{l  l}
-  \multicolumn{2}{l}{\mathsf{#1}}\\
-  \textbf{Input:}    & #2 \\
-  \textbf{#4} & #3
-\end{tabular}
-&&
-\end{flalign*}
-}
+\NewDocumentCommand{\Indets}{}{\mathcal{X}}
+\NewDocumentCommand{\IndetsCol}{}{\mathcal{Y}}
+\NewDocumentCommand{\IndetsV}{ O{V} }{\mathcal{X}_{#1}}
+\NewDocumentCommand{\idlZ}{}{\mathcal{Z}}
 
-\newcommand{\prob}[3]
-{
-\probBasic{#1}{#2}{#3}{Question:}
-}
-
-\NewDocumentOrdering{pmon}{\preceq}{\prec}
-\NewDocumentCommand{\pmoneq}{}{\mathrel{\kl[pmon]{\equiv}}}
-
-
+%
 %  ORDINALS, PARTIAL ORDERINGS, AND THEIR OPERATIONS
+%
 \newcommand{\ordfin}[1]{\kl[\ordfin]{#1}}
 \newcommand{\om}{\kl[\om]{\omega}}
 \newcommand{\ordplus}{\mathrel{\kl[\ordplus]{+}}}
@@ -211,22 +178,49 @@
 \knowledge{\ordfin}{notion}
 \knowledge{\om}{notion}
 
-
-
-
-
+%
+% Buchberger related macros
+%
 \NewDocumentCommand{\toeucl}{m}{
   \mathrel{\kl[\toeucl]{\to_{#1}}}
 }
 \knowledge{\toeucl}{notion}
 
-\NewDocumentCommand{\CancelPoly}{ m m }{\mathsf{C}_{#1,#2}}
+\NewDocumentCommand{\CancelPoly}{ m m }{\kl[\CancelPoly]{\mathsf{C}_{#1,#2}}}
+\knowledge{\CancelPoly}{notion}
 
-%%%%%%%%%%%%%%%% "Colourful" macros %%%%%%%%%%%%%%%%%%
+\newcommand{\spoly}[2]{\mathop{\kl[\spoly]{\mathsf{S}}}(#1,#2)}
+\knowledge{\spoly}{notion}
+\newcommand{\spolyset}{\mathop{\kl[\spolyset]{\mathsf{SSet}}}}
+\knowledge{\spolyset}{notion}
+\newcommand{\rem}[3][]{\kl[\rem]{\mathsf{Rem}^{#1}_{#2}(#3)}}
+\knowledge{\rem}{notion}
 
-\newcommand{\forget}{\mathsf{forget}}
-\newcommand{\col}{\mathsf{C}}
-\newcommand{\paint}[1]{#1_{\col}}
-\newcommand{\repaint}[1]{\alpha_{#1}}
-\newcommand{\repL}{\, \triangleleft\, }
-\newcommand{\repR}{\, \triangleright\, }
+
+%
+% Coloring operations on sets of indeterminates
+%
+\NewDocumentCommand{\forgetCol}{}{\mathop{\mathsf{forget}}}
+\NewDocumentCommand{\colorWith}{ m }{\mathop{\mathsf{col}_{#1}}}
+\NewDocumentCommand{\freeColor}{ }{\mathop{\mathsf{freecol}}}
+
+%
+% word encodings and undecidability
+%
+\newcommand{\wenc}[1]{\withkl{\kl[\wenc]}{\mathopen{\cmdkl{\llbracket}} #1 \mathclose{\cmdkl{\rrbracket}}}}
+\knowledge{\wenc}{notion}
+
+%
+% Garbage macros
+%
+
+\newcommand{\aut}[2][]{\mathsf{Aut}_{#1}{(#2)}}
+\newcommand{\perm}[1]{\mathsf{Perm}(#1)}
+\newcommand{\otu}[2]{#1^{(#2)}}
+\newcommand{\radoG}{\mathbb{G}_{\mathsf{Rado}}}
+\newcommand{\radoV}{\mathbb{V}_{\mathsf{Rado}}}
+\newcommand{\radoE}{\mathbb{E}_{\mathsf{Rado}}}
+\newcommand{\cycleSet}[1][]{\mathsf{Cycles}_{#1}}
+
+
+
