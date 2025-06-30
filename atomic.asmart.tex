@@ -65,18 +65,6 @@
 \Crefname{assumption}{Assumption}{Assumptions}
 \usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
-%\definecolor[named]{ACMBlue}{cmyk}{1,0.1,0,0.1}
-%\definecolor[named]{ACMYellow}{cmyk}{0,0.16,1,0}
-%\definecolor[named]{ACMOrange}{cmyk}{0,0.42,1,0.01}
-%\definecolor[named]{ACMRed}{cmyk}{0,0.90,0.86,0}
-%\definecolor[named]{ACMLightBlue}{cmyk}{0.49,0.01,0,0}
-%\definecolor[named]{ACMGreen}{cmyk}{0.20,0,1,0.19}
-%\definecolor[named]{ACMPurple}{cmyk}{0.55,1,0,0.15}
-%\definecolor[named]{ACMDarkBlue}{cmyk}{1,0.58,0,0.21}
-
-\knowledgestyle{intro notion}{color={ACMDarkBlue}, emphasize}
-\knowledgestyle{notion}{color={B1}}
-
 
 % Tables 
 \usepackage{booktabs}
@@ -100,6 +88,11 @@
 
 % Colors 
 \usepackage{ensps-colorscheme}
+\knowledgestyle{intro notion}{color={ACMDarkBlue}, emphasize}
+\knowledgestyle{notion}{color={B1}}
+
+
+
 
 % we include whatever the user wants to include in the header
 
@@ -116,8 +109,7 @@
 \begin{document}
 
 \title[Equivariant Gröbner bases]{Computability of Equivariant Gröbner bases \\
-       main ce39c6813c8c04e82e3f2f3a1e90487139789480 \\
-       2025-06-26 15:10:58 +0200
+       2025-06-26 15:51:24 +0200
 }
 
 
@@ -200,6 +192,7 @@
 \input{src/preliminaries.tex}
 \input{src/weakgb.tex}
 \input{src/fullbasis.tex}
+\input{src/algorithm.tex}
 \input{src/undecidability.tex}
 \input{src/examples.tex}
 \input{src/conclusion.tex}
@@ -217,7 +210,6 @@ Aliaume Lopez was supported by the Polish National Science Centre (NCN) grant ``
 
 % If there are any appendices, we include them here.
 \appendix
-\input{src/algorithm.tex}
 \input{src/appendix.tex}
 
 

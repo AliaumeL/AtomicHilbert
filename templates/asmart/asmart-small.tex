@@ -67,18 +67,6 @@ $endif$
 \Crefname{assumption}{Assumption}{Assumptions}
 \usepackage[$if(draft)$composition$else$electronic$endif$,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
-%\definecolor[named]{ACMBlue}{cmyk}{1,0.1,0,0.1}
-%\definecolor[named]{ACMYellow}{cmyk}{0,0.16,1,0}
-%\definecolor[named]{ACMOrange}{cmyk}{0,0.42,1,0.01}
-%\definecolor[named]{ACMRed}{cmyk}{0,0.90,0.86,0}
-%\definecolor[named]{ACMLightBlue}{cmyk}{0.49,0.01,0,0}
-%\definecolor[named]{ACMGreen}{cmyk}{0.20,0,1,0.19}
-%\definecolor[named]{ACMPurple}{cmyk}{0.55,1,0,0.15}
-%\definecolor[named]{ACMDarkBlue}{cmyk}{1,0.58,0,0.21}
-
-\knowledgestyle{intro notion}{color={ACMDarkBlue}, emphasize}
-\knowledgestyle{notion}{color={B1}}
-
 
 % Tables 
 \usepackage{booktabs}
@@ -102,6 +90,11 @@ $endif$
 
 % Colors 
 \usepackage{ensps-colorscheme}
+\knowledgestyle{intro notion}{color={ACMDarkBlue}, emphasize}
+\knowledgestyle{notion}{color={B1}}
+
+
+
 
 % we include whatever the user wants to include in the header
 $for(header-includes)$
@@ -121,7 +114,6 @@ $endfor$
 
 $if(draft)$
 \title$if(short-title)$[$short-title$]$endif${$title$ \\
-       $git-meta.branch$ $git-meta.commit$ \\
        $git-meta.date$
 }
 $else$

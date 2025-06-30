@@ -63,44 +63,51 @@ the trivial group.
 \AP There has been a growing interest in understanding which groups $\group$
 and sets of variables $\X$ allow one to extend the \kl{Hilbert's basis theorem}
 to the equivariant case, and to adapt the theory of \kl{Gr\"{o}bner bases} to
-this setting \cite{BRDR11,HISU12,HIKRLE18,GHOLAS24},
-\arka{Must cite cohen}
-and there is an almost
-complete characterisation of the pairs $(\X,\group)$ for which the
-\kl{Equivariant Hilbert basis property} \cite[Theorems 11 and 12]{GHOLAS24}.
-But to obtain decision procedures, one still lacks a generalisation of
-\kl{Buchberger's algorithm} to the equivariant case, except under very strong
-extra assumptions: the set of indeterminates should come equipped with a
-\emph{total} and \emph{well-founded} ordering \cite[Section 6]{GHOLAS24}.
-\arka{It is slightly different. I would rather say the conditions are artificial/strong and not explain them.
-I prefer artificial since I think we can prove that this artificial condition is satisfied under}
+this setting \cite{BRDR11,HISU12,HIKRLE18,GHOLAS24}, \arka{Must cite cohen}
+\todo{I do not know this paper} and there is an almost complete
+characterisation of the pairs $(\X,\group)$ for which the \kl{Equivariant
+Hilbert basis property} \cite[Theorems 11 and 12]{GHOLAS24}. But to obtain
+decision procedures, one still lacks a generalisation of \kl{Buchberger's
+algorithm} to the equivariant case, except under artificial extra assumptions
+\cite[Section 6]{GHOLAS24}. Overall, a general understanding of the
+decidability of the \kl{equivariant ideal membership problem} is still missing,
+and \emph{a fortiori}, a generalisation of \kl{Buchberger's algorithm} to the
+equivariant case is still an open problem.
 
-\AP In this paper, we develop an equivariant generalisation of \kl{Buchberger's
-algorithm}, to effectively compute \kl{Gr\"{o}bner bases} of \kl{equivariant
-ideals} under mild assumptions. We also show that common examples violating
-these assumptions have undecidable \kl{equivariant ideal membership problems}.
+\paragraph{Contributions.} \AP In this paper, we bridge the gap between the
+theretical understanding of \kl{Hilbert's basis property} in the equivariant
+setting \cite{GHOLAS24}, and the computational aspects of \kl{equivariant
+ideals}, by showing that under mild assumptions on the group action, one can
+compute an \kl{equivariant Gröbner basis} of an \kl{equivariant ideal}, hence,
+that one can decide the \kl{equivariant ideal membership problem}. In order to
+compute such sets, we will need to introduce some classical computability
+assumptions on the group action $\group \actson \Indets$, and on the set of
+indeterminates $\Indets$. These will be defined in
+\cref{sec:preliminaries}, but informally, we assume
+that one can compute representatives of the orbits of elements under the action
+of $\group$ (this is called \kl{effective oligomorphism}), and that one has
+access to a \kl{total ordering} on $\Indets$ that is computable, and
+\kl(ord){compatible} with the action of $\group$. Please note that the ordering
+on $\Indets$ is not required to be well-founded, and a typical example of our
+computable assumstions would be the set $\Q$ of rationals, equipped with the
+natural ordering $\leq$ and the group $\group$ would be the group of all
+monotone bijections from $\Q$ to itself.
 
-\paragraph{Contributions.} \AP In this paper, we continue the work of
-\cite{GHOLAS24} and show that the \kl{equivariant ideal membership problem} is
-decidable under mild assumptions. We will state our main results without
-defining all the concepts appearing in them to aid readability.
-Our first theorem is that the \kl{equivariant ideal membership problem} is decidable
-under very weak effectivity assumptions.
-
-\begin{theorem}[name={Equivariant Ideal Membership},restate=thm:decide-equiv-ideal-mem]
-  \label{thm:decide-equiv-ideal-mem}
-  Let $(\Indets, \group, \leq)$ be a set of indeterminates, a group acting \kl{effectively
-  oligomorphically}
-  on $\X$ and an
-  \kl{effective total ordering} $\leq$ on $\Indets$ that is compatible with the action of
-  $\group$. 
-  If $(\mon[\om \ordplus 1]{\Indets}, \gdivleq)$ is a \kl{WQO}, then one can decide the
-  \kl{equivariant ideal membership problem}.
-\end{theorem}
-
-Next, we show that one can strengthen the conclusion an obtain a fully-fledged
-\kl{Gr\"{o}bner basis} algorithm, under the same effectivity assumptions, but
-with a slightly stronger structural requirement on the set of indeterminates.
+\AP Let us now focus on the mild semantic assumption that we will need to make
+on the set of indeterminates $\Indets$ and the group $\group$, that will
+guarantee the termination of our procedures. We refer to our preliminaries
+(\cref{sec:preliminaries}) for a more detailed
+discussion on these assumptions, but again informally, we ask that the set of
+\kl{monomials} $\mon{\Indets}$ is well-behaved with respect to divisibility up
+to the action of $\group$, which we write as the fact that $(\mon{\Indets},
+\gdivleq)$ is a \kl{well-quasi-ordering} (\kl{WQO}). It is known from that this
+is a necessary condition for the \kl{equivariant Hilbert basis property} to
+hold \cite{GHOLAS24}. We will rely on a slightly stronger condition, namely
+that $(\mon[\om^2]{\Indets}, \gdivleq)$ is a \kl{WQO}, which is conjectured to
+be equivalent to the first condition, and intuitively means that one can still
+guarantee termination when considering \kl{monomials} with exponents that are
+\kl{ordinals} below $\om^2$.\footnote{Natural numbers are precisely ordinals
+below $\om$.}
 
 \begin{theorem}[name={Equivariant Gröbner Basis},restate=thm:compute-equiv-gb]
   \label{thm:compute-egb}
@@ -113,44 +120,92 @@ with a slightly stronger structural requirement on the set of indeterminates.
   compute an \kl{equivariant Gröbner basis} from a finite set $H$ of generators.
 \end{theorem}
 
-Informally, we require that the set of indeterminates comes equipped with a
-total ordering (not necessarily well-founded) that is compatible with the
-action of the group, and that one can effectively compute on the representation
-(compute the order, and compute representatives of orbits). In addition to
-these natural assumptions, we also require a \kl{well-quasi-ordering} property
-on the set of \kl{monomials}. Note that it is shown in \cite{GHOLAS24} that for
-the \kl{equivariant Hilbert basis property} to hold, it is necessary that
-$(\mon[\om]{\X}, \gdivleq)$ is a \kl{WQO}. Furthermore, it is conjectured
-that whenever $(\mon[\om]{\X}, \gdivleq)$ is a \kl{WQO}, then $(\mon[\om
-\ordplus 1]{\X}, \gdivleq)$ and $(\mon[\om^2]{\X}, \gdivleq)$ are also
-\kl{WQOs}.
+\AP To prove our
+\cref{thm:compute-egb},
+we will first introduce a weaker notion of \kl{weak equivariant Gröbner basis},
+which characterises the results obtained by naïvely adapting \kl{Buchberger's
+algorithm} to the equivariant case. Then, we will show that under our
+effectivity assumptions, one can start from a finite set of generators $H$ of
+an \kl{equivariant ideal}, and compute a well-chosen \kl{weak equivariant
+Gröbner basis}, which happens to be an \kl{equivariant Gröbner basis} of the
+ideal generated by $H$. By leveraging the same proof technique, we can also
+show that the \kl{equivariant ideal membership problem} is decidable under a
+weaker hypothesis, namely that the set of \kl{monomials} $\mon[\om \ordplus
+1]{\Indets}$ is a \kl{WQO}, which is also believed to be equivalent to the
+first condition.
 
-Finally, we show that if one can interpret paths, then the 
-equivariant membership problem is undecidable.
+\begin{theorem}[name={Equivariant Ideal Membership},restate=thm:decide-equiv-ideal-mem]
+  \label{thm:decide-equiv-ideal-mem}
+  Let $(\Indets, \group, \leq)$ be a set of indeterminates, a group acting \kl{effectively
+  oligomorphically}
+  on $\X$ and an
+  \kl{effective total ordering} $\leq$ on $\Indets$ that is compatible with the action of
+  $\group$. 
+  If $(\mon[\om \ordplus 1]{\Indets}, \gdivleq)$ is a \kl{WQO}, then one can decide the
+  \kl{equivariant ideal membership problem}.
+\end{theorem}
+
+\AP We then focus on providing undecidability results for the \kl{equivariant
+ideal membership problem} in the case where our effective assumptions are
+satisfied, but the \kl{well-quasi-ordering} condition is not. This aims at
+illustrating the fact that our assumptions are close to optimal. One classical
+way for a set of structures to not be \kl{well-quasi-ordered} (when labelled
+using integers) is to have the ability to represent an \emph{infinite path} (a
+formal definition will be given in
+\cref{sec:undecidability}). We prove that
+whenever one can (effectively) represent an infinite path in the set of
+\kl{monomials} $\mon{\Indets}$, then the \kl{equivariant ideal membership
+problem} is undecidable.
 
 \begin{theorem}
   \label{thm:undecidable-paths}
-  todo.
+  Let $(\Indets, \group, \leq)$ be a set of indeterminates, a group acting
+  \kl{effectively oligomorphically} on $\Indets$ and an
+  \kl{effective total ordering} $\leq$ on $\Indets$ that is compatible with the action of
+  $\group$. If $(\mon{\Indets}, \gdivleq)$ 
+  can be equipped with a \kl{word encoding} function, then
+  the \kl{equivariant ideal membership problem} is undecidable.
 \end{theorem}
 
+As corollaries of \cref{thm:undecidable-paths}, we obtain numerous
+examples of cases where the \kl{equivariant ideal membership problem} is
+undecidable, such as the case of $\N$ with the group generated by the successor
+function (an instance of
+\cref{subsec:paths}), or the case of an
+\kl{infinite dimensional} vector space with the group of all linear bijections
+(\cref{subsec:vector}). 
+
+Finally, we illustrate how our positive results find applications in 
+numerous situations, by showing how to create sets of indetermiates 
+\todo[inline]{this section is not written yet so it is hard to write 
+what is indise...}
+
 \paragraph{Organisation.} \AP The rest of the paper is organised as follows. In
-\cref{sec:preliminaries}, we introduce formally what a \kl{Gröbner basis} is,
-and present the background on how to compute them using \kl{Buchberger's
-algorithm}. Then, we will present in \cref{sec:weakgb} an adaptation of
-\kl{Buchberger's algorithm} to the equivariant case, that computes a \kl{weak
-equivariant Gröbner basis} of an \kl{equivariant ideal}. This is the central
-object of our paper, and will be used to derive our two positive results. In
-\cref{sec:algorithm}, we use \kl{weak equivariant Gröbner bases} to devise a
-decision procedure for the \kl{equivariant ideal membership problem}, and prove
-our \cref{thm:decide-equiv-ideal-mem}. Then, in
-\cref{sec:equivariant-grobner-basis}, we push further the same proof scheme to
-obtain \kl{equivariant Gröbner bases} and prove our \cref{thm:compute-egb}. In
-\cref{sec:examples} we will show how to use our algorithm to solve some
-non-trivial examples. This will also be a way to show that our restrictions are
-very mild, and that one can really apply our theoretical results. Then, we will
-argue that our hypothesis are close to optimal, by illustrating a variety of
-cases where the \kl{equivariant ideal membership problem} is undecidable.
-Finally, in \cref{sec:conclusion}, we will discuss on the need for a total
-ordering on the set of indeterminates, and the possibility to relax the
-hypotheses of our results.
+\cref{sec:preliminaries}, we introduce formally the
+notions of \kl{Gröbner bases}, \kl{effectively oligomorphic} sets, and
+\kl{well-quasi-orderings}, which are the main assumptions of our positive
+results. Then, we will present in \cref{sec:weakgb}
+an adaptation of \kl{Buchberger's
+algorithm} to the equivariant case, that computes a \kl{weak equivariant
+Gröbner basis} of an \kl{equivariant ideal}. This is the central object of our
+paper, and will be used to derive our two positive results. In
+\cref{sec:equivariant-grobner-basis},
+we use \kl{weak equivariant Gröbner bases} to prove our main
+\cref{thm:compute-egb}.
+Then, we refine our analysis in
+\cref{sec:refinements},
+we use \kl{weak equivariant Gröbner bases} to devise a decision procedure for
+the \kl{equivariant ideal membership problem} under weaker assumptions
+(\cref{thm:decide-equiv-ideal-mem}),
+and discuss the potential other applications of \kl{weak equivariant Gröbner
+bases}. Then, in
+\cref{sec:undecidability}, we show that
+our assumptions are close to optimal by proving that the \kl{equivariant ideal
+membership problem} is undecidable whenever one can produce a \kl{word
+encoding} function (\cref{thm:undecidable-paths}), and we
+illustrate this result with a variety of examples. We provide a detailed
+discussion on the applications of our positive results in \cref{sec:examples}
+Finally, in \cref{sec:conclusion}, we will
+discuss on the need for a total ordering on the set of indeterminates, and the
+possibility to relax the hypotheses of our results.
 

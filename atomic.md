@@ -9,7 +9,6 @@ libraries:
     - lib/maths
     - lib/knowledges.kl
 appendix:
-    - src/algorithm.tex
     - src/appendix.tex
 ---
 
@@ -17,6 +16,7 @@ appendix:
 \input{src/preliminaries.tex}
 \input{src/weakgb.tex}
 \input{src/fullbasis.tex}
+\input{src/algorithm.tex}
 \input{src/undecidability.tex}
 \input{src/examples.tex}
 \input{src/conclusion.tex}

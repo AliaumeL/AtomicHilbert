@@ -41,7 +41,7 @@ easier to work with: the \kl{monomial reachability problem}.
   The \intro{monomial reachability problem} is the problem of deciding whether
   there exists a sequence of rewrites that transforms $\monelt_s$ into $\monelt_t$
   using the rules of a monomial rewrite system $R$, where
-  a \intro{rewrite step} is a pair of the form
+  a \intro(monrew){rewrite step} is a pair of the form
   \begin{equation*}
     \monelt[n] (\gelem \cdot \monelt)
     \leftrightarrow_R 
@@ -193,7 +193,7 @@ with some extra ``phase information''.
   reachable from $\wenc{ \triangleright^{\text{pre}} \square^n \triangleleft^{\text{pre}} }$
   or $\wenc{ \triangleright^{\text{post}} \square^n \triangleleft^{\text{post}} }$
   is the image of a word of the form
-  $\wenc{\triangleright^{\text{run}} u \triangleright^{\text{run}}}$  
+  $\wenc{\triangleright^{\text{run}} u \triangleleft^{\text{run}}}$  
   where $u \in (Q \uplus \Sigma \uplus \square)^n$.
 \end{lemma}
 \begin{proof}

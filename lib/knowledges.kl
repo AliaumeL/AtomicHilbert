@@ -193,3 +193,21 @@
  | remainder
 
 
+%% undecidability
+
+\knowledge{notion}
+ | monomial reachability problem
+\knowledge{notion}
+ | monomial rewrite system
+ | monomial rewriting
+\knowledge{notion}
+ | rewrite step@monrew
+
+\knowledge{notion}
+ | word encodings
+ | word encoding
+
+\knowledge{notion}
+ | infinite path@of
+\knowledge{notion}
+ | infinite dimensional vector space
