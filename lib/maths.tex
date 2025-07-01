@@ -76,7 +76,8 @@
 % Polynomial rings, monomials, and related macros
 %
 \newcommand{\poly}[2]{#1[#2]}
-\newcommand{\mon}[2][]{\mathsf{Mon}_{#1}(#2)}
+\newcommand{\mon}[2][]{\mathop{\kl[\mon]{\mathsf{Mon}_{#1}}}(#2)}
+\knowledge{\mon}{notion}
 \NewDocumentCommand{\monelt}{ O{m} }{\mathfrak{#1}}
 
 %
