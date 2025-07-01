@@ -12,6 +12,8 @@ the \kl{equivariant ideal membership problem} is undecidable even when
 $(\mon{\Indets}, \gdivleq)$ is not a well-quasi-ordering, as illustrated by the
 following \cref{ex:non-wqo-undecidable}.
 
+\todo[inline]{Add N with succ, and N with order as examples}
+
 \begin{example}
   \label{ex:non-wqo-undecidable}
   Let $\Indets = \{x_1, x_2, \ldots\}$ be an infinite set of indeterminates,
@@ -98,7 +100,7 @@ easier to work with: the \kl{monomial reachability problem}.
   of an analysis of the coefficient of the monomial $v$ in the sum of
   \cref{eq:mon-rewrite-red-membership}.
 
-  Hence, the graph $G$ is a flow network, with a flow value of at least $1$
+  Hence, the graph $G$ is a flow network,\todo{cite} with a flow value of at least $1$
   from $\monelt_s$ to $\monelt_t$. As a consequence, there must exist a path
   from $\monelt_s$ to $\monelt_t$ in $G$, which is a witness
   of the fact that 
@@ -137,12 +139,12 @@ To overcome the second issue, we will use the following notion of
 \end{definition}
 
 The first condition of \cref{def:word-encoding} ensures that
-the \kl{word encoding} related correctly the \emph{infix} relation on words
-when considering divisibility up-to the group action $\group$. The second
-condition ensures that the \emph{substitutions} of infixes (having the same
-size) can be modelled using \kl{monomial rewriting}. It is therefore
-straightforward to simulate the runs of reversible Turing machines using
-\kl{monomial rewriting} when one has access to a suitable \kl{word encoding}.
+the \kl{word encoding}  correctly relates the \emph{infix} relation on words
+with the divisibility up-to the group action $\group$. The second condition
+ensures that the \emph{substitutions} of infixes having the same size can be
+modelled using \kl{monomial rewriting}. It is therefore straightforward to
+simulate the runs of reversible Turing machines using \kl{monomial rewriting}
+when one has access to a suitable \kl{word encoding}.
 
 \begin{remark}
   \label{rem:alphabet-size}
@@ -170,7 +172,7 @@ same as the existence of a \kl{word encoding} for a binary alphabet. Given a
 reversible Turing machine $M$ with a finite set $Q$ of states and tape alphabet
 $\Sigma$, we will consider the following alphabet $\Gamma \defined \set{
 \triangleleft, \triangleright } \times \set{ \text{pre}, \text{run},
-\text{post} } \uplus Q \uplus \Sigma \uplus \set{ \square}$. The letter
+\text{post} } \uplus Q \uplus \Sigma \uplus \set{ \square, \square_1, \square_2}$. The letter
 $\square$ is a blank symbol, and the letters $\triangleleft$ and
 $\triangleright$ are used to delimit the beginning and the end of the tape,
 with some extra ``phase information''.
@@ -327,6 +329,8 @@ $u \in \Sigma^*$.
   there exists $x, y \in \Sigma^*$ such that $x u y = v$.
 \end{proof}
 
+\todo[inline]{Add examples}
+
 \subsection{Infinite Dimensional Vector Space}
 \label{subsec:vector}
 
@@ -337,6 +341,7 @@ $\Indets \defined \mathbb{V}$, that is, an infinite dimensional vector space
 over a field, where the group $\group$ acting on $\Indets$ is the group of
 linear automorphisms of $\mathbb{V}$.
 
+\todo[inline]{replace $4$ by $3$}
 It is unclear whether the \kl{infinite dimensional vector space} contains an
 \kl(of){infinite path} $P$ as defined in
 \cref{subsec:paths}. However, we can
@@ -377,3 +382,5 @@ and $\wenc{b u} \defined v_0^4 (v_0 + v_1)^1 v_1^4 (v_1 + v_2)^2 (\gelem_{+2}
   Similarly, one can prove that $\gelem \cdot v_2 = v_{k + 2}$, and
   by induction conclude.
 \end{proof}
+
+\todo[inline]{consequences?}
