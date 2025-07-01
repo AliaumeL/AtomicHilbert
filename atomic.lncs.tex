@@ -12,6 +12,7 @@
 
 % create a new LNCS environment for assumptions
 \newtheorem{assumption}[theorem]{Assumption}{\bfseries}{\itshape}
+\newtheorem{remark}[theorem]{Remark}{\bfseries}{\normalfont}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -87,20 +88,21 @@
 \input{lib/maths}
 \input{lib/knowledges.kl}
 
-\newcommand{\repositoryUrl}{Undefined Anonymous Repository}
+\newcommand{\repositoryUrl}{\url{https://github.com/AliaumeL/AtomicHilbert}}
 
 \begin{document}
 %
-\title{Deciding the Equivariant Ideal Membership Problem \\
-       main 2011a59d47623f76cb5905e348917a84d70e62d3 \\
-       2025-04-25 10:05:57 +0200
+\title{Computability of Equivariant Gröbner bases \\
+       main 54fcebfa0481e387a239e625e30d13f50ca82dd3 \\
+       2025-07-01 16:54:04 +0200
 }
+\titlerunning{Equivariant Gröbner bases}
 
 \author{
-    Anonymized for review
-}
-\authorrunning{Anonymized for review}
-\institute{Anonymized for review}
+        Arka Ghosh\inst{1}\orcidID{0000-0003-3839-8459} \and
+        Aliaume Lopez\inst{1}\orcidID{0000-0002-4205-327X}}
+\authorrunning{A. Ghosh and A. Lopez}
+\institute{University of Warsaw}
 
 \date{\today}
 
@@ -108,19 +110,17 @@
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-    Polynomials with infinite number of variables do not have the Hilbert basis property. However, if the variables are considered up to the action of a group, one can focus on the equivariant ideals, for which it has recently been proven that they do have the Hilbert basis property, under mild assumptions on the group action. We extend this result by showing that the ideal membership problem (that is, given a polynomial, does it belong to a given equivariant ideal) is decidable under similar assumptions. This is significant because it paves the way towards decision procedures based on the Hilbert method in the presence of infinite data structures with symmetries.
+    The ring of polynomials in infinitely many variables over a field is never Noetherian. However, it is often the case that the set of indeterminates comes equipped with an additional structure. This extra structure can be taken into account by the means of a group action on the indeterminates, and by considering polynomials up to this action. In this setting, one can recover Noetherianity by restricting the attention to equivariant ideals, under mild assumptions on the group action, as shown by Ghosh and Lasota in 2024. We extend this result by proving algorithmic counterparts to this theoretical result: we show that one can decide the equivariant membership problem, and that one can even compute equivariant Gröbner bases, under similar assumptions as the ones made by Ghosh and Lasota. In addition to these positive results, we also establish sufficient conditions for the equivariant membership problem to be undecidable. Finally, we discuss how these computational results can be applied to various mathematical and computer science decidability problems.
 \end{abstract}
 
 % Include the content of the paper
 \input{src/intro.tex}
 \input{src/preliminaries.tex}
 \input{src/weakgb.tex}
-
-\input{src/algorithm.tex}
 \input{src/fullbasis.tex}
+\input{src/algorithm.tex}
 \input{src/undecidability.tex}
 \input{src/examples.tex}
-\input{src/strong.tex}
 \input{src/conclusion.tex}
 
 % Include acknowledgements
