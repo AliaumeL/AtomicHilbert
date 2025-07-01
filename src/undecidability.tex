@@ -54,6 +54,14 @@ easier to work with: the \kl{monomial reachability problem}.
   \end{equation*}
 \end{definition}
 
+\begin{example}
+  \label{ex:mon-rewrite-system}
+  Let $\Indets = \N$ and $\group$ be the set of all bijections of $\Indets$.
+  Then, the rewrite system $x_1^2 x_2^2 \leftrightarrow_R x_1^2$
+  satisfies $\monelt \leftrightarrow_R^* x_1^2$ if and only if 
+  $\monelt$ has all its exponents that are multiple of $2$.
+\end{example}
+
 
 \begin{lemma}
   \label{lem:mon-rewrite-red-membership}
@@ -199,7 +207,7 @@ with some extra ``phase information''.
 \end{lemma}
 \begin{proof}
   The rewrite system simply acts on the tape of the reversible Turing machine 
-  using blank symbols. Because transisions of the reversible Turing machine
+  using blank symbols. Because transitions of the reversible Turing machine
   are substitutions of strings having the same size if one does not create new
   tape cells, the rewriting system can straigthforwardly simulate the 
   substitutions because of \cref{def:word-encoding}.
