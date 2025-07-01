@@ -29,6 +29,8 @@ action of $\group$.
 
 Leveraging the notion of decomposition, we can define a weakening of the notion
 of \kl{equivariant Gröbner basis} that we will use in this section.
+\todo[inline]{This is the translation of the notion of Grobner basis
+from polynomials to decompositions}
 
 \begin{definition}
   An \kl{equivariant set} $\Basis$ of polynomials is 
@@ -49,11 +51,13 @@ $\lm[\Indets](r) \revlexlt \lm[\Indets](p)$. In order to simplify the
 notations, we will write $p \intro*\pmonleq r$ to denote $\dom(r) \subseteq
 \dom(p)$, and $\lm[\Indets](r) \revlexlt \lm[\Indets](p)$, leaving the
 ordered set of indeterminates $\Indets$ implicit.
+The relation $\pmonleq$ is extended to decompositions by using 
+the analogues of $\dom$ and $\lm$ for decompositions.
 
 \begin{lemma}
   \label{lem:chm}
-  The quasi-ordering $\pmonleq$ is \kl{compatible} with the action of $\group$,
-  and is well-founded.
+  The quasi-ordering $\pmonleq$ is \kl(ord){compatible} with the action of $\group$,
+  and is well-founded on polynomials, and on \kl{decompositions} of polynomials.
 \end{lemma}
 \begin{proof}
   The first property is immediate because $\dom$, $\lm$, and $\revlexleq$ are
@@ -63,28 +67,25 @@ ordered set of indeterminates $\Indets$ implicit.
   indeterminates. In a decreasing sequence, the support of the leading 
   monomials is also decreasing, so that sequence only contains finitely many 
   indeterminates, hence we conclude.
+  The same proof works for decompositions.
 \end{proof}
 
-As a consequence of \cref{lem:chm}, we know that the rewriting relation
-$\toeucl{H}$ is \kl{terminating} for every set $H$.
-
-\begin{definition}
-  \label{def:normalisation}
-  Let $H$ be a set of polynomials, and let $p \in \poly{\K}{\X}$ be a
-  polynomial. We say that $p$ is \intro{normalised} with respect to $H$ if
-  there are no transitions $p \toeucl{H} r$. 
-  The set of \intro{remainders} of $p$ with respect to $H$ is 
-  denoted $\rem{H}{p}$, and is defined as the set of all polynomials $r$ such that
-  $p \toeucl{H}^* r$ and $r$ is normalised with respect to $H$.
-\end{definition}
+\AP As a consequence of \cref{lem:chm}, we know that the rewriting
+relation $\toeucl{H}$ is \kl{terminating} for every set $H$. Given a $H$ of
+polynomials, and given a polynomial $p \in \poly{\K}{\X}$, we say that $p$ is
+\intro{normalised} with respect to $H$ if there are no transitions $p
+\toeucl{H} r$. The set of \intro{remainders} of $p$ with respect to $H$ is
+denoted $\intro*\rem{H}{p}$, and is defined as the set of all polynomials $r$
+such that $p \toeucl{H}^* r$ and $r$ is \kl{normalised} with respect to $H$.
+The following lemma states that $\rem{H}{\cdot}$ is a computable function from
+in our setting.
 
 \begin{lemma}
   \label{lem:normalisation}
   Let $H$ be an \kl{orbit finite set} of polynomials, and let $p \in \poly{\K}{\X}$ be a
   polynomial. Then $\rem{H}{p}$ is finite.
   Furthermore, this computation
-  is equivariant is: for all $\gelem \in \group$, we have
-  $\rem{H}{\gelem \cdot p} = \gelem \cdot \rem{H}{p}$.
+  is \kl(func){equivariant}.
 \end{lemma}
 \begin{proof}
   Let us write $H = \orbit[\group]{H'}$, where $H'$ is a finite set of
@@ -116,20 +117,24 @@ that $\lm(r) < \max(\monelt[n] \lm(p), \monelt[m]\lm(q))$, where $\alpha,\beta
 given two monomials $\monelt[n], \monelt[m] \in \mon{\X}$, one can compute
 $\intro*\lcm(\monelt[n], \monelt[m])$ as the least common multiple of the two
 monomials, and that this in an \kl{equivariant operation}.
-
-\begin{lemma}
-  \label{lem:spoly}
-  Let $p$ and $q$ be two polynomials in $\poly{\K}{\X}$.
-  All the polynomials in $\CancelPoly{p}{q}$ are obtained by multiplying a monomial
-  with
-  the \kl{S-polynomial} $\spoly{p}{q}$ of $p$ and $q$, defined as
-  \begin{equation}
+Using this, we can introduce the \intro{S-polynomial} of two polynomials $p$ and $q$
+as in \cref{eq:spoly}.
+ \begin{equation}
     \label{eq:spoly}
     \intro*\spoly{p}{q} \defined
     \frac{\lcm(\lm(p), \lm(q))}{\lt(p)} \times p
     - \frac{\lcm(\lm(p), \lm(q))}{\lt(q)} \times q
     \quad .
   \end{equation}
+
+
+
+\begin{lemma}
+  \label{lem:spoly}
+  Let $p$ and $q$ be two polynomials in $\poly{\K}{\X}$.
+  All the polynomials in $\CancelPoly{p}{q}$ are obtained by multiplying a monomial
+  with
+  their \kl{S-polynomial} $\spoly{p}{q}$.
 \end{lemma}
 \begin{proof}
   Let $p,q \in \poly{\K}{\X}$, and let $r \in \CancelPoly{p}{q}$.
@@ -168,18 +173,25 @@ $\intro*\spolyset(H) \defined \bigcup_{p,q \in H} \rem{H}{\spoly{p}{q}}$.
 
 \begin{lemma}
   \label{lem:spoly-orbit-finite}
-  Let $H$ be an orbit finite set of polynomials. Then $\spolyset(H)$ is also an
-  orbit finite set of polynomials.
+  The function $\spolyset(H)$ is an \kl{equivariant function},
+  and given an \kl{orbit finite} set $H$ of polynomials, one can compute
+  the image 
+  $\spolyset(H)$.
 \end{lemma}
 \begin{proof}
   \todo[inline]{write it...}
 \end{proof}
 
-We are now ready to define the saturation algorithm that will compute 
-\kl{weak equivariant Gröbner bases}, described in \cref{alg:weakgb}.
+We are now ready to define the saturation algorithm that will compute \kl{weak
+equivariant Gröbner bases}, described in
+\cref{alg:weakgb}.
+Let us remark that \cref{alg:weakgb}
+is an actual
+algorithm, that can be run on a finite representation of the input set $H$.
+Indeed, \todo[inline]{justify it}
 
 \begin{algorithm}
-    \caption{Computing \kl{weak equivariant Gröbner bases}}
+  \caption{Computing \kl{weak equivariant Gröbner bases} using the algorithm \kl{weakgb}}
     \label{alg:weakgb}
     \KwIn{An orbit finite set $H$ of polynomials}
     \KwOut{An orbit finite set $\Basis$ that is a \kl{weak equivariant Gröbner basis} of
@@ -193,27 +205,16 @@ We are now ready to define the saturation algorithm that will compute
     }
 \end{algorithm}
 
-In order for \cref{alg:weakgb} to be an actual algorithm, we need several 
-effectivity assumptions. 
-
-\begin{lemma}
-  \label{lem:weakgb-computable}
-  Assume that the order $\varleq$ is effectively computable, and 
-  that the action of $\group$ is \kl{effectively oligomorphic}. Then, the
-  algorithm \cref{alg:weakgb} is an actual algorithm,
-  that can be run on a finite representation of the input set $H$.
-\end{lemma}
-\begin{proof}
-  \todo[inline]{
-    use the effectivity assumptions: one can compute the orbits of
-    pairs of elements
-    }
-\end{proof}
+Let us now use the semantic assumptions to prove the termination of
+\cref{alg:weakgb}
+and the
+correctness of the result.
 
 \begin{lemma}
   \label{lem:weakgb-termination}
   Assume that $(\mon[\omega]{\X}, \gdivleq)$ is a \kl{WQO}. Then, 
-  \cref{alg:weakgb} terminates.
+  \cref{alg:weakgb} terminates
+  on every \kl{orbit finite} set $H$ of polynomials.
 \end{lemma}
 \begin{proof}
   Let $\seqof{H_n}[n \in \N]$ be the sequence of sets of polynomials
@@ -237,14 +238,13 @@ effectivity assumptions.
   \mon{\X}$ such that $\lm(t) \times \monelt[n] = \lm(r)$, and therefore
   $\lm(t) \gdivleq \cm(r)$. Therefore, one can find some $\alpha \in \K$ such
   that the polynomial $r' \defined r - \alpha \monelt[n] t$ satisfies $r'
-  \pmonlt r$, and in particular, $r \toeucl{\pmonleq}{H_n} r'$.
+  \pmonlt r$, and in particular, $r \toeucl{H_n} r'$.
   This contradicts the fact that $r$ is \kl{normalised} with respect to $H_n$.
 \end{proof}
 
 \begin{lemma}
   \label{lem:weakgb-correctness}
-  Assume that $(\mon[\omega]{\X}, \gdivleq)$ is a \kl{WQO}. Then, the set $\Basis$ computed
-  by \cref{alg:weakgb} 
+  Assume that $\Basis$ is the output of \cref{alg:weakgb}. Then, it 
   is a \kl{weak equivariant Gröbner basis} of the ideal
   $\EqIdlGen{H}$.
 \end{lemma}
@@ -261,15 +261,6 @@ effectivity assumptions.
   \end{equation}
   Where $\alpha_i \in \K$, $p_i \in \Basis$, and $\monelt_i \in \mon{\X}$,
   for all $i \in I$.
-
-  Let us extend the ordering $\pmonleq$ to decompositions as follows:
-  \begin{equation}
-    \mathfrak{d}_1 \pmonleq \mathfrak{d}_2
-    \quad \text{if and only if} \quad
-    \dom(\mathfrak{d}_1) \subseteq \dom(\mathfrak{d}_2)
-    \text{ and } \lm(\mathfrak{d}_1) \revlexleq \lm(\mathfrak{d}_2)
-    \quad .
-  \end{equation}
 
   Because of \cref{lem:chm}, we know that the ordering $\pmonleq$ is
   \kl{well-founded}. As a consequence, one can find a minimal decomposition
