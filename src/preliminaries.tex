@@ -72,6 +72,18 @@ the ordering $\varleq$, we allow ourselves to write $\lm[\Indets](p)$ to
 highlight the precise ordered set of variables that was used to compute the
 \kl{leading monomial} of $p$.
 
+Let us briefly argue in favor of the \kl{reverse lexicographic} ordering. In
+the case of a finite set of indeterminates, one can choose any total ordering
+on $\mon{\Indets}$, as long as it contains the \kl{divisibility}
+quasi-ordering, and is compatible with the product of monomials.\footnote{This
+is often called a \emph{monomial ordering}, see \cite{CLO15}.} In our case,
+having an infinite number of indeterminates, we rely on a connection between
+$\lm(p)$ and $\dom(p)$: $\dom(p) \subseteq \dwset{\dom(\lm(p))}$, where
+$\dwset{S}$ is the downward closure of a set $S \subseteq \Indets$, i.e. the
+set of all indeterminates $x \in \Indets$ such that $y \leq x$ for some $y \in
+S$. This means that the \kl{leading monomial} encodes a \emph{global property}
+of the polynomial, and it will be crucial in our termitation arguments.
+
 
 \paragraph{Ideals, and Gröbner Bases.} \AP An \intro{ideal} $\idl$ of
 $\poly{\K}{\X}$ is a non-empty subset of $\poly{\K}{\X}$ that is closed under
@@ -148,18 +160,25 @@ of \kl{equivariant ideals}.
 union of finitely many \intro{orbits} under the action of $\group$. We denote
 $\intro*\orbit[\group]{E}$ for the set of all elements $\gelem \cdot x$ for
 $\gelem \in \group$ and $x \in E$. Equivalently, an \reintro{orbit finite set}
-is a set of the form $\orbit[\group]{E}$ for some finite set $E$.
+is a set of the form $\orbit[\group]{E}$ for some finite set $E$. Not every
+\kl{equivariant subset} is \kl{orbit finite}, as shown in
+\cref{ex:orbit-finite}. However, \kl{orbit finite sets} are
+robust in the sense that \kl{equivariant subsets} of \kl{orbit finite sets} are
+also \kl{orbit finite}, and similarly, an \kl{equivariant subset} of $E^n$ is
+\kl{orbit finite} whenever $E$ is \kl{orbit finite} and $n \in \N$ is finite
+\cite{BOJAN16inf}. For algorithmic purposes, \kl{orbit finite sets} are the
+ones that can be taken as input as a finite set of representatives (one for
+each orbit).
 
-\todo[inline]{add example of orbit finite / non orbit finite}
-
-\AP A group action $\group \actson \X$ is said to be \intro(ord){compatible} with an
-ordering $\leq$ on $\X$ if for all $\gelem \in \group$ and $x,y \in \X$, we
-have $x \leq y$ if and only if $\gelem \cdot x \leq \gelem \cdot y$. Let us
-point out that in this case, $\revlexleq$ is also \kl{compatible} with the
-action of $\group$ on $\mon{\X}$, i.e. for all $\gelem \in \group$ and
-monomials $\monelt[m], \monelt[n] \in \mon{\X}$, we have
-$\monelt[m] \revlexleq \monelt[n]$ if and only if $\gelem \cdot \monelt[m]
-\revlexleq \gelem \cdot \monelt[n]$.
+\begin{example}
+  \label{ex:orbit-finite}
+  Let $\Indets = \N$, and $\group$ be all permutations 
+  that fixes prime numbers. The
+  set of all polynomials whose coefficients sum to $0$ is an 
+  \kl{equivariant ideal}, but it is not \kl{orbit finite},
+  since all the polynomials $x_p - x_q$ for $p \neq q$ primes
+  are in distinct orbits under the action of $\group$.
+\end{example}
 
 \AP A function $f \colon X \to Y$ between two sets $X$ and $Y$ equipped with
 actions $\group \actson X$ and $\group \actson Y$ is said to be
@@ -167,24 +186,37 @@ actions $\group \actson X$ and $\group \actson Y$ is said to be
 $f(\gelem \cdot x) = \gelem \cdot f(x)$. For instance, the
 \kl(monomial){domain} of a monomial is an \kl{equivariant function} if $\gelem
 \in \group$, then $\gelem \cdot \dom(\monelt[m]) = \dom(\gelem \cdot
-\monelt[m])$. Similarly, the \kl{leading monomial} is an \kl{equivariant
-function}, provided that the ordering $\varleq$ on $\Indets$ is \kl{compatible} with
-the action of $\group$ on $\Indets$.
+\monelt[m])$. Let us point out that the image of an \kl{orbit finite set} under
+an \kl{equivariant function} is \kl{orbit finite}, and that the algorithms that
+we will develop in this paper will all be \kl(func){equivariant}.
 
+\paragraph*{Computability assumptions.} \AP We say that the action is
+\intro{effectively oligomorphic} if for every $n \in \N$ and every \kl{orbit
+finite set} $E \subseteq \Indets$, the set $E^n$ is \kl{orbit finite} under the
+action of $\group$ on $\Indets^n$. Furthermore, we ask that, for all $n \in
+\N$, there exists an algorithm that decides whether two elements $\vec{x},
+\vec{y} \in \Indets^n$ are in the same orbit under the action of $\group$ on
+$\Indets^n$.
+A group action $\group \actson \X$ is said to be \intro(ord){compatible}
+with an ordering $\leq$ on $\X$ if for all $\gelem \in \group$ and $x,y \in
+\X$, we have $x \leq y$ if and only if $\gelem \cdot x \leq \gelem \cdot y$.
+Let us point out that in this case, $\revlexleq$ is also \kl(ord){compatible} with
+the action of $\group$ on $\mon{\X}$, i.e. for all $\gelem \in \group$ and
+monomials $\monelt[m], \monelt[n] \in \mon{\X}$, we have $\monelt[m] \revlexleq
+\monelt[n]$ if and only if $\gelem \cdot \monelt[m] \revlexleq \gelem \cdot
+\monelt[n]$.
+Our \intro{computability assumptions} on the tuple $(\Indets, \group,
+\leq)$ will therefore be that $\group$ acts \kl{effectively oligomorphic} on
+$\Indets$, and that its action is \kl(ord){compatible} with the ordering $\leq$
+on $\Indets$.
 
-\AP We say that the action is \intro{effectively oligomorphic} if for every $n
-\in \N$ and every \kl{orbit finite set} $E \subseteq \Indets$, the set $E^n$ is
-\kl{orbit finite} under the action of $\group$ on $\Indets^n$. Furthermore, we
-ask that, for all $n \in \N$, there exists an algorithm that decides whether
-two elements $\vec{x}, \vec{y} \in \Indets^n$ are in the same orbit under the
-action of $\group$ on $\Indets^n$.
-
-\todo[inline]{add a reference to the atom book
-   + add examples of effective oligomorphic / non effective oligomorphic}
-
-\todo[inline]{Prove that the image of an orbit finite set under 
-  an equivariant function is orbit finite
-  if everything is \kl{effectively oligomorphic}.}
+\begin{example}
+  \label{ex:computability-assumptions}
+  Let $\Indets \defined \Q$ and $\group$ be the group of all
+  order preserving bijections of $\Q$.
+  Then, $\group$ acts \kl{effectively oligomorphically} on $\Indets$,
+  and its action is \kl(ord){compatible} with the ordering of $\Q$ by definition.
+\end{example}
 
 \paragraph{Equivariant Gröbner bases.} \AP We know from \cite{GHOLAS24} that a
 necessary condition for the \kl{equivariant Hilbert basis property} to hold is
@@ -194,10 +226,9 @@ endowed with the \intro{divisibility up-to $\group$} relation
 \mon{\X}$, we write $\monelt_1 \gdivleq \monelt_2$ if there exists $\gelem \in
 \group$ such that $\monelt_1$ \kl{divides} $\gelem \cdot \monelt_2$. This
 relation also extends to monomials that are functions from $\Indets$ to
-$(Y,\leq)$ with finite support, where $Y$ is any partially ordered set.
-
-\AP We say that a set $\Basis \subseteq \poly{\K}{\X}$ is an \intro{equivariant
-Gröbner basis} of an equivariant ideal $\idl$ if $\Basis$ is \kl{equivariant},
+$(Y,\leq)$ with finite support, where $Y$ is any partially ordered set. We say
+that a set $\Basis \subseteq \poly{\K}{\X}$ is an \intro{equivariant Gröbner
+basis} of an equivariant ideal $\idl$ if $\Basis$ is \kl{equivariant},
 $\IdlGen{\Basis} = \idl$, and for every polynomial $p \in \idl$, there exists
 $q \in \Basis$ such that $\lm[\Indets](q) \gdivleq \lm[\Indets](p)$ and
 $\dom(q) \subseteq \dom(p)$, following the definition of \cite{GHOLAS24}.
@@ -207,4 +238,20 @@ is not necessarily an \kl{equivariant Gröbner basis}, because of the
 \kl(polynomial){domain} condition. However, every \kl{equivariant Gröbner
 basis} is a \kl{Gröbner basis}.
 
-\todo[inline]{add an example of non equivariant Gröbner basis in the finite case}
+\begin{example}
+  \label{ex:equivariant-gb}
+  Let $\Indets \defined \set{ x_1, x_2 }$,
+  with $x_1 \varleq x_2$,
+  and $\group$ be the trivial group.
+  Let us furthermore consider the ideal $\idl$ \kl(idl){generated by}
+  $\set{ x_1, x_2 }$.
+  Then, the set $\Basis \defined \set{ x_2 - x_1, x_1 }$ is a
+  \kl{Gröbner basis} of $\idl$, but not an \kl{equivariant Gröbner basis}.
+  Indeed, $x_2 \in \idl$, but there is no polynomial $q \in \Basis$
+  such that $\lm(q) \divleq x_2$ and $\dom(q) \subseteq \dom(x_2)$.
+\end{example}
+
+In the finite case, one can always compute an \kl{equivariant Gröbner basis} by
+computing \kl{Gröbner bases} for every possible ordering of the indeterminates,
+and taking their union.\footnote{This algorithm is correct because we are
+  considering the \kl{reverse lexicographic} ordering.}
