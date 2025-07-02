@@ -8,8 +8,10 @@ basis} of an \kl{equivariant ideal}. This can be seen as an analysis of the
 classical algorithm in the equivariant setting. We will assume for the rest of
 the section that $\Indets$ is a set of indeterminates equipped with a group
 $\group$ acting \kl{effectively oligomorphically} on $\X$, and that $\X$ is
-equipped with a total ordering $\varleq$ that is \kl{compatible} with the
-action of $\group$.
+equipped with a total ordering $\varleq$ that is \kl(ord){compatible} with the
+action of $\group$. The crucial object of this section is the notion of
+\kl{decomposition} of a polynomial with respect to a set $H$
+(\cref{def:decomposition}).
 
 \begin{definition}
   \label{def:decomposition}
@@ -28,9 +30,9 @@ action of $\group$.
 \end{definition}
 
 Leveraging the notion of decomposition, we can define a weakening of the notion
-of \kl{equivariant Gröbner basis} that we will use in this section.
-\todo[inline]{This is the translation of the notion of Grobner basis
-from polynomials to decompositions}
+of \kl{equivariant Gröbner basis}, that essentially mimics the classical notion
+of \kl{equivariant Gröbner basis} at the level of \kl{decompositions} instead
+o,f polynomials.
 
 \begin{definition}
   An \kl{equivariant set} $\Basis$ of polynomials is 
@@ -48,7 +50,7 @@ relation. Given $p,r \in \poly{\K}{\X}$, we write $p \intro*\toeucl{H}
 r$ if and only if there exists $q \in H$, $a \in \K$, and $\monelt \in
 \mon{\X}$ such that $p = a \monelt q + r$, $\dom(r) \subseteq \dom(p)$, and
 $\lm[\Indets](r) \revlexlt \lm[\Indets](p)$. In order to simplify the
-notations, we will write $p \intro*\pmonleq r$ to denote $\dom(r) \subseteq
+notations, we will write $p \intro*\pmonlt r$ to denote $\dom(r) \subseteq
 \dom(p)$, and $\lm[\Indets](r) \revlexlt \lm[\Indets](p)$, leaving the
 ordered set of indeterminates $\Indets$ implicit.
 The relation $\pmonleq$ is extended to decompositions by using 
@@ -99,7 +101,7 @@ in our setting.
   Because, $\lm(r) \revlexlt \lm(q)$, we  
   conclude that $\lm(p) = \lm(\alpha \monelt[n] (\gelem\cdot q))$, and 
   therefore $r$ is uniquely determined by the choice of $q \in H'$ and the
-  choice of $\gelem \in \group$ that maps the \kl{domain} of $q$ to the \kl{domain} of
+  choice of $\gelem \in \group$ that maps the \kl(poly){domain} of $q$ to the \kl(poly){domain} of
   $p$. There are finitely elements in $H'$ and finitely many such functions
   $\gelem \in \group$ because both domains are finite.
 \end{proof}
@@ -166,29 +168,15 @@ as in \cref{eq:spoly}.
 \end{proof}
 
 Remark that the \kl{S-polynomial} is equivariant: if $\gelem \in \group$, then
-$\spoly{\gelem \cdot p}{\gelem \cdot q} = \gelem \cdot \spoly{p}{q}$. We are
-now ready to define our saturation algorithm. Whenever $p,q \in H$, these
-polynomials clearly belong to $\IdlGen{H}$. Given a set $H$, we write
-$\intro*\spolyset(H) \defined \bigcup_{p,q \in H} \rem{H}{\spoly{p}{q}}$.
-
-\begin{lemma}
-  \label{lem:spoly-orbit-finite}
-  The function $\spolyset(H)$ is an \kl{equivariant function},
-  and given an \kl{orbit finite} set $H$ of polynomials, one can compute
-  the image 
-  $\spolyset(H)$.
-\end{lemma}
-\begin{proof}
-  \todo[inline]{write it...}
-\end{proof}
-
-We are now ready to define the saturation algorithm that will compute \kl{weak
-equivariant Gröbner bases}, described in
+$\spoly{\gelem \cdot p}{\gelem \cdot q} = \gelem \cdot \spoly{p}{q}$. Given a
+set $H$, we write $\intro*\spolyset(H) \defined \bigcup_{p,q \in H}
+\rem{H}{\spoly{p}{q}}$. We are now ready to define the saturation algorithm
+that will compute \kl{weak equivariant Gröbner bases}, described in
 \cref{alg:weakgb}.
 Let us remark that \cref{alg:weakgb}
-is an actual
-algorithm, that can be run on a finite representation of the input set $H$.
-Indeed, \todo[inline]{justify it}
+is
+an actual algorithm (\cref{lem:weakgb-computable}) that is
+\kl(func){equivariant}.
 
 \begin{algorithm}
   \caption{Computing \kl{weak equivariant Gröbner bases} using the algorithm \intro{weakgb}.}
@@ -205,10 +193,27 @@ Indeed, \todo[inline]{justify it}
     }
 \end{algorithm}
 
-Let us now use the semantic assumptions to prove the termination of
-\cref{alg:weakgb}
-and the
-correctness of the result.
+\begin{lemma}
+  \label{lem:weakgb-computable}
+  The \cref{alg:weakgb} is a computable function that is itself
+  \kl(func){equivariant}.
+\end{lemma}
+\begin{proof}
+  \todo[inline]{write it...}
+  The function $\spolyset(H)$ is an \kl{equivariant function},
+  and given an \kl{orbit finite} set $H$ of polynomials, one can compute
+  the image 
+  $\spolyset(H)$.
+
+  Furthermore one can decide whether the set $\Basis$ stabilises
+  because one the set of indeterminates is \kl{effectively oligomorphic}.
+\end{proof}
+
+
+Let us now use the semantic assumptions to prove the termination
+(\cref{lem:weakgb-termination}) of \cref{alg:weakgb}
+and
+the correctness of the result (\cref{lem:weakgb-correctness}).
 
 \begin{lemma}
   \label{lem:weakgb-termination}

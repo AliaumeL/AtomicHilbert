@@ -65,6 +65,7 @@
  | characteristic monomials
 \knowledge{notion}
  | domain@polynomial
+ | domain@poly
  | domain@monomial
  | domain of a polynomial
 
@@ -73,6 +74,7 @@
 
 \knowledge{notion}
  | decomposition
+ | decompositions
 
 \knowledge{notion}
  | leading monomial@dec
@@ -145,6 +147,8 @@
  | equivariant
  | equivariant set
  | invariant
+ | equivariant subset
+ | equivariant subsets
 
 \knowledge{notion}
  | equivariant ideal
@@ -231,3 +235,11 @@
  | infinite path@of
 \knowledge{notion}
  | infinite dimensional vector space
+ 
+
+
+% algorithms
+\knowledge{notion,typewriter,ensuretext}
+ | weakgb
+\knowledge{notion,typewriter,ensuretext}
+ | egb

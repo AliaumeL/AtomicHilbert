@@ -201,9 +201,13 @@
 %
 % Coloring operations on sets of indeterminates
 %
-\NewDocumentCommand{\forgetCol}{}{\mathop{\mathsf{forget}}}
-\NewDocumentCommand{\colorWith}{ m }{\mathop{\mathsf{col}_{#1}}}
-\NewDocumentCommand{\freeColor}{ }{\mathop{\mathsf{freecol}}}
+\NewDocumentCommand{\forgetCol}{}{\mathop{\kl[\forgetCol]{\mathsf{forget}}}}
+\knowledge{\forgetCol}{notion}
+\NewDocumentCommand{\colorWith}{ m }{\mathop{\kl[\colorWith]{\mathsf{col}_{#1}}}}
+\knowledge{\colorWith}{notion}
+\NewDocumentCommand{\freeColor}{ }{\mathop{\kl[\freeColor]{\mathsf{freecol}}}}
+\knowledge{\freeColor}{notion}
+
 
 %
 % word encodings and undecidability

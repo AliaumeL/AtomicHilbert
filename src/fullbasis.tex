@@ -16,23 +16,29 @@ disjoint union of two copies of $\Indets$, ordered. It will be useful to refer
 to the first copy (lower copy) and the second copy (upper copy), noting the
 isomorphism between $\IndetsCol$ and $\set{\mathsf{first}, \mathsf{second}}
 \times \Indets$, ordered lexicographically, where $\mathsf{first} <
-\mathsf{second}$. We will also define $\forgetCol \colon \IndetsCol \to
+\mathsf{second}$. We will also define $\intro*\forgetCol \colon \IndetsCol \to
 \Indets$ that maps a colored variable to its underlying variable.
 Beware that $\forgetCol$ is not an order preserving map.
 We extend $\forgetCol$ as a morphism from polynomials in
 $\poly{\K}{\IndetsCol}$ to polynomials in $\poly{\K}{\Indets}$.
 
-Given a subset $V \subfin \Indets$, we build the injection $\colorWith{V}
-\colon \Indets \to \IndetsCol$ that maps variables $x$ in $V$ to
-$(\mathsf{fisrt}, x)$, and variables $x$ not in $V$ to $(\mathsf{second}, x)$.
-Again, we extend these maps as morphisms from $\poly{\K}{\Indets}$ to
-$\poly{\K}{\IndetsCol}$. We say that a polynomial $p \in \poly{\K}{\IndetsCol}$
-is \intro{$V$-compatible} if $p \in \colorWith{V}(\poly{\K}{\Indets})$.
+\AP
+Given a subset $V \subfin \Indets$, we build the injection
+$\intro*\colorWith{V} \colon \Indets \to \IndetsCol$ that maps variables $x$ in
+$V$ to $(\mathsf{fisrt}, x)$, and variables $x$ not in $V$ to
+$(\mathsf{second}, x)$. Again, we extend these maps as morphisms from
+$\poly{\K}{\Indets}$ to $\poly{\K}{\IndetsCol}$. We say that a polynomial $p
+\in \poly{\K}{\IndetsCol}$ is \intro{$V$-compatible} if $p \in
+\colorWith{V}(\poly{\K}{\Indets})$. Using these definitions, we create
+$\intro*\freeColor$ that maps a set $H$ of polynomials to the union over all
+finite subsets $V$ of $\Indets$ of the set $\colorWith{V}(H)$. Beware that
+$\freeColor$ does not equal $\forgetCol^{-1}$, since we only consider
+\kl{$V$-compatible} polynomials (for some finite set $V$).
 
-\todo[inline]{introduce a function for egb, and weakgb}
+\AP
 We are now ready to write our algorithm to compute an \kl{equivariant Gröbner
-basis} by computing the ``congugacy'' $\mathsf{egb} \defined \forgetCol \circ
-\mathop{\mathsf{weakgb}} \circ \freeColor$. To prove the correctness of our
+basis} by computing the ``congugacy'' $\intro{egb} \defined \forgetCol \circ
+\mathop{\kl{weakgb}} \circ \freeColor$. To prove the correctness of our
 algorithm, let us first argue that one can indeed compute the \kl{weak
 equivariant Gröbner basis} algorithm.
 
@@ -42,8 +48,8 @@ equivariant Gröbner basis} algorithm.
   is \kl{effectively oligomorphic},
   and that $(\mon[\om^2]{\Indets}, \gdivleq)$
   is a \kl{well-quasi-order}.
-  Then $\mathsf{egb}$ is a computable function,
-  and the function $\mathsf{weakgb}$ is called 
+  Then $\kl{egb}$ is a computable function,
+  and the function $\kl{weakgb}$ is called 
   on corret inputs.
 \end{lemma}
 \begin{proof}
