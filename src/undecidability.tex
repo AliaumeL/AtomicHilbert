@@ -12,8 +12,6 @@ the \kl{equivariant ideal membership problem} is undecidable even when
 $(\mon{\Indets}, \gdivleq)$ is not a well-quasi-ordering, as illustrated by the
 following \cref{ex:non-wqo-undecidable}.
 
-\todo[inline]{Add N with succ, and N with order as examples}
-
 \begin{example}
   \label{ex:non-wqo-undecidable}
   Let $\Indets = \{x_1, x_2, \ldots\}$ be an infinite set of indeterminates,
@@ -28,6 +26,59 @@ following \cref{ex:non-wqo-undecidable}.
   Then, the \kl{equivariant ideal membership problem} is reduces to 
   the \kl{ideal membership problem} in $\poly{\K}{V}$, which is decidable.
 \end{proof}
+
+Avoiding pathological cases such as the one in
+\cref{ex:non-wqo-undecidable}, we can give one positive and one
+negative examples that are designed to illustrate the results we will present
+in this section. On the positive side, one can consider $\Indets_\Q$, the set
+of all rationals equipped with their usual ordering, and the group of all
+bijections of $\Indets_\Q$ that preserve the ordering
+(\cref{ex:q-is-super-wqo}). While on the negitive side, one can
+consider $\Indets_\Z$, the set of all integers equipped with their usual
+ordering, and the group of all shifts of integers
+(\cref{ex:z-is-not-wqo}).
+
+\begin{example}
+  \label{ex:q-is-super-wqo}
+  The set $(\mon[Y]{\Indets_\Q}, \gdivleq)$ is a \kl{well-quasi-ordering} whenever $Y$ is
+  one, and in particular $\Indets_\Q$ satisfies the computability assumptions and
+  the termination assumptions of both \cref{thm:compute-egb}
+  and
+  \cref{thm:decide-equiv-ideal-mem}.
+\end{example}
+\begin{proof}
+  Let $\seqof{\monelt_i}[i \in \N]$ be a sequence of monomials in
+  $\mon[Y]{\Indets_\Q}$. Let us write each monomial $\monelt_i$ as
+  a finite word $w_i$ over the alphabet $Y$, by writing all the exponents in the order 
+  prescribed by the indeterminates.
+  Because $Y$ is a \kl{well-quasi-ordering}, the set of all finite words over $Y$ is
+  \kl{well-quasi-ordered} by the \emph{scattered subword} relation \cite{HIG52}.
+  Now, if $w_i$ is a scattered subword of $w_j$, then
+  $\monelt_i \gdivleq \monelt_j$, by choosing a suitable $\gelem \in \group$.
+\end{proof}
+
+\begin{example}
+  \label{ex:z-is-not-wqo}
+  The set $(\mon[Y]{\Indets_\Z}, \gdivleq)$ is not a \kl{well-quasi-ordering} whenever $Y$ is
+  contains two distinct elements.
+  In particular, $\Indets_\Z$ does not satisfy the termination assumptions of
+  \cref{thm:compute-egb} and \cref{thm:decide-equiv-ideal-mem}.
+\end{example}
+\begin{proof}
+  Assume that $Y$ has two distinct elements $a$ and $b$, and let us assume without loss of generality
+  that $a \leq b$. The sequence of monomials 
+  $\monelt_i \defined x_1^{b} x_2^{a} \cdots x_{i-1}^{a} x_i^{b}$
+  forms an infinite antichain in $(\mon[Y]{\Indets_\Z}, \gdivleq)$.
+  Indeed, if $\monelt_i \gdivleq \monelt_j$ for some $i < j$, then
+  without loss of generality, $\gelem_i (x_1) = x_1$, and 
+  $\gelem_i (x_i) = x_j$, because these are the only ones that can be 
+  equipped with a large enough exponent.
+  Therefore, $\gelem_i = \mathrm{id}$ since the group only contains translations.
+  However, this implies that the exponent of $x_j$ in $\monelt_j$ is at most $a$,
+  which contradicts the fact that it is $b$.
+\end{proof}
+
+\subsection{Monomial Reachability}
 
 The undecidability results we will present in this section regarding the
 \kl{equivariant ideal membership problem} will use the polynomials in a very
@@ -337,8 +388,6 @@ $u \in \Sigma^*$.
   there exists $x, y \in \Sigma^*$ such that $x u y = v$.
 \end{proof}
 
-\todo[inline]{Add examples}
-
 \subsection{Infinite Dimensional Vector Space}
 \label{subsec:vector}
 
@@ -349,7 +398,6 @@ $\Indets \defined \mathbb{V}$, that is, an infinite dimensional vector space
 over a field, where the group $\group$ acting on $\Indets$ is the group of
 linear automorphisms of $\mathbb{V}$.
 
-\todo[inline]{replace $4$ by $3$}
 It is unclear whether the \kl{infinite dimensional vector space} contains an
 \kl(of){infinite path} $P$ as defined in
 \cref{subsec:paths}. However, we can
@@ -360,9 +408,9 @@ linearly independent, which is possible precisely because $\mathbb{V}$ is
 infinite dimensional. Let us write $\gelem_{+1} \in \group$ for the linear
 automorphism that sends $v_i$ to $v_{i + 1}$ for all $i \in \N$, and acts
 trivially on a supplement of the subspace spanned by $\set{v_0, v_1, v_2,
-\ldots}$. We then define $\wenc{\varepsilon} \defined v_0^4$, $\wenc{a u}
-\defined v_0^4 (v_0 + v_1)^2 v_1^4 (v_1 + v_2) (\gelem_{+2} \cdot \wenc{u})$
-and $\wenc{b u} \defined v_0^4 (v_0 + v_1)^1 v_1^4 (v_1 + v_2)^2 (\gelem_{+2}
+\ldots}$. We then define $\wenc{\varepsilon} \defined v_0^3$, $\wenc{a u}
+\defined v_0^3 (v_0 + v_1)^2 v_1^3 (v_1 + v_2) (\gelem_{+2} \cdot \wenc{u})$
+and $\wenc{b u} \defined v_0^3 (v_0 + v_1)^1 v_1^3 (v_1 + v_2)^2 (\gelem_{+2}
 \cdot \wenc{u})$.
 
 \begin{lemma}
@@ -377,7 +425,7 @@ and $\wenc{b u} \defined v_0^4 (v_0 + v_1)^1 v_1^4 (v_1 + v_2)^2 (\gelem_{+2}
   it acts as a translation of the indices on the vectors $v_i$ that appear in
   $u$.
   The reason is that the indeterminates $v_i$ are the only ones that appear with
-  exponent $4$ in the definition of $\wenc{\cdot}$, hence $\gelem$ must 
+  exponent $3$ in the definition of $\wenc{\cdot}$, hence $\gelem$ must 
   send all the $v_i's$ that appear in $\wenc{u}$ to some $v_j$'s that appear 
   in $\wenc{v}$.
   Assume that $\gelem \cdot v_0 = v_k$ for some $k \in \N$,
