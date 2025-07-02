@@ -4,15 +4,19 @@
 \section{Decision Procedure for the Equivariant Ideal Membership Problem}
 \label{sec:refinements}
 
+In the previous
+\cref{sec:equivariant-grobner-basis},
+we relied on a strong assumption on the set of indeterminates. Let us prove
+that one can safely weaken this assumption to obtain a decision procedure for
+the \kl{equivariant ideal membership problem}, leaving a very tight gap between
+the hypothesis needed for the existence of \kl{equivariant Gröbner bases} and
+the decidability of the \kl{equivariant ideal membership problem}.
 
-\todo[inline]{In this section, we refine our analysis by 
-showing that under weaker assumptions, we still get decidability}
-
-In this section we provide a decision procedure for the
-\kl{equivariant ideal membership problem}, we will
-leverage the results of the previous section to compute
-what we call \kl{$V$-strong equivariant Gröbner bases}
-for a finite set $V \subfin \Indets$ of indeterminates.
+The key idea of this section is to focus on a finite set $V \subfin \Indets$ of
+indeterminates, and to consider what we call \kl{$V$-strong equivariant Gröbner
+bases}, that are intuitively good enough to decide the \kl{equivariant ideal
+membership problem} for all polynomials in $\poly{\K}{V}$, that is, for all
+polynomials that only depend on the indeterminates in $V$.
 
 \begin{definition}
   \label{def:strong-equiv-grob}
@@ -34,11 +38,10 @@ basis} of the ideal $\idl$ with respect to a new ordering of the indeterminates
 and a new group action. Let us write $\IndetsV[V] \defined V \ordplus (\Indets
 \setminus V)$, that is the totally ordered set of indeterminates having the
 same elements as $\Indets$, but with the elements of $V$ ordered below all
-other elements of $\Indets$.
-We will define a new group $\group_V$ that acts on $\IndetsV[V]$ by
-restricting the action of $\group$ to the operations that fix the
-indeterminates in $V$, i.e., such that for all $\gelem \in \group_V$ and
-$x \in V$, we have $\gelem(x) = x$.
+other elements of $\Indets$. We will define a new group $\group_V$ that acts on
+$\IndetsV[V]$ by restricting the group to elements $\gelem$ such that $\gelem
+\cdot V = V$. In particular, the action of $\group_V$ on $\IndetsV[V]$ is
+\kl(ord){compatible} with the ordering on $\IndetsV[V]$.
 
 Let us call $\iota_V \colon \Indets \to \IndetsV[V]$ the identity map that maps
 every element of $\Indets$ to itself. We extend this map as a morphism from
@@ -46,136 +49,67 @@ $\poly{\K}{\Indets}$ to $\poly{\K}{\IndetsV[V]}$. Beware that $\iota_V$ is not
 an order-preserving map. Similarly, let us introduce $\upsilon_V \colon
 \IndetsV[V] \to \Indets$ that maps every element of $\IndetsV[V]$ to itself,
 and extends as a morphism from $\poly{\K}{\IndetsV[V]}$ to
-$\poly{\K}{\Indets}$. Again, $\upsilon_V$ is not an order-preserving map.
-Using these two constructions, we are ready to define the algorithm that computes
-a \kl{$V$-strong equivariant Gröbner basis} of an \kl{equivariant ideal}
-in \cref{alg:v-stronggb}.
+$\poly{\K}{\Indets}$. Again, $\upsilon_V$ is not an order-preserving map. Using
+these two constructions, we are ready to define the algorithm that computes a
+\kl{$V$-strong equivariant Gröbner basis} of an \kl{equivariant ideal}:
+$\mathsf{vsgb}(H, V) \defined \upsilon_V(\mathsf{weakgb}(\iota_V(H)))$.
 
-\begin{algorithm}
-    \caption{Computing a \kl{$V$-strong equivariant Gröbner bases}}
-    \label{alg:v-stronggb}
-    \KwIn{An orbit finite set $H$ of polynomials, a finite set $V$ of indeterminates}
-    \KwOut{A \kl{$V$-strong equivariant Gröbner basis} of
-      $\EqIdlGen{H}$}
-    \Begin{
-        $H_V \gets \iota_V(H)$\;
-        $\Basis_V \gets \mathsf{weakgb}(H_V)$\;
-        $\Basis \gets \upsilon_V(\Basis_V)$\;
-        \Return{$\Basis$}\;
-    }
-\end{algorithm}
-
-For \cref{alg:v-stronggb} to be valid, it suffices to check that: $\iota_V(H)$
-is an orbit finite set of polynomials in $\poly{\K}{\IndetsV[V]}$ under the
-action of $\group_V$, that the hypotheses of
-  \cref{thm:weakgb-comput}
-are satisfied for $(\IndetsV[V],
-\group_V)$, and that the result $\upsilon_V(\Basis_V)$ is indeed a
-\kl{$V$-strong equivariant Gröbner basis} of $\EqIdlGen{H}$.
-
-Let us first check that $\iota_V(H)$ is an orbit finite set of
-polynomials in $\poly{\K}{\IndetsV[V]}$ under the action of $\group_V$,
-and that it is effectively computable from $V$ and $H$.
+Let us proceed similarly as in \cref{sec:equivariant-grobner-basis}
+to prove that
+$\mathsf{vsgb}$ is a computable \kl{equivariant function} that outputs a
+\kl{$V$-strong equivariant Gröbner basis}, whenever $\Indets$ satisfies the
+\kl{computability assumptions} and $(\mon[\om \ordplus \ordfin{1}]{\Indets},
+\gdivleq[\group])$ is a \kl{well-quasi-ordering}.
 
 \begin{lemma}
-  \label{lem:iota-V-orbit-finite}
-  Let $H$ be an orbit finite set of polynomials in $\poly{\K}{\Indets}$.
-  Then, $\iota_V(H)$ is an orbit finite set of polynomials in
-  $\poly{\K}{\IndetsV[V]}$ under the action of $\group_V$.
+  \label{lem:strong-v-gb-algorithm}
+  Let $H \subseteq \poly{\K}{\Indets}$,
+  and $V \subfin \Indets$ be a finite set of indeterminates.
+  Then, $\mathsf{vsgb}(H,V)$
+  is a computable function that calls
+  \kl{weakgb} on with valid inputs.
 \end{lemma}
 \begin{proof}
-  Let $H$ be a finite set of polynomials.
-  Because $\group \actson \Indets$ is \kl{effectively oligomorphic}:
-  for every polynomial $p \in H$, we can compute a finite set
-  $P_V$ of representatives of the \kl{$\group_V$-orbits} of $p$.
-  We define $H_V$ to be the union of all the $P_V$ for $p \in H$.
-  This union is \kl{orbit finite}.
+  For the algorithm to be computable, we will rely on the fact that 
+  $\poly{\K}{\IndetsV[V]}$ is \kl{effectively oligomorphic} 
+  and that the ordering on $\IndetsV[V]$ is also effective and 
+  \kl(ord){compatible} with the action of $\group_V$.
+  Then, following the same reasoning as in \cref{lem:colored-hypothesis-sat},
+  we conclude that $\iota_V(H)$ is a computable orbit finite set
+  of polynomials in $\poly{\K}{\IndetsV[V]}$, and that 
+  $\upsilon_V(\kl{weakgb}(\iota_V(H)))$ is also computable and ouputs an 
+  \kl{orbit finite set}.
 
-  \todo[inline]{Is it just not that 
-    $\iota_V$ is finitely supported by $V$? Maybe there is a
-    one liner argument here.}
-
+  The only non-trivial check being that the set $(\mon{\IndetsV[V]},
+  \gdivleq[\group_V])$ is a \kl{well-quasi-ordering}. To that end, let us
+  consider an infinite sequence $\seqof{\monelt_i}[i \in \N]$ of elements of
+  $\mon{\IndetsV[V]}$. Let us convert each $\monelt_i$ into a monomial
+  $\monelt[n]_i$ in $\mon[\om \ordplus \ordfin{1}]{\Indets}$, by replacing the
+  exponents of elements in $V$ by $\om$. Because $(\mon[\om \ordplus
+  \ordfin{1}]{\Indets}, \gdivleq[\group])$ is a \kl{well-quasi-ordering}, there
+  exists an infinite subsequence $\seqof{\monelt[n]_j}[j \in J]$ such that for
+  all $i < j$ in $J$, we have a group element $\gelem_{i,j} \in \group$ such
+  that $\gelem_{i,j}(\monelt[n]_i) \divleq \monelt[n]_j$. Let us now consider
+  the action of $\gelem_{i,j}$ on the elements of $V$. Because $\gelem_{i,j}$
+  must send an element of $V$ (having exponent $\om$ in $\monelt[n]_i$) to an
+  element of $V$ (having exponent $\om$ in $\monelt[n]_j$), and since $V$ is a
+  finite set, we can without loss of generality extract the subsequence $J$ so
+  that $\gelem_{i,j}$ is the identity function on the variables of $V$ that
+  appear in the monomials, for all $i < j$ in $J$.
+  Now, because $\N^V$ with the pointwise ordering is a \kl{well-quasi-ordering}
+  (as a finite product of $\N$ with the usual ordering), there exists $i < j$
+  such that $\monelt[m]_i (x) \leq \monelt[m]_j (x)$ for all $x \in V$.
+  As a consequence, 
+  $\gelem_{i,j} (\monelt_i) \divleq \monelt_j$, and we have shown
+  that $(\mon{\IndetsV[V]}, \gdivleq[\group_V])$ is a
+  \kl{well-quasi-ordering}.
 \end{proof}
-
-\begin{lemma}
-  \label{lem:decidability-preserved}
-  Let $(\Indets, \group)$ be a set of indeterminates, a group acting
-  \kl{effectively oligomorphically} on $\Indets$ and an
-  \kl{effective total ordering} $\varleq$ on $\Indets$ that is compatible with the
-  action of $\group$.
-  Then, the set $(\IndetsV, \group_V)$ is a set of indeterminates, a group acting
-  \kl{effectively oligomorphically} on $\X$ and an
-  \kl{effective total ordering} on $\IndetsV$ that is compatible with the
-  action of $\group_V$.
-\end{lemma}
-\begin{proof}
-  It is clear that $\IndetsV$ 
-  is equipped with an \kl{effective total ordering}, and it is 
-  \kl{compatible} with the action of $\group_V$ because the latter fixes
-  the elements of $V$.
-  Let us now show that $\group_V$ is \kl{effectively oligomorphic}.
-
-  \todo[inline]{what we want to show is that 
-    the orbits of tuples of elements in
-    $\group_V$ can be computed.
-    }
-\end{proof}
-
-Then, we will prove that a mild assumption on the monomials allows us to
-conclude that $(\mon[\omega]{\IndetsV}, \gdivleq[\group_V])$ is a
-\kl{well-quasi-ordering}: it suffices to assume that $(\mon[\omega + 1]{\Indets},
-\gdivleq[\group])$ is a \kl{well-quasi-ordering} itself.
-
-\begin{lemma}
-  \label{lem:wqo-mon-S}
-  Assume that $(\mon[\omega + 1]{\X}, \gdivleq[\group])$ is a \kl{well-quasi-ordering}.
-  Then, the set 
-  $(\mon[\omega]{\IndetsV}, \gdivleq[\group_V])$ is \kl{well-quasi-ordered}.
-\end{lemma}
-\begin{proof}
-  Let $\seqof{\monelt_i}[i \in \N]$ be an infinite sequence of elements of
-  $\mon[\omega]{\X}$. We will show that there exists $i < j$ such that
-  $\monelt_i \gdivleq[\group_S] \monelt_j$.
-  We will assume without loss of generality that the elements of 
-  $\monelt_i$ contain all variables in $S$.
-
-  To that end, let us define the function $h \colon \mon[\omega]{\X} \to
-  \mon[\omega + 1]{\X}$ that maps a monomial $m$ to itself but with the
-  elements of $S$ having exponent $\omega$.
-  Because $(\mon[\omega + 1]{\X}, \gdivleq[\group])$ is a
-  \kl{well-quasi-ordering},
-  there exists an infinite subsequence of indices $J$ such that 
-  for all $i < j$ in $J$, we have $h(\monelt_i) \gdivleq[\group] h(\monelt_j)$.
-  By definition, this provides us with a sequence of 
-  group elements $\gelem_{i,j} \in \group$ such that
-  for all  $i < j$ in $J$, we have
-  \begin{equation*}
-    \gelem_{i,j}(h(\monelt_i)) \divleq h(\monelt_j)
-  \end{equation*}
-  In particular, 
-  the elements $\gelem_{i,j}$ must send elements of $S$ to elements of $S$.
-  Because $S$ is a finite set, one can further refine the extraction
-  so that $\gelem_{i,j}$ is the identity fuction on $S$ for all $i < j$ in $J$. 
-  Therefore, we have $\gelem_{i,j} \in \group_S$.
-  Finally,
-  consider the sequence of monomials
-  $\monelt[s]_i$ defined as the restriction of $\monelt_i$ to the elements
-  of $S$. Since $S$ is finite, $(\mon{S}, \divleq)$ is a \kl{well-quasi-ordering},
-  and one can further extract $J$ to assume that for all 
-  $i < j$ in $J$, we have $\monelt[s]_i \divleq \monelt[s]_j$.
-  Finally,
-  we conclude that $\gelem_{i,j}(\monelt_i) \divleq \monelt_j$,
-  for all $i < j$ in $J$, and in particular for one such pair.
-\end{proof}
-
-Now that we have all the ingredients to show that 
-\cref{alg:v-stronggb} is an algorithm, let us prove that it is correct.
 
 \begin{lemma}
   \label{lem:correct-v-strong-gb}
   Let $H$ be an orbit finite set of polynomials in $\poly{\K}{\Indets}$,
   and let $V \subseteq \Indets$ be a finite set of indeterminates.
-  Then, the result of \cref{alg:v-stronggb} is a
+  Then, the result of $\mathsf{vsgb}(H,V)$ is a
   \kl{$V$-strong equivariant Gröbner basis} of $\EqIdlGen{H}$.
 \end{lemma}
 \begin{proof}
@@ -228,10 +162,31 @@ Now that we have all the ingredients to show that
   $\EqIdlGen{H}$.
 \end{proof}
 
-As a corollary, we obtain that \cref{alg:v-stronggb} is a decision procedure for the
-\kl{equivariant ideal membership problem}. 
 
-\csname thm:decide-equiv-ideal-mem\endcsname*
+As a consequence, we have proven that \cref{thm:decide-equiv-ideal-mem}
+holds
+using the algorithm \kl{vsgb}. Furthermore, notice that the assumption of
+\cref{thm:decide-equiv-ideal-mem}
+is
+that $(\mon[\om \ordplus \ordfin{1}]{\Indets}, \gdivleq[\group])$ is a
+\kl{well-quasi-ordering}, which very close to the necessary condition that
+$(\mon{\Indets}, \gdivleq[\group])$ being a \kl{well-quasi-ordering}, and is
+weaker than the assumption used in \cref{thm:compute-egb}.
 
-
-TODO: and we can lower the bound on the ordinals for the equivariant grobner basis too
+\todo[inline]{This looks false}
+\begin{remark}
+Let us briefly argue that using similar techniques, one can also improve the
+computation of \kl{equivariant Gröbner bases} to obtain a decision procedure
+under the assumption that $(\mon[\om \ordplus \om]{\Indets}, \gdivleq[\group])$
+is a \kl{well-quasi-ordering}. 
+\end{remark}
+\begin{proof}
+  The main idea is that one can adapt the proof of
+  \cref{lem:strong-gb-correct} to only ever consider polynomials with
+  colored variables that are \kl{$V$-compatible} to some finite set $V$ of
+  indeterminates. This way, every variable in the polynomial must have a
+  well-defined color. The algorithm of \kl{weakgb} can then be adapted to only
+  consider such polynomials: the only operation that can create
+  non-\kl{$V$-compatible} polynomials is the computation of \kl{$S$-polynomials},
+  which can be changed to ignore all non-\kl{$V$-compatible} polynomials.
+\end{proof}

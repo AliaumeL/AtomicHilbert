@@ -10,10 +10,7 @@ ordinal (that is, $(\N, \leq)$), and write $X \intro*\ordplus Y$ for the
 lexicographic sum of two partial orders $X$ and $Y$. We will also use the usual
 notations for finite ordinals, writing $\intro*\ordfin{n}$ for the finite
 ordinal of size $n$. For instance, $\om \ordplus \ordfin{1}$ is the total order
-$\N \uplus \set{+\infty}$, where $+\infty$ is the new largest element. Finally,
-we will also use the ordinal $\om^2$, that is obtained as pairs of elements of
-$\om$, ordered lexicographically (i.e., a linearisaton of the Cartesian product
-$\N \times \N$ equipped with the product ordering).
+$\N \uplus \set{+\infty}$, where $+\infty$ is the new largest element.
 
 \AP In order to guarantee the termination of the algorithms presented in this
 paper, a key ingredient will be the notion of \intro{well-quasi-ordering}
@@ -217,6 +214,16 @@ on $\Indets$.
   Then, $\group$ acts \kl{effectively oligomorphically} on $\Indets$,
   and its action is \kl(ord){compatible} with the ordering of $\Q$ by definition.
 \end{example}
+
+Note that under our \kl{computability assumptions}, the set of polynomials
+$\poly{\K}{\Indets}$ is also \kl{effectively oligomorphic} under the action of
+$\group$ on $\Indets$. This is because a polynomial $p \in \poly{\K}{\Indets}$
+can be seen as an element of $(\K \times \Indets^{\leq d})^n$ where $n$ is the
+number of monomials in $p$, and $d$ is the maximal degree of a monomial
+appearing in $p$. Beware that the set of polynomials $\poly{\K}{\Indets}$ is
+not \kl{orbit finite}, precisely because the orbit of a polynomial $p$ under 
+the action of $\group$ cannot change the degree of $p$, and that there are 
+polynomials of arbitrarily large degree.
 
 \paragraph{Equivariant Gröbner bases.} \AP We know from \cite{GHOLAS24} that a
 necessary condition for the \kl{equivariant Hilbert basis property} to hold is

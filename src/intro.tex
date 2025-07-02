@@ -103,17 +103,16 @@ to the action of $\group$, which we write as the fact that $(\mon{\Indets},
 \gdivleq)$ is a \kl{well-quasi-ordering} (\kl{WQO}). It is known from that this
 is a necessary condition for the \kl{equivariant Hilbert basis property} to
 hold \cite{GHOLAS24}. We will rely on a slightly stronger condition, namely
-that $(\mon[\om^2]{\Indets}, \gdivleq)$ is a \kl{WQO}, which is conjectured to
-be equivalent to the first condition, and intuitively means that one can still
-guarantee termination when considering \kl{monomials} with exponents that are
-\kl{ordinals} below $\om^2$.\footnote{Natural numbers are precisely ordinals
-below $\om$.}
+that $(\mon[\N \times \N]{\Indets}, \gdivleq)$ is a \kl{WQO}, which is
+conjectured to be equivalent to the first condition, and intuitively means that
+one can still guarantee termination when considering \kl{monomials} with
+exponents that are pairs of numbers in  $\N \times \N$.
 
 \begin{theorem}[name={Equivariant Gröbner Basis},restate=thm:compute-equiv-gb]
   \label{thm:compute-egb}
   Let $\Indets$ be a totally ordered set of indeterminates
   equipped with a group action $\group \actson \Indets$, under our \kl{computability assumptions}.
-  If $(\mon[\om^2]{\Indets}, \gdivleq)$ is a \kl{WQO}, then one can
+  If $(\mon[\N \times \N]{\Indets}, \gdivleq)$ is a \kl{WQO}, then one can
   compute an \kl{equivariant Gröbner bases} of \kl{equivariant ideals}.
 \end{theorem}
 
