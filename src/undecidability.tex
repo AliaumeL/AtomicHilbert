@@ -388,6 +388,11 @@ $u \in \Sigma^*$.
   there exists $x, y \in \Sigma^*$ such that $x u y = v$.
 \end{proof}
 
+As an immediate consequence of \cref{lem:word-encoding-paths}, we
+conclude that the \kl{equivariant ideal membership problem} is undecidable when
+variables are $\Indets_\Z$ equipped with the group of shifts, as described in
+\cref{ex:z-is-not-wqo}.
+
 \subsection{Infinite Dimensional Vector Space}
 \label{subsec:vector}
 
@@ -439,4 +444,6 @@ and $\wenc{b u} \defined v_0^3 (v_0 + v_1)^1 v_1^3 (v_1 + v_2)^2 (\gelem_{+2}
   by induction conclude.
 \end{proof}
 
-\todo[inline]{consequences?}
+The role of \cref{lem:word-encoding-vector} is to show that the idea
+of \kl{word encodings} is versatile enough to obtain undecidability for
+structures where actual \kl(of){infinite paths} are not clearly visible.

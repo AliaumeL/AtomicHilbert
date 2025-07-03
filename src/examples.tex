@@ -1,5 +1,18 @@
+% LTeX: language=en
+%%!TEX root = ../atomic.asmart.tex
+%
 \section{Relation to Existing Results and Examples}
 \label{sec:examples}
+
+In this section, we are interested in the consequences of our decidability
+results. First, we will provide numerous examples of sets of indeterminates
+that satisfy our \kl{computability assumptions} as well as our
+\kl{well-quasi-ordering} conditions. Then, we will discuss how our results can
+be applied to solve various decidability problems in theoretical computer
+science.
+
+\subsection{Crafting sets of indeterminates}
+
 
 \paragraph{Sets with atoms.}
 
@@ -25,11 +38,63 @@ only if $(\mon[\om \ordplus \ordfin{1}]{\Indets}, \gdivleq)$, $(\mon[\om
 \ordplus \om]{\Indets}, \gdivleq)$, and $(\mon[\om^2]{\Indets}, \gdivleq)$ are
 well-quasi-orderings too.
 
-\paragraph{Decision procedures.}
+\subsection{Decision procedures}
 
-\begin{itemize}
-  \item zeroness of polynomial automata
-  \item topological well-structured transition systems  
-  \item VASS?
-  \item etc
-\end{itemize}
+\paragraph{Topological Well-Structured Transition Systems.} \AP The notion of
+\kl{topological well-structured transition system} was introduced by
+Goubault-Larrecq in \cite{JGL07}, noticing that the pre-existing notion of
+\kl{Noetherian space} could serve as a topological generalisation of
+\kl{well-quasi-orderings}, for which the celebrated decision procedures on
+\kl{well-structured transition systems} can be applied. In particular,
+Goubault-Larrecq used such systems to verify properties of \emph{polynomial
+programs} computing over the rationals, that can communicate over lossy
+channels using a finite alphabet \cite{JGL10}. The fact that polynomial
+computations could be verified followed from the theory of \kl{Gröbner bases}
+on finitely many indeterminates.
+
+\AP A \intro{topological space} is a set $X$ equipped with a collection $\tau$
+of subsets of $X$ that is stable under finite intersections and arbitrary
+unions.\footnote{In particular, $\tau$ contains the empty set and $X$ itself.}
+In a \kl{topological space}, elements of $\tau$ are called \intro{open
+subsets}, while their complements (in $X$) are called \intro{closed subsets}. A
+\kl{topological space} is \intro(space){Noetherian} when, for every sequence
+$\seqof{U_i}[i \in \N]$ of \kl{open subsets}, there exists $n \in \N$ such that
+$\bigcup_{i \in \N} U_i = \bigcup_{i \leq n} U_i$. We refer the readers to the
+book \cite{JGL13} for a comprehensive introduction to \kl{Noetherian spaces}
+and their usage in theoretical computer science. Let us briefly argue that
+\kl{Noetherian spaces} generalize \kl{well-quasi-orders} in
+\cref{ex:well-quasi-orders-are-noeth}, and encode the
+\kl{Hilbert basis property} in \cref{ex:polynomials-noetherian}.
+
+\begin{example}[ see \cite{JGL13}]
+  \label{ex:well-quasi-orders-are-noeth}
+  Let $(X, \leq)$ be a quasi-ordered set.
+  Then, the set $X$ equipped with the \kl{topology} having 
+  as \kl{open sets} the upwards-closed subsets of $X$ is \kl(space){Noetherian}
+  if and only if $(X, \leq)$ is \kl{well-quasi-ordered}.
+\end{example}
+
+\begin{example}[ see \cite{JGL13}]
+  \label{ex:polynomials-noetherian}
+  Let $\K$ be a field, and let $n \in \N$.
+  The space $\K^n$ equipped with the \kl{Zariski topology}
+  \kl(space){Noetherian}; where the \intro{Zariski topology}
+  is the topology whose \kl{closed sets} are 
+  of the form $\setof{ \vec{x} \in \K^n}{ \forall p \in \idl, p(\vec{x}) = 0}$,
+  where $\idl$ is an \kl{ideal} of $\poly{\K}{x_1, \dots, x_n}$.
+\end{example}
+
+\AP The advantage of \kl{Noetherian spaces} over \kl{well-quasi-orderings} and
+\kl{Noetherian rings} is that they generalize both and can be \emph{combined}:
+\kl{Noetherian spaces} are closed under finite sums, finite products,
+considering finite words, considering finite trees, and many more \todo{cite}.
+As a consequence, they provide a versatile tool to express the set of states of
+a system, ensuring that a strong termination property holds.
+
+\AP A \intro{topological well-structured transition system} is a
+\kl{topological space} $(X, \tau)$, equipped with a finite number of transition
+functions
+
+\paragraph{Consequences for polynomial automata.}
+
+\paragraph{Consequences for vector addition systems with states.}
