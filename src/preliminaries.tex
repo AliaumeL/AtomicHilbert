@@ -79,7 +79,9 @@ $\lm(p)$ and $\dom(p)$: $\dom(p) \subseteq \dwset{\dom(\lm(p))}$, where
 $\dwset{S}$ is the downward closure of a set $S \subseteq \Indets$, i.e. the
 set of all indeterminates $x \in \Indets$ such that $y \leq x$ for some $y \in
 S$. This means that the \kl{leading monomial} encodes a \emph{global property}
-of the polynomial, and it will be crucial in our termitation arguments.
+of the polynomial, and it will be crucial in our termitation arguments. This is
+already at the core of the \emph{elimination theorems} \cite[Chapter 3, Theorem
+2]{CLO15}.
 
 
 \paragraph{Ideals, and Gröbner Bases.} \AP An \intro{ideal} $\idl$ of
@@ -162,10 +164,12 @@ is a set of the form $\orbit[\group]{E}$ for some finite set $E$. Not every
 \cref{ex:orbit-finite}. However, \kl{orbit finite sets} are
 robust in the sense that \kl{equivariant subsets} of \kl{orbit finite sets} are
 also \kl{orbit finite}, and similarly, an \kl{equivariant subset} of $E^n$ is
-\kl{orbit finite} whenever $E$ is \kl{orbit finite} and $n \in \N$ is finite
-\cite{BOJAN16inf}. For algorithmic purposes, \kl{orbit finite sets} are the
-ones that can be taken as input as a finite set of representatives (one for
-each orbit).
+\kl{orbit finite} whenever $E$ is \kl{orbit finite} and $n \in \N$ is finite.
+For algorithmic purposes, \kl{orbit finite sets} are the ones that can be taken
+as input as a finite set of representatives (one for each orbit). The notions
+of \kl{equivariance} and \kl{orbit finite sets} from a computational
+perspective are discussed in \cite{BOJAN16inf}, and we refer the reader to this
+book for a more comprehensive introduction to the topic.
 
 \begin{example}
   \label{ex:orbit-finite}
