@@ -16,6 +16,8 @@ science.
 
 \paragraph{Sets with atoms.}
 
+\todo[inline]{Say that if one starts with atoms and equality, then we can only 
+  have dimension 1, and that this is the case of the rationals.}
 
 \paragraph{Relational structures.} Let $\mathbb{A}$ be an infinite relational
 structure with finitely many relations. Then, one can consider the set of
@@ -38,7 +40,22 @@ only if $(\mon[\om \ordplus \ordfin{1}]{\Indets}, \gdivleq)$, $(\mon[\om
 \ordplus \om]{\Indets}, \gdivleq)$, and $(\mon[\om^2]{\Indets}, \gdivleq)$ are
 well-quasi-orderings too.
 
-\subsection{Decision procedures}
+\subsection{Topological Well-Structured Transition Systems}
+
+The fact that (finite control) systems performing polynomial computations can
+be verified folloms from the theory of \kl{Gröbner bases} on finitely many
+indeterminates \cite{MULSEI02,BEDUSHWO17}. There were also numerous
+applications to automata theory, suchz as deciding whether a weighted automaton
+could be determinised (resp. desambiguated) \cite{BESM23,PUSM24}. We refer the
+readers to a nice survey recapitulating the successes of the so-called
+``Hilbert method'' automata theory \cite{BOJAN19}. In this section, we will
+show how our results can be used in the framework of \kl{topological
+well-structured transition systems}, that is an abstract setting to verify
+infinite state systems that is more general than computing polynomial
+invariants \cite{JGL07,JGL10}. As a consequence, we will show how our results
+can be used to decide the zeroness of \kl{orbit finite polynomial automata}, a
+new model of computation that generalizes \kl{polynomial automata}
+\cite{BEDUSHWO17} and \kl{orbit finite weighted automata} \cite{BOKLMO21}.
 
 \paragraph{Topological Well-Structured Transition Systems.} \AP The notion of
 \kl{topological well-structured transition system} was introduced by
@@ -48,15 +65,7 @@ Goubault-Larrecq in \cite{JGL07}, noticing that the pre-existing notion of
 \kl{well-structured transition systems} can be applied. In particular,
 Goubault-Larrecq used such systems to verify properties of \emph{polynomial
 programs} computing over the rationals, that can communicate over lossy
-channels using a finite alphabet \cite{JGL10}. The fact that polynomial
-computations could be verified followed from the theory of \kl{Gröbner bases}
-on finitely many indeterminates. The use of \kl{Gröbner bases} to compute
-polynomial invariants of programs has been a recurring theme in computer
-science, and did not wait for \kl{topological well-structured transition 
-systems} to used in the verification of programs \cite{MULSEI02}, or more
-recently to decide whether some weighted automaton could be determinised (resp.
-desambiguated) \cite{BESM23,PUSM24}.
-
+channels using a finite alphabet \cite{JGL10}. 
 \AP A \intro{topological space} is a set $X$ equipped with a collection $\tau$
 of subsets of $X$ that is stable under finite intersections and arbitrary
 unions.\footnote{In particular, $\tau$ contains the empty set and $X$ itself.}
@@ -141,11 +150,12 @@ discussing the case of orbit finite polynomial automata, let us recall in
 \cref{ex:polynomial-automata}
 the
 setting of \kl{polynomial automata} in the classical case, as studied by
-\cite{BEDUSHWO17}, with techniques that dates back to \cite{MULSEI02}. We will
+\cite{BEDUSHWO17}, with techniques that dates back to \cite{MULSEI02}. TWe will
 formally state in \cref{lem:zeroness-problem-polynomial-automata}
 how the classical problem of deciding the \kl(pa){zeroness} of a
 \kl{polynomial automaton} is a special case of the \kl{open reachability
-problem} for \kl{topological well-structured transition systems}.
+problem} for \kl{topological well-structured transition systems}. Beware that
+these are consequences of \cite{JGL10}.
 
 \begin{definition}[Polynomial automata, as described in \cite{BEDUSHWO17}]
   \label{ex:polynomial-automata}
@@ -221,7 +231,7 @@ automaton} is a tuple $A \defined (Q, \Sigma, \delta, q_0, F)$, where $Q =
 \K^{(\Indets)}$, $\Sigma$ is an \kl{orbit finite} alphabet, $\delta \colon
 \Sigma \to (\Indets \to \poly{\K}{\Indets})$ is a \kl(func){finitely supported}
 polynomial update function, and $F \in \poly{\K}{\Indets}$ is a polynomial
-computing the result of the automaton. Given a lettes $a \in \Sigma$ and a
+computing the result of the automaton. Given a letter $a \in \Sigma$ and a
 state $q \in Q$, the update $\delta^*(q,a)$ is defined as the function from
 $\Indets$ to $\K$ defined by $\delta^*(q,a) \colon x \mapsto \delta(a,x)[ q ]$,
 which is well-defined because $\delta(a,x)$ is a \kl{finitely supported}
