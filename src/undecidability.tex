@@ -38,6 +38,10 @@ consider $\Indets_\Z$, the set of all integers equipped with their usual
 ordering, and the group of all shifts of integers
 (\cref{ex:z-is-not-wqo}).
 
+\arka{Maybe boldface for structures and mathhbb for numeric sets}
+
+\arka{How about putting the examples in the sections where we discuss structures}
+
 \begin{example}
   \label{ex:q-is-super-wqo}
   The set $(\mon[Y]{\Indets_\Q}, \gdivleq)$ is a \kl{well-quasi-ordering} whenever $Y$ is
@@ -197,6 +201,9 @@ To overcome the second issue, we will use the following notion of
   \end{enumerate}
 \end{definition}
 
+\arka{The equality in the second condition should hold only for the length, right?}
+
+
 The first condition of \cref{def:word-encoding} ensures that
 the \kl{word encoding}  correctly relates the \emph{infix} relation on words
 with the divisibility up-to the group action $\group$. The second condition
@@ -211,6 +218,7 @@ when one has access to a suitable \kl{word encoding}.
   then one can construct a \kl{word encoding} for any finite alphabet $\Sigma'$
   using a suitable binary encoding. The only difficulty is to ensure unique 
   parsability of the encoding, which can be done using unambiguous codes.
+  \arka{Citation?}
 \end{remark}
 
 \begin{remark}
@@ -302,7 +310,9 @@ with some extra ``phase information''.
   $\wenc{ \triangleleft^{\text{pre}} } \leftrightarrow_{R_\text{pre}}
    \wenc{ \square \triangleleft^{\text{pre}} }$.
   This will create a long \emph{tape like} monomial.
-  However, there is no guarantee that the reachable monomials are linear, i.e., that we do not
+  However, there is no guarantee that the reachable monomials are linear,
+  \arka{This does not guarantee that the encoding is valid}
+  i.e., that we do not
   reuse the same indeterminate twice in our reduction.
   To ensure that we do obtain a correct monomial, we will implement the 
   Floyd cycle-finding algorithm, which uses two pointers moving at different speeds.
