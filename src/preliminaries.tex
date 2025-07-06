@@ -192,16 +192,19 @@ an \kl{equivariant function} is \kl{orbit finite}, and that the algorithms that
 we will develop in this paper will all be \kl(func){equivariant}.
 
 \paragraph*{Computability assumptions.} \AP We say that the action is
-\intro{effectively oligomorphic} if for every $n \in \N$ and every \kl{orbit
-finite set} $E \subseteq \Indets$, the set $E^n$ is \kl{orbit finite} under the
-action of $\group$ on $\Indets^n$.
+\intro{effectively oligomorphic} if :
+%
+\begin{enumerate}
+\item It is \intro{oligomorphic}, i.e.\ for every $n \in \N$ and every \kl{orbit
+finite set} $E \subseteq \Indets$,
+the set $E^n$ is \kl{orbit finite} under the action of $\group$ on $\Indets^n$.
+\item There exists an algorithm that decides whether two elements $\vec{x},
+\vec{y} \in \Indets^*$ are in the same orbit under the action of $\group$ on $\Indets^*$.
+\item There exists an algorithm which on input $n\in\N$ outputs a set $A\subseteqfin\Indets^n$ such that $|A\cap U| = 1$ for every orbit $U\in\Indets^n$.
+\end{enumerate}
+%
 
-\arka{Also need to add that we can compute the representatives of orbits}
 
-Furthermore, we ask that, for all $n \in
-\N$, there exists an algorithm that decides whether two elements $\vec{x},
-\vec{y} \in \Indets^n$ are in the same orbit under the action of $\group$ on
-$\Indets^n$.
 A group action $\group \actson \X$ is said to be \intro(ord){compatible}
 with an ordering $\leq$ on $\X$ if for all $\gelem \in \group$ and $x,y \in
 \X$, we have $x \leq y$ if and only if $\gelem \cdot x \leq \gelem \cdot y$.
