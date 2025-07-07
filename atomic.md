@@ -10,13 +10,13 @@ libraries:
     - lib/knowledges.kl
 appendix:
     - src/appendix.tex
+    - src/algorithm.tex
 ---
 
 \input{src/intro.tex}
 \input{src/preliminaries.tex}
+\input{src/examples.tex}
 \input{src/weakgb.tex}
 \input{src/fullbasis.tex}
-\input{src/algorithm.tex}
-\input{src/examples.tex}
 \input{src/undecidability.tex}
 \input{src/conclusion.tex}
