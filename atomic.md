@@ -17,6 +17,6 @@ appendix:
 \input{src/weakgb.tex}
 \input{src/fullbasis.tex}
 \input{src/algorithm.tex}
-\input{src/undecidability.tex}
 \input{src/examples.tex}
+\input{src/undecidability.tex}
 \input{src/conclusion.tex}

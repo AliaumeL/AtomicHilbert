@@ -3,17 +3,29 @@
 \section{Concluding Remarks}
 \label{sec:conclusion}
 
-\todo[inline]{Write it}
+We have proven that the \kl{equivariant ideal membership problem} is decidable
+under classical effective assumptions on the group action and the
+representation of the set of indeterminates, and under a mild hypothesis on the
+behavior of monomials. Furthermore, we have developed an algorithm that
+computes an \kl{equivariant Gröbner basis} of an \kl{equivariant ideal}, and
+shown that it provides an effective representation to work with ideals
+(allowing us to compute unions, intersections, etc.) under a slightly stronger
+hypothesis on the divisibility ordering. Finally, we have discussed how the
+classical counter-examples to our assumptions on the behavior of monomials can
+be turned into undecidability results for the \kl{equivariant ideal membership
+problem}. Let us now discuss the main open questions raised by
+the present paper.
 
-\paragraph*{Total orderings.} In all of our paper, we assumed that the set of
-indeterminates $\Indets$ is equipped with a total ordering $\varleq$. This
-assumption seems necessary, as the notions of leading monomials would cease to
-be well-defined without it. However, we do not have a clear understanding of
-whether this assumption is vacuous or not. It was conjectured by Pouzet and
-restated by Ghosh and Lasota that every \kl{effectively oligomorphic} group
-action on a countable set of indeterminates that satisfies the
-\kl{well-quasi-ordering} condition on its monomials admits a total ordering
-compatible with the  group action.
+\paragraph*{Total orderings.} We assumed that the indeterminates $\Indets$ were
+equipped with a total ordering $\varleq$. This assumption seems necessary, as
+the notions of \kl{leading monomials} would cease to be well-defined without
+it. However, we do not have a clear understanding of whether this assumption is
+vacuous or not. Indeed, as noticed by \cite[Lemma 13]{GHOLAS24}, and
+\cref{lem:reducts-equiv-hilbert}, it often suffices to extend the
+structures of the indeterminates to account for a total ordering. A conjecture
+of Pouzet \todo{cite} states that such an ordering always exists, and this was
+remarked by \cite[Remark 14]{GHOLAS24}. Note that in this case, one would 
+\todo[inline]{complete this}
 
 \paragraph*{All our hypotheses and Pouzet in the middle.} We conjecture that
 $(\mon{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} if and only if

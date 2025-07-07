@@ -39,7 +39,45 @@ conjectured that $(\mon{\Indets}, \gdivleq)$ is a well-quasi-ordering if and
 only if $(\mon[\om \ordplus \ordfin{1}]{\Indets}, \gdivleq)$, $(\mon[\om
 \ordplus \om]{\Indets}, \gdivleq)$, and $(\mon[\om^2]{\Indets}, \gdivleq)$ are
 well-quasi-orderings too.
-\arka{So we can use any well-ordered set of labels?}
+\arka{So we can use any well-ordered set of labels?} 
+\todo[inline]{
+  Cite \cite{POUZ72},
+  \cite{DRT10} for the conjecture.
+}
+
+
+\paragraph{On reducts of structures.} \AP Let $\sigma$ be a finite relational
+signature, and $\tau \subseteq \sigma$ be another finite relational signature.
+Let $\mathbb{A}, \mathbb{B}$ be respectively a $\sigma$ and a $\tau$ structure. We say
+that \intro{$\mathbb{B}$ is a reduct of $\mathbb{A}$} when $\mathbb{B}$ is
+obtained from $\mathbb{A}$ by keeping the same universe, and relations. It was noted by \cite[Lemma 13]{GHOLAS24} that in
+this case, the \kl{equivariant Hilbert basis property} transfers from
+$\mathbb{A}$ to $\mathbb{B}$. Let us briefly argue that this transfer holds too
+for our \cref{thm:decide-equiv-ideal-mem,thm:compute-egb}.
+
+\begin{lemma}
+  \label{lem:reducts-equiv-hilbert}
+  Let $\mathbb{A}$ be a relational structure, let $\mathbb{B}$ be a 
+  \kl(struct){reduct} of $\mathbb{A}$. Then, if $\mathbb{A}$ satisfies the
+  hypotheses of \cref{thm:decide-equiv-ideal-mem},
+  then one can decide the \kl{equivariant ideal membership problem} for
+  $\poly{\K}{\mathbb{B}}$. Similarly, 
+  if $\mathbb{A}$ satisfies the hypotheses of
+  \cref{thm:compute-egb}, then one can compute an
+  \kl{equivariant Gröbner basis} of an
+  \kl{equivariant ideal} of $\poly{\K}{\mathbb{B}}$.
+\end{lemma}
+\begin{proof}
+  \todo[inline]{Just write it, and it works.}
+\end{proof}
+
+\AP 
+As a consequence, one can apply our results to structures that are not equipped 
+with an ordering, because one can always consider the 
+
+\todo[inline]{Talk about $\N$ I guess.}
+
+
 
 \subsection{Topological Well-Structured Transition Systems}
 
@@ -151,13 +189,12 @@ discussing the case of orbit finite polynomial automata, let us recall in
 \cref{ex:polynomial-automata}
 the
 setting of \kl{polynomial automata} in the classical case, as studied by
-\cite{BEDUSHWO17}, with techniques that dates back to \cite{MULSEI02}.
-TWe \arka{TWe?} will
+\cite{BEDUSHWO17}, with techniques that dates back to \cite{MULSEI02}. We will
 formally state in \cref{lem:zeroness-problem-polynomial-automata}
 how the classical problem of deciding the \kl(pa){zeroness} of a
 \kl{polynomial automaton} is a special case of the \kl{open reachability
 problem} for \kl{topological well-structured transition systems}. Beware that
-these are consequences of \cite{JGL10}.
+these are consequences of \cite[Section 6, Polynomial Games]{JGL10}.
 
 \begin{definition}[Polynomial automata, as described in \cite{BEDUSHWO17}]
   \label{ex:polynomial-automata}
@@ -313,22 +350,24 @@ systems} with the \kl{equivariant Zariski topology} on $\K^{(\Indets)}$.
   We have concluded.
 \end{proof}
 
-\paragraph{Communicating orbit finite polynomial automata.} Following the lines
-of \cite{JGL10}, one can consider the case of communicating orbit finite
-polynomial automata, where we have a collection of processes that communicate
-letters using lossy channels, and can perform polynomial updates on their local
-state. Furthermore, we can add \emph{ifs} and finite state to the automata.
-Deciding whether such a system can reach a state where one process fails to
-satisfy a given polynomial invariant is a special case of the \kl{open
-reachability problem}, and is decidable.
+While all of these reasosing could be done outside the realm of (effective)
+\kl{topological well-structured transition systems}, we can use the modularity
+of the theory to obtain more complex verification properties. Following the
+lines of \cite[Theorem 6]{JGL10}, one can consider the case of communicating
+orbit finite polynomial automata, where we have a collection processes that
+communicate letters over a finite alphabet using lossy channels, and can
+perform polynomial updates on their local state. Deciding whether such a system
+can reach a state where one process fails to satisfy a given polynomial
+invariant is a special case of the \kl{open reachability problem}, and is
+decidable.
 
-\textbf{Warning:} this does not work if we allow the processes to communicate 
-atoms!!! They have to share finite information.
-
-\arka{To add : symmetric VAS equations}
 
 \paragraph{Reachability problem of symmetric data Petri nets.}
 
+\arka{To add : symmetric VAS equations}
+\todo[inline]{for arka: define symmetric data Petri nets/ symmetric VAS equations}
 
 \paragraph{Orbit-finite systems of equations}
+
+\todo[inline]{for arka: do it}
 

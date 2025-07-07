@@ -39,6 +39,7 @@ ordering, and the group of all shifts of integers
 (\cref{ex:z-is-not-wqo}).
 
 \arka{Maybe boldface for structures and mathhbb for numeric sets}
+why?
 
 \arka{How about putting the examples in the sections where we discuss structures}
 
@@ -198,6 +199,19 @@ To overcome the second issue, we will use the following notion of
       Furthermore, for every other word
       $u'$ of the same size as $u$,
       $\wenc{x u' y} (\gelem \cdot \wenc{u}) = \wenc{x u y} (\gelem \cdot \wenc{u'})$.
+    \item
+      Finally, for every monomial $\monelt$,
+      if there exists a word $u \in \Sigma^*$
+      of size $n \in \N$, elements $\gelem_i \in \group$ for $1 \leq i \leq n$,
+      satisfying 
+      $\gelem_i \cdot (\wenc{u_i u_{i+1}}) \divleq \monelt$
+      for all $i < n$,
+      such that $\gelem_i \cdot \wenc{u_i u_{i+1}} 
+      = (\gelem_i \cdot \wenc{u_i}) (\gelem_{i+1} \cdot \wenc{u_{i+1}})$,
+      and such that 
+      $\gelem_i \cdot \wenc{u_i}$ shares no indeterminates with
+      $\gelem_j \cdot \wenc{u_j}$ whenever $j < i - 1$,
+      then $\wenc{u} \gdivleq \monelt$.
   \end{enumerate}
 \end{definition}
 
@@ -210,7 +224,9 @@ with the divisibility up-to the group action $\group$. The second condition
 ensures that the \emph{substitutions} of infixes having the same size can be
 modelled using \kl{monomial rewriting}. It is therefore straightforward to
 simulate the runs of reversible Turing machines using \kl{monomial rewriting}
-when one has access to a suitable \kl{word encoding}.
+when one has access to a suitable \kl{word encoding}. The third condition
+ensures that the \kl{word encoding} can be inductively contructed by replacing
+the last letter of a word by a two-letter word.
 
 \begin{remark}
   \label{rem:alphabet-size}
@@ -309,12 +325,11 @@ with some extra ``phase information''.
   In a first phase, we will consider the rules
   $\wenc{ \triangleleft^{\text{pre}} } \leftrightarrow_{R_\text{pre}}
    \wenc{ \square \triangleleft^{\text{pre}} }$.
-  This will create a long \emph{tape like} monomial.
-  However, there is no guarantee that the reachable monomials are linear,
-  \arka{This does not guarantee that the encoding is valid}
-  i.e., that we do not
-  reuse the same indeterminate twice in our reduction.
-  To ensure that we do obtain a correct monomial, we will implement the 
+  This is \emph{almost} leading to the desired \kl{word encoding}, 
+  thanks to the third property of \cref{def:word-encoding}.
+  The only thing left to check is that we do not reuse indeterminates when 
+  creating new letters.
+  To ensure that we did not, we will implement the 
   Floyd cycle-finding algorithm, which uses two pointers moving at different speeds.
   To that end, we will use two new blank symbols $\square_1$ and $\square_2$,
   and the rules 
