@@ -53,9 +53,52 @@ science.
 \end{proof}
 
 \subsection{Crafting sets of indeterminates}
+%
+We give some interesting examples of group actions $\group \actson \Indets$ and discuss which of them satisfy the necessary condition of \Cref{thm:compute-egb}.
+We also describe operations to build new group actions from old ones,
+and discuss which of them preserve this condition.
 
+\arka{Did we write somewhere that divisibility is same as labelled embedding}
+
+\todo[inline]{for arka : add citations}
+
+In all of our examples $\Indets$ is a set with some structure, described by some relations and functions on that set,
+and $\group$ is the group $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve the structure) of $\Indets$.
+Moreover, they are \intro{homogeneous}:
+every isomorphisms between finite induced substructures extends to an automorphism of the whole structure (\arka{cite wikipedia and macpherson survey})
+%
+
+\arka{Homogenous? Since then we can list substructures, how they look labels}
+
+%
+\begin{example}\label{ex:eq atoms}
+Let $\A$ be an infinite set without any additional structure other than the equality relation.
+Then $\aut{\A}$ is the set of all bijections of the set $\A$.
+This action $\aut{\A} \actson \A$ does not preserve any linear order on $\A$.
+However, $(\mon[\N \times \N]{\A}, \gdivleq)$ is a \kl{WQO}.
+This is because $(\mon[\N \times \N]{\A}, \gdivleq[\aut{\A}])$ is essentially the ordering of finite multisets on $\N \times \N$ (\arka{cite MPRI lecture notes?}.
+For example, for some $a,b,c,d\in\A$ the monomials $p = a^{(1,1)}b^{(2,0)}c^{(1,1)}$ and $q = b^{(1,1)}c^{(2,0)}d^{(2,1)}$ can be thought as the multisets $P = \{(1,1),(2,0),(1,1)\}$ and $Q = \{(1,1),(2,0),(2,1)\}$.
+We leave it to the reader the to check that $p \gdivleq[\aut{\A}] q$ and $P$ is smaller than $Q$ in the multiset ordering.
+\end{example}
+%
+\begin{example}\label{ex:dlo}
+Let $\D$ be a dense linear order without endpoints(\arka{cite wiki}).
+Then $\aut{\D}$ is the set of all order preserving bijections of $\D$.
+\end{example}
+%
+\begin{example}\label{ex:rado}
+Let $\G$ be the Rado graph (\arka{cite wiki}).
+Then $\aut{\G}$ is the set of all automorphisms of the graph $\G$.
+\end{example}
+%
+\begin{example}\label{ex:rado}
+Let $\V$ be an infinite dimensional vector space over $\ftwo$.
+Then $\aut{\V}$ is the set of all linear automorphisms.
+\end{example}
+%
 
 \paragraph{Sets with atoms.}
+
 
 \todo[inline]{Say that if one starts with atoms and equality, then we can only 
   have dimension 1, and that this is the case of the rationals.}
