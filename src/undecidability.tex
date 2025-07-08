@@ -38,8 +38,7 @@ the ordering (\cref{ex:q-is-super-wqo}). While on the negative side, one can
 consider $\Indets_\Z$, the set of all integers equipped with their usual
 ordering, and the group of all shifts of integers (\cref{ex:z-is-not-wqo}).
 
-\subsection{Monomial Reachability}
-
+\paragraph{Monomial Reachability}
 The undecidability results we will present in this section regarding the
 \kl{equivariant ideal membership problem} will use the polynomials in a very
 limited way: we will only need to consider \emph{monomials}, and there will
@@ -96,60 +95,17 @@ monomials due to the commutativity of the multiplication.
 To overcome the second issue, we will use the following notion of 
 \kl{word encoding}.
 
-
-\begin{definition}
-  \label{def:word-encoding}
-  Let $\Sigma$ be a finite alphabet.
-  A \intro{word encoding} is a function $\intro*\wenc{\cdot} \colon \Sigma^* \to \mon{\Indets}$ such
-  that:
-  \begin{enumerate}
-    \item For all words $u, v \in \Sigma^*$,
-      there exists a $\gelem \in \group$ such
-      that $\pi \cdot \wenc{u} \divleq \wenc{v}$
-      if and only if
-      there exists $x, y \in \Sigma^*$ such that 
-      $x u y = v$. 
-    \item 
-      Furthermore, for every other word
-      $u'$ of the same size as $u$,
-      $\wenc{x u' y} (\gelem \cdot \wenc{u}) = \wenc{x u y} (\gelem \cdot \wenc{u'})$.
-    \item
-      Finally, for every monomial $\monelt$,
-      if there exists a word $u \in \Sigma^*$
-      of size $n \in \N$, elements $\gelem_i \in \group$ for $1 \leq i \leq n$,
-      satisfying 
-      $\gelem_i \cdot (\wenc{u_i u_{i+1}}) \divleq \monelt$
-      for all $i < n$,
-      such that $\gelem_i \cdot \wenc{u_i u_{i+1}} 
-      = (\gelem_i \cdot \wenc{u_i}) (\gelem_{i+1} \cdot \wenc{u_{i+1}})$,
-      and such that 
-      $\gelem_i \cdot \wenc{u_i}$ shares no indeterminates with
-      $\gelem_j \cdot \wenc{u_j}$ whenever $j < i - 1$,
-      then $\wenc{u} \gdivleq \monelt$.
-  \end{enumerate}
-\end{definition}
-
-\arka{The equality in the second condition should hold only for the length, right?}
-
-
-The first condition of \cref{def:word-encoding} ensures that
-the \kl{word encoding}  correctly relates the \emph{infix} relation on words
-with the divisibility up-to the group action $\group$. The second condition
-ensures that the \emph{substitutions} of infixes having the same size can be
-modelled using \kl{monomial rewriting}. It is therefore straightforward to
-simulate the runs of reversible Turing machines using \kl{monomial rewriting}
-when one has access to a suitable \kl{word encoding}. The third condition
-ensures that the \kl{word encoding} can be inductively constructed by replacing
-the last letter of a word by a two-letter word.
-
-\begin{remark}
-  \label{rem:alphabet-size}
-  If there exists a \kl{word encoding} $\wenc{\cdot}$ for a binary alphabet $\Sigma$,
-  then one can construct a \kl{word encoding} for any finite alphabet $\Sigma'$
-  using a suitable binary encoding. The only difficulty is to ensure unique 
-  parsability of the encoding, which can be done using unambiguous codes
-  \cite{BERST09}.
-\end{remark}
+\paragraph{Structures Containing Paths.} In this section, we will assume that
+the set of indeterminates $\Indets$ contains an \intro(of){infinite path} $P
+\defined \seqof{x_i}[i \in \N] \subseteq \Indets$, that is, a set $P$ of
+indeterminates such that $\group$ acts on $P$ as a translation of the indices.
+Formally, we require that, for all $\gelem \in \group$ and for all segments $J
+\defined [k,l] \subfin \N$ such that $\gelem \cdot x_j \subseteq P$ for all $j
+\in J$, there exists $n \in \N$ such that $\gelem \cdot x_j = x_{j + n}$ for
+all $j \in J$ ; and there exists a $\gelem_{+1} \in \group$ such that
+$\gelem_{+1} \cdot x_i = x_{i + 1}$ for all $i \in \N$. The prototypical
+example being the set of all indeterminates $\Indets = \Z$ equipped with the
+group $\group$ of all shifts.
 
 \begin{remark}
   \label{rem:not-wqo}
@@ -163,9 +119,38 @@ the last letter of a word by a two-letter word.
 \end{remark}
 
 
-Because of \cref{rem:alphabet-size}, we will be interested in the
-existence of \kl{word encodings} for arbitrary finite alphabets, which is the
-same as the existence of a \kl{word encoding} for a binary alphabet. Given a
+\AP Let us fix a binary alphabet $\Sigma \defined \set{a,b}$, and let us define
+a function $\intro*\wenc{ \cdot} \colon \Sigma^* \to \mon{\Indets}$, where
+$\Sigma$ is a finite alphabet, that encodes a word $u \in \Sigma^*$ as a
+monomial. Namely, we define inductively $\wenc{\varepsilon} \defined 1$,
+$\wenc{a u} = x_0^3 x_1^2 x_2^1 x_3^3 (\gelem_{+4} \cdot \wenc{u})$ and
+$\wenc{b u} = x_0^3 x_1^1 x_2^2 x_3^3 (\gelem_{+4} \cdot \wenc{u})$ for all $u
+\in \Sigma^*$. Let us remark that \kl{monomial rewriting} applied on \kl{word
+encodings} can simulate (reversible) string rewriting on words of a given size.
+
+\begin{lemma}
+  \label{lem:word-encoding-string-subst}
+  Let $u,v,w \in \Sigma^*$ be three words, such that $|u| = |v|$,
+  and let $\monelt[n] \in \mon{\Indets}$ be a monomial.
+  The following are equivalent:
+  \begin{enumerate}
+    \item There exists $\gelem \in \group$
+      such that $\wenc{w} = \monelt[m] (\gelem \cdot \wenc{u})$
+      and $\monelt[n] = \monelt[m] (\gelem \cdot \wenc{v})$,
+    \item There exists $x, y \in \Sigma^*$
+      such that $x u y = w$ and $\wenc{x v y} = \monelt[n]$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  \textbf{aliaume todo}
+\end{proof}
+
+Note that without loss of generality, thanks to
+\cref{lem:word-encoding-string-subst}, we can assume that the alphabet is any
+finite set, using a suitable unambiguous encoding of the alphabet into a binary
+alphabet \cite{BERST09}. This bigger alphabet size will simplify the statement
+and proof of the following \cref{lem:reversible-machine}, which explains how
+to simulate a reversible Turing machine using \kl{monomial rewriting}. Given a
 reversible Turing machine $M$ with a finite set $Q$ of states and tape alphabet
 $\Sigma$, we will consider the following alphabet $\Gamma \defined \set{
 \triangleleft, \triangleright } \times \set{ \text{pre}, \text{run},
@@ -175,7 +160,7 @@ $\triangleright$ are used to delimit the beginning and the end of the tape,
 with some extra ``phase information''.
 
 \begin{lemma}
-  \label{lem:rev-turing-machine}
+  \label{lem:reversible-machine}
   There exists a
   \kl{monomial rewrite system} $R_M$ such that the following
   are equivalent for every $n \geq 1$:
@@ -199,7 +184,7 @@ with some extra ``phase information''.
   using blank symbols. Because transitions of the reversible Turing machine
   are substitutions of strings having the same size if one does not create new
   tape cells, the rewriting system can straigthforwardly simulate the 
-  substitutions because of \cref{def:word-encoding}.
+  substitutions because of \cref{lem:word-encoding-string-subst}.
   To this monomial rewriting system, we add two rules,
   respectively of the form
   $\wenc{ \triangleright^{\text{pre}} \square^n \triangleleft^{\text{pre}} }
@@ -214,9 +199,16 @@ with some extra ``phase information''.
   This is not problematic because one can 
   simply write $\wenc{\triangleright^{\text{run}} q_0} (\gelem \cdot \wenc{\triangleleft^{\text{run}}})$
   for a suitable $\gelem \in \group$, in order
-  to ignore the number of blank symbols in the tape and assume that the reversible Turing machine
+  to ignore the number of blank symbols in the tape,
+  and because we can assume that the reversible Turing machine
   starts with a clean tape and ends with a clean tape.
 \end{proof}
+
+\Cref{lem:reversible-machine} shows that one can simulate the runs, provided we
+know in advance the maximal size of the tape used by the reversible Turing
+machine. The key ingredient that remains to be explained is how one can 
+start from a finite monomial $\monelt$ and create a tape of arbitrary size
+using a \kl{monomial rewrite system}. 
 
 \begin{lemma}
   \label{lem:tape-creation}
@@ -252,8 +244,10 @@ with some extra ``phase information''.
   \wenc{ \square \square_1 } (\gelem \cdot \wenc{ \square \square \square_2 })$,
   where $\pi$ is a permutation of the indeterminates that ensures that the
   indetermitates of the two words are distinct.
-  Finally, one adds the possibility to switch to the sencond phase,
+  Finally, one adds the possibility to switch to the second phase,
   and end the second phase when pointer $\square_2$ reaches the end of the tape.
+
+  \todo[inline]{Aliaume: complete the proof}
 \end{proof}
 
 \begin{corollary}
@@ -267,121 +261,3 @@ with some extra ``phase information''.
   It suffices to combine the rewriting systems $R_M$, $R_\text{pre}$ and 
   $R_\text{post}$ by taking their union.
 \end{proof}
-
-Now that we have obtained a general proof scheme to obtain the undecidability
-of the \kl{equivariant ideal membership problem}, let us illustrate more
-concrete conditions on the group action $\group$ that allow constructing such
-\kl{word encodings}.
-
-\subsection{Interpreting Paths}
-\label{subsec:paths}
-
-In this section, we will assume that the set of indeterminates $\Indets$
-contains an \intro(of){infinite path} $P \defined \seqof{x_i}[i \in \N]
-\subseteq \Indets$, that is, a set of indeterminates such that $\group$ acts on
-$\Indets$ as a translation of the indices. Formally, we require that, for all
-$\gelem \in \group$ and for all segments $J \defined [k,l] \subfin \N$
-such that $\gelem \cdot x_j \subseteq P$ for all $j \in J$, there exists $n \in
-\N$ such that $\gelem \cdot x_j = x_{j + n}$ for all $j \in J$ ; and there
-exists a $\gelem_{+1} \in \group$ such that $\gelem_{+1} \cdot x_i = x_{i + 1}$ for all
-$i \in \N$.
-
-Let us now define a \kl{word encoding} for a binary alphabet $\Sigma =
-\set{a,b}$, leveraging the existence of such an \kl(of){infinite path} $P$. We
-define $\wenc{\varepsilon} \defined 1$, and $\wenc{a u} \defined x_0^{3} x_1^{2} x_2 x_3^3
-(\gelem_{+4} \cdot \wenc{u})$ and
-$\wenc{b u} \defined x_0^{2} x_1^{3} x_2^2 x_3 (\gelem_{+4} \cdot \wenc{u})$ for all
-$u \in \Sigma^*$. 
-
-\begin{lemma}
-  \label{lem:word-encoding-paths}
-  The function $\wenc{\cdot}$ defined above is a \kl{word encoding} for the
-  binary alphabet $\Sigma = \set{a,b}$.
-\end{lemma}
-\begin{proof}
-  Let $u, v \in \Sigma^*$ be two words.
-  Assume that there exists $x,y$ such that $x u y = v$.
-  Then, it as clear that $\wenc{v} = \monelt (\gelem_{+n} \cdot \wenc{u})$ for some
-  $n \in \N$, hence $\wenc{u} \gdivleq \wenc{v}$.
-  Furthermore, if $u'$ is another word of the same size as $u$, then
-  $\wenc{x u' y} = \monelt' (\gelem_{+n} \cdot \wenc{u'})$ for the same $n \in \N$,
-  hence
-  $\wenc{x u' y} (\gelem_{+n} \cdot \wenc{u}) = \wenc{x u y} (\gelem_{+n} \cdot \wenc{u'})$.
-
-  Conversely,
-  assume that $\wenc{u} \gdivleq \wenc{v}$.
-  Then, there exists a $\gelem \in \group$ such that
-  $\wenc{v} = \monelt (\gelem \cdot \wenc{u})$ for some monomial $\monelt$.
-  In particular, $\gelem$ maps the elements of $\wenc{u}$ to $P$,
-  hence, there exists $n \in \N$ such that
-  $\gelem \cdot x_i = x_{i + n}$ for all $i$ such that $x_i$ appears in $\wenc{u}$.
-  It follows that 
-  $\wenc{v} = \monelt (\gelem_{+n} \cdot \wenc{u})$.
-
-  Now, because of the exponents in the definition of $\wenc{\cdot}$, the $n$
-  must be a multiple of $4$, and the exponents of the indeterminates in every
-  block of four consecutive indeterminates of the form $x_i^3 x_{i+1}^\alpha
-  x_{i+2}^\beta x_{i+3}^3$ must be such that $(\alpha, \beta) \in \set{(2,1),
-  (1,2)}$. It follows that the letters $a$ and $b$ must be the same in the 
-  words $u$ and the word $v[n / 4, n/ 4 + |u| - 1]$. In particular,
-  there exists $x, y \in \Sigma^*$ such that $x u y = v$.
-\end{proof}
-
-As an immediate consequence of \cref{lem:word-encoding-paths}, we
-conclude that the \kl{equivariant ideal membership problem} is undecidable when
-variables are $\Indets_\Z$ equipped with the group of shifts, as described in
-\cref{ex:z-is-not-wqo}.
-
-\subsection{Infinite Dimensional Vector Space}
-\label{subsec:vector}
-
-\AP In this section, we will show that the \kl{equivariant ideal membership
-problem} is undecidable for the \intro{infinite dimensional vector space}
-$\Indets \defined \mathbb{V}$, that is, an infinite dimensional vector space,
-where the group $\group$ acting on $\Indets$ is the group of linear
-automorphisms of $\mathbb{V}$.
-
-It is unclear whether the \kl{infinite dimensional vector space} contains an
-\kl(of){infinite path} $P$ as defined in
-\cref{subsec:paths}. However, we can
-construct a \kl{word encoding} for a binary alphabet $\Sigma = \set{a,b}$. To
-that end, let us consider an infinite sequence $v_0, v_1, v_2, \ldots$ of
-vectors in $\mathbb{V}$ such that the set $\set{v_0, v_1, v_2, \ldots}$ is
-linearly independent, which is possible precisely because $\mathbb{V}$ is
-infinite dimensional. Let us write $\gelem_{+1} \in \group$ for the linear
-automorphism that sends $v_i$ to $v_{i + 1}$ for all $i \in \N$, and acts
-trivially on a supplement of the subspace spanned by $\set{v_0, v_1, v_2,
-\ldots}$. We then define $\wenc{\varepsilon} \defined v_0^3$, $\wenc{a u}
-\defined v_0^3 (v_0 + v_1)^2 v_1^3 (v_1 + v_2) (\gelem_{+2} \cdot \wenc{u})$
-and $\wenc{b u} \defined v_0^3 (v_0 + v_1)^1 v_1^3 (v_1 + v_2)^2 (\gelem_{+2}
-\cdot \wenc{u})$.
-
-\begin{lemma}
-  \label{lem:word-encoding-vector}
-  The function $\wenc{\cdot}$ defined above is a \kl{word encoding} for the
-  binary alphabet $\Sigma = \set{a,b}$.
-\end{lemma}
-\begin{proof}
-  The proof is similar to the one of \cref{lem:word-encoding-paths}.
-  The only difficulty is to ensure that if a linear automorphism $\gelem$ maps
-  $\wenc{u}$ to a subset of variables in $\wenc{v}$ for some $u,v$, then
-  it acts as a translation of the indices on the vectors $v_i$ that appear in
-  $u$.
-  The reason is that the indeterminates $v_i$ are the only ones that appear with
-  exponent $3$ in the definition of $\wenc{\cdot}$, hence $\gelem$ must 
-  send all the $v_i's$ that appear in $\wenc{u}$ to some $v_j$'s that appear 
-  in $\wenc{v}$.
-  Assume that $\gelem \cdot v_0 = v_k$ for some $k \in \N$,
-  and that $\gelem \cdot v_1 = v_l$ for some $l \in \N$.
-  Then, 
-  $\gelem \cdot (v_0 + v_1) = v_k + v_l$, or the only indeterminates 
-  that are sums of two vectors in $\wenc{v}$ are of the form
-  $v_j + v_{j+1}$ for some $j \in \N$.
-  We conclude that $l = k + 1$.
-  Similarly, one can prove that $\gelem \cdot v_2 = v_{k + 2}$, and
-  by induction conclude.
-\end{proof}
-
-The role of \cref{lem:word-encoding-vector} is to show that the idea
-of \kl{word encodings} is versatile enough to obtain undecidability for
-structures where actual \kl(of){infinite paths} are not clearly visible.
