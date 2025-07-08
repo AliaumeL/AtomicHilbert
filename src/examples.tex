@@ -63,22 +63,25 @@ and discuss which of them preserve this condition.
 \todo[inline]{for arka : add citations}
 
 In all of our examples $\Indets$ is a set with some structure, described by some relations and functions on that set,
-and $\group$ is the group $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve the structure) of $\Indets$.
-To show that $(\mon[Y]{\Indets},\gdivleq)$ is a WQO we use the following strategy:
-we define an one-to-one function $f_{\Indets} : \mon[Y]{\Indets} \to W_{\Indets}$ to some well-known well-quasi-ordered set $(W_{\Indets},\leq)$ such that $f_{\Indets}(\monelt[p]) \leq f_{\Indets}(\monelt[q])$ if and only if $\monelt[p] \gdivleq \monelt[q]$.
-The reason why this strategy works is because in all of our examples, $\Indets$ will be a \intro{homogeneous} structure (\arka{cite wikipedia and macpherson survey}),
-and $f_{\Indets}$ essentially maps an element $\monelt[p]$ of $\mon[Y]{\X}$,
-thought as a finite induced substructure labelled by $Y$,
-to its isomorphism class.
+and $\group$ is the group $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve and reflect the structure) of $\Indets$.
+Moreover, all the structures in our examples are \intro{homogenous}:
+isomorphism between finite induced substructures extends to an automorphism of the whole structure.
+\arka{cite wikipedia and macpherson survey}
+%To show that $(\mon[Y]{\Indets},\gdivleq)$ is a WQO we use the following strategy:
+%we define an one-to-one function $f_{\Indets} : \mon[Y]{\Indets} \to W_{\Indets}$ to some well-known well-quasi-ordered set $(W_{\Indets},\leq)$ such that $f_{\Indets}(\monelt[p]) \leq f_{\Indets}(\monelt[q])$ if and only if $\monelt[p] \gdivleq \monelt[q]$.
+%The reason why this strategy works is because in all of our examples, $\Indets$ will be a \intro{homogeneous} structure (\arka{cite wikipedia and macpherson survey}),
+%and $f_{\Indets}$ essentially maps an element $\monelt[p]$ of $\mon[Y]{\X}$,
+%thought as a finite induced substructure labelled by $Y$,
+%to its isomorphism class.
 %
 \begin{example}\label{ex:eq atoms}
 Let $\A$ be an infinite set without any additional structure other than the equality relation.
 Then $\aut{\A}$ is the set of all bijections of the set $\A$.
 This action $\aut{\A} \actson \A$ does not preserve any linear order on $\A$.
 However, $(\mon[Y]{\A}, \gdivleq)$ is a \kl{WQO} whenever $Y$ is a \kl{WQO}.
-To see this define $f_{\A}$ to be the function which takes $\monelt[p]$ to the multiset of its coefficients.
-For example, $f_{\A}(a^{y}a_2^{y'}c^{y} = \{y,y',y\}$ for every $a,b,c\in\A$ and $y,y'\in Y$.
-We leave it to the reader to prove that for every $\monelt[p],\monelt[q]\in\mon[Y]{\A}$ we have $\monelt[p] \gdivleq[\aut{\A}] \monelt[q]$ if and only if $f(\monelt[p])$ is smaller than or equal to $f(\monelt[q])$ in the multiset ordering (\arka{cite MPRI lecture notes?}).
+Observe that up to isomorphism, a monomial $\monelt[p]$ in $\mon[Y]{\A}$ can be though as a multiset of its coefficients.
+For example, the monomials $a^{y}b^{z}c^{y}$ can be though as the multiset $\{y,z,y\}$ for every $a,b,c\in\A$ and $y,z\in Y$.
+We leave it to the reader to prove that for every $\monelt[p],\monelt[q]\in\mon[Y]{\A}$ we have $\monelt[p] \gdivleq[\aut{\A}] \monelt[q]$ if and only if the multiset of coefficients of $\monelt{p}$ is smaller than or equal to the multiset of coefficients of $\monelt{1}$ in the multiset ordering (\arka{cite MPRI lecture notes?}).
 Note that the latter is a \kl{WQO}.
 \end{example}
 %
@@ -89,11 +92,10 @@ Let $\D$ be a dense linear order without endpoints(\arka{cite wiki}).
 Then $\aut{\D}$ is the set of all order preserving bijections of $\D$.
 By definition, the action $\aut{\D} \actson \D$ preserves the linear order on $\D$.
 Moreover, $(\mon[Y]{\A}, \gdivleq)$ is a \kl{WQO} whenever $Y$ is a \kl{WQO}.
-Using the same strategy as \Cref{ex:eq atoms},
-we define $f_{\D}$ to be the map which takes $\monelt[p]\in\mon[Y]{\D}$ to the corresponding word in $Y^*$ which we get by writing all the exponents in the order prescribed by the indeterminates.
+From a monomial $\monelt[p]$ in $\mon[Y]{\D}$ we get a word in $Y^*$ by writing all the exponents in the order prescribed by the indeterminates.
 For example, for every $a < b < c \in \D$ and $u,v\in Y$,
 $f_{\D}(a^u b^v c^u) = uvu$.
-We leave it to the reader to check that for every $\monelt[p],\monelt[q]\in\mon[Y]{\D}$ we have $\monelt[p] \gdivleq[\aut{\A}] \monelt[q]$ if and only if $f(\monelt[p])$ is smaller than or equal to $f(\monelt[q])$ in the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \cite{HIG52}.
+We leave it to the reader to check that for every $\monelt[p],\monelt[q]\in\mon[Y]{\D}$ we have $\monelt[p] \gdivleq[\aut{\A}] \monelt[q]$ if and only if the word corresponding word to $(\monelt[p])$ is smaller than or equal to the word corresponding word to $(\monelt[q])$ in the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \cite{HIG52}.
 \end{example}
 %
 \begin{example}\label{ex:dlo}
@@ -134,9 +136,67 @@ is an infinite antichain.
 %
 \begin{example}\label{ex:dense tree}
 Let $\T$ denote the dense-tree structure,
-which is the unique (up to isomorphism) homogeneous infinite tree such that every finite tree is a topological minor of $\T$.
-The tree structure is given by 
+which is the unique (up to isomorphism) homogeneous infinite tree such that every finite tree is isomorphic to a topological minor of $\T$.
+The tree structure is given by the \intro{closed common ancestor function},
+which takes as input a pair of nodes of $\T$ and returns their closest common ancestor \arka{cite atombook}.
+In this case, $\aut{\T}$ is the set of bijections $\pi$ of $\T$ that preserves and reflects ancestry:
+$\pi(a)$ is an ancestor of $\pi(b)$ if and only if $a$ is an ancestor of $b$.
+The action $\aut{\T}\actson\T$ does not preserve any linear order,
+since for every pair of nodes $a$ and $b$ such that their closest common ancestor $c$ is neither $a$ or $b$,
+there exists $\pi\in\aut{\T}$ such that $\pi(a) = b$ and $\pi(b) = a$.
+However, $(\mon[Y]{\T},\gdivleq[\aut{\T}])$ is a \kl{WQO} whenever $Y$ is a \kl{WQO}.
+This follows from Kruskal's theorem \arka{add citation} in the following way.
+Extend $Y$ to another \kl{WQO} $Y'$ by adding an element $\bot$ which is smaller than every element in $Y$.
+The domain of an element $\monelt[p]\in\mon[Y]{\T}$ induces a finite subtree of $\T$ which is the smallest subtree of $\T$ containing $\dom(\monelt[p])$ and closed under the closest common ancestor relation.
+The coefficients of $\monelt[p]$ defines a partial labelling of nodes of this subtree using $Y$.
+By labelling the unlabelled nodes by $\bot$ we get a finite subtree of $\T$ labelled by $Y'$.
+Due to homogeneity,
+$\monelt[p] \gdivleq \monelt[q]$ if and only if the labelled subtree corresponding to $\monelt[p]$ is isomorphic to a topological minor of the labelled subtree corresponding to $\monelt[q]$.
+Now it follows from Kruskal's lemma that $(\mon[Y]{\T},\gdivleq[\aut{\T}])$ is a \kl{WQO}.
 \end{example}
+%
+For the remainder of this section fix a pair of group actions
+$\G\actson\X$ and $\calH\actson\Y$
+%
+\begin{example}\label{ex:union}
+The group actions $\G\actson\X$ and $\calH\actson\Y$ can be extended to a group action $(\G\times\calH)\actson(\X\uplus\Y)$ by defining
+\[
+(\pi,\sigma)(z) =
+\begin{cases}
+\pi(z) & \text{if }z\in\X,\\
+\sigma(z) & \text{if }z\in \Y.
+\end{cases}
+\]
+If the actions $\G\actson\X$ and $\calH\actson\Y$ preserve linear orders then so does the actions $(\G\times\calH)\actson(\X\uplus\Y)$.
+Fix a \kl{WQO} $Q$.
+We have
+\[
+(\mon[Q]{\X\uplus\Y}, \gdivleq[\G\times\calH])
+\cong
+(\mon[Q]{\X}\times\mon[Y]{\Y}, \gdivleq[\G]\times\gdivleq[\calH])
+\]
+where $\gdivleq[\G]\times\gdivleq[\calH]$ is the product ordering \arka{citation?}.
+This implies if $(\mon[Q]{\X},\gdivleq{\G}$ and $(\mon[Q]{\Y},\gdivleq{\calH}$ are \kl{WQOs},
+so is $(\mon[Q]{\X\uplus\Y}, \gdivleq[\G\times\calH])$.
+\end{example}
+%
+\begin{example}\label{ex:product}
+Let $\G * \calH$ denote the free product of the groups $\G$ and $\calH$.
+\arka{cite wikipedia}
+We extend the group actions $\G\actson\X$ and $\calH\actson\Y$ to a group action $(\G * \calH)\actson(\X\times\Y)$.
+Noting that it is enough to define the actions on $\G,\calH\subseteq \G * \calH$,
+we define 
+\[
+\pi((x,y)) =
+\begin{cases}
+(\pi(x),y) & \text{if }\pi\in\G,\\
+(x,\pi(y)) & \text{if }\pi\in\calH.
+\end{cases}
+\]
+$(\mon[Q]{\X\times\Y}, \gdivleq[\G * \calH])$ is not a \kl{WQO} even when $Y$ is a singleton
+\arka{finish}
+\end{example}
+
 %
 \paragraph{Sets with atoms.}
 
