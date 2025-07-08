@@ -3,54 +3,53 @@
 %
 \section{Relation to Existing Results and Examples}
 \label{sec:examples}
-
-In this section, we are interested in the consequences of our decidability
-results. First, we will provide numerous examples of sets of indeterminates
-that satisfy our \kl{computability assumptions} as well as our
-\kl{well-quasi-ordering} conditions. Then, we will discuss how our results can
-be applied to solve various decidability problems in theoretical computer
-science.
-
-\todo[inline]{for arka: integrate these examples}
-\begin{example}
-  \label{ex:q-is-super-wqo}
-  The set $(\mon[Y]{\Indets_\calQ}, \gdivleq)$ is a \kl{well-quasi-ordering} whenever $Y$ is
-  one, and in particular $\Indets_\calQ$ satisfies the computability assumptions and
-  the termination assumptions of both \cref{thm:compute-egb}
-  and
-  \cref{thm:decide-equiv-ideal-mem}.
-\end{example}
-\begin{proof}
-  Let $\seqof{\monelt_i}[i \in \N]$ be a sequence of monomials in
-  $\mon[Y]{\Indets_\calQ}$. Let us write each monomial $\monelt_i$ as
-  a finite word $w_i$ over the alphabet $Y$, by writing all the exponents in the order 
-  prescribed by the indeterminates.
-  Because $Y$ is a \kl{well-quasi-ordering}, the set of all finite words over $Y$ is
-  \kl{well-quasi-ordered} by the \emph{scattered subword} relation \cite{HIG52}.
-  Now, if $w_i$ is a scattered subword of $w_j$, then
-  $\monelt_i \gdivleq \monelt_j$, by choosing a suitable $\gelem \in \group$.
-\end{proof}
-
-\begin{example}
-  \label{ex:z-is-not-wqo}
-  The set $(\mon[Y]{\Indets_\Z}, \gdivleq)$ is not a \kl{well-quasi-ordering} whenever $Y$ is
-  contains two distinct elements.
-  In particular, $\Indets_\Z$ does not satisfy the termination assumptions of
-  \cref{thm:compute-egb} and \cref{thm:decide-equiv-ideal-mem}.
-\end{example}
-\begin{proof}
-  Assume that $Y$ has two distinct elements $a$ and $b$, and let us assume without loss of generality
-  that $a \leq b$. The sequence of monomials 
-  $\monelt_i \defined x_1^{b} x_2^{a} \cdots x_{i-1}^{a} x_i^{b}$
-  forms an infinite antichain in $(\mon[Y]{\Indets_\Z}, \gdivleq)$.
-  Indeed, if $\monelt_i \gdivleq \monelt_j$ for some $i < j$, then
-  without loss of generality, $\gelem_i (x_1) = x_1$, and 
-  $\gelem_i (x_i) = x_j$, because these are the only ones that can be 
-  equipped with a large enough exponent.
-  Therefore, $\gelem_i = \mathrm{id}$ since the group only contains translations.
-  However, this implies that the exponent of $x_j$ in $\monelt_j$ is at most $a$,
-  which contradicts the fact that it is $b$.
-\end{proof}
+%In this section, we are interested in the consequences of our decidability
+%results. First, we will provide numerous examples of sets of indeterminates
+%that satisfy our \kl{computability assumptions} as well as our
+%\kl{well-quasi-ordering} conditions. Then, we will discuss how our results can
+%be applied to solve various decidability problems in theoretical computer
+%science.
+%
+%\todo[inline]{for arka: integrate these examples}
+%\begin{example}
+%  \label{ex:q-is-super-wqo}
+%  The set $(\mon[Y]{\Indets_\calQ}, \gdivleq)$ is a \kl{well-quasi-ordering} whenever $Y$ is
+%  one, and in particular $\Indets_\calQ$ satisfies the computability assumptions and
+%  the termination assumptions of both \cref{thm:compute-egb}
+%  and
+%  \cref{thm:decide-equiv-ideal-mem}.
+%\end{example}
+%\begin{proof}
+%  Let $\seqof{\monelt_i}[i \in \N]$ be a sequence of monomials in
+%  $\mon[Y]{\Indets_\calQ}$. Let us write each monomial $\monelt_i$ as
+%  a finite word $w_i$ over the alphabet $Y$, by writing all the exponents in the order 
+%  prescribed by the indeterminates.
+%  Because $Y$ is a \kl{well-quasi-ordering}, the set of all finite words over $Y$ is
+%  \kl{well-quasi-ordered} by the \emph{scattered subword} relation \cite{HIG52}.
+%  Now, if $w_i$ is a scattered subword of $w_j$, then
+%  $\monelt_i \gdivleq \monelt_j$, by choosing a suitable $\gelem \in \group$.
+%\end{proof}
+%
+%\begin{example}
+%  \label{ex:z-is-not-wqo}
+%  The set $(\mon[Y]{\Indets_\Z}, \gdivleq)$ is not a \kl{well-quasi-ordering} whenever $Y$ is
+%  contains two distinct elements.
+%  In particular, $\Indets_\Z$ does not satisfy the termination assumptions of
+%  \cref{thm:compute-egb} and \cref{thm:decide-equiv-ideal-mem}.
+%\end{example}
+%\begin{proof}
+%  Assume that $Y$ has two distinct elements $a$ and $b$, and let us assume without loss of generality
+%  that $a \leq b$. The sequence of monomials 
+%  $\monelt_i \defined x_1^{b} x_2^{a} \cdots x_{i-1}^{a} x_i^{b}$
+%  forms an infinite antichain in $(\mon[Y]{\Indets_\Z}, \gdivleq)$.
+%  Indeed, if $\monelt_i \gdivleq \monelt_j$ for some $i < j$, then
+%  without loss of generality, $\gelem_i (x_1) = x_1$, and 
+%  $\gelem_i (x_i) = x_j$, because these are the only ones that can be 
+%  equipped with a large enough exponent.
+%  Therefore, $\gelem_i = \mathrm{id}$ since the group only contains translations.
+%  However, this implies that the exponent of $x_j$ in $\monelt_j$ is at most $a$,
+%  which contradicts the fact that it is $b$.
+%\end{proof}
 
 \subsection{Crafting sets of indeterminates}
 %
@@ -59,8 +58,6 @@ We also describe operations to build new group actions from old ones,
 and discuss which of them preserve this condition.
 
 \arka{Did we write somewhere that divisibility is same as labelled embedding}
-
-\todo[inline]{for arka : add citations}
 
 In all of our examples $\Indets$ is a set with some structure, described by some relations and functions on that set,
 and $\group$ is the group $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve and reflect the structure) of $\Indets$.
