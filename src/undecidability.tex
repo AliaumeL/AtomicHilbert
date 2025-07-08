@@ -254,15 +254,20 @@ of $\group$.
   \todo[inline]{Aliaume: complete the proof}
 \end{proof}
 
-\begin{corollary}
-  \label{cor:undecidability}
-  Let $\Indets$ be a set of indeterminates, and let $\group$ be a group acting
-  on $\Indets$ such that the action is effective. If there exists a
-  \kl{word encoding} for a binary alphabet, then the \kl{equivariant ideal
-  membership problem} is undecidable.
-\end{corollary}
+\csname thm:undecidable-paths\endcsname
 \begin{proof}
   It suffices to combine the rewriting systems $R_M$, $R_\text{pre}$ and 
   $R_\text{post}$ by taking their union.
 \end{proof}
 
+
+\begin{remark}
+  \label{rem:more-generally}
+  The undecidability result of \cref{cor:undecidability} can be generalized to
+  any set of indeterminates in which one can encode words over a binary alphabet,
+  and for which there is a \kl{monomial rewrite system} that can
+  produce arbitrary long words.
+  We strongly conjecture that this is the case for 
+  the \kl{infinite dimensional vector space}
+  \todo{cite ref}
+\end{remark}
