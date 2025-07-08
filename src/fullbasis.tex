@@ -174,12 +174,11 @@ used in algorithms as we will see in \cref{sec:examples}.
 
 \begin{corollary}
   \label{cor:equivariant-ideals-computations}
-  Let $(Y, \leq) \defined (\om \ordplus \ordfin{1}) \times (\om \ordplus \ordfin{1})$,
-  i.e. pairs of (potentially infinite) natural numbers ordered pointwise.
   Assume that $(\Indets, \varleq, \group)$
   is \kl{effectively oligomorphic},
   and that $(\mon[Y]{\Indets}, \gdivleq)$
-  is a \kl{well-quasi-ordered} set.
+  is a \kl{well-quasi-ordered} set
+  for every \kl{well-quasi-ordered} set $(Y,\leq)$.
   Then one has an \emph{effective representation} of
   the \kl{equivariant ideals} of $\poly{\K}{\Indets}$,
   such that:
@@ -197,8 +196,8 @@ used in algorithms as we will see in \cref{sec:examples}.
 \begin{proof}
   Most of this statement follows from \cref{thm:compute-egb}, using
   \kl{equivariant Gröbner bases} as a representation of \kl{equivariant ideals}.
-  Indeed, because $\N \times \N$ is contained in $Y$ as an ordering, 
-  it is clear that $(\mon[\N \times \N]{\Indets}, \gdivleq)$ is a 
+  Indeed, because $\N \times \N$ is a \kl{well-quasi-ordered} set,
+  we conclude $(\mon[\N \times \N]{\Indets}, \gdivleq)$ is a 
   \kl{well-quasi-ordered} set too.
   The only non-trivial part is the fact that one can compute an
   \kl{equivariant Gröbner basis} of the
