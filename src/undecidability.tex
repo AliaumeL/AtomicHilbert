@@ -206,9 +206,14 @@ with some extra ``phase information''.
 
 \Cref{lem:reversible-machine} shows that one can simulate the runs, provided we
 know in advance the maximal size of the tape used by the reversible Turing
-machine. The key ingredient that remains to be explained is how one can 
-start from a finite monomial $\monelt$ and create a tape of arbitrary size
-using a \kl{monomial rewrite system}. 
+machine. The key ingredient that remains to be explained is how one can start
+from a finite monomial $\monelt$ and create a tape of arbitrary size using a
+\kl{monomial rewrite system}. Note that because the set of indeterminates can
+very well contain multiple copies of an \kl(of){infinite path} $P$, we will not
+be able to guarantee that we create exactly the tape $\wenc{
+\triangleright^{\text{pre}} \square^n \triangleleft^{\text{pre}} }$ for some $n
+\in \N$, but rather that we can find some equivalent monomial up to the action
+of $\group$.
 
 \begin{lemma}
   \label{lem:tape-creation}
@@ -219,8 +224,8 @@ using a \kl{monomial rewrite system}.
     \item $\wenc{ \triangleright^{\text{pre}} \square \triangleleft^{\text{pre}}} 
       \leftrightarrow_{R_\text{pre}}^* 
       \monelt$
-    \item there exists $n \in \N$ such that
-      $\monelt = \wenc{ \triangleright^{\text{pre}} \square^n 
+    \item there exists $n \in \N$ and $\gelem \in \group$, such that
+      $\gelem \cdot \monelt = \wenc{ \triangleright^{\text{pre}} \square^n 
                         \triangleleft^{\text{pre}} }$.
   \end{enumerate}
   Similarly, there exists a \kl{monomial rewrite system} $R_\text{post}$
@@ -229,10 +234,9 @@ using a \kl{monomial rewrite system}.
 \begin{proof}
   The rewrite system is going to have two phases.
   In a first phase, we will consider the rules
-  $\wenc{ \triangleleft^{\text{pre}} } \leftrightarrow_{R_\text{pre}}
-   \wenc{ \square \triangleleft^{\text{pre}} }$.
-  This is \emph{almost} leading to the desired \kl{word encoding}, 
-  thanks to the third property of \cref{def:word-encoding}.
+  $\wenc{ \square \triangleleft^{\text{pre}} } \leftrightarrow_{R_\text{pre}}
+   \wenc{ \square \square \triangleleft^{\text{pre}} }$.
+  This is \emph{almost} leading to the desired \kl{word encoding}.
   The only thing left to check is that we do not reuse indeterminates when 
   creating new letters.
   To ensure that we did not, we will implement the 
@@ -261,3 +265,4 @@ using a \kl{monomial rewrite system}.
   It suffices to combine the rewriting systems $R_M$, $R_\text{pre}$ and 
   $R_\text{post}$ by taking their union.
 \end{proof}
+
