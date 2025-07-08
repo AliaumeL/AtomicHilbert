@@ -3,6 +3,8 @@
 \section{Undecidability Results}
 \label{sec:undecidability}
 
+\todo[inline]{Aliaume: update section intro}
+
 In this section, we will show that under certain conditions, the
 \kl{equivariant ideal membership problem} is undecidable. We aim to show that
 it is the case when we assume the usual effectiveness conditions on the group
@@ -27,61 +29,14 @@ following \cref{ex:non-wqo-undecidable}.
   the \kl{ideal membership problem} in $\poly{\K}{V}$, which is decidable.
 \end{proof}
 
-Avoiding pathological cases such as the one in
-\cref{ex:non-wqo-undecidable}, we can give one positive and one
-negative examples that are designed to illustrate the results we will present
-in this section. On the positive side, one can consider $\Indets_\Q$, the set
-of all rationals equipped with their usual ordering, and the group of all
-bijections of $\Indets_\Q$ that preserve the ordering
-(\cref{ex:q-is-super-wqo}). While on the negitive side, one can
+Avoiding pathological cases such as the one in \cref{ex:non-wqo-undecidable},
+we can give one positive and one negative examples that are designed to
+illustrate the results we will present in this section. On the positive side,
+one can consider $\Indets_\Q$, the set of all rationals equipped with their
+usual ordering, and the group of all bijections of $\Indets_\Q$ that preserve
+the ordering (\cref{ex:q-is-super-wqo}). While on the negative side, one can
 consider $\Indets_\Z$, the set of all integers equipped with their usual
-ordering, and the group of all shifts of integers
-(\cref{ex:z-is-not-wqo}).
-
-\arka{Maybe boldface for structures and mathhbb for numeric sets}
-why?
-
-\arka{How about putting the examples in the sections where we discuss structures}
-
-\begin{example}
-  \label{ex:q-is-super-wqo}
-  The set $(\mon[Y]{\Indets_\Q}, \gdivleq)$ is a \kl{well-quasi-ordering} whenever $Y$ is
-  one, and in particular $\Indets_\Q$ satisfies the computability assumptions and
-  the termination assumptions of both \cref{thm:compute-egb}
-  and
-  \cref{thm:decide-equiv-ideal-mem}.
-\end{example}
-\begin{proof}
-  Let $\seqof{\monelt_i}[i \in \N]$ be a sequence of monomials in
-  $\mon[Y]{\Indets_\Q}$. Let us write each monomial $\monelt_i$ as
-  a finite word $w_i$ over the alphabet $Y$, by writing all the exponents in the order 
-  prescribed by the indeterminates.
-  Because $Y$ is a \kl{well-quasi-ordering}, the set of all finite words over $Y$ is
-  \kl{well-quasi-ordered} by the \emph{scattered subword} relation \cite{HIG52}.
-  Now, if $w_i$ is a scattered subword of $w_j$, then
-  $\monelt_i \gdivleq \monelt_j$, by choosing a suitable $\gelem \in \group$.
-\end{proof}
-
-\begin{example}
-  \label{ex:z-is-not-wqo}
-  The set $(\mon[Y]{\Indets_\Z}, \gdivleq)$ is not a \kl{well-quasi-ordering} whenever $Y$ is
-  contains two distinct elements.
-  In particular, $\Indets_\Z$ does not satisfy the termination assumptions of
-  \cref{thm:compute-egb} and \cref{thm:decide-equiv-ideal-mem}.
-\end{example}
-\begin{proof}
-  Assume that $Y$ has two distinct elements $a$ and $b$, and let us assume without loss of generality
-  that $a \leq b$. The sequence of monomials 
-  $\monelt_i \defined x_1^{b} x_2^{a} \cdots x_{i-1}^{a} x_i^{b}$
-  forms an infinite antichain in $(\mon[Y]{\Indets_\Z}, \gdivleq)$.
-  Indeed, if $\monelt_i \gdivleq \monelt_j$ for some $i < j$, then
-  without loss of generality, $\gelem_i (x_1) = x_1$, and 
-  $\gelem_i (x_i) = x_j$, because these are the only ones that can be 
-  equipped with a large enough exponent.
-  Therefore, $\gelem_i = \mathrm{id}$ since the group only contains translations.
-  However, this implies that the exponent of $x_j$ in $\monelt_j$ is at most $a$,
-  which contradicts the fact that it is $b$.
-\end{proof}
+ordering, and the group of all shifts of integers (\cref{ex:z-is-not-wqo}).
 
 \subsection{Monomial Reachability}
 
@@ -90,7 +45,7 @@ The undecidability results we will present in this section regarding the
 limited way: we will only need to consider \emph{monomials}, and there will
 even be a bound on the maximal exponent used. Before going into the details of
 our reductions, let us first introduce an intermediate problem that will be
-easier to work with: the \kl{monomial reachability problem}.
+easier to work with: the (equivariant) \kl{monomial reachability problem}. 
 
 \begin{definition}
   \label{def:mon-rewrite-system}
@@ -118,58 +73,17 @@ easier to work with: the \kl{monomial reachability problem}.
   $\monelt$ has all its exponents that are multiple of $2$.
 \end{example}
 
+The following \cref{lem:mon-rewrite-red-membership} shows that the \kl{monomial
+reachability problem} can be reduced to the \kl{equivariant ideal membership
+problem}, and follows the exact same reasoning as in the case of finitely many
+indeterminates \cite{MAME82}. This reduction was also noticed in \cite[Theorem
+64]{GHOLAS24}.
 
-\begin{lemma}
-  \label{lem:mon-rewrite-red-membership}
+
+\begin{lemma}[label=lem:mon-rewrite-red-membership,ref=lem:mon-rewrite-red-membership]
   One can solve the \kl{monomial reachability problem}
   provided that one can solve the \kl{equivariant ideal membership problem}.
 \end{lemma}
-\begin{proof}
-  Let $R$ be a monomial rewrite system, and let $\monelt_s, \monelt_t \in
-  \mon{\Indets}$ be two monomials. We can encode the problem of deciding whether
-  $\monelt_s$ can be rewritten into $\monelt_t$ using the rules of $R$ as an
-  instance of the \kl{equivariant ideal membership problem} as follows:
-  \begin{itemize}
-    \item Let $H$ be the set of all polynomials of the form $\monelt - \monelt'$
-      for all pairs
-      $(\monelt, \monelt') \in R$.
-    \item Then, we ask whether $\monelt_s - \monelt_t$ belongs to the ideal generated by $H$.
-  \end{itemize}
-
-  It is clear that if $\monelt_s$ can be rewritten into $\monelt_t$ using the
-  rules of $R$, then $\monelt_s - \monelt_t$ belongs to the equivariant ideal generated by
-  $H$. Conversely, if $\monelt_s - \monelt_t$ belongs to the ideal generated by
-  $H$, then 
-  \begin{equation}
-    \label{eq:mon-rewrite-red-membership}
-    \monelt_s - \monelt_t 
-    = 
-    \sum_{i=1}^n a_i \monelt[n]_i (\gelem_i \cdot \monelt_i - \gelem_i \cdot \monelt'_i)
-    \quad .
-  \end{equation}
-
-  Let us write the (finite) graph $G$ whose vertices are the monomials
-  $\monelt[n] (\gelem_i \cdot \monelt_i)$ and $\monelt[n] (\gelem_i \cdot
-  \monelt'_i)$, and whose edges are the directed weighted edges labelled by
-  $a_i$ (in a direction that makes the weight positive).
-
-  Let us now analyse \cref{eq:mon-rewrite-red-membership}, and notice that
-  identifying monomials in the left and right-hand sides of the equation allows
-  us to show that $\monelt_s$ and $\monelt_t$ are vertices of $G$. Furthermore,
-  we deduce that the sum of the weights of the edges having $\monelt_s$ as a
-  source or target equals $1$, and that the sum of the weights of the edges
-  having $\monelt_t$ as a source or target equals $-1$. Finally, for every
-  vertex $v$ of $G$ that is not $\monelt_s$ or $\monelt_t$, the sum of the
-  weights of the edges having $v$ as a source or target is $0$, again because
-  of an analysis of the coefficient of the monomial $v$ in the sum of
-  \cref{eq:mon-rewrite-red-membership}.
-
-  Hence, the graph $G$ is a flow network, with a flow value of at least $1$
-  from $\monelt_s$ to $\monelt_t$. As a consequence, there must exist a path
-  from $\monelt_s$ to $\monelt_t$ in $G$, which is a witness
-  of the fact that 
-  one can rewrite $\monelt_s$ into $\monelt_t$ using the rules of $R$.
-\end{proof}
 
 In order to show that the \kl{equivariant ideal membership problem} is
 undecidable, it is therefore enough to show that the \kl{monomial reachability
