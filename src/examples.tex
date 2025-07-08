@@ -82,6 +82,8 @@ We leave it to the reader to prove that for every $\monelt[p],\monelt[q]\in\mon[
 Note that the latter is a \kl{WQO}.
 \end{example}
 %
+
+\todo[inline]{Why not use $\Q$? Also, we do not \emph{leave to the reader}, we claim that.}
 \begin{example}\label{ex:dlo}
 Let $\D$ be a dense linear order without endpoints(\arka{cite wiki}).
 Then $\aut{\D}$ is the set of all order preserving bijections of $\D$.
@@ -91,7 +93,7 @@ Using the same strategy as \Cref{ex:eq atoms},
 we define $f_{\D}$ to be the map which takes $\monelt[p]\in\mon[Y]{\D}$ to the corresponding word in $Y^*$ which we get by writing all the exponents in the order prescribed by the indeterminates.
 For example, for every $a < b < c \in \D$ and $u,v\in Y$,
 $f_{\D}(a^u b^v c^u) = uvu$.
-We leave it to the reader to check that for every $\monelt[p],\monelt[q]\in\mon[Y]{\D}$ we have $\monelt[p] \gdivleq[\aut{\A}] \monelt[q]$ if and only if $f(\monelt[p])$ is smaller than or equal to $f(\monelt[q])$ in the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \arka{add citation}.
+We leave it to the reader to check that for every $\monelt[p],\monelt[q]\in\mon[Y]{\D}$ we have $\monelt[p] \gdivleq[\aut{\A}] \monelt[q]$ if and only if $f(\monelt[p])$ is smaller than or equal to $f(\monelt[q])$ in the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \cite{HIG52}.
 \end{example}
 %
 \begin{example}\label{ex:dlo}
@@ -225,6 +227,8 @@ for every $x \notin S$. Given an element $f \in \K^{(\Indets)}$, and given a
 polynomial $p \in \poly{\K}{\Indets}$, we write $p(f)$ for the evaluation of
 $p$ on $f$.
 
+\todo[inline]{for arka: we never defined finitely supported functions.}
+
 \begin{definition}
   \label{def:orbit-finite-polynomial-automaton}
   An \reintro{orbit finite polynomial
@@ -263,6 +267,9 @@ for every input word $w$, the output $F(\delta^*(q_0, w))$ is zero. Solving the
 decide the equality of two such automata, by computing their difference. Let us
 prove that the \kl(ofpa){zeroness problem} is decidable for \kl{orbit finite
 polynomial automata}.
+
+\todo[inline]{the proof of the following is incorrect and I do not know
+  how to fix it easily}
 
 \begin{theorem}
   \label{cor:orbit-finite-polynomial-automata-zeroness}
