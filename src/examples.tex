@@ -65,7 +65,7 @@ and discuss which of them preserve this condition.
 In all of our examples $\Indets$ is a set with some structure, described by some relations and functions on that set,
 and $\group$ is the group $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve the structure) of $\Indets$.
 To show that $(\mon[Y]{\Indets},\gdivleq)$ is a WQO we use the following strategy:
-we define an equivariant one-to-one function $f_{\Indets} : \mon[Y]{\Indets} \to W_{\Indets}$ to some well-known well-quasi-ordered set $(W_{\Indets},\leq)$ such that $f_{\Indets}(\monelt[p]) \leq f_{\Indets}(\monelt[q])$ if and only if $\monelt[p] \gdivleq \monelt[q]$.
+we define an one-to-one function $f_{\Indets} : \mon[Y]{\Indets} \to W_{\Indets}$ to some well-known well-quasi-ordered set $(W_{\Indets},\leq)$ such that $f_{\Indets}(\monelt[p]) \leq f_{\Indets}(\monelt[q])$ if and only if $\monelt[p] \gdivleq \monelt[q]$.
 The reason why this strategy works is because in all of our examples, $\Indets$ will be a \intro{homogeneous} structure (\arka{cite wikipedia and macpherson survey}),
 and $f_{\Indets}$ essentially maps an element $\monelt[p]$ of $\mon[Y]{\X}$,
 thought as a finite induced substructure labelled by $Y$,
@@ -106,16 +106,38 @@ An example of an infinite antichain is the set $\setof{a b}{b\in\calZ\setminus\{
 \end{example}
 
 \begin{example}\label{ex:rado}
-Let $\G$ be the Rado graph (\arka{cite wiki}).
+Let $\G$ be the Rado graph (\arka{cite wiki}),
+i.e.\ the unique (up to isomorphism) homogeneous infinite graph such that every finite graph is isomorphic to some finite induced subgraph of $\G$.
 Then $\aut{\G}$ is the set of all automorphisms of the graph $\G$.
+The action $\aut{\G}\actson\G$ does not preserve any linear order of $\G$,
+since due to homogeneity,
+for every pair of vertices $a,b\in\G$, there exists $\pi\in\aut{\G}$ such that $\pi(a) = b$ and $\pi(b) = a$.
+Moreover, $(\mon[Y]{\G}, \gdivleq[\aut{\G}])$ is not a \kl{WQO} even when $Y$ is singleton.
+For instance, any subset $\setof{\monelt[c]_{n}}{n = 3,4,5,\dots}$ of $\mon[Y]{\G}$ such that the subgraph of $\G$ induced by $\dom(\monelt[c]_{n})$ is a cycle of length $n$, is an infinite antichain.
 \end{example}
 %
-\begin{example}\label{ex:rado}
+\begin{example}\label{ex:bit vector}
 Let $\V$ be an infinite dimensional vector space over $\ftwo$.
 Then $\aut{\V}$ is the set of all linear automorphisms.
+The action $\aut{\V}\actson\V$ does not preserve any linear order of $\V$,
+since for every pair of linearly independent vectors $u,v\in\V$, there exists $\pi\in\aut{\V}$ such that $\pi(u) = v$ and $\pi(v) = u$.
+Moreover, $(\mon[Y]{\V}, \gdivleq[\aut{\V}])$ is not a WQO even when $Y$ is a singleton.
+For instance, given an infinite set of linearly independent vectors $\{v_1,v_2,\dots\}$ in $\V$,
+the subset $\setof{\monelt[s]_{n}}{n = 3,4,5,\dots}$ of $\mon[Y]{\V}$ such that \[
+\dom(\monelt[s]_{n}) = \{v_1,\dots,v_n,(v_1 + v_2),(v_2 + v_3),\dots,(v_{n-1}+v_n),(v_n+v_1)\}
+\]
+is an infinite antichain.
+\arka{Trying to think of an easy argument}
 \end{example}
 %
-
+\arka{Add citations}
+%
+\begin{example}\label{ex:dense tree}
+Let $\T$ denote the dense-tree structure,
+which is the unique (up to isomorphism) homogeneous infinite tree such that every finite tree is a topological minor of $\T$.
+The tree structure is given by 
+\end{example}
+%
 \paragraph{Sets with atoms.}
 
 
