@@ -180,204 +180,69 @@ with an ordering, because one can always consider the
 
 
 
-\subsection{Topological Well-Structured Transition Systems}
-
-The fact that (finite control) systems performing polynomial computations can
-be verified folloms from the theory of \kl{Gröbner bases} on finitely many
-indeterminates \cite{MULSEI02,BEDUSHWO17}. There were also numerous
-applications to automata theory, suchz as deciding whether a weighted automaton
-could be determinised (resp. desambiguated) \cite{BESM23,PUSM24}. We refer the
-readers to a nice survey recapitulating the successes of the so-called
-``Hilbert method'' automata theory \cite{BOJAN19}. In this section, we will
-show how our results can be used in the framework of \kl{topological
-well-structured transition systems}, that is an abstract setting to verify
-infinite state systems that is more general than computing polynomial
-invariants \cite{JGL07,JGL10}. As a consequence, we will show how our results
-can be used to decide the zeroness of \kl{orbit finite polynomial automata}, a
-new model of computation that generalizes \kl{polynomial automata}
-\cite{BEDUSHWO17} and \kl{orbit finite weighted automata} \cite{BOKLMO21}.
-
-\paragraph{Topological Well-Structured Transition Systems.} \AP The notion of
-\kl{topological well-structured transition system} was introduced by
-Goubault-Larrecq in \cite{JGL07}, noticing that the pre-existing notion of
-\kl{Noetherian space} could serve as a topological generalisation of
-\kl{well-quasi-orderings}, for which the celebrated decision procedures on
-\kl{well-structured transition systems} can be applied. In particular,
-Goubault-Larrecq used such systems to verify properties of \emph{polynomial
-programs} computing over the rationals, that can communicate over lossy
-channels using a finite alphabet \cite{JGL10}. 
-\AP A \intro{topological space} is a set $X$ equipped with a collection $\tau$
-of subsets of $X$ that is stable under finite intersections and arbitrary
-unions.\footnote{In particular, $\tau$ contains the empty set and $X$ itself.}
-In a \kl{topological space}, elements of $\tau$ are called \intro{open
-subsets}, while their complements (in $X$) are called \intro{closed subsets}. A
-\kl{topological space} is \intro(space){Noetherian} when, for every sequence
-$\seqof{U_i}[i \in \N]$ of \kl{open subsets}, there exists $n \in \N$ such that
-$\bigcup_{i \in \N} U_i = \bigcup_{i \leq n} U_i$. We refer the readers to the
-book \cite{JGL13} for a comprehensive introduction to \kl{Noetherian spaces}
-and their usage in theoretical computer science. Let us briefly argue that
-\kl{Noetherian spaces} generalize \kl{well-quasi-orders} in
-\cref{ex:well-quasi-orders-are-noeth}, and encode the
-\kl{Hilbert basis property} in \cref{ex:polynomials-noetherian}.
-
-\begin{example}[ see \cite{JGL13}]
-  \label{ex:well-quasi-orders-are-noeth}
-  Let $(X, \leq)$ be a quasi-ordered set.
-  Then, the set $X$ equipped with the \kl{topology} having 
-  as \kl{open subsets} the upwards-closed subsets of $X$ is \kl(space){Noetherian}
-  if and only if $(X, \leq)$ is \kl{well-quasi-ordered}.
-\end{example}
-
-\begin{example}[ see \cite{JGL13}]
-  \label{ex:polynomials-noetherian}
-  Let $\K$ be a field, and let $n \in \N$.
-  The space $\K^n$ equipped with the \kl{Zariski topology}
-  \kl(space){Noetherian}; where the \intro{Zariski topology}
-  is the topology whose \kl{closed subsets} are finite unions of sets
-  of the form $\setof{ \vec{x} \in \K^n}{ \forall p \in \idl, p(\vec{x}) = 0}$,
-  where $\idl$ is an \kl{ideal} of $\poly{\K}{x_1, \dots, x_n}$.
-\end{example}
-
-\AP The advantage of \kl{Noetherian spaces} over \kl{well-quasi-orderings} and
-\kl{Noetherian rings} is that they generalize both and can be \emph{combined}:
-\kl{Noetherian spaces} are closed under finite sums, finite products,
-considering finite words, considering finite trees, and many more \todo{cite}.
-As a consequence, they provide a versatile tool to express the set of states of
-a system, ensuring that a strong termination property holds.
-
-\AP A \intro{topological well-structured transition system} with alphabet
-$\Sigma$ is a \kl{topological space} $(X, \tau)$, equipped with a transition
-function $\delta \colon X \times \Sigma \to X$, such that the following
-properties hold: for every $U \in \tau$, $\mathrm{pre}^\exists(U)$, the set of
-states $x \in X$ such that there exists $a \in \Sigma$ with $\delta(x, a) \in
-U$, is an \kl{open subset}. Equivalently, the set $\mathrm{pre}^\forall(E)$ of
-states $x \in X$ such that for every $a \in \Sigma$, $\delta(x, a) \in E$ is a
-\kl{closed subset} of $X$ whenever $E$ is itself a \kl{closed subset} of $X$.
-The natural decition problem for \kl{topological well-structured transition
-systems} is the following \intro{open reachability problem} is decidable: given
-an initial state $x_0 \in X$ and an \kl{open subset} $U \in \tau$, is it true that
-there exists a word $w \in \Sigma^*$ such that $\delta^*(x_0, w) \in U$? The
-prototypical algorithm to solve this problem is the following \intro{backward
-algorithm}: start with $U_0 \defined U$, and iteratively compute $U_{i+1}
-\defined U_i \cup \mathrm{pre}^\exists(U_i)$ until $U_i = U_{i+1}$, then check
-whether $x_0 \in U_\text{last}$.
-There are easy-to-state sufficient conditions  for such an algorithm to be computable and terminate:
-\begin{enumerate}
-  \item One is equipped with an effective representation of open subsets,
-    where one is able to test equality of open subsets, compute unions of open subsets, and test 
-    membership of a point in an open subset.
-  \item The pre-image function $\mathrm{pre}^\exists$ is computable, i.e., one can
-    compute the set $\mathrm{pre}^\exists(U)$ for every open subset $U$.
-  \item The space $(X, \tau)$ is \kl{Noetherian}. 
-\end{enumerate}
-
-\AP Our \cref{cor:equivariant-ideals-computations} shows that
-under some assumptions on $\Indets$, the set of finitely supported functions
-$\Indets \to \K$ is a \kl{Noetherian space} with respect to the
-\intro{equivariant Zariski topology}, i.e., the topology whose \kl{closed subsets}
-are finite unions of sets of the form $E_{\idl} \defined \setof{f \in
-\K^{(\Indets)}}{\forall p \in \idl, p(f) = 0}$, where $\idl$ is an
-\kl{equivariant ideal} of $\poly{\K}{\Indets}$. Furthermore, we have an
-effective representation of the \kl{closed subsets} in this topology, using
-\kl{equivariant Gröbner bases} of \kl{equivariant ideals}. In particular, the
-theory of \kl{topological well-structured transition systems} can be applied to
-systems whose state space contains ``named registers'' that contain numbers and
-are updated by polynomial functions.
+\subsection{Applications}
 
 
-\paragraph{Consequences for orbit-finite polynomial automata.} Before
-discussing the case of orbit finite polynomial automata, let us recall in
-\cref{ex:polynomial-automata}
-the
-setting of \kl{polynomial automata} in the classical case, as studied by
-\cite{BEDUSHWO17}, with techniques that dates back to \cite{MULSEI02}. We will
-formally state in \cref{lem:zeroness-problem-polynomial-automata}
-how the classical problem of deciding the \kl(pa){zeroness} of a
-\kl{polynomial automaton} is a special case of the \kl{open reachability
-problem} for \kl{topological well-structured transition systems}. Beware that
-these are consequences of \cite[Section 6, Polynomial Games]{JGL10}.
+\paragraph{Polynomial computations.} \AP The fact that (finite control) systems
+performing polynomial computations can be verified follows from the theory of
+\kl{Gröbner bases} on finitely many indeterminates \cite{MULSEI02,BEDUSHWO17}.
+There were also numerous applications to automata theory, such as deciding
+whether a weighted automaton could be determinised (resp. desambiguated)
+\cite{BESM23,PUSM24}. We refer the readers to a nice survey recapitulating the
+successes of the so-called ``Hilbert method'' automata theory \cite{BOJAN19}. A
+natural consequence of the effective computations of \kl{equivariant Gröbner
+bases} is that one can apply the same decision techniques to \emph{orbit finite
+polynomial computations}. For simplicity and clarity, we will focus on
+\kl{polynomial automata} without states or zero-tests \cite{BEDUSHWO17}, but
+the same reasoning would apply to more general systems as we will discuss in
+\cref{rem:topological-wsts}.
 
-\begin{definition}[Polynomial automata, as described in \cite{BEDUSHWO17}]
-  \label{ex:polynomial-automata}
-  A \intro{polynomial automaton} is a tuple $A \defined (Q, \Sigma, \delta, q_0, F)$,
-  where $Q = \K^n$ for some finite $n \in \N$, $\Sigma$ is a finite alphabet,
-  $\delta \colon Q \times \Sigma \to Q$ is a transition function such that 
-  $\delta(\cdot,a)_i$ is a polynomial in the indeterminates $q_1, \dots, q_n$ for every
-  $a \in \Sigma$ and every $i \in \set{1, \dots, n}$, $q_0 \in Q$ is the initial state,
-  and $F \colon Q \to \K$ is a polynomial function describing the final result of the 
-  automaton.
-  The \intro{zeroness problem for polynomial automata} is the following decision problem:
-  given a \kl{polynomial automaton} $A$, is it true that 
-  for all words $w \in \Sigma^*$, the polynomial $F(\delta^*(q_0, w))$ is zero?
-\end{definition}
 
-\begin{lemma}
-  \label{lem:zeroness-problem-polynomial-automata}
-  The \kl{zeroness problem for polynomial automata} is a special case of the
-  \kl{open reachability problem} for \kl{topological well-structured transition systems}.
-\end{lemma}
-\begin{proof}
-  Let $A = (Q, \Sigma, \delta, q_0, F)$ be a \kl{polynomial automaton}.
-  We consider the topological space $(Q, \tau)$, where $\tau$ is the
-  \kl{Zariski topology} on $\K^n$.
-  Let $\idl$ be an \kl{ideal} of $\poly{\K}{x_1,\dots,x_n}$ generated by the polynomials
-  $p_1, \dots, p_m$,
-  and let $E \defined \setof{q \in Q}{\forall p \in \idl, p(q) = 0}$,
-  a \kl{closed subset} of $Q$.
-  Then,
-  \begin{align*}
-    q \in \mathrm{pre}^\forall(E) & \iff 
-    \forall a \in \Sigma, \forall p \in \idl, p(\delta(q, a)) = 0 \\
-                                  & \iff 
-    \forall a \in \Sigma, \forall p \in \idl, p(\delta(q, a)) = 0 \\
-                                  & \iff 
-                                  \forall p \in \idl[J], p(q) = 0
-  \end{align*}
-  where $\idl[J] \defined \IdlGen{ \setof{ p_i[ x_i \mapsto \delta(\cdot, a)_i] }{ i \in \set{1, \dots, m}, a \in \Sigma } }$.
-  In particular, one can represent \kl{closed subsets} of $Q$ as finite 
-  lists of \kl{ideals} using their \kl{Gröbner bases}, and we showed that 
-  one can effectively compute the pre-image of \kl{closed subsets} of $Q$
-  via $\mathrm{pre}^\forall$ by substituting polynomials.
-  In this representation, it is very easy to compute the union 
-  of two \kl{closed subsets}, which is simply concatenating the two lists 
-  of \kl{ideals} reperesenting them.
-  To compute the intersection of two \kl{closed subsets} $E_1$ and $E_2$,
-  one can assume without loss of generality that both are represented by a 
-  single ideal (i.e., that they are irreducible closed subsets), respectively 
-  $\idl_1$ and $\idl_2$.
-  Then, an easy computation shows that 
-  $E_1 \cap E_2 = \setof{q \in Q}{\forall p \in \idl_1 + \idl_2, p(q) = 0}$,
-  where $\idl_1 + \idl_2$ is the sum of the two ideals.
-  Whether a point $q \in Q$ is in a \kl{closed subset} $E$ is decidable
-  because one can evaluate the generating polynomials on $q$ and check that 
-  it is indeed $0$.
-  The equality check is more complicated, and can be done by first 
-  normalizing the list of ideals so that their intersection is trivial,
-  which requires computing the intersection of ideals
-  and performing equality checks on the resulting \kl{ideals}.
-
-  As a consequence, it suffices to test the \kl{open reachability problem} for
-  the \kl{topological well-structured transition system} $(Q, \tau)$ with the
-  initial state $q_0$ and the \kl{open subset} $U = Q \setminus E_\text{final}$,
-  where $E_\text{final} \defined \setof{q \in Q}{F(q) = 0}$ is the \kl{closed subset}
-  of states where the automaton outputs zero.
-\end{proof}
+\AP Before discussing the case of orbit finite polynomial automata, let us
+recall in \cref{ex:polynomial-automata} the setting of \kl{polynomial automata}
+in the classical case, as studied by \cite{BEDUSHWO17}, with techniques that
+dates back to \cite{MULSEI02}. A \intro{polynomial automaton} is a tuple $A
+\defined (Q, \Sigma, \delta, q_0, F)$, where $Q = \K^n$ for some finite $n \in
+\N$, $\Sigma$ is a finite alphabet, $\delta \colon Q \times \Sigma \to Q$ is a
+transition function such that $\delta(\cdot,a)_i$ is a polynomial in the
+indeterminates $q_1, \dots, q_n$ for every $a \in \Sigma$ and every $i \in
+\set{1, \dots, n}$, $q_0 \in Q$ is the initial state, and $F \colon Q \to \K$
+is a polynomial function describing the final result of the automaton. The
+\intro{zeroness problem for polynomial automata} is the following decision
+problem: given a \kl{polynomial automaton} $A$, is it true that for all words
+$w \in \Sigma^*$, the polynomial $F(\delta^*(q_0, w))$ is zero? It is known
+that the \kl{zeroness problem for polynomial automata} is decidable
+\cite{BEDUSHWO17}, using the theory of \kl{Gröbner bases} on finitely many
+indeterminates. Let us now propose a new model of computation called \kl{orbit
+finite polynomial automata}, and prove an analogue decidability result.
 
 \AP Let us fix a group $\group$ that acts on the set of indeterminates
 $\Indets$, and on an alphabet $\Sigma$ in an \kl{effectively oligomorphic}
-fashion. Let us now consider the case of \intro{orbit finite polynomial
-automata}, that we define as follows: an \reintro{orbit finite polynomial
-automaton} is a tuple $A \defined (Q, \Sigma, \delta, q_0, F)$, where $Q =
-\K^{(\Indets)}$, $\Sigma$ is an \kl{orbit finite} alphabet, $\delta \colon
-\Sigma \to (\Indets \to \poly{\K}{\Indets})$ is a \kl(func){finitely supported}
-polynomial update function, and $F \in \poly{\K}{\Indets}$ is a polynomial
-computing the result of the automaton. Given a letter $a \in \Sigma$ and a
-state $q \in Q$, the update $\delta^*(q,a)$ is defined as the function from
-$\Indets$ to $\K$ defined by $\delta^*(q,a) \colon x \mapsto \delta(a,x)[ q ]$,
-which is well-defined because $\delta(a,x)$ is a \kl{finitely supported}
-polynomial. The update function is naturally extended to words. Finally, the
-output of an \kl{orbit finite polynomial automaton} on a word $w \in \Sigma^*$
-is defined as $F(\delta^*(q_0, w))$.
+fashion. We write $\K^{(\Indets)}$ for the set of finitely supported functions
+from $\Indets$ to $\K$, i.e., the set of functions $f \colon \Indets \to \K$
+such that there exists a finite set $S \subseteq \Indets$ such that $f(x) = 0$
+for every $x \notin S$. Given an element $f \in \K^{(\Indets)}$, and given a
+polynomial $p \in \poly{\K}{\Indets}$, we write $p(f)$ for the evaluation of
+$p$ on $f$.
+
+\begin{definition}
+  \label{def:orbit-finite-polynomial-automaton}
+  An \reintro{orbit finite polynomial
+  automaton} is a tuple $A \defined (Q, \Sigma, \delta, q_0, F)$, where $Q =
+  \K^{(\Indets)}$, $\Sigma$ is an \kl{orbit finite} alphabet, $\delta \colon
+  \Sigma \to (\Indets \to \poly{\K}{\Indets})$ is a \kl(func){finitely supported}
+  polynomial update function, and $F \in \poly{\K}{\Indets}$ is a polynomial
+  computing the result of the automaton. 
+
+  Given a letter $a \in \Sigma$ and a
+  state $q \in Q$, the update $\delta^*(q,a)$ is defined as the function from
+  $\Indets$ to $\K$ defined by $\delta^*(q,a) \colon x \mapsto \delta(a,x)[ q ]$,
+  which is well-defined because $\delta(a,x)$ is a \kl{finitely supported}
+  polynomial. The update function is naturally extended to words. Finally, the
+  output of an \kl{orbit finite polynomial automaton} on a word $w \in \Sigma^*$
+  is defined as $F(\delta^*(q_0, w))$.
+\end{definition}
+
 
 \begin{example}
   \label{ex:orbit-finite-polynomial-automata}
@@ -395,46 +260,71 @@ is defined as $F(\delta^*(q_0, w))$.
 orbit finite polynomial automata is the following decision problem: decide if
 for every input word $w$, the output $F(\delta^*(q_0, w))$ is zero. Solving the
 \kl(ofpa){zeroness problem} for orbit finite polynomial automata allows us to
-decide the equality of two such automata, by computing their substraction. 
+decide the equality of two such automata, by computing their difference. Let us
+prove that the \kl(ofpa){zeroness problem} is decidable for \kl{orbit finite
+polynomial automata}.
 
-It follows from the same reasoning as in
-\cref{lem:zeroness-problem-polynomial-automata} that the
-\kl(ofpa){zeroness problem} for orbit finite polynomial automata reduces to the
-\kl{open reachability problem} for \kl{topological well-structured transition
-systems} with the \kl{equivariant Zariski topology} on $\K^{(\Indets)}$.
-
-\begin{corollary}
+\begin{theorem}
   \label{cor:orbit-finite-polynomial-automata-zeroness}
-  Let $Y \defined (\N \ordplus \ordfin{1})^2$ be the set of pairs 
-  of potentially infinite natural numbers ordered pointwise.
   Let $\Indets$ be a set of indeterminates that satisfies the
   \kl{computability assumptions} and such that $(\mon[Y]{\Indets}, \gdivleq)$ is a
-  \kl{well-quasi-ordering}.
+  \kl{well-quasi-ordering}, for every \kl{well-quasi-ordered} set $(Y, \leq)$.
   Then, the \kl(ofpa){zeroness problem} is decidable for all \kl{orbit finite polynomial automata}
   with register names in $\Indets$, for every \kl{orbit finite} alphabet $\Sigma$,
   that is \kl{effectively oligomorphic} with respect to the action of $\group$.
-\end{corollary}
+\end{theorem}
 \begin{proof}
-  Let $A = (Q, \Sigma, \delta, q_0, F)$ be an \kl{orbit finite polynomial automaton}.
-  We consider the topological space $(Q, \tau)$, where $\tau$ is the
-  \kl{equivariant Zariski topology} on $\K^{(\Indets)}$.
-  Let $E_\text{final} \defined \setof{q \in Q}{F(q) = 0}$ be the \kl{closed subset}
-  of states where the automaton outputs zero.
+  Let $A = (Q, \Sigma, \delta, q_0, F)$ be an \kl{orbit finite polynomial
+  automaton}. Following the classical \emph{backward procedure} for such
+  systems, we will compute a sequence of sets $E_0 \defined \setof{ q \in Q }{
+  F(q) = 0 }$, and $E_{i+1} \defined \mathrm{pre}^\forall(E_i) \cap E_i$, where
+  $\mathrm{pre}^\forall(E)$ is the set of states $q \in Q$ such that for every
+  $a \in \Sigma$, $\delta^*(q,a) \in E$. We will prove that the sequence of
+  sets $E_i$ stabilises, and that it is computable. As an immediate
+  consequence, it suffices to check that $q_0 \in E_{\infty}$, where $E_\infty$
+  is the limit of the sequence $(E_i)_{i \in \N}$, to decide the
+  \kl(ofpa){zeroness problem}.
 
-  We proceed as in \cref{lem:zeroness-problem-polynomial-automata},
-  representing \kl{closed subsets} of $Q$ as finite lists of \kl{equivariant
-  ideals}, which is an effective representation of \kl{closed subsets} thanks
-  to \cref{cor:equivariant-ideals-computations}. The only
-  non-trivial check to apply the same reasoning as in
-  \cref{lem:zeroness-problem-polynomial-automata} is that
-  $\mathrm{pre}^\forall(E)$ is computable for every \kl{closed subset} $E$ of
-  $Q$. To that end, let us fix an \kl{equivariant ideal} $\idl$ and an
-  \kl{orbit finite} set $H$ of polynomials such that $\idl = \IdlGen{H}$. Then,
+  The only idea of the proof is to notice that all the sets $E_i$ are
+  representable as zero-sets of \kl{equivariant ideals} in
+  $\poly{\K}{\Indets}$, allowing us to leverage the effective computations of
+  \cref{cor:equivariant-ideals-computations}. Given a set $H$ of polynomials,
+  we write $\mathcal{V}(H)$ the collections of states $q \in Q$ such that $p(q)
+  = 0$ for all $p \in H$.
+  It is easy to see that $E_0 = \mathcal{V}(\set{F}) = \mathcal{V}(\idl_0)$,
+  where $\idl_0$ is the \kl{equivariant ideal} generated by $F$. 
+  Furthermore, assuming that $E_i = \mathcal{V}(\idl_i)$, we can
+  see that 
+  \begin{align*}
+    \mathrm{pre}^\forall(E_i) 
+    & = \setof{ q \in Q }{ \forall a \in \Sigma, \delta^*(q,a) \in E_i } \\
+    & = \setof{ q \in Q }{ \forall a \in \Sigma, \forall p \in \idl_i, p(\delta^*(q,a)) = 0 } \\
+    & = \setof{ q \in Q }{ \forall p' \in \idl[J], p'(q) = 0 }
+  \end{align*}
+  Where, the \kl{equivariant ideal} $\idl[J]$ is generated by the
+  polynomials $\mathrm{pullback}(p,a) \defined p [ x \mapsto \delta(a)(x)]$
+  for every pair $(p, a) \in \idl_i \times \Sigma$. 
+  As a consequence, we have $E_{i+1} = \mathcal{V}(\idl_{i+1})$, where
+  $\idl_{i+1} = \idl_i + \idl[J]$.
+
+  Because the sequence $\seqof{ \idl_i }[ i \in \N]$ is increasing, and thanks
+  to the \kl{equivariant Hilbert basis property} of $\poly{\K}{\Indets}$, there
+  exists an $n_0 \in \N$ such that $\idl_{n_0} = \idl_{n_0 + 1} = \idl_{n_0 +
+  2} = \cdots$. In particular, we do have $E_{n_0} = E_{n_0 + 1} = E_{n_0 + 2}
+  = \cdots$.
+
+  Let us argue that we can compute the sequence $\idl_i$ effectively.
+  First,  $\idl_0 = \EqIdlGen{F}$ is finitely represented.
+  Now, 
+  given an \kl{equivariant ideal} $\idl$, represented by an \kl{orbit finite}
+  set of generators $H$,
   we can compute the \kl{equivariant ideal} $\idl[J]$ generated by the
-  polynomials $\mathrm{pullback}(p,a) \defined p [ x_i \mapsto \delta(a)(x_i)]$ for every pair $(p, a) \in H \times \Sigma$. Indeed, $H \times \Sigma$
-  remains \kl{orbit finite} because the action of $\group$ on $\Indets$ is
-  \kl{effectively oligomorphic}, and the function $\mathrm{pullback}$ is computable
-  and \kl(func){equivariant}: indeed, given  $\gelem \in \group$, we can show that
+  polynomials $\mathrm{pullback}(p,a) \defined p [ x_i \mapsto \delta(a)(x_i)]$
+  for every pair $(p, a) \in H \times \Sigma$. Indeed, $H \times \Sigma$ is
+  \kl{orbit finite} because the action of $\group$ on $\Indets$ is
+  \kl{effectively oligomorphic}, and the function $\mathrm{pullback}$ is
+  computable and \kl(func){equivariant}: indeed, given $\gelem \in \group$, we can
+  show that
   \begin{align*}
     \gelem \cdot \mathrm{pullback}(p, a) & = 
     \gelem \cdot (p [ x_i \mapsto \delta(a)(x_i)]) \\
@@ -443,24 +333,40 @@ systems} with the \kl{equivariant Zariski topology} on $\K^{(\Indets)}$.
     & = (\gelem \cdot p) [ x_i \mapsto \delta(\gelem \cdot a, x_i)] \\
     & = \mathrm{pullback}(\gelem \cdot p, \gelem \cdot a).
   \end{align*}
-  As a consequence, we can 
-  compute an \kl{orbit finite set} of polynomials $H'$ that generate $\idl[J]$.
-  Furthermore, it is clear that 
-  $\mathrm{pre}^\forall(E)$ is exactly the set of states $q \in Q$ such that
-  $\forall p \in \idl[J], p(q) = 0$.
-  We have concluded.
+  
+  Finally, one can detect when the sequence stabilises, by checking whether
+  $\idl_i = \idl_{i+1}$, which is decidable because the
+  \kl{equivariant ideal membership problem} is decidable 
+  by \cref{thm:compute-egb}.
+
+  To conclude, it remains to check whether $q_0 \in E_\infty$,
+  which amounts to check that $q_0 \in \mathcal{V}(\idl_\infty)$.
+  This is equivalent to checking whether for every element $p \in \Basis$
+  where $\Basis$ is an \kl{equivariant Gröbner basis} of $\idl_\infty$, we have
+  $p(q_0) = 0$, which can be done by enumerating relevant orbits.
 \end{proof}
 
-While all of these reasosing could be done outside the realm of (effective)
-\kl{topological well-structured transition systems}, we can use the modularity
-of the theory to obtain more complex verification properties. Following the
-lines of \cite[Theorem 6]{JGL10}, one can consider the case of communicating
-orbit finite polynomial automata, where we have a collection processes that
-communicate letters over a finite alphabet using lossy channels, and can
-perform polynomial updates on their local state. Deciding whether such a system
-can reach a state where one process fails to satisfy a given polynomial
-invariant is a special case of the \kl{open reachability problem}, and is
-decidable.
+
+\begin{remark}
+  \label{rem:topological-wsts}
+  The notion of
+  \intro{topological well-structured transition system} was introduced by
+  Goubault-Larrecq in \cite{JGL07}, noticing that the pre-existing notion of
+  \kl{Noetherian space} could serve as a topological generalisation of
+  \kl{Noetherian rings} (where ideal-based method can be applied),
+  and 
+  \kl{well-quasi-orderings}, for which the celebrated decision procedures on
+  \kl{well-structured transition systems} can be applied \cite{ABDU96}. In particular,
+  Goubault-Larrecq used such systems to verify properties of \emph{polynomial
+  programs} computing over the rationals, that can communicate over lossy
+  channels using a finite alphabet \cite{JGL10}. 
+  Because of \cref{cor:equivariant-ideals-computations}, we do have an 
+  effective way to compute on the topological spaces at hand, 
+  and therefore we can apply the theory of
+  \kl{topological well-structured transition systems} to verify systems
+  such as \emph{orbit finite automata communicating using a finite alphabet
+  over lossy channels}.
+\end{remark}
 
 
 \paragraph{Reachability problem of symmetric data Petri nets.}
