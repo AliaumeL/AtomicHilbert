@@ -3,40 +3,108 @@
 \section{Undecidability Results}
 \label{sec:undecidability}
 
-\todo[inline]{Aliaume: update section intro}
-
-In this section, we will show that under certain conditions, the
-\kl{equivariant ideal membership problem} is undecidable. We aim to show that
-it is the case when we assume the usual effectiveness conditions on the group
-action, but we do not assume that $(\mon{\Indets}, \gdivleq)$ is a
-well-quasi-ordering. Beware though that there are some pathological cases where
-the \kl{equivariant ideal membership problem} is undecidable even when
-$(\mon{\Indets}, \gdivleq)$ is not a well-quasi-ordering, as illustrated by the
-following \cref{ex:non-wqo-undecidable}.
+In this section, we aim to show that the \kl{equivariant ideal membership
+problem} is undecidable under the usual \kl{effectiveness conditions} on the
+group action, when we do not assume that $(\mon{\Indets}, \gdivleq)$ is a
+\kl{well-quasi-ordering}. In particular, this would show that computing
+\kl{equivariant Gröbner bases} is not possible in these settings, proving the
+optimality of our decidability
+\cref{thm:compute-egb}.
+Beware that there are some pathological cases where the \kl{equivariant ideal
+membership problem} is easily decidable, even when $(\mon{\Indets}, \gdivleq)$
+is not a well-quasi-ordering, as illustrated by the following
+\cref{ex:non-wqo-undecidable}, and it is not possible to obtain
+such a dichotomy result.
 
 \begin{example}
   \label{ex:non-wqo-undecidable}
   Let $\Indets = \{x_1, x_2, \ldots\}$ be an infinite set of indeterminates,
   and let $\group$ be trivial group acting on $\Indets$.
   Then, the \kl{equivariant ideal membership problem} is decidable.
-\end{example}
-\begin{proof}
-  Because the group is trivial, whenever one provides a finite set
+  Indeed, since the group is trivial, whenever one provides a finite set
   $H$ of generators of an \kl{equivariant ideal} $I$, one can
   in fact work in $\poly{\K}{V}$, where $V$ is the set of indeterminates
   that appear in $H$.
   Then, the \kl{equivariant ideal membership problem} is reduces to 
   the \kl{ideal membership problem} in $\poly{\K}{V}$, which is decidable.
-\end{proof}
+\end{example}
 
-Avoiding pathological cases such as the one in \cref{ex:non-wqo-undecidable},
-we can give one positive and one negative examples that are designed to
-illustrate the results we will present in this section. On the positive side,
-one can consider $\Indets_\Q$, the set of all rationals equipped with their
-usual ordering, and the group of all bijections of $\Indets_\Q$ that preserve
-the ordering (\cref{ex:q-is-super-wqo}). While on the negative side, one can
-consider $\Indets_\Z$, the set of all integers equipped with their usual
-ordering, and the group of all shifts of integers (\cref{ex:z-is-not-wqo}).
+
+\AP However, one we are able to prove the undecidability of the \kl{equivariant
+ideal membership problem} under the assumption that the set of indeterminates
+$\Indets$  contains an \intro(of){infinite path} $P \defined \seqof{x_i}[i \in
+\N] \subseteq \Indets$, that is, a set $P$ of indeterminates such that $\group$
+acts on $P$ as a translation of the indices. Formally, we require that, for all
+$\gelem \in \group$ and for all segments $J \defined [k,l] \subfin \N$ such
+that $\gelem \cdot x_j \subseteq P$ for all $j \in J$, there exists $n \in \N$
+such that $\gelem \cdot x_j = x_{j + n}$ for all $j \in J$ ; and there exists a
+$\gelem_{+1} \in \group$ such that $\gelem_{+1} \cdot x_i = x_{i + 1}$ for all
+$i \in \N$. The prototypical example being the set of all indeterminates
+$\Indets = \Z$ equipped with the group $\group$ of all shifts. The presence of
+an \kl(of){infinite path} clearly prevents $(\mon{\Indets}, \gdivleq)$ from
+being a \kl{well-quasi-ordering}, as shown by the following
+\cref{rem:not-wqo}. Furthermore, for indeterminates obtained by
+considering \kl{homogeneous structures} and their automorphism groups
+(\cref{sec:examples}),
+the presence of an \kl(of){infinite path} has been conjectured to be a
+necessary and sufficient condition for $(\mon{\Indets}, \gdivleq)$ to be a
+\kl{well-quasi-ordering}: this follows from a conjecture of Schmitz restated in
+\cref{conj:wqo-infinite-path}, that generalises one
+of Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
+\cref{rem:conj-wqo-infinite-path}.
+
+
+\begin{remark}
+  \label{rem:not-wqo}
+  If there exists a \kl{word encoding} for a binary alphabet $\Sigma$, then
+  $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
+  Indeed, the infix ordering relation on words over a binary alphabet is
+  not a \kl{well-quasi-ordering}, as shown by the infinite antichain
+  $\setof{ a b^n a}{n \in \N }$,
+  and the \kl{word encoding} $\wenc{\cdot}$ is an order embedding of
+  the infix ordering relation on words over $\Sigma$ into $(\mon{\Indets}, \gdivleq)$.
+\end{remark}
+
+\begin{conjecture}[Schmitz]
+  \label{conj:wqo-infinite-path}
+  Let $\mathcal{C}$ be a class of finite structures. Then, the following are
+  equivalent:
+  \begin{enumerate}
+    \item The class of structures of $\mathcal{C}$ labelled with 
+      any \kl{well-quasi-ordered} set $(Y, \leq)$ is
+      itself \kl{well-quasi-ordered} under the
+      labelled-induced-substructure relation.
+    \item For every existential formula $\varphi(x,y)$,
+      there exists $N_\varphi \in \N$, such 
+      that $\varphi$ does not define paths of length greater than $N_\varphi$
+      in the structures of $\mathcal{C}$.
+  \end{enumerate}
+  Where 
+\end{conjecture}
+
+\begin{remark}
+  \label{rem:conj-wqo-pouzet}
+  The conjecture of Schmitz is a generalization of Pouzet's conjecture
+  \cite{POUZET82} that states that the class of finite structures is
+  \kl{well-quasi-ordered} under the labelled-induced-substructure relation if and
+  it is for two labels.
+\end{remark}
+
+\begin{remark}
+  \label{rem:conj-wqo-infinite-path}
+  Let $\Indets$ be an infinite \kl{homogeneous structure},
+  such that $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
+  Then, the collection of finite substructures of $\Indets$
+  labelled by $(\N,\leq)$ is not \kl{well-quasi-ordered} under the
+  labelled-induced-substructure relation.
+  Hence, if one believes that \cref{conj:wqo-infinite-path} holds,
+  there exists an existential formula $\varphi(x,y)$ such that
+  $\varphi$ defines arbitrarily long paths in $\Indets$.
+  Because $\Indets$ is \kl{homogeneous}, 
+  this means that $\varphi$ defines an infinite path in $\Indets$,
+  and in particular, 
+  $\Indets$ contains an \kl(of){infinite path} $P$ as defined above.
+\end{remark}
 
 \paragraph{Monomial Reachability}
 The undecidability results we will present in this section regarding the
@@ -95,28 +163,7 @@ monomials due to the commutativity of the multiplication.
 To overcome the second issue, we will use the following notion of 
 \kl{word encoding}.
 
-\paragraph{Structures Containing Paths.} In this section, we will assume that
-the set of indeterminates $\Indets$ contains an \intro(of){infinite path} $P
-\defined \seqof{x_i}[i \in \N] \subseteq \Indets$, that is, a set $P$ of
-indeterminates such that $\group$ acts on $P$ as a translation of the indices.
-Formally, we require that, for all $\gelem \in \group$ and for all segments $J
-\defined [k,l] \subfin \N$ such that $\gelem \cdot x_j \subseteq P$ for all $j
-\in J$, there exists $n \in \N$ such that $\gelem \cdot x_j = x_{j + n}$ for
-all $j \in J$ ; and there exists a $\gelem_{+1} \in \group$ such that
-$\gelem_{+1} \cdot x_i = x_{i + 1}$ for all $i \in \N$. The prototypical
-example being the set of all indeterminates $\Indets = \Z$ equipped with the
-group $\group$ of all shifts.
-
-\begin{remark}
-  \label{rem:not-wqo}
-  If there exists a \kl{word encoding} for a binary alphabet $\Sigma$, then
-  $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
-  Indeed, the infix ordering relation on words over a binary alphabet is
-  not a \kl{well-quasi-ordering}, as shown by the infinite antichain
-  $\setof{ a b^n a}{n \in \N }$,
-  and the \kl{word encoding} $\wenc{\cdot}$ is an order embedding of
-  the infix ordering relation on words over $\Sigma$ into $(\mon{\Indets}, \gdivleq)$.
-\end{remark}
+\paragraph{Structures Containing Paths.}
 
 
 \AP Let us fix a binary alphabet $\Sigma \defined \set{a,b}$, and let us define
