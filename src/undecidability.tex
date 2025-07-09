@@ -76,16 +76,18 @@ of Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
       labelled-induced-substructure relation.
     \item For every existential formula $\varphi(x,y)$,
       there exists $N_\varphi \in \N$, such 
-      that $\varphi$ does not define paths of length greater than $N_\varphi$
+      that $\varphi$ does not \kl(efo){define paths} of length greater than $N_\varphi$
       in the structures of $\mathcal{C}$.
   \end{enumerate}
-  Where 
+  Where a formula \intro(efo){defines a path} of length $n$ in a structure
+  if there exists $n$ distinct elements $a_0, \ldots, a_{n-1}$ in the structure
+  such that $\varphi(a_i, a_j)$ holds if and only if $|i - j| = 1$.
 \end{conjecture}
 
 \begin{remark}
   \label{rem:conj-wqo-pouzet}
   The conjecture of Schmitz is a generalization of Pouzet's conjecture
-  \cite{POUZET82} that states that the class of finite structures is
+  \cite{POUZ72} that states that the class of finite structures is
   \kl{well-quasi-ordered} under the labelled-induced-substructure relation if and
   it is for two labels.
 \end{remark}
@@ -100,10 +102,11 @@ of Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
   Hence, if one believes that \cref{conj:wqo-infinite-path} holds,
   there exists an existential formula $\varphi(x,y)$ such that
   $\varphi$ defines arbitrarily long paths in $\Indets$.
-  Because $\Indets$ is \kl{homogeneous}, 
+  Because $\Indets$ is \kl{homogeneous}, and $\varphi$ is existential,
   this means that $\varphi$ defines an infinite path in $\Indets$,
   and in particular, 
-  $\Indets$ contains an \kl(of){infinite path} $P$ as defined above.
+  $\Indets$ contains an \kl(of){infinite path} $P$, as introduced
+  for generic sets of indeterminates.
 \end{remark}
 
 \paragraph{Monomial Reachability}
@@ -164,8 +167,12 @@ To overcome the second issue, we will use the following notion of
 \kl{word encoding}.
 
 \paragraph{Structures Containing Paths.}
-
-\AP Let us fix a binary alphabet $\Sigma \defined \set{a,b}$, and let us define
+\AP
+Let us assume for the rest of this section 
+that $\Indets$ is a set of indeterminates that contains an
+\kl(of){infinite path} $P \defined \seqof{x_i}[i \in \N]$,
+and 
+let us fix a binary alphabet $\Sigma \defined \set{a,b}$, and let us define
 a function $\intro*\wenc{ \cdot} \colon \Sigma^* \to \mon{\Indets}$, where
 $\Sigma$ is a finite alphabet, that encodes a word $u \in \Sigma^*$ as a
 monomial. Namely, we define inductively $\wenc{\varepsilon} \defined 1$,
@@ -180,30 +187,64 @@ encodings} can simulate (reversible) string rewriting on words of a given size.
   and let $\monelt[n] \in \mon{\Indets}$ be a monomial.
   The following are equivalent:
   \begin{enumerate}
-    \item There exists $\gelem \in \group$
+    \item \label{item:rewrite-submonomial} 
+      There exists $\gelem \in \group$
       such that $\wenc{w} = \monelt[m] (\gelem \cdot \wenc{u})$
       and $\monelt[n] = \monelt[m] (\gelem \cdot \wenc{v})$,
-    \item There exists $x, y \in \Sigma^*$
+    \item \label{item:rewrite-subword}
+      There exists $x, y \in \Sigma^*$
       such that $x u y = w$ and $\wenc{x v y} = \monelt[n]$.
   \end{enumerate}
 \end{lemma}
 \begin{proof}
-  \textbf{aliaume todo}
+  Let us prove \cref{item:rewrite-submonomial} implies
+  \cref{item:rewrite-subword}. To that end,
+  let $\gelem \in \group$ be such that
+  $\wenc{w} = \monelt[m] (\gelem \cdot \wenc{u})$ and
+  $\monelt[n] = \monelt[m] (\gelem \cdot \wenc{v})$.
+  Then, $(\gelem \cdot \wenc{u}) = (\gelem_{+k} \cdot \wenc{u})$ 
+  for some $z \in \Z$
+  since $P$ is an \kl(of){infinite path}.
+  Furthermore, $u$ and $v$ have the same length, hence
+  the same indeterminates, and we conclude that
+  $(\gelem \cdot \wenc{v}) =
+   (\gelem_{+k} \cdot \wenc{v})$.
+  Because letters encoding start and end with an exponent $3$,
+  we conclude that $k = 4 \times \ell$, and therefore
+  that $\wenc{w} = \wenc{x} (\gelem_{+k} \cdot \wenc{u})
+  (\gelem_{+(k + 4|u|)} \cdot \wenc{y})$.
+  As a consequence,
+  $\wenc{x v y} = \monelt[n]$.
+
+  Conversely, let us prove that \cref{item:rewrite-subword} implies
+  \cref{item:rewrite-submonomial}. To that end, let $x, y \in \Sigma^*$ be such
+  that $x u y = w$ and $\wenc{x v y} = \monelt[n]$. Then, we can write
+  $\wenc{w} = \wenc{x} (\gelem_{+k} \cdot \wenc{u}) (\gelem_{+(k + 4|u|)} \cdot
+  \wenc{y})$. Let us define $\monelt[m] \defined \wenc{x} (\gelem_{+(k +
+  4\times|u|)} \cdot \wenc{y})$. It is clear that $\wenc{w} = \monelt[m]
+  (\gelem_{+k} \cdot \wenc{u})$, and we can also notice that $\monelt[n] =
+  \wenc{x v y} = \monelt[m] (\gelem_{+(k + 4|u|)} \cdot \wenc{v})$.
 \end{proof}
 
 Note that without loss of generality, thanks to
 \cref{lem:word-encoding-string-subst}, we can assume that the alphabet is any
-finite set, using a suitable unambiguous encoding of the alphabet into a binary
-alphabet \cite{BERST09}. This bigger alphabet size will simplify the statement
-and proof of the following \cref{lem:reversible-machine}, which explains how
-to simulate a reversible Turing machine using \kl{monomial rewriting}. Given a
-reversible Turing machine $M$ with a finite set $Q$ of states and tape alphabet
-$\Sigma$, we will consider the following alphabet $\Gamma \defined \set{
-\triangleleft, \triangleright } \times \set{ \text{pre}, \text{run},
-\text{post} } \uplus Q \uplus \Sigma \uplus \set{ \square, \square_1, \square_2}$. The letter
-$\square$ is a blank symbol, and the letters $\triangleleft$ and
-$\triangleright$ are used to delimit the beginning and the end of the tape,
-with some extra ``phase information''.
+finite set of letters, using a suitable unambiguous encoding of the alphabet
+into a binary alphabet \cite{BERST09}. This bigger alphabet size will simplify
+the statement and proof of the following \cref{lem:reversible-machine}, which
+explains how to simulate a reversible Turing machine using \kl{monomial
+rewriting}. Given a reversible Turing machine $M$ with a finite set $Q$ of
+states and tape alphabet $\Sigma$, we will consider the following alphabet
+$\Gamma \defined \set{ \triangleleft, \triangleright } \times \set{ \text{pre},
+\text{run}, \text{post} } \uplus Q \uplus \Sigma \uplus \set{ \square,
+\square_1, \square_2}$. The letter $\square$ is a blank symbol, and the letters
+$\triangleleft$ and $\triangleright$ are used to delimit the beginning and the
+end of the tape, with some extra ``phase information''. In a first \kl{monomial
+rewrite system}, we will encode a run of a reversible Turing machine $M$ on a
+fixed size input tape (\cref{lem:reversible-machine}), and in a second
+\kl{monomial rewrite system}, we will create a tape of arbitrary size
+(\cref{lem:tape-creation}). The union of these two \kl{monomial rewrite
+systems} will then be used to prove the undecidability of the \kl{equivariant
+ideal membership problem} in \cref{thm:undecidable-paths}.
 
 \begin{lemma}
   \label{lem:reversible-machine}
@@ -300,7 +341,7 @@ of $\group$.
   \todo[inline]{Aliaume: complete the proof}
 \end{proof}
 
-\csname thm:undecidable-paths\endcsname
+\csname thm:undecidable-paths\endcsname*
 \begin{proof}
   It suffices to combine the rewriting systems $R_M$, $R_\text{pre}$ and 
   $R_\text{post}$ by taking their union.
