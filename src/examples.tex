@@ -373,7 +373,8 @@ polynomial automata}.
 
 \paragraph{Reachability problem of symmetric data Petri nets.}
 %
-Define a Petri net with data $\group\actson\Indets$ to be a Petri nets which uses elements of $\Indets$ to label its tokens, and its transitions are invariant under the action of $\group$.
+Define a Petri net with data $\group\actson\Indets$ to be a Petri net which uses elements from $\Indets$ to label its tokens,
+and its transitions are invariant under the action of $\group$.
 As observed in \cite[Section 8]{GHOLAS24},
 a reversible data Petri nets are same as a monomial rewrite system.
 Using \Cref{thm:compute-egb}, \Cref{lem:reducts-equiv-hilbert} and \cite[Theorem 64]{GHOLAS24} we can get the following corollary:
@@ -381,6 +382,18 @@ Using \Cref{thm:compute-egb}, \Cref{lem:reducts-equiv-hilbert} and \cite[Theorem
 \begin{corollary}
 The reachability problem is decidable for reversible Petri net with data $\group\actson\Indets$ if it is $\group\actson\Indets$ is a reduct of $\calH\actson\Indets$ such that ...
 \end{corollary}
+%
+\begin{proof}
+The proof follows from the fact that for a \kl{WQO} $Y$ and finite set $P$,
+\[
+(\mon[Y]{\X{\times}P},\gdivleq)
+\cong
+(\mon[Y\times P]{\X},\gdivleq) \ ,
+\]
+where $Y\times P$ denotes the product of \kl{WQOs} $Y$ and $P$.
+
+\arka{did we define it?}
+\end{proof}
 %
 \paragraph{Orbit-finite systems of equations}
 
