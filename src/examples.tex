@@ -53,49 +53,77 @@
 
 \subsection{Crafting sets of indeterminates}
 %
-We give some interesting examples of group actions $\group \actson \Indets$ and discuss which of them satisfy the necessary condition of \Cref{thm:compute-egb}.
-We also describe operations to build new group actions from old ones,
-and discuss which of them preserve this condition.
-
-\arka{Did we write somewhere that divisibility is same as labelled embedding}
-\todo[inline]{No we did not write it. It in the good time to do so after your 
-paragraph on homogeneous structures.}
-
-In all of our examples $\Indets$ is a set with some structure, described by some relations and functions on that set,
+Many of the common examples of group actions $\group\actson\Indets$ are of the form where $\Indets$ is a set with some structure, described by some relations and functions on that set,
 and $\group$ is the group $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve and reflect the structure) of $\Indets$.
-Moreover, all the structures in our examples are \intro{homogenous} :
-isomorphism between finite induced substructures extends to an automorphism of the whole structure.
-We refer the reader to \cite[Chapter 7]{BOJAN16inf} and \cite{homsurvey} for more details on homogeneous structures.
-%To show that $(\mon[Y]{\Indets},\gdivleq)$ is a WQO we use the following strategy:
-%we define an one-to-one function $f_{\Indets} : \mon[Y]{\Indets} \to W_{\Indets}$ to some well-known well-quasi-ordered set $(W_{\Indets},\leq)$ such that $f_{\Indets}(\monelt[p]) \leq f_{\Indets}(\monelt[q])$ if and only if $\monelt[p] \gdivleq \monelt[q]$.
-%The reason why this strategy works is because in all of our examples, $\Indets$ will be a \intro{homogeneous} structure (\arka{cite wikipedia and macpherson survey}),
-%and $f_{\Indets}$ essentially maps an element $\monelt[p]$ of $\mon[Y]{\X}$,
-%thought as a finite induced substructure labelled by $Y$,
-%to its isomorphism class.
+A monomial $\monelt[p] \in \mon[Q]{\Indets}$ can be thought as a labelling of a finite substructure of $\X$ using elements of $Y$.
+If the structure $\Indets$ is \intro{homogenous} :
+isomorphism between finite induced substructures extends to an automorphism of the whole structure,
+then $\gdivleq$ is same as embedding of labelled finite induced substructures of $\X$.
+\footnote{
+We refer the reader to \cite[Chapter 7]{BOJAN16inf} and \cite{homsurvey} for more details on homogeneous structures.}
+We give some examples of homogeneous structures and discuss whether they satisfy the WQO condition of \Cref{thm:compute-egb} :
+$(\mon[Y]{\Indets},\gdivleq[\aut{\Indets}])$ is a \kl{WQO} for every \kl{WQO} $Y$. 
 %
 \begin{example}\label{ex:eq atoms}
 Let $\A$ be an infinite set without any additional structure other than the equality relation.
-Then $\aut{\A}$ is the set of all bijections of the set $\A$.
-This action $\aut{\A} \actson \A$ does not preserve any linear order on $\A$.
-However, $(\mon[Y]{\A}, \gdivleq)$ is a \kl{WQO} whenever $Y$ is a \kl{WQO}.
-Observe that up to isomorphism, a monomial $\monelt[p]$ in $\mon[Y]{\A}$ can be though as a multiset of its coefficients.
-For example, the monomials $a^{y}b^{z}c^{y}$ can be though as the multiset $\{y,z,y\}$ for every $a,b,c\in\A$ and $y,z\in Y$.
-We leave it to the reader to prove that for every $\monelt[p],\monelt[q]\in\mon[Y]{\A}$ we have $\monelt[p] \gdivleq[\aut{\A}] \monelt[q]$ if and only if the multiset of coefficients of $\monelt[p]$ is smaller than or equal to the multiset of coefficients of $\monelt[q]$ in the multiset ordering \cite[Section 1.5]{SCSC17}.
-Note that the latter is a \kl{WQO} \cite[Corollary 1.21]{SCSC17}.
+%Then $\aut{\A}$ is the set of all bijections of the set $\A$.
+Up to isomorphism, finite induced substructures of $\A$ are finite sets,
+monomials in $\mon[Y]{\A}$ are finite multisets of elements in $Y$,
+and $\gdivleq[\aut{\A}]$ is the multiset ordering \cite[Section 1.5]{SCSC17},
+which is a \kl{WQO} \cite[Corollary 1.21]{SCSC17}.
 \end{example}
 %
 \begin{example}\label{ex:dlo}
 Let $\calQ$ be the set of rational numbers ordered by the usual ordering.
 Note that under this ordering, $\calQ$ is a dense linear order without endpoints.
 We write $\calQ$ instead of $\Q$ to emphasise that we use its elements as indeterminates and not as coefficients of polynomials. 
-$\aut{\calQ}$ is the set of all order preserving bijections of $\calQ$.
-By definition, the action $\aut{\calQ} \actson \calQ$ preserves the linear order on $\calQ$.
-Moreover, $(\mon[Y]{\calQ}, \gdivleq)$ is a \kl{WQO} whenever $Y$ is a \kl{WQO}.
-From a monomial $\monelt[p]$ in $\mon[Y]{\calQ}$ we get a word in $Y^*$ by writing all the exponents in the order prescribed by the indeterminates.
-For example, for every $a < b < c \in \calQ$ and $u,v\in Y$,
-from the monomial $(a^u b^v c^u)$ we get the word $uvu$.
-We claim that for every $\monelt[p],\monelt[q]\in\mon[Y]{\D}$ we have $\monelt[p] \gdivleq[\aut{\A}] \monelt[q]$ if and only if the word corresponding word to $(\monelt[p])$ is smaller than or equal to the word corresponding word to $(\monelt[q])$ in the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \cite{HIG52}.
+Up to isomorphism, finite induced substructures of $\calQ$ are finite linear orders,
+monomials in $\mon[Y]{\calQ}$ are words in $Y^*$ (i.e.\ finite linear order labelled with elements of $Y$)
+and $\gdivleq[\aut{\calQ}]$ is the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \cite{HIG52}.
 \end{example}
+%
+\begin{example}\label{ex:rado}
+Let $\G$ be the Rado graph (\cite[Section 7.3.1]{BOJAN16inf},\cite[Example 2.2.1]{homsurvey}).
+Up to isomorphism,
+finite induced substructures of $\G$ are finite undirected graphs,
+monomials in $\mon[Y]{\G}$ are graphs with vertices labelled with $Y$,
+and $\gdivleq[\aut{\G}]$ is the labelled induced subgraph ordering even when $Y$ is a singleton.
+For example, cycles of length more than three form an infinite antichain.
+\end{example}
+%
+\begin{example}\label{ex:bit vector}
+Let $\V$ be an infinite dimensional vector space over $\ftwo$.
+Up to isomorphism,
+finite induced substructures of $\V$ are finite dimensional vector spaces over $\ftwo$.
+These are well-quasi-ordered in the absence of labelling.
+However, even when $Y = \N$,
+$(\mon[Y]{\V},\gdivleq[\aut{\V}])$ is not a \kl{WQO} as illustrated by the following antichain.
+Let $\{v_1,v_2,\dots\}\subseteq \V$ be a countable set of linearly independent vectors in $\V$.
+Let $\oplus$ denote the addition operation of $\V$.
+For $n \geq 3$ define the monomial $\monelt[p]_n$ as 
+\[
+\monelt[p]_n = v^2_1 \cdot \ldots \cdot v^2_n \cdot (v_1\oplus v_2) \cdot (v_2\oplus v_3) \ldots \cdot (v_{n-1}\oplus v_n) \cdot (v_{n}\oplus v_1)
+\]
+Then $\setof{\monelt[p]_n}{n = 3,4,\dots}$ forms an infinite antichain.
+\end{example}
+%
+\begin{example}\label{ex:dense tree}
+Let $\T$ denote the universal countable dense meet-tree
+\cite[Page 2]{KRS21}\cite[Section 7.3.3]{BOJAN16inf}.
+Note that the tree structure is given by the \intro{meet} operation (and not by edges),
+which takes as input a pair of nodes of $\T$ and returns their closest common ancestor.
+For a subset $S\subset \T$,
+define its \intro{closure} to be the smallest subset of $\T$ that is closed under the \kl{meet} operation.
+Note that the \kl{closure} of a finite subset is finite. 
+Up to isomorphism, finite induced substructures of $\calQ$ are finite meet-trees.
+monomials in $\mon[Y]{\calQ}$ are finite meet-trees labelled with $1 + Y$.
+Here $1 + Y$ is the \kl{WQO} containing one more element than $Y$ which is incomparable to elements in $Y$,
+and is used to label nodes that are in the \kl{closure} of the set of variable of a monomial, but not in the monomial itself.
+The relation $\gdivleq[\aut{\T}]$ is the embedding of labelled meet-trees,
+which is a \kl{WQO} due to Kruskal's tree theorem \cite{Kruskal60}.
+\end{example}
+%
+We discuss an interesting non-homogeneous structure.
 %
 \begin{example}\label{ex:int}
 Let $\calZ$ be the set of integers ordered by the usual ordering.
@@ -105,57 +133,7 @@ By definition, the action $\aut{\calZ} \actson \calZ$ preserves the linear order
 However, $(\mon[Y]{\calZ}, \gdivleq[\aut{\calZ}])$ is not a \kl{WQO} even when $Y$ is a singleton.
 An example of an infinite antichain is the set $\setof{a b}{b\in\calZ\setminus\{a\}}$, for any fixed $a\in\calZ$.
 \end{example}
-
-\begin{example}\label{ex:rado}
-Let $\G$ be the Rado graph (\cite[Section 7.3.1]{BOJAN16inf},\cite[Example 2.2.1]{homsurvey}),
-i.e.\ the unique (up to isomorphism) homogeneous infinite graph such that every finite graph is isomorphic to some finite induced subgraph of $\G$.
-Then $\aut{\G}$ is the set of all automorphisms of the graph $\G$.
-The action $\aut{\G}\actson\G$ does not preserve any linear order of $\G$,
-since due to homogeneity,
-for every pair of vertices $a,b\in\G$, there exists $\pi\in\aut{\G}$ such that $\pi(a) = b$ and $\pi(b) = a$.
-Moreover, $(\mon[Y]{\G}, \gdivleq[\aut{\G}])$ is not a \kl{WQO} even when $Y$ is singleton.
-For instance, any subset $\setof{\monelt[c]_{n}}{n = 3,4,5,\dots}$ of $\mon[Y]{\G}$ such that the subgraph of $\G$ induced by $\dom(\monelt[c]_{n})$ is a cycle of length $n$, is an infinite antichain.
-\end{example}
 %
-\begin{example}\label{ex:bit vector}
-Let $\V$ be an infinite dimensional vector space over $\ftwo$.
-Then $\aut{\V}$ is the set of all linear automorphisms.
-The action $\aut{\V}\actson\V$ does not preserve any linear order of $\V$,
-since for every pair of linearly independent vectors $u,v\in\V$,
-there exists $\pi\in\aut{\V}$ such that $\pi(u) = v$ and $\pi(v) = u$.
-Moreover, $(\mon[Y]{\V}, \gdivleq[\aut{\V}])$ is not a WQO even when $Y$ is a singleton.
-For instance, given an infinite set of linearly independent vectors $\{v_1,v_2,\dots\}$ in $\V$,
-the subset $\setof{\monelt[s]_{n}}{n = 3,4,5,\dots}$ of $\mon[Y]{\V}$ such that \[
-\dom(\monelt[s]_{n}) = \{v_1,\dots,v_n,(v_1 + v_2),(v_2 + v_3),\dots,(v_{n-1}+v_n),(v_n+v_1)\}
-\]
-is an infinite antichain.
-\arka{Trying to think of an easy argument}
-\end{example}
-%
-\begin{example}\label{ex:dense tree}
-Let $\T$ denote the dense-meet-tree structure
-\cite[Section 7.3.3]{BOJAN16inf},
-which is the unique (up to isomorphism) homogeneous infinite tree such that every finite tree is isomorphic to a topological minor of $\T$ \arka{There are no edges!}
-\arka{rewrite using meet-relation}.
-The tree structure is given by the \intro{closed common ancestor} function,
-which takes as input a pair of nodes of $\T$ and returns their closest common ancestor.
-In this case, $\aut{\T}$ is the set of bijections $\pi$ of $\T$ that preserves and reflects ancestry:
-$\pi(a)$ is an ancestor of $\pi(b)$ if and only if $a$ is an ancestor of $b$.
-The action $\aut{\T}\actson\T$ does not preserve any linear order,
-since for every pair of nodes $a$ and $b$ such that their closest common ancestor $c$ is neither $a$ or $b$,
-there exists $\pi\in\aut{\T}$ such that $\pi(a) = b$ and $\pi(b) = a$.
-However, $(\mon[Y]{\T},\gdivleq[\aut{\T}])$ is a \kl{WQO} whenever $Y$ is a \kl{WQO}.
-This follows from Kruskal's theorem \cite[Page 212]{Kruskal60} in the following way.
-Extend $Y$ to another \kl{WQO} $Y'$ by adding an element $\bot$ which is smaller than every element in $Y$.
-The domain of an element $\monelt[p]\in\mon[Y]{\T}$ induces a finite subtree of $\T$ which is the smallest subtree of $\T$ containing $\dom(\monelt[p])$ and closed under the closest common ancestor relation.
-The coefficients of $\monelt[p]$ defines a partial labelling of nodes of this subtree using $Y$.
-By labelling the unlabelled nodes by $\bot$ we get a finite subtree of $\T$ labelled by $Y'$.
-Due to homogeneity,
-$\monelt[p] \gdivleq \monelt[q]$ if and only if the labelled subtree corresponding to $\monelt[p]$ is isomorphic to a topological minor of the labelled subtree corresponding to $\monelt[q]$.
-Now it follows from Kruskal's lemma that $(\mon[Y]{\T},\gdivleq[\aut{\T}])$ is a \kl{WQO}.
-\end{example}
-%
-
 \todo[inline]{arka: create a new subsection: stability of our hypotheses, and place 
   it after the section on effective oligomorphisms. Because right now you do not prove
   that these constructions can be used to apply our results.
