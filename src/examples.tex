@@ -100,11 +100,11 @@ However, even when $Y = \N$,
 $(\mon[Y]{\V},\gdivleq[\aut{\V}])$ is not a \kl{WQO} as illustrated by the following antichain.
 Let $\{v_1,v_2,\dots\}\subseteq \V$ be a countable set of linearly independent vectors in $\V$.
 Let $\oplus$ denote the addition operation of $\V$.
-For $n \geq 3$ define the monomial $\monelt[p]_n$ as 
-\[
-\monelt[p]_n = v^2_1 \cdot \ldots \cdot v^2_n \cdot (v_1\oplus v_2) \cdot (v_2\oplus v_3) \ldots \cdot (v_{n-1}\oplus v_n) \cdot (v_{n}\oplus v_1)
-\]
-Then $\setof{\monelt[p]_n}{n = 3,4,\dots}$ forms an infinite antichain.
+For $n \geq 3$ define the monomial 
+$
+\monelt[p]_n \defined v^2_1 \cdot \ldots \cdot v^2_n \cdot (v_1\oplus v_2) \cdot (v_2\oplus v_3) \ldots \cdot (v_{n-1}\oplus v_n) \cdot (v_{n}\oplus v_1)
+$.
+Then, $\setof{\monelt[p]_n}{n = 3,4,\dots}$ forms an infinite antichain.
 \end{example}
 %
 \begin{example}\label{ex:dense tree}
@@ -123,7 +123,11 @@ The relation $\gdivleq[\aut{\T}]$ is the embedding of labelled meet-trees,
 which is a \kl{WQO} due to Kruskal's tree theorem \cite{Kruskal60}.
 \end{example}
 %
-We discuss an interesting non-homogeneous structure.
+Even though the above examples using \kl{homogeneous} 
+structures nicely illustrate the correspondance between 
+monomials and labelled finite substructures, 
+we can also consider \kl{non-homogeneous} structures,
+such as in \Cref{ex:int} below.
 %
 \begin{example}\label{ex:int}
 Let $\calZ$ be the set of integers ordered by the usual ordering.
