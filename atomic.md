@@ -18,5 +18,6 @@ appendix:
 \input{src/examples.tex}
 \input{src/weakgb.tex}
 \input{src/fullbasis.tex}
+\input{src/applications.tex}
 \input{src/undecidability.tex}
 \input{src/conclusion.tex}

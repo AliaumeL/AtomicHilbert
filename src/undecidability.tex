@@ -33,18 +33,16 @@ such a dichotomy result.
 \AP However, one we are able to prove the undecidability of the \kl{equivariant
 ideal membership problem} under the assumption that the set of indeterminates
 $\Indets$  contains an \intro(of){infinite path} $P \defined \seqof{x_i}[i \in
-\N] \subseteq \Indets$, that is, a set $P$ of indeterminates such that $\group$
-acts on $P$ as a translation of the indices. Formally, we require that, for all
-$\gelem \in \group$ and for all segments $J \defined [k,l] \subfin \N$ such
-that $\gelem \cdot x_j \subseteq P$ for all $j \in J$, there exists $n \in \N$
-such that $\gelem \cdot x_j = x_{j + n}$ for all $j \in J$ ; and there exists a
-$\gelem_{+1} \in \group$ such that $\gelem_{+1} \cdot x_i = x_{i + 1}$ for all
-$i \in \N$. The prototypical example being the set of all indeterminates
-$\Indets = \Z$ equipped with the group $\group$ of all shifts. The presence of
-an \kl(of){infinite path} clearly prevents $(\mon{\Indets}, \gdivleq)$ from
-being a \kl{well-quasi-ordering}, as shown by the following
-\cref{rem:not-wqo}. Furthermore, for indeterminates obtained by
-considering \kl{homogeneous structures} and their automorphism groups
+\N] \subseteq \Indets$, that is, a set of indeterminates such that $(x_i,x_j)
+\in P^2$ is in the same orbit as $(x_0, x_1)$ if and only if $|i - j| = 1$, for
+all $i,j \in \N$. We similarly define \reintro(of){finite paths} by considering
+finitely many elements. The prototypical example of a set of indeterminates
+containing an \kl(of){infinite path} is $\Indets = \Z$ equipped with the group
+$\group$ of all shifts. The presence of an \kl(of){infinite path} clearly
+prevents $(\mon{\Indets}, \gdivleq)$ from being a \kl{well-quasi-ordering}, as
+shown by the following \cref{rem:not-wqo}. Furthermore, for
+indeterminates obtained by considering \kl{homogeneous structures} and their
+automorphism groups
 (\cref{sec:examples}),
 the presence of an \kl(of){infinite path} has been conjectured to be a
 necessary and sufficient condition for $(\mon{\Indets}, \gdivleq)$ to be a
@@ -56,13 +54,20 @@ of Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
 
 \begin{remark}
   \label{rem:not-wqo}
-  If there exists a \kl{word encoding} for a binary alphabet $\Sigma$, then
-  $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
-  Indeed, the infix ordering relation on words over a binary alphabet is
-  not a \kl{well-quasi-ordering}, as shown by the infinite antichain
-  $\setof{ a b^n a}{n \in \N }$,
-  and the \kl{word encoding} $\wenc{\cdot}$ is an order embedding of
-  the infix ordering relation on words over $\Sigma$ into $(\mon{\Indets}, \gdivleq)$.
+  Assume that $\Indets$ contains an \kl(of){infinite path}
+  $P \defined \seqof{x_i}[i \in \N]$.
+  Then, the set of monomials $\setof{x_0^3 x_1^1 \cdots x_{n-1}^1 x_n^2}{n \in \N}$
+  is an infinite antichain in $(\mon{\Indets}, \gdivleq)$.
+  Indeed, assume that there exists $n < m$, and a group element $\gelem \in \group$ such that
+  $\gelem \cdot \monelt_n \divleq \monelt_m$.
+  Then, $\gelem \cdot x_0 = x_0$, because it is the only indeterminate with 
+  exponent $3$ in $\monelt_m$. Furthermore, 
+  $\gelem \cdot (x_0,x_1) = (x_i,x_j)$ implies that 
+  $|i - j| = 1$, and since $\gelem \cdot x_0 = x_0$, we conclude
+  $\gelem \cdot x_1 = x_1$. By an immediate induction, we 
+  conclude that $\gelem \cdot x_i = x_i$ for all $0 \leq i \leq n$,
+  but then we also have that the degree of $\gelem \cdot x_n$ is less than $2$
+  in $\monelt_m$, which contradicts the fact that $\gelem \cdot \monelt_n \divleq \monelt_m$.
 \end{remark}
 
 \begin{conjecture}[Schmitz]
@@ -229,7 +234,7 @@ encodings} can simulate (reversible) string rewriting on words of a given size.
 Note that without loss of generality, thanks to
 \cref{lem:word-encoding-string-subst}, we can assume that the alphabet is any
 finite set of letters, using a suitable unambiguous encoding of the alphabet
-into a binary alphabet \cite{BERST09}. This bigger alphabet size will simplify
+in binary \cite{BERST09}. This bigger alphabet size will simplify
 the statement and proof of the following \cref{lem:reversible-machine}, which
 explains how to simulate a reversible Turing machine using \kl{monomial
 rewriting}. Given a reversible Turing machine $M$ with a finite set $Q$ of
