@@ -107,7 +107,7 @@ of Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
   Hence, if one believes that \cref{conj:wqo-infinite-path} holds,
   there exists an existential formula $\varphi(x,y)$ such that
   $\varphi$ defines arbitrarily long paths in $\Indets$.
-  Because $\Indets$ is \kl{homogeneous}, and $\varphi$ is existential,
+  Because $\Indets$ is \kl{homogeneous},
   this means that $\varphi$ defines an infinite path in $\Indets$,
   and in particular, 
   $\Indets$ contains an \kl(of){infinite path} $P$, as introduced
@@ -171,20 +171,20 @@ monomials due to the commutativity of the multiplication.
 To overcome the second issue, we will use the following notion of 
 \kl{word encoding}.
 
-\paragraph{Structures Containing Paths.}
-\AP
-Let us assume for the rest of this section 
-that $\Indets$ is a set of indeterminates that contains an
-\kl(of){infinite path} $P \defined \seqof{x_i}[i \in \N]$,
-and 
-let us fix a binary alphabet $\Sigma \defined \set{a,b}$, and let us define
-a function $\intro*\wenc{ \cdot} \colon \Sigma^* \to \mon{\Indets}$, where
-$\Sigma$ is a finite alphabet, that encodes a word $u \in \Sigma^*$ as a
-monomial. Namely, we define inductively $\wenc{\varepsilon} \defined 1$,
-$\wenc{a u} = x_0^3 x_1^2 x_2^1 x_3^3 (\gelem_{+4} \cdot \wenc{u})$ and
-$\wenc{b u} = x_0^3 x_1^1 x_2^2 x_3^3 (\gelem_{+4} \cdot \wenc{u})$ for all $u
-\in \Sigma^*$. Let us remark that \kl{monomial rewriting} applied on \kl{word
-encodings} can simulate (reversible) string rewriting on words of a given size.
+\paragraph{Structures Containing Paths.} \AP Let us assume for the rest of this
+section that $\Indets$ is a set of indeterminates that contains an
+\kl(of){infinite path} $P \defined \seqof{x_i}[i \in \N]$, and let us fix a
+binary alphabet $\Sigma \defined \set{a,b}$. We define a function
+$\intro*\wenc{ \cdot} \colon \Sigma^* \to \mon{\Indets}$, where $\Sigma$ is a
+finite alphabet, that encodes a word $u \in \Sigma^*$ as a monomial. Namely, we
+define inductively $\wenc{\varepsilon} \defined 1$, $\wenc{a u} = x_0^3 x_1^2
+x_2^1 x_3^3 (\mathsf{shift}_{+4} \cdot \wenc{u})$ and $\wenc{b u} = x_0^3 x_1^1
+x_2^2 x_3^3 (\mathsf{shift}_{+4} \cdot \wenc{u})$ for all $u \in \Sigma^*$,
+where $\mathsf{shift}_{+k}$ acts on $P$ by shifting the indices by
+$k$.\footnote{There may be no element $\gelem \in \group$ that acts like
+$\mathsf{shift}_{+1}$, we only use it as a function.} Let us remark that
+\kl{monomial rewriting} applied on \kl{word encodings} can simulate
+(reversible) string rewriting on words of a given size.
 
 \begin{lemma}
   \label{lem:word-encoding-string-subst}
@@ -204,31 +204,12 @@ encodings} can simulate (reversible) string rewriting on words of a given size.
 \begin{proof}
   Let us prove \cref{item:rewrite-submonomial} implies
   \cref{item:rewrite-subword}. To that end,
-  let $\gelem \in \group$ be such that
-  $\wenc{w} = \monelt[m] (\gelem \cdot \wenc{u})$ and
-  $\monelt[n] = \monelt[m] (\gelem \cdot \wenc{v})$.
-  Then, $(\gelem \cdot \wenc{u}) = (\gelem_{+k} \cdot \wenc{u})$ 
-  for some $z \in \Z$
-  since $P$ is an \kl(of){infinite path}.
-  Furthermore, $u$ and $v$ have the same length, hence
-  the same indeterminates, and we conclude that
-  $(\gelem \cdot \wenc{v}) =
-   (\gelem_{+k} \cdot \wenc{v})$.
-  Because letters encoding start and end with an exponent $3$,
-  we conclude that $k = 4 \times \ell$, and therefore
-  that $\wenc{w} = \wenc{x} (\gelem_{+k} \cdot \wenc{u})
-  (\gelem_{+(k + 4|u|)} \cdot \wenc{y})$.
-  As a consequence,
-  $\wenc{x v y} = \monelt[n]$.
-
+  
   Conversely, let us prove that \cref{item:rewrite-subword} implies
-  \cref{item:rewrite-submonomial}. To that end, let $x, y \in \Sigma^*$ be such
-  that $x u y = w$ and $\wenc{x v y} = \monelt[n]$. Then, we can write
-  $\wenc{w} = \wenc{x} (\gelem_{+k} \cdot \wenc{u}) (\gelem_{+(k + 4|u|)} \cdot
-  \wenc{y})$. Let us define $\monelt[m] \defined \wenc{x} (\gelem_{+(k +
-  4\times|u|)} \cdot \wenc{y})$. It is clear that $\wenc{w} = \monelt[m]
-  (\gelem_{+k} \cdot \wenc{u})$, and we can also notice that $\monelt[n] =
-  \wenc{x v y} = \monelt[m] (\gelem_{+(k + 4|u|)} \cdot \wenc{v})$.
+  \cref{item:rewrite-submonomial}.
+
+  \todo[inline]{aliaume todo}
+
 \end{proof}
 
 Note that without loss of generality, thanks to
@@ -355,11 +336,12 @@ of $\group$.
 
 \begin{remark}
   \label{rem:more-generally}
-  The undecidability result of \cref{cor:undecidability} can be generalized to
+  The undecidability result of \cref{cor:undecidability} can be generalised to
   any set of indeterminates in which one can encode words over a binary alphabet,
   and for which there is a \kl{monomial rewrite system} that can
   produce arbitrary long words.
   We strongly conjecture that this is the case for 
-  the \kl{infinite dimensional vector space}
-  \todo{cite ref}
+  the \kl{infinite dimensional vector space}, as defined in 
+  \cref{ex:bit vector} of
+  \cref{sec:examples}.
 \end{remark}
