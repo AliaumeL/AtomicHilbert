@@ -283,9 +283,42 @@ and taking their union.\footnote{This algorithm is correct because we are
 \section{Previous Research}
 %
 \arka{Maybe put it before}
-
-The existence of \kl{equivariant Gr\"{o}bner basis} was first proven in \cite[Proposition 2]{COHEN67}.
-The computability was proven in 
 %
+The existence of \kl{equivariant Gr\"{o}bner basis} for the case when $\group$ is equal to the group $\symgr{\Indets}$ of all bijections from $\Indets$ to itself,
+is proven in \cite[Proposition 2]{COHEN67},
+and the computability can be found in \cite[Theorem 10]{COHEN87} and \cite{Emmott87}.
+Their definition of Gr\"{o}bner basis is different than ours.
+We quickly sketch their ideas.
+
+Let $<$ be a well-order on $\Indets$.
+Let $\inc{<}$ be the set of all strictly increasing one-to-one function from $\Indets$ to itself.
+An obvious but crucial observation is that,
+an ideal that is invariant under the action of $\symgr{\Indets}$ is also invariant under the action of $\inc{<}$.
+Hence we can consider ideals invariant under the action of $\inc{<}$.
+Using the well-order we define the leading monomial of a polynomial by the short-lex order : \arka{todo:define $\shortlexlt$}.
+Since $<$ is a well-order, $\shortlexlt$ is also a well-order.
+Hence any sequence of reductions that decreases the leading monomial with respect to $\shortlexlt$ terminates.
+Again, due to the fact that $<$ is a well-order,
+the divisibility relation $\gdivleq[\inc{<}]$ upto $\inc{<}$ is a \kl{well-partial-order}.
+As a consequence, for every $\inc{<}$-equivariant ideal $\idl[I]$,
+we can find a finite set of polynomials $B\subseteq \idl[I]$ which is a Gr\"{o}bner basis of $\idl{I}$ in the sense that,
+for every polynomial $f$ in $\idl[I]$,
+there exists a polynomial $b$ in $B$ such that $\lm(b) \gdivleq[\inc{<}] \lm(f)$.
+It can be proven that $B$ is a set of generators of $\idl[I]$.
+This proves that every $\inc{<}$-equivariant ideal, and hence every $\symgr{\Indets}$-equivariant ideal is finitely generated.
+Now for the computation of a Gr\"{o}bner basis,
+one can extend the Buchberger's algorithm to this setting,
+which terminates due to the fact that $\gdivleq[\inc{<}]$ is a \kl{well-partial-order}.
+
+The above mentioned results were rediscovered in \cite{AH07,AH08,HKL18}.
+In \cite{HS12} these results were used to prove the Independent Set Conjecture in algebraic statistics.
+In \cite{HKL18}, the authors showed that one can even take a submonoid $\calM$ of $\inc{<}$ and prove existence and computability of finite Gr\"{o}bner basis assuming that $\gdivleq[\calM]$ is a well-partial-order.
+
+\cite[Corollary 59]{GHOLAS24} shows that one can use a similar strategy for the action $\aut{\calQ}\actson\calQ$ (\Cref{ex:dlo}).
+However, 
+
+%
+
+\arka{Add other orbit-finite research: weighted automata, equations, linear programming}
 
 

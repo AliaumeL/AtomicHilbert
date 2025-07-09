@@ -81,6 +81,7 @@
 \newcommand{\calZ}{\mathcal{Z}}
 \newcommand{\calH}{\mathcal{H}}
 \newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calM}{\mathcal{M}}
 
 % 
 % Polynomial rings, monomials, and related macros
@@ -111,6 +112,7 @@
 \NewDocumentOrdering{revlex}{\sqsubseteq^{\mathsf{RevLex}}}{\sqsubset^{\mathsf{RevLex}}}
 \NewDocumentOrdering{grevlex}{\sqsubseteq^{\mathsf{RevLex}}_\group}{\sqsubset^{\mathsf{RevLex}}_\group}
 \NewDocumentOrdering{lex}{\sqsubseteq_{\mathsf{Lex}}}{\sqsubset_{\mathsf{Lex}}}
+\NewDocumentOrdering{shortlex}{\sqsubseteq_{\mathsf{ShortLex}}}{\sqsubset_{\mathsf{ShortLex}}}
 
 \NewDocumentOrdering{pmon}{\preceq}{\prec}
 \NewDocumentCommand{\pmoneq}{}{\mathrel{\kl[pmon]{\equiv}}}
@@ -167,6 +169,8 @@
 \newcommand{\orbit}[2][]{\mathop{\kl[\orbit]{\mathsf{orbit}_{#1}}}{(#2)}}
 \knowledge{\orbit}{notion}
 
+\newcommand{\symgr}[1]{\mathbf{S}_{#1}}
+\newcommand{\inc}[1]{\textsc{Inc}_{#1}}
 
 %
 % Sets of indeterminates, bases
