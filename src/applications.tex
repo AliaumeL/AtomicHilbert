@@ -296,11 +296,7 @@ automata}.
   We refer to \cite[Chapter 9]{JGL13} for a survey on the theory of 
   Noetherian spaces.
 \end{remark}
-
-\todo[inline]{for arka: cleanup and use \kl{nicely orderable}
-to state the results.}
-
-
+%
 \paragraph{Reachability problem of symmetric data Petri nets.}
 %
 Define a Petri net with data $\group\actson\Indets$ to be a Petri net which uses elements from $\Indets$ to label its tokens,
@@ -310,7 +306,7 @@ a reversible data Petri nets are same as a monomial rewrite system.
 Using \Cref{thm:compute-egb}, \Cref{lem:reducts-equiv-hilbert} and \cite[Theorem 64]{GHOLAS24} we can get the following corollary:
 %
 \begin{corollary}\label{cor:rev data VAS}
-The reachability problem is decidable for reversible Petri net with data $\group\actson\Indets$ if $\group\actson\Indets$ is a reduct of $\calH\actson\Indets$ such that ...
+The reachability problem is decidable for reversible Petri net with data $\group\actson\Indets$ if $\group\actson\Indets$ is \kl{nicely orderable}.
 \end{corollary}
 %
 \begin{proof}
@@ -320,9 +316,7 @@ The proof follows from the fact that for a \kl{WQO} $Y$ and finite set $P$,
 \cong
 (\mon[Y\times P]{\X},\gdivleq) \ ,
 \]
-where $Y\times P$ denotes the product of \kl{WQOs} $Y$ and $P$.
-
-\arka{did we define it?} No, we only define the lexicographic product.
+where $Y\times P$ denotes the product of \kl{WQOs} $Y$ and $P$ (cf. \cite[Section 1.3]{SCSC17}.
 \end{proof}
 %
 \paragraph{Orbit-finite systems of equations}
