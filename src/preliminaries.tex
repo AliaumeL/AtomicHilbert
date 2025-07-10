@@ -120,8 +120,11 @@ $\group$ if for all $\gelem \in \group$ and $x \in S$, we have $\gelem \cdot x
 \in S$. We give in \cref{ex:idl-equiv} an example and a non-example
 of \kl{equivariant ideals}.
 
-\arka{Maybe we can simply assume $\group$ is a subgroup of bijections of $\Indets$.
-Then we can also use the notation $\pi(x)$ which is less confusing than $\pi\cdot x$}
+\arka{Maybe we can simply assume $\group$ is a subgroup of bijections of
+$\Indets$. Then we can also use the notation $\pi(x)$ which is less confusing
+than $\pi\cdot x$} \todo[inline]{In my opinion, the new notation is more
+  confusing because now $p(x)$ is very diffrent from $\pi(x)$: one is
+polynomial evaluation/substitution, the other is a group action.}
 
 \begin{example}
     \label{ex:idl-equiv}
@@ -158,9 +161,6 @@ Then we can also use the notation $\pi(x)$ which is less confusing than $\pi\cdo
     not belong to the ideal.
 \end{proof}
 
-\todo[inline]{for arka: I realize this definition is just wrong no? At least
-it does not fit with the one given in \cite{BOKLMO21} we do have to introduce the 
-cumulative hierarchy.}
 \AP An \kl{equivariant set} is said to be \intro{orbit finite} if it is the
 union of finitely many \intro{orbits} under the action of $\group$. We denote
 $\intro*\orbit[\group]{E}$ for the set of all elements $\gelem \cdot x$ for
@@ -281,6 +281,20 @@ and taking their union.\footnote{This algorithm is correct because we are
   considering the \kl{reverse lexicographic} ordering.}
 
 \section{Previous Research}
+\todo[inline]{This is way too technical. 
+  the applications when using infinite number of indeterminates 
+  should be in the introduction stating ``growing interest''.
+I strongly advise againts putting a proof sketch (it is going to be bad) of another paper (does not serve our narrative)... this is 
+  clearly not possible to be understood at this stage. Also, you add again 2/3
+  pages before examples and proofs with definitions that will never be used again
+  and even worse, closely resemble the actual ones we will be using
+  (shortlex / co-lex, reduction game / changing indeterminates, well-founded-ordering preserved / total orderding preserved).
+  My suggestions would develop the ``artificial assumptions''
+  of the introduction to say: ok, they need a well-founded ordering 
+  to be preserved, and they can also deal with equality using a trick.
+  While already very useful (state results), this does not give a 
+  total answer and leads to tedious proofs.
+}
 %
 \arka{Maybe put it before}
 %
@@ -313,6 +327,9 @@ which terminates due to the fact that $\gdivleq[\inc{<}]$ is a \kl{well-partial-
 The above mentioned results were rediscovered in \cite{AH07,AH08,HKL18}.
 In \cite{HS12} these results were used to prove the Independent Set Conjecture in algebraic statistics.
 In \cite{HKL18}, the authors showed that one can even take a submonoid $\calM$ of $\inc{<}$ and prove existence and computability of finite Gr\"{o}bner basis assuming that $\gdivleq[\calM]$ is a well-partial-order.
+
+\todo[inline]{The reference does not explain the result: this is very misleading, 
+I really expected to be told how to add the well-founded ordering...}
 
 \cite[Corollary 59]{GHOLAS24} shows that one can use a similar strategy for the action $\aut{\calQ}\actson\calQ$ (\Cref{ex:dlo}).
 However, it becomes difficult to do the same for a general action $\group\actson\Indets$ satisfying the conditions in \Cref{thm:compute-egb}.
