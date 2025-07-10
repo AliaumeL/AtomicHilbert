@@ -1,5 +1,5 @@
 % LTeX: language=en
-%%!TEX root = ../atomic.asmart.tex
+%!TEX root = ../atomic.asmart.tex
 %
 \section{Applications}
 \label{sec:applications}
@@ -163,71 +163,62 @@ the polynomial $F(\delta^*(q_0, w))$ is zero? It is known that the \kl{zeroness
 problem for polynomial automata} is decidable \cite{BEDUSHWO17}, using the
 theory of \kl{Gröbner bases} on finitely many indeterminates. 
 
+
+\newcommand{\toequiv}{\stackrel{\text{\tiny{eq}}}{\to}}
+
 \AP Let us now propose a new model of computation called \kl{orbit finite
 polynomial automata}, and prove an analogue decidability result. Let us fix a
 group $\group$ that acts on the set of indeterminates $\Indets$, and on an
-alphabet $\Sigma$ in an \kl{effectively oligomorphic} fashion. We write
-$\K^{(\Indets)}$ for the set of finitely supported functions from $\Indets$ to
-$\K$, i.e., the set of functions $f \colon \Indets \to \K$ such that there
-exists a finite set $S \subseteq \Indets$ such that $f(x) = 0$ for every $x
-\notin S$. Given an element $f \in \K^{(\Indets)}$, and given a polynomial $p
-\in \poly{\K}{\Indets}$, we write $p(f)$ for the evaluation of $p$ on $f$.
-
-\todo[inline]{for arka: we never defined finitely supported functions.}
+alphabet $\Sigma$ in an \kl{effectively oligomorphic} fashion,\footnote{ In
+particular, $\group$ acts on $\Indets \times \Sigma$ and on $\poly{\K}{\Indets}
+\times \Sigma$ \kl{effectively oligomorphically}. } and such that there are
+finitely many letters $\Gamma \subfin \Sigma$ and finitely many indeterminates
+$V \subfin \Indets$ such that $\group$ acts as the identity of $\Gamma$ and
+$V$. We write $\Indets \toequiv \K$ for the set of \kl{equivariant functions}
+from $\Indets$ to $\K$. Given such a function $f$, and given a polynomial $p
+\in \poly{\K}{\Indets}$, we write $p(f)$ for the evaluation of $p$ on $f$, that
+belongs to $\K$. The model is purposely designed to be simple and does not
+leverage the full theory of sets with atoms.
 
 \begin{definition}
   \label{def:orbit-finite-polynomial-automaton}
   An \reintro{orbit finite polynomial
-  automaton} is a tuple $A \defined (Q, \Sigma, \delta, q_0, F)$, where $Q =
-  \K^{(\Indets)}$, $\Sigma$ is an \kl{orbit finite} alphabet, $\delta \colon
-  \Sigma \to (\Indets \to \poly{\K}{\Indets})$ is a \kl(func){finitely supported}
-  polynomial update function, and $F \in \poly{\K}{\Indets}$ is a polynomial
+  automaton} is a tuple $A \defined (Q, \delta, q_0, F)$, where $Q =
+  \Indets \toequiv \K$, $q_0 \in Q$, $\delta \colon
+  \Sigma \times \Indets \toequiv \poly{\K}{\Indets}$ 
+  is a
+  polynomial update function, and $F \in \poly{\K}{V}$ is a polynomial 
   computing the result of the automaton. 
 
   Given a letter $a \in \Sigma$ and a
-  state $q \in Q$, the update $\delta^*(q,a)$ is defined as the function from
-  $\Indets$ to $\K$ defined by $\delta^*(q,a) \colon x \mapsto \delta(a,x)[ q ]$,
-  which is well-defined because $\delta(a,x)$ is a \kl{finitely supported}
-  polynomial. The update function is naturally extended to words. Finally, the
+  state $q \in Q$, the updated state $\delta^*(a,q)  \in Q$ is defined as the function from
+  $\Indets$ to $\K$ defined by $\delta^*(a,q) \colon x \mapsto \delta(a,x)( q )$.
+  The update function is naturally extended to words. Finally, the
   output of an \kl{orbit finite polynomial automaton} on a word $w \in \Sigma^*$
-  is defined as $F(\delta^*(q_0, w))$.
+  is defined as $F(\delta^*(w,q_0))$.
 \end{definition}
 
-
-\begin{example}
-  \label{ex:orbit-finite-polynomial-automata}
-  Let $\Indets = \calQ$, and let $\group$ be the group of all
-  order-preserving bijections of $\calQ$.
-  Let $\Sigma \defined \calQ \times \calQ$.
-  Then, the following function are computable by 
-  \kl{orbit finite polynomial automata}:
-  the number $\mathrm{inc}(w)$ of letters $(a,b)$ such that $a < b$ in a word $w \in \Sigma^*$,
-  the number $\mathrm{dec}(w)$ of letters $(a,b)$ such that $a > b$ in a word $w \in \Sigma^*$,
-  and the number $(\mathrm{inc}(w) - \mathrm{dec}(w))^2$.
-\end{example}
-
-\AP As for \kl{polynomial automata}, the \intro(ofpa){zeroness problem} for
-orbit finite polynomial automata is the following decision problem: decide if
-for every input word $w$, the output $F(\delta^*(q_0, w))$ is zero. Solving the
-\kl(ofpa){zeroness problem} for orbit finite polynomial automata allows us to
-decide the equality of two such automata, by computing their difference. Let us
-prove that the \kl(ofpa){zeroness problem} is decidable for \kl{orbit finite
-polynomial automata}.
-
-\todo[inline]{the proof of the following is incorrect and I do not know
-  how to fix it easily}
+\AP \kl{Orbit finite polynomial automata} can be used to model programs that
+read a string $w \in \Sigma^*$ from left to right, having as internal state a
+dictionary of type \texttt{dict[indet, number]}, which is updated using
+polynomial computations. As for \kl{polynomial automata}, the
+\intro(ofpa){zeroness problem} for orbit finite polynomial automata is the
+following decision problem: decide if for every input word $w$, the output
+$F(\delta^*(w, q_0))$ is zero. Solving the \kl(ofpa){zeroness problem} for
+orbit finite polynomial automata allows us to decide the equality of two such
+automata, by computing their difference. Let us prove that the
+\kl(ofpa){zeroness problem} is decidable for \kl{orbit finite polynomial
+automata}.
 
 \begin{theorem}
   \label{cor:orbit-finite-polynomial-automata-zeroness}
   Let $\Indets$ be a set of indeterminates that satisfies the
   \kl{computability assumptions} and such that $(\mon[Y]{\Indets}, \gdivleq)$ is a
   \kl{well-quasi-ordering}, for every \kl{well-quasi-ordered} set $(Y, \leq)$.
-  Then, the \kl(ofpa){zeroness problem} is decidable for all \kl{orbit finite polynomial automata}
-  with register names in $\Indets$, for every \kl{orbit finite} alphabet $\Sigma$,
-  that is \kl{effectively oligomorphic} with respect to the action of $\group$.
+  Then, the \kl(ofpa){zeroness problem} is decidable for \kl{orbit finite polynomial automata}.
 \end{theorem}
 \begin{proof}
-  Let $A = (Q, \Sigma, \delta, q_0, F)$ be an \kl{orbit finite polynomial
+  Let $A = (Q, \delta, q_0, F)$ be an \kl{orbit finite polynomial
   automaton}. Following the classical \emph{backward procedure} for such
   systems, we will compute a sequence of sets $E_0 \defined \setof{ q \in Q }{
   F(q) = 0 }$, and $E_{i+1} \defined \mathrm{pre}^\forall(E_i) \cap E_i$, where
@@ -245,28 +236,28 @@ polynomial automata}.
   we write $\mathcal{V}(H)$ the collections of states $q \in Q$ such that $p(q)
   = 0$ for all $p \in H$.
   It is easy to see that $E_0 = \mathcal{V}(\set{F}) = \mathcal{V}(\idl_0)$,
-  where $\idl_0$ is the \kl{equivariant ideal} generated by $F$. 
+  where $\idl_0$ is the \kl{equivariant ideal} generated by $F$, since 
+  $F \in \poly{\K}{V}$ and $V$ is invariant under the action of $\group$.
   Furthermore, assuming that $E_i = \mathcal{V}(\idl_i)$, we can
   see that 
   \begin{align*}
     \mathrm{pre}^\forall(E_i) 
-    & = \setof{ q \in Q }{ \forall a \in \Sigma, \delta^*(q,a) \in E_i } \\
-    & = \setof{ q \in Q }{ \forall a \in \Sigma, \forall p \in \idl_i, p(\delta^*(q,a)) = 0 } \\
+    & = \setof{ q \in Q }{ \forall a \in \Sigma, \delta^*(a,q) \in E_i } \\
+    & = \setof{ q \in Q }{ \forall a \in \Sigma, \forall p \in \idl_i, p(\delta^*(a,q)) = 0 } \\
     & = \setof{ q \in Q }{ \forall p' \in \idl[J], p'(q) = 0 }
   \end{align*}
   Where, the \kl{equivariant ideal} $\idl[J]$ is generated by the
-  polynomials $\mathrm{pullback}(p,a) \defined p [ x \mapsto \delta(a)(x)]$
+  polynomials $\mathrm{pullback}(p,a) \defined p [ x \mapsto \delta(a,x)]$
   for every pair $(p, a) \in \idl_i \times \Sigma$. 
   As a consequence, we have $E_{i+1} = \mathcal{V}(\idl_{i+1})$, where
   $\idl_{i+1} = \idl_i + \idl[J]$.
-
   Because the sequence $\seqof{ \idl_i }[ i \in \N]$ is increasing, and thanks
   to the \kl{equivariant Hilbert basis property} of $\poly{\K}{\Indets}$, there
   exists an $n_0 \in \N$ such that $\idl_{n_0} = \idl_{n_0 + 1} = \idl_{n_0 +
   2} = \cdots$. In particular, we do have $E_{n_0} = E_{n_0 + 1} = E_{n_0 + 2}
   = \cdots$.
 
-  Let us argue that we can compute the sequence $\idl_i$ effectively.
+  Let us argue that we can compute the sequence $\idl_i$.
   First,  $\idl_0 = \EqIdlGen{F}$ is finitely represented.
   Now, 
   given an \kl{equivariant ideal} $\idl$, represented by an \kl{orbit finite}
@@ -274,17 +265,21 @@ polynomial automata}.
   we can compute the \kl{equivariant ideal} $\idl[J]$ generated by the
   polynomials $\mathrm{pullback}(p,a) \defined p [ x_i \mapsto \delta(a)(x_i)]$
   for every pair $(p, a) \in H \times \Sigma$. Indeed, $H \times \Sigma$ is
-  \kl{orbit finite} because the action of $\group$ on $\Indets$ is
-  \kl{effectively oligomorphic}, and the function $\mathrm{pullback}$ is
-  computable and \kl(func){equivariant}: indeed, given $\gelem \in \group$, we can
+  \kl{orbit finite}, and the function $\mathrm{pullback}$ is
+  computable and \kl(func){equivariant}: given $\gelem \in \group$, we can
   show that
   \begin{align*}
     \gelem \cdot \mathrm{pullback}(p, a) & = 
-    \gelem \cdot (p [ x_i \mapsto \delta(a)(x_i)]) \\
-    & = p [ x_i \mapsto (\gelem \cdot \delta(a, x_i))] \\
-    & = p [ x_i \mapsto \delta(\gelem \cdot a, \gelem \cdot x_i))] \\
-    & = (\gelem \cdot p) [ x_i \mapsto \delta(\gelem \cdot a, x_i)] \\
+    \gelem \cdot (p [ x_i \mapsto \delta(a,x_i)]) & \text{ by definition }\\
+                                                  & = p [ x_i \mapsto (\gelem \cdot \delta(a, x_i))] 
+                                                  & \text{ $\gelem$ acts as a morphism } \\
+    & = p [ x_i \mapsto \delta(\gelem \cdot a, \gelem \cdot x_i))] 
+    & \text{ $\delta$ is \kl(func){equivariant} } \\
+    & = (\gelem \cdot p) [ x_i \mapsto \delta(\gelem \cdot a, x_i)] 
+    & \text{ definition of substitution }
+    \\
     & = \mathrm{pullback}(\gelem \cdot p, \gelem \cdot a).
+    & \text{ by definition }
   \end{align*}
   
   Finally, one can detect when the sequence stabilises, by checking whether
