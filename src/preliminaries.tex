@@ -7,10 +7,13 @@
 sets.} \AP We assume basic familiarity with partial orders, well-founded sets,
 and ordinals. We will use the notation $\intro*\om$ for the first infinite
 ordinal (that is, $(\N, \leq)$), and write $X \intro*\ordplus Y$ for the
-lexicographic sum of two partial orders $X$ and $Y$. We will also use the usual
-notations for finite ordinals, writing $\intro*\ordfin{n}$ for the finite
-ordinal of size $n$. For instance, $\om \ordplus \ordfin{1}$ is the total order
-$\N \uplus \set{+\infty}$, where $+\infty$ is the new largest element.
+lexicographic sum of two partial orders $X$ and $Y$. Similarly, the notation $X
+\intro*\ordtimes Y$ will denote the product of two partial orders equipped with the
+lexigographic ordering, i.e. $(x_1, y_1) \leq (x_2, y_2)$ if either $x_1 <
+x_2$, or $x_1 = x_2$ and $y_1 \leq y_2$. We will also use the usual notations
+for finite ordinals, writing $\intro*\ordfin{n}$ for the finite ordinal of size
+$n$. For instance, $\om \ordplus \ordfin{1}$ is the total order $\N \uplus
+\set{+\infty}$, where $+\infty$ is the new largest element.
 
 \AP In order to guarantee the termination of the algorithms presented in this
 paper, a key ingredient will be the notion of \intro{well-quasi-ordering}
