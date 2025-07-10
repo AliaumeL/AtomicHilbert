@@ -129,26 +129,33 @@ It is called a \intro{effective reduct} if $f$ is \kl{effective}.
 If $\group\actson\Indets \reduct{f} \calH\actson\Y$ then:
 \begin{enumerate}
 \item for every $\group$-equivariant ideal $\idl[I]\subseteq\poly{\K}{\X}$,
-$f(\idl[I])\subseteq\poly[\K][\Y]$ is a $\calH$-equivariant ideal.
-\item if $\Basis\subseteq\poly[\K][\Y]$ is a $\calH$-equivariant Gr\"{o}bner basis then $\cup_{\pi\in\g}f^{-1}(b)$ is a $\group$-equivariant Gr\"{o}bner basis.
+$f(\idl[I])\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant ideal.
+\item if $\Basis\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant Gr\"{o}bner basis then $\orbit[\group]{f^{-1}(\Basis)}$ is a $\group$-equivariant Gr\"{o}bner basis.
 \end{enumerate}
 \end{lemma}
+%
+Call an action $\group\actson\Indets$ \intro{nicely orderable} if it is an \kl{effective reduct} of some action computably oligomorphic action $\calH\actson\Y$ that satisfies the conditions mentioned in \Cref{thm:compute-egb},
+i.e.\
+$\calH\actson\Y$ preserves an effective linear order and $\gdivleq[\calH]$ is a \kl{WQO}.
+As an immediate corollary of \Cref{thm:compute-egb}, \Cref{lem:reducts-equiv-hilbert} we get
+%
+\begin{corollary}\label{cor:egb}
+If $\group\actson\Indets$ is \kl{nicely orderable} then 
+\end{corollary}
+%
 
 \AP 
 %
 \begin{remark}\label{rem:reduct}
 \Cref{lem:reducts-equiv-hilbert} implies that one can apply our results to an action $\group\actson\Indets$ that does not preserve a linear order,
 if it is a reduct of some another action $\calH\actson\Indets$ which preserves a linear order.
-For example, $\symgr{\calQ}$ is a reduct of $\aut{\calQ}\actson\Q$.
-Since $\aut{\A}\actson\A$ and $\symgr{\calQ}$ are isomorphic as group actions,
-our results are applicable to $\aut{\A}\actson\A$.
+For example, $\aut{\A}\actson\A$ is a reduct of $\aut{\calQ}\actson\calQ$ assuming $\A$ is countable.
 Let $\T_<$ be the countable dense-meet tree with a lexicographic ordering \cite[Remark 6.14]{KRS21}.
 \footnote{The remark says that finite meet-trees expanded with a lexicographic ordering is a Fra\"{i}sse class,
 from which it follows that there exists a Fra\"{i}sse limit $\T_<$ for that class.}
 Let $\group$ be the group of bijections of $\T_<$ which do not necessarily preserve the lexicographic ordering.
 Then $\group\actson\T_<$ is isomorphic to $\aut{\T}\actson\T$,
-and is a reduct of $\aut{\T_<}\actson\T_<$.
-Hence our results also apply to $\aut{\T}\actson\T$.
+and hence $\aut{\T}\actson\T$ is a reduct of $\aut{\T_<}\actson\T_<$.
 \end{remark}
 %
 \paragraph{Effective oligomorphicity}
