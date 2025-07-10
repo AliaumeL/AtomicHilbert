@@ -92,17 +92,31 @@ monotone bijections from $\Q$ to itself.
 \AP Let us now focus on the mild semantic assumption that we will need to make
 on the set of indeterminates $\Indets$ and the group $\group$, that will
 guarantee the termination of our procedures. We refer to our preliminaries
-(\cref{sec:preliminaries}) for a more detailed discussion on these assumptions,
-but again informally, we ask that the set of \kl{monomials} $\mon{\Indets}$ is
-well-behaved with respect to divisibility up to the action of $\group$, which
-we write as the fact that $(\mon{\Indets}, \gdivleq)$ is a
-\kl{well-quasi-ordering} (\kl{WQO}). It is known from that this is a necessary
-condition for the \kl{equivariant Hilbert basis property} to hold
-\cite[Theorem 11]{GHOLAS24}.
-\arka{Maybe restate the theorems here?}
-We will rely on a slightly stronger condition, namely that
-$(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{WQO}, whenever $(Y, \leq)$ is one,
-which is conjectured to be equivalent to the first condition.
+(\cref{sec:preliminaries}) for a more detailed
+discussion on these assumptions, but again informally, we ask that the set of
+\kl{monomials} $\mon{\Indets}$ is well-behaved with respect to divisibility up
+to the action of $\group$, which we write as the fact that $(\mon{\Indets},
+\gdivleq)$ is a \kl{well-quasi-ordering} (\kl{WQO}). It is known from that this
+is a necessary condition for the \kl{equivariant Hilbert basis property}
+\cref{thm:equiv-hilbert-property}, and we will rely on a slightly stronger
+condition, namely that $(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{WQO}, whenever
+$(Y, \leq)$ is one, which is conjectured to be equivalent to the first
+condition. Beware that \cref{thm:equiv-hilbert-property,thm:compute-egb}
+are
+incomparable: the former does not talk about decidability, while the latter 
+only considers \kl{equivariant ideals} that are already finitely presented, and we 
+will show in
+\cref{ex:non-wqo-undecidable} an example where \kl{equivariant
+Gröbner bases} are computable, but the \kl{Hilbert basis property} fails.
+
+\begin{theorem}[name={\cite[Theorem 11]{GHOLAS24}}]
+  \label{thm:equiv-hilbert-property}
+  Let $\Indets$ be a totally ordered set of indeterminates
+  equipped with a group action $\group \actson \Indets$.
+  Then, $(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{WQO} for every
+  \kl{well-quasi-ordered} set $(Y,\leq)$, if and only if 
+  the \kl{equivariant Hilbert basis property} holds for $\poly{\K}{\Indets}$.
+\end{theorem}
 
 \begin{theorem}[name={Equivariant Gröbner Basis},restate=thm:compute-equiv-gb]
   \label{thm:compute-egb}
