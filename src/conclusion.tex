@@ -26,17 +26,29 @@ structures of the indeterminates to account for a total ordering. A conjecture
 of Pouzet \todo{cite} states that such an ordering always exists, and this was
 remarked by \cite[Remark 14]{GHOLAS24}. Note that in this case, one would 
 \todo[inline]{complete this}
-
+%
 \paragraph*{All our hypotheses and Pouzet in the middle.} We conjecture that
 $(\mon{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} if and only if
 $(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} for every
 \kl{well-quasi-ordered} set $Y$ of exponents. This is a form of Pouzet's
 conjecture, which has been verified on some classes of structures.
-
+%
 \paragraph*{Undecidability.} It would be nice to obtain a dichotomy result
 for the decidability, but it seems beyond reach for now.
 talk about VASS here  for coverability.
-
+%
 \paragraph*{Complexity.} We do not have complexity lower bounds, and there may
 be better algorithms like adaptations of Faugère's algorithm that could be
 better in practice.
+%
+\paragraph*{WQO dichotomy conjecture}
+The condition that $(\mon[Y]{\Indets},\gdivleq)$ is a \kl{WQO} for every \kl{WQO} also guarantees coverability of Petri nets with data $\X$ is decidable \cite[Theorem 1]{Lasota16}.
+In fact it is conjectured to be equivalent \cite[Conjecture 1]{Lasota16}.
+%
+\paragraph*{Duals of orbit-finitely generated vector spaces}
+%
+An interesting question posed by S\l{a}womir Lasota is that whether for group actions $\group\actson\Indets$ for which $(\mon[Y]{\Indets},\gdivleq)$ is a \kl{WQO},
+duals of orbit-finitely generated vector spaces are also orbit-finitely generated.
+This follows for the structures in \Cref{ex:eq atoms,ex:dlo} by the results of \cite{BFKM24,GHL22,Prz24}.
+Proving it for the general case would be a big step towards generalising the results of \cite{GHL22}. 
+%

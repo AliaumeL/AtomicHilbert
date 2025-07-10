@@ -114,23 +114,15 @@ does not.
 
 \paragraph{Group actions, equivariance, and orbit finite sets.}  \AP A
 \intro{group} $\group$ is a set equipped with a binary operation that is
-associative, has an identity element and has inverses. In our setting, we are
+associative, has an identity element and has inverses.
+In our setting, we are
 interested in infinite sets $\X$ of indeterminates that is equipped with a
-\intro{group action} $\group \actson \X$. This means that for each $\gelem \in
-\group$, we have a bijection $\X \tobij \X$ that we denote by $x \mapsto \gelem
-\cdot x$. A set $S \subseteq \X$ is \intro{equivariant} under the action of
-$\group$ if for all $\gelem \in \group$ and $x \in S$, we have $\gelem \cdot x
+\intro{group action} $\group \actson \X$.
+This means that $\group$ is a subgroup of bijections of the set $\Indets$ to itself.
+A set $S \subseteq \X$ is \intro{equivariant} under the action of
+$\group$ if for all $\gelem \in \group$ and $x \in S$, we have $\gelem(x)
 \in S$. We give in \cref{ex:idl-equiv} an example and a non-example
 of \kl{equivariant ideals}.
-
-\arka{Maybe we can simply assume $\group$ is a subgroup of bijections of
-$\Indets$. Then we can also use the notation $\pi(x)$ which is less confusing
-than $\pi\cdot x$} \todo[inline]{In my opinion, the new notation is more
-  confusing because now $p(x)$ is very diffrent from $\pi(x)$: one is
-polynomial evaluation/substitution, the other is a group action.
-}
-
-\arka{But $\cdot$ is also product}
 
 \begin{example}
     \label{ex:idl-equiv}
@@ -155,7 +147,7 @@ polynomial evaluation/substitution, the other is a group action.
     $p \times r + q$ belongs to $S_0$. 
     Because $0$ is in $S_0$, we conclude that $S_0$ is an \kl{ideal}.
     Furthermore, if $\gelem \in \group$ and $p \in S_0$, then
-    the sum of the coefficients $\gelem \cdot p$ is exactly
+    the sum of the coefficients $\gelem(p)$ is exactly
     the sum of the coefficients of $p$, hence is $0$ too.
     This shows that $S_0$ is \kl(ideal){equivariant}.
 
@@ -163,13 +155,13 @@ polynomial evaluation/substitution, the other is a group action.
     is an ideal of $\poly{\K}{\Indets}$. This is not an \kl{equivariant ideal}:
     take any bijection $\gelem \in \group$ that does not map $x$ to $x$ (it
     exists because $\Indets$ is infinite and $\group$ is all permutations),
-    then $\gelem \cdot x$ is not a multiple of $x$, and therefore does 
+    then $\gelem(x)$ is not a multiple of $x$, and therefore does 
     not belong to the ideal.
 \end{proof}
 
 \AP An \kl{equivariant set} is said to be \intro{orbit finite} if it is the
 union of finitely many \intro{orbits} under the action of $\group$. We denote
-$\intro*\orbit[\group]{E}$ for the set of all elements $\gelem \cdot x$ for
+$\intro*\orbit[\group]{E}$ for the set of all elements $\gelem(x)$ for
 $\gelem \in \group$ and $x \in E$. Equivalently, an \reintro{orbit finite set}
 is a set of the form $\orbit[\group]{E}$ for some finite set $E$. Not every
 \kl{equivariant subset} is \kl{orbit finite}, as shown in
@@ -196,10 +188,10 @@ book for a more comprehensive introduction to the topic.
 \AP A function $f \colon X \to Y$ between two sets $X$ and $Y$ equipped with
 actions $\group \actson X$ and $\group \actson Y$ is said to be
 \intro(func){equivariant} if for all $\gelem \in \group$ and $x \in X$, we have
-$f(\gelem \cdot x) = \gelem \cdot f(x)$. For instance, the
+$f(\gelem(x)) = \gelem(f(x))$. For instance, the
 \kl(monomial){domain} of a monomial is an \kl{equivariant function} if $\gelem
-\in \group$, then $\gelem \cdot \dom(\monelt[m]) = \dom(\gelem \cdot
-\monelt[m])$. Let us point out that the image of an \kl{orbit finite set} under
+\in \group$, then $\gelem(\dom(\monelt[m])) = \dom(\gelem(\monelt[m]))$.
+Let us point out that the image of an \kl{orbit finite set} under
 an \kl{equivariant function} is \kl{orbit finite}, and that the algorithms that
 we will develop in this paper will all be \kl(func){equivariant}.
 
@@ -219,12 +211,11 @@ the set $E^n$ is \kl{orbit finite} under the action of $\group$ on $\Indets^n$.
 
 A group action $\group \actson \X$ is said to be \intro(ord){compatible}
 with an ordering $\leq$ on $\X$ if for all $\gelem \in \group$ and $x,y \in
-\X$, we have $x \leq y$ if and only if $\gelem \cdot x \leq \gelem \cdot y$.
+\X$, we have $x \leq y$ if and only if $\gelem(x) \leq \gelem(y)$.
 Let us point out that in this case, $\revlexleq$ is also \kl(ord){compatible} with
 the action of $\group$ on $\mon{\X}$, i.e. for all $\gelem \in \group$ and
 monomials $\monelt[m], \monelt[n] \in \mon{\X}$, we have $\monelt[m] \revlexleq
-\monelt[n]$ if and only if $\gelem \cdot \monelt[m] \revlexleq \gelem \cdot
-\monelt[n]$.
+\monelt[n]$ if and only if $\gelem(\monelt[m]) \revlexleq \gelem(\monelt[n])$.
 Our \intro{computability assumptions} on the tuple $(\Indets, \group,
 \leq)$ will therefore be that $\group$ acts \kl{effectively oligomorphic} on
 $\Indets$, and that its action is \kl(ord){compatible} with the ordering $\leq$
@@ -254,7 +245,7 @@ that the set  $\mon{\X}$  of monomials is a \kl{well-quasi-ordering} when
 endowed with the \intro{divisibility up-to $\group$} relation
 ($\intro*\gdivleq$), which is defined as follows: for $\monelt_1, \monelt_2 \in
 \mon{\X}$, we write $\monelt_1 \gdivleq \monelt_2$ if there exists $\gelem \in
-\group$ such that $\monelt_1$ \kl{divides} $\gelem \cdot \monelt_2$. This
+\group$ such that $\monelt_1$ \kl{divides} $\gelem(\monelt_2)$. This
 relation also extends to monomials that are functions from $\Indets$ to
 $(Y,\leq)$ with finite support, where $Y$ is any partially ordered set. We say
 that a set $\Basis \subseteq \poly{\K}{\X}$ is an \intro{equivariant Gr\"{o}bner
