@@ -1,128 +1,97 @@
 % LTeX: language=en
-%%!TEX root = ../atomic.asmart.tex
+%!TEX root = ../atomic.asmart.tex
 %
-%In this section, we are interested in the consequences of our decidability
-%results. First, we will provide numerous examples of sets of indeterminates
-%that satisfy our \kl{computability assumptions} as well as our
-%\kl{well-quasi-ordering} conditions. Then, we will discuss how our results can
-%be applied to solve various decidability problems in theoretical computer
-%science.
-%
-%\todo[inline]{for arka: integrate these examples}
-%\begin{example}
-%  \label{ex:q-is-super-wqo}
-%  The set $(\mon[Y]{\Indets_\calQ}, \gdivleq)$ is a \kl{well-quasi-ordering} whenever $Y$ is
-%  one, and in particular $\Indets_\calQ$ satisfies the computability assumptions and
-%  the termination assumptions of both \cref{thm:compute-egb}
-%  and
-%  \cref{thm:decide-equiv-ideal-mem}.
-%\end{example}
-%\begin{proof}
-%  Let $\seqof{\monelt_i}[i \in \N]$ be a sequence of monomials in
-%  $\mon[Y]{\Indets_\calQ}$. Let us write each monomial $\monelt_i$ as
-%  a finite word $w_i$ over the alphabet $Y$, by writing all the exponents in the order 
-%  prescribed by the indeterminates.
-%  Because $Y$ is a \kl{well-quasi-ordering}, the set of all finite words over $Y$ is
-%  \kl{well-quasi-ordered} by the \emph{scattered subword} relation \cite{HIG52}.
-%  Now, if $w_i$ is a scattered subword of $w_j$, then
-%  $\monelt_i \gdivleq \monelt_j$, by choosing a suitable $\gelem \in \group$.
-%\end{proof}
-%
-%\begin{example}
-%  \label{ex:z-is-not-wqo}
-%  The set $(\mon[Y]{\Indets_\Z}, \gdivleq)$ is not a \kl{well-quasi-ordering} whenever $Y$ is
-%  contains two distinct elements.
-%  In particular, $\Indets_\Z$ does not satisfy the termination assumptions of
-%  \cref{thm:compute-egb} and \cref{thm:decide-equiv-ideal-mem}.
-%\end{example}
-%\begin{proof}
-%  Assume that $Y$ has two distinct elements $a$ and $b$, and let us assume without loss of generality
-%  that $a \leq b$. The sequence of monomials 
-%  $\monelt_i \defined x_1^{b} x_2^{a} \cdots x_{i-1}^{a} x_i^{b}$
-%  forms an infinite antichain in $(\mon[Y]{\Indets_\Z}, \gdivleq)$.
-%  Indeed, if $\monelt_i \gdivleq \monelt_j$ for some $i < j$, then
-%  without loss of generality, $\gelem_i (x_1) = x_1$, and 
-%  $\gelem_i (x_i) = x_j$, because these are the only ones that can be 
-%  equipped with a large enough exponent.
-%  Therefore, $\gelem_i = \mathrm{id}$ since the group only contains translations.
-%  However, this implies that the exponent of $x_j$ in $\monelt_j$ is at most $a$,
-%  which contradicts the fact that it is $b$.
-%\end{proof}
-
 \section{Examples of group actions}\label{sec:act ex}
-%
-Many of the common examples of group actions $\group\actson\Indets$ are of the form where $\Indets$ is a set with some structure, described by some relations and functions on that set,
-and $\group$ is the group $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve and reflect the structure) of $\Indets$.
-A monomial $\monelt[p] \in \mon[Q]{\Indets}$ can be thought as a labelling of a finite substructure of $\X$ using elements of $Y$.
-If the structure $\Indets$ is \intro{homogenous} :
-isomorphism between finite induced substructures extends to an automorphism of the whole structure,
-then $\gdivleq$ is same as embedding of labelled finite induced substructures of $\X$.
-\footnote{
-We refer the reader to \cite[Chapter 7]{BOJAN16inf} and \cite{homsurvey} for more details on homogeneous structures.}
-We give some examples of homogeneous structures and discuss whether they satisfy the WQO condition of \Cref{thm:compute-egb} :
-$(\mon[Y]{\Indets},\gdivleq[\aut{\Indets}])$ is a \kl{WQO} for every \kl{WQO} $Y$. 
-%
-\begin{example}\label{ex:eq atoms}
-Let $\A$ be an infinite set without any additional structure other than the equality relation.
-%Then $\aut{\A}$ is the set of all bijections of the set $\A$.
-Up to isomorphism, finite induced substructures of $\A$ are finite sets,
-monomials in $\mon[Y]{\A}$ are finite multisets of elements in $Y$,
-and $\gdivleq[\aut{\A}]$ is the multiset ordering \cite[Section 1.5]{SCSC17},
+
+\AP Many of the common examples of group actions $\group\actson\Indets$ are
+obtained by considering $\Indets$  as set with some structure, described by
+some relations and functions on that set, and $\group$ is the group
+$\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve and
+reflect the structure) of $\Indets$. A monomial $\monelt[p] \in
+\mon[Q]{\Indets}$ can be thought as a labelling of a finite substructure of
+$\X$ using elements of $Y$. If the structure $\Indets$ is \intro{homogenous},
+that is, if isomorphisms between finite induced substructures extends to
+automorphisms of the whole structure, then $\gdivleq$ is same as embedding of
+labelled finite induced substructures of $\X$. \footnote{ We refer the reader
+to \cite[Chapter 7]{BOJAN16inf} and \cite{homsurvey} for more details on
+homogeneous structures.} Let us now give some examples of such structures and
+whether they satisfy our \kl{computability assumptions}, and whether the
+\kl{divisibility relation up-to-$\group$} is a \kl{well-quasi-ordering} for
+\kl{generalised monomials}.
+
+
+\begin{example}[Equality Atoms]
+  \label{ex:eq atoms}
+Let $\intro*\EqualityAtoms$ be an infinite set without any additional structure other than the equality relation.
+Up to isomorphism, finite induced substructures of $\EqualityAtoms$ are finite sets,
+monomials in $\mon[Y]{\EqualityAtoms}$ are finite multisets of elements in $Y$,
+and $\gdivleq[\aut{\EqualityAtoms}]$ is the multiset ordering \cite[Section 1.5]{SCSC17},
 which is a \kl{WQO} \cite[Corollary 1.21]{SCSC17}.
 \end{example}
-%
-\begin{example}\label{ex:dlo}
-Let $\calQ$ be the set of rational numbers ordered by the usual ordering.
-Note that under this ordering, $\calQ$ is a dense linear order without endpoints.
-We write $\calQ$ instead of $\Q$ to emphasise that we use its elements as indeterminates and not as coefficients of polynomials. 
-Up to isomorphism, finite induced substructures of $\calQ$ are finite linear orders,
-monomials in $\mon[Y]{\calQ}$ are words in $Y^*$ (i.e.\ finite linear order labelled with elements of $Y$)
-and $\gdivleq[\aut{\calQ}]$ is the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \cite{HIG52}.
+
+\begin{example}[Dense linear order]
+  \label{ex:dlo}
+Let $\intro*\OrderAtoms$ be the set of rational numbers ordered by the usual ordering.
+Note that under this ordering, $\OrderAtoms$ is a dense linear order without endpoints.
+We write $\OrderAtoms$ instead of $\Q$ to emphasise that we use its elements as indeterminates and not as coefficients of polynomials. 
+Up to isomorphism, finite induced substructures of $\OrderAtoms$ are finite linear orders,
+monomials in $\mon[Y]{\OrderAtoms}$ are words in $Y^*$ (i.e.\ finite linear order labelled with elements of $Y$)
+and $\gdivleq[\aut{\OrderAtoms}]$ is the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \cite{HIG52}.
 \end{example}
-%
-\begin{example}\label{ex:rado}
-Let $\G$ be the Rado graph (\cite[Section 7.3.1]{BOJAN16inf},\cite[Example 2.2.1]{homsurvey}).
+
+\begin{example}[The Rado graph]
+  \label{ex:rado}
+Let $\intro*\RadoAtoms$ be the Rado graph (\cite[Section 7.3.1]{BOJAN16inf},\cite[Example 2.2.1]{homsurvey}).
 Up to isomorphism,
-finite induced substructures of $\G$ are finite undirected graphs,
-monomials in $\mon[Y]{\G}$ are graphs with vertices labelled with $Y$,
-and $\gdivleq[\aut{\G}]$ is the labelled induced subgraph ordering even when $Y$ is a singleton.
+finite induced substructures of $\RadoAtoms$ are finite undirected graphs,
+monomials in $\mon[Y]{\RadoAtoms}$ are graphs with vertices labelled with $Y$,
+and $\gdivleq[\aut{\RadoAtoms}]$ is the labelled induced subgraph ordering even when $Y$ is a singleton.
 For example, cycles of length more than three form an infinite antichain.
 \end{example}
-%
-\begin{example}\label{ex:bit vector}
-Let $\V$ be an infinite dimensional vector space over $\ftwo$.
+
+\begin{example}[Infinite dimensional vector space]
+  \label{ex:bit vector}
+Let $\intro*\BitVectorAtoms$ be an infinite dimensional vector space over $\ftwo$.
 Up to isomorphism,
-finite induced substructures of $\V$ are finite dimensional vector spaces over $\ftwo$.
+finite induced substructures of $\BitVectorAtoms$ are finite dimensional vector spaces over $\ftwo$.
 These are well-quasi-ordered in the absence of labelling.
 However, even when $Y = \N$,
-$(\mon[Y]{\V},\gdivleq[\aut{\V}])$ is not a \kl{WQO} as illustrated by the following antichain.
-Let $\{v_1,v_2,\dots\}\subseteq \V$ be a countable set of linearly independent vectors in $\V$.
-Let $\oplus$ denote the addition operation of $\V$.
+$(\mon[Y]{\BitVectorAtoms},\gdivleq[\aut{\BitVectorAtoms}])$ is not a \kl{WQO} as illustrated by the following antichain.
+Let $\{v_1,v_2,\dots\}\subseteq \BitVectorAtoms$ be a countable set of linearly independent vectors in $\BitVectorAtoms$.
+Let $\oplus$ denote the addition operation of $\BitVectorAtoms$.
 For $n \geq 3$ define the monomial 
 $
 \monelt[p]_n \defined v^2_1 \cdot \ldots \cdot v^2_n \cdot (v_1\oplus v_2) \cdot (v_2\oplus v_3) \ldots \cdot (v_{n-1}\oplus v_n) \cdot (v_{n}\oplus v_1)
 $.
 Then, $\setof{\monelt[p]_n}{n = 3,4,\dots}$ forms an infinite antichain.
 \end{example}
-%
-\arka{write that now we present a structure for which it was not shown}
-%
-\begin{example}\label{ex:dense tree}
-Let $\T$ denote the universal countable dense meet-tree
-\cite[Page 2]{KRS21}\cite[Section 7.3.3]{BOJAN16inf}.
-Note that the tree structure is given by the \intro{meet} operation (and not by edges),
-which takes as input a pair of nodes of $\T$ and returns their closest common ancestor.
-For a subset $S\subset \T$,
-define its \intro{closure} to be the smallest subtree of $\T$ containing $S$.
-Note that the \kl{closure} of a finite subset is finite. 
-Up to isomorphism, finite induced substructures of $\calQ$ are finite meet-trees.
-monomials in $\mon[Y]{\calQ}$ are finite meet-trees labelled with $1 + Y$.
+
+The previous \cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector}
+are
+well known examples in the theory of \emph{sets with atoms} \cite{BOJAN16inf}.
+Let us now give a new example of \kl{well-quasi-ordered} \kl{generalised
+monomials}, by extending \Cref{ex:dlo} that
+relied on Higman's lemma \cite{HIG52} via Kruskal's tree theorem
+\cite{Kruskal60}.
+
+
+\begin{example}[Dense Tree]
+  \label{ex:dense tree}
+Let $\intro*\TreeAtoms$ denote the universal countable dense meet-tree, as
+defined in 
+\cite[Page 2]{KRS21} or \cite[Section 7.3.3]{BOJAN16inf}.
+Note that the tree structure is given by the \intro{least common ancestor} (\reintro{meet})
+operation, and not by its edges.
+For a subset $S\subset \TreeAtoms$,
+define its \intro(meet-tree){closure} to be the smallest subtree of $\TreeAtoms$ containing $S$.
+Up to isomorphism, finite induced substructures of $\TreeAtoms$ are finite meet-trees.
+Monomials in $\mon[Y]{\TreeAtoms}$ are finite meet-trees labelled with $1 + Y$.
 Here $1 + Y$ is the \kl{WQO} containing one more element than $Y$ which is incomparable to elements in $Y$,
-and is used to label nodes that are in the \kl{closure} of the set of variable of a monomial, but not in the monomial itself.
-The relation $\gdivleq[\aut{\T}]$ is the embedding of labelled meet-trees,
+and is used to label nodes that are in the \kl(meet-tree){closure} of the set of variable of a monomial, but not in the monomial itself.
+The relation $\gdivleq[\aut{\TreeAtoms}]$ is the embedding of labelled meet-trees,
 which is a \kl{WQO} due to Kruskal's tree theorem \cite{Kruskal60}.
 \end{example}
-%
+
 Even though the above examples using \kl{homogeneous} 
 structures nicely illustrate the correspondance between 
 monomials and labelled finite substructures, 
