@@ -106,58 +106,64 @@ By definition, the action $\aut{\calZ} \actson \calZ$ preserves the linear order
 However, $(\mon[Y]{\calZ}, \gdivleq[\aut{\calZ}])$ is not a \kl{WQO} even when $Y$ is a singleton.
 An example of an infinite antichain is the set $\setof{a b}{b\in\calZ\setminus\{a\}}$, for any fixed $a\in\calZ$.
 \end{example}
-%
-%\paragraph{On reducts of structures.} \AP Let $\sigma$ be a finite relational
-%signature, and $\tau \subseteq \sigma$ be another finite relational signature.
-%Let $\mathbb{A}, \mathbb{B}$ be respectively a $\sigma$ and a $\tau$ structure. We say
-%that \intro{$\mathbb{B}$ is a reduct of $\mathbb{A}$} when $\mathbb{B}$ is
-%obtained from $\mathbb{A}$ by keeping the same universe, and relations. It was noted by \cite[Lemma 13]{GHOLAS24} that in
-%this case, the \kl{equivariant Hilbert basis property} transfers from
-%$\mathbb{A}$ to $\mathbb{B}$. Let us briefly argue that this transfer holds too
-%for our \cref{thm:decide-equiv-ideal-mem,thm:compute-egb}.
-%
-\paragraph{Reducts}
-%
-A group action $\group\actson\Indets$ is said to be a \intro{reduct} of another group action $\calH\actson\Y$ if there exists a bijection $f : \Indets\to\Y$ such that $f^{-1}\circ\pi\circ f \in\group$ for every $\pi\in\calH$.
-We write it in symbols as
-\[
-\group\actson\Indets \reduct{f} \calH\actson\Y \ .
-\]
-It is called a \intro{effective reduct} if $f$ is \kl{effective}.
-%
-\begin{lemma}\label{lem:reducts-equiv-hilbert}
-If $\group\actson\Indets \reduct{f} \calH\actson\Y$ then:
-\begin{enumerate}
-\item for every $\group$-equivariant ideal $\idl[I]\subseteq\poly{\K}{\X}$,
-$f(\idl[I])\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant ideal.
-\item if $\Basis\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant Gr\"{o}bner basis then $\orbit[\group]{f^{-1}(\Basis)}$ is a $\group$-equivariant Gr\"{o}bner basis.
-\end{enumerate}
-\end{lemma}
-%
-Call an action $\group\actson\Indets$ \intro{nicely orderable} if it is an \kl{effective reduct} of some action computably oligomorphic action $\calH\actson\Y$ that satisfies the conditions mentioned in \Cref{thm:compute-egb},
-i.e.\
-$\calH\actson\Y$ preserves an effective linear order and $\gdivleq[\calH]$ is a \kl{WQO}.
-As an immediate corollary of \Cref{thm:compute-egb}, \Cref{lem:reducts-equiv-hilbert} we get
-%
-\begin{corollary}\label{cor:egb}
-If $\group\actson\Indets$ is \kl{nicely orderable} then one can compute \kl{equivariant Gröbner bases} of \kl{equivariant ideals}.
-\end{corollary}
-%
 
-\AP 
-%
+\paragraph{Reducts} \AP As mentioned in the introduction, some examples of
+group actions $\group\actson\Indets$ do not preserve a linear order on
+$\Indets$, such as the set $\EqualityAtoms$ of indistinguishable names without
+any relations. However, there are techniques that allow us to reduce the
+problem of computing \kl{equivariant Gröbner bases} to the case where the
+action preserves a linear ordering, using what is called a \kl{reduct} of the
+action. A group action $\group\actson\Indets$ is said to be a \intro{reduct} of
+another group action $\calH\actson\Y$ if there exists a bijection $f \colon
+\Indets\to\Y$ such that $f^{-1}\circ \gelem \circ f \in\group$ for every
+$\gelem \in \calH$. It is called an \intro{effective reduct} if $f$ is
+computable.
+
+\begin{lemma}\label{lem:reducts-equiv-hilbert}
+  Let $\group\actson\Indets$ be an \kl{effective reduct} of $\calH\actson\Y$ 
+  via a computable function $f\colon\Indets\to\Y$. Then,
+  \begin{enumerate}
+    \item for every $\group$-equivariant ideal $\idl[I]\subseteq\poly{\K}{\X}$,
+    $f(\idl[I])\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant ideal,
+    \item if $\Basis\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant Gr\"{o}bner basis then $\orbit[\group]{f^{-1}(\Basis)}$ is a $\group$-equivariant Gr\"{o}bner basis.
+  \end{enumerate}
+\end{lemma}
+
+\AP We say that an action $\group\actson\Indets$ is \intro{nicely orderable} if
+it is an \kl{effective reduct} of some  \kl{effectively oligomorphic} action
+$\calH\actson\Y$ that satisfies the conditions mentioned in
+\Cref{thm:compute-egb},
+i.e.\ $\calH\actson\Y$ preserves an effective linear order and
+$\gdivleq[\calH]$ is a \kl{WQO}. As an immediate corollary of
+\Cref{thm:compute-egb},
+\Cref{lem:reducts-equiv-hilbert} we get the desired \cref{cor:egb}.
+  
+\begin{corollary}\label{cor:egb} If $\group\actson\Indets$ is
+  \kl{nicely orderable} then
+  one can compute an \kl{equivariant Gröbner basis} of any 
+  \kl{equivariant ideal} given by an \kl{orbit finite} set of
+  generators.
+\end{corollary}
+
 \begin{remark}\label{rem:reduct}
-\Cref{lem:reducts-equiv-hilbert} implies that one can apply our results to an action $\group\actson\Indets$ that does not preserve a linear order,
-if it is a reduct of some another action $\calH\actson\Indets$ which preserves a linear order.
-For example, $\aut{\A}\actson\A$ is a reduct of $\aut{\calQ}\actson\calQ$ assuming $\A$ is countable.
-Let $\T_<$ be the countable dense-meet tree with a lexicographic ordering \cite[Remark 6.14]{KRS21}.
-\footnote{The remark says that finite meet-trees expanded with a lexicographic ordering is a Fra\"{i}sse class,
-from which it follows that there exists a Fra\"{i}sse limit $\T_<$ for that class.}
-Let $\group$ be the group of bijections of $\T_<$ which do not necessarily preserve the lexicographic ordering.
-Then $\group\actson\T_<$ is isomorphic to $\aut{\T}\actson\T$,
-and hence $\aut{\T}\actson\T$ is a reduct of $\aut{\T_<}\actson\T_<$.
+
+\Cref{lem:reducts-equiv-hilbert} implies that one can apply our
+results to an action $\group\actson\Indets$ that does not preserve a linear
+order, as soon as it is  a reduct of some another action $\calH\actson\Indets$ which
+does preserves a linear order. 
+
+For example, $\aut{\EqualityAtoms}\actson\EqualityAtoms$ is a reduct of
+$\aut{\OrderAtoms}\actson\OrderAtoms$ assuming $\EqualityAtoms$ is countable.
+Similarly, let $\T_<$ be the countable dense-meet tree with a lexicographic
+ordering, as defined in \cite[Remark 6.14]{KRS21}.\footnote{The remark says
+that finite meet-trees expanded with a lexicographic ordering is a Fra\"{i}sse
+class, from which it follows that there exists a Fra\"{i}sse limit $\T_<$ for
+that class.} Let $\group$ be the group of bijections of $\T_<$ which do not
+necessarily preserve the lexicographic ordering. Then $\group\actson\T_<$ is
+isomorphic to $\aut{\TreeAtoms}\actson\TreeAtoms$, and hence
+$\aut{\TreeAtoms}\actson\TreeAtoms$ is a reduct of $\aut{\T_<}\actson\T_<$.
 \end{remark}
-%
+
 \paragraph{Effective oligomorphicity}
 %
 \cite[Theorem 7.6]{BOJAN16inf} implies that the structures mentioned in  \Cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree,rem:reduct} are \kl{oligomorphic}.
@@ -168,240 +174,3 @@ For example, $\A$ can be identified with the set of strings over a fixed finite 
 Elements of $\calQ$ can be represented in the usual way.
 A representation of elements of $\T$ is given in \cite[Page 244-245]{BOJAN16inf}.
 \cite{CompFraisse} gives a general way to represent Fra\"{i}sse limits.
-%
-\section{Applications}
-
-\paragraph{Polynomial computations.} \AP The fact that (finite control) systems
-performing polynomial computations can be verified follows from the theory of
-\kl{Gröbner bases} on finitely many indeterminates \cite{MULSEI02,BEDUSHWO17}.
-There were also numerous applications to automata theory, such as deciding
-whether a weighted automaton could be determinised (resp. desambiguated)
-\cite{BESM23,PUSM24}. We refer the readers to a nice survey recapitulating the
-successes of the so-called ``Hilbert method'' automata theory \cite{BOJAN19}. A
-natural consequence of the effective computations of \kl{equivariant Gröbner
-bases} is that one can apply the same decision techniques to \emph{orbit finite
-polynomial computations}. For simplicity and clarity, we will focus on
-\kl{polynomial automata} without states or zero-tests \cite{BEDUSHWO17}, but
-the same reasoning would apply to more general systems as we will discuss in
-\cref{rem:topological-wsts}.
-
-
-\AP Before discussing the case of orbit finite polynomial automata, let us
-recall in \cref{ex:polynomial-automata} the setting of \kl{polynomial automata}
-in the classical case, as studied by \cite{BEDUSHWO17}, with techniques that
-dates back to \cite{MULSEI02}. A \intro{polynomial automaton} is a tuple $A
-\defined (Q, \Sigma, \delta, q_0, F)$, where $Q = \K^n$ for some finite $n \in
-\N$, $\Sigma$ is a finite alphabet, $\delta \colon Q \times \Sigma \to Q$ is a
-transition function such that $\delta(\cdot,a)_i$ is a polynomial in the
-indeterminates $q_1, \dots, q_n$ for every $a \in \Sigma$ and every $i \in
-\set{1, \dots, n}$, $q_0 \in Q$ is the initial state, and $F \colon Q \to \K$
-is a polynomial function describing the final result of the automaton. The
-\intro{zeroness problem for polynomial automata} is the following decision
-problem: given a \kl{polynomial automaton} $A$, is it true that for all words
-$w \in \Sigma^*$, the polynomial $F(\delta^*(q_0, w))$ is zero? It is known
-that the \kl{zeroness problem for polynomial automata} is decidable
-\cite{BEDUSHWO17}, using the theory of \kl{Gröbner bases} on finitely many
-indeterminates. Let us now propose a new model of computation called \kl{orbit
-finite polynomial automata}, and prove an analogue decidability result.
-
-\AP Let us fix a group $\group$ that acts on the set of indeterminates
-$\Indets$, and on an alphabet $\Sigma$ in an \kl{effectively oligomorphic}
-fashion. We write $\K^{(\Indets)}$ for the set of finitely supported functions
-from $\Indets$ to $\K$, i.e., the set of functions $f \colon \Indets \to \K$
-such that there exists a finite set $S \subseteq \Indets$ such that $f(x) = 0$
-for every $x \notin S$. Given an element $f \in \K^{(\Indets)}$, and given a
-polynomial $p \in \poly{\K}{\Indets}$, we write $p(f)$ for the evaluation of
-$p$ on $f$.
-
-\todo[inline]{for arka: we never defined finitely supported functions.}
-
-\begin{definition}
-  \label{def:orbit-finite-polynomial-automaton}
-  An \reintro{orbit finite polynomial
-  automaton} is a tuple $A \defined (Q, \Sigma, \delta, q_0, F)$, where $Q =
-  \K^{(\Indets)}$, $\Sigma$ is an \kl{orbit finite} alphabet, $\delta \colon
-  \Sigma \to (\Indets \to \poly{\K}{\Indets})$ is a \kl(func){finitely supported}
-  polynomial update function, and $F \in \poly{\K}{\Indets}$ is a polynomial
-  computing the result of the automaton. 
-
-  Given a letter $a \in \Sigma$ and a
-  state $q \in Q$, the update $\delta^*(q,a)$ is defined as the function from
-  $\Indets$ to $\K$ defined by $\delta^*(q,a) \colon x \mapsto \delta(a,x)[ q ]$,
-  which is well-defined because $\delta(a,x)$ is a \kl{finitely supported}
-  polynomial. The update function is naturally extended to words. Finally, the
-  output of an \kl{orbit finite polynomial automaton} on a word $w \in \Sigma^*$
-  is defined as $F(\delta^*(q_0, w))$.
-\end{definition}
-
-
-\begin{example}
-  \label{ex:orbit-finite-polynomial-automata}
-  Let $\Indets = \calQ$, and let $\group$ be the group of all
-  order-preserving bijections of $\calQ$.
-  Let $\Sigma \defined \calQ \times \calQ$.
-  Then, the following function are computable by 
-  \kl{orbit finite polynomial automata}:
-  the number $\mathrm{inc}(w)$ of letters $(a,b)$ such that $a < b$ in a word $w \in \Sigma^*$,
-  the number $\mathrm{dec}(w)$ of letters $(a,b)$ such that $a > b$ in a word $w \in \Sigma^*$,
-  and the number $(\mathrm{inc}(w) - \mathrm{dec}(w))^2$.
-\end{example}
-
-\AP As for \kl{polynomial automata}, the \intro(ofpa){zeroness problem} for
-orbit finite polynomial automata is the following decision problem: decide if
-for every input word $w$, the output $F(\delta^*(q_0, w))$ is zero. Solving the
-\kl(ofpa){zeroness problem} for orbit finite polynomial automata allows us to
-decide the equality of two such automata, by computing their difference. Let us
-prove that the \kl(ofpa){zeroness problem} is decidable for \kl{orbit finite
-polynomial automata}.
-
-\todo[inline]{the proof of the following is incorrect and I do not know
-  how to fix it easily}
-
-\begin{theorem}
-  \label{cor:orbit-finite-polynomial-automata-zeroness}
-  Let $\Indets$ be a set of indeterminates that satisfies the
-  \kl{computability assumptions} and such that $(\mon[Y]{\Indets}, \gdivleq)$ is a
-  \kl{well-quasi-ordering}, for every \kl{well-quasi-ordered} set $(Y, \leq)$.
-  Then, the \kl(ofpa){zeroness problem} is decidable for all \kl{orbit finite polynomial automata}
-  with register names in $\Indets$, for every \kl{orbit finite} alphabet $\Sigma$,
-  that is \kl{effectively oligomorphic} with respect to the action of $\group$.
-\end{theorem}
-\begin{proof}
-  Let $A = (Q, \Sigma, \delta, q_0, F)$ be an \kl{orbit finite polynomial
-  automaton}. Following the classical \emph{backward procedure} for such
-  systems, we will compute a sequence of sets $E_0 \defined \setof{ q \in Q }{
-  F(q) = 0 }$, and $E_{i+1} \defined \mathrm{pre}^\forall(E_i) \cap E_i$, where
-  $\mathrm{pre}^\forall(E)$ is the set of states $q \in Q$ such that for every
-  $a \in \Sigma$, $\delta^*(q,a) \in E$. We will prove that the sequence of
-  sets $E_i$ stabilises, and that it is computable. As an immediate
-  consequence, it suffices to check that $q_0 \in E_{\infty}$, where $E_\infty$
-  is the limit of the sequence $(E_i)_{i \in \N}$, to decide the
-  \kl(ofpa){zeroness problem}.
-
-  The only idea of the proof is to notice that all the sets $E_i$ are
-  representable as zero-sets of \kl{equivariant ideals} in
-  $\poly{\K}{\Indets}$, allowing us to leverage the effective computations of
-  \cref{cor:equivariant-ideals-computations}. Given a set $H$ of polynomials,
-  we write $\mathcal{V}(H)$ the collections of states $q \in Q$ such that $p(q)
-  = 0$ for all $p \in H$.
-  It is easy to see that $E_0 = \mathcal{V}(\set{F}) = \mathcal{V}(\idl_0)$,
-  where $\idl_0$ is the \kl{equivariant ideal} generated by $F$. 
-  Furthermore, assuming that $E_i = \mathcal{V}(\idl_i)$, we can
-  see that 
-  \begin{align*}
-    \mathrm{pre}^\forall(E_i) 
-    & = \setof{ q \in Q }{ \forall a \in \Sigma, \delta^*(q,a) \in E_i } \\
-    & = \setof{ q \in Q }{ \forall a \in \Sigma, \forall p \in \idl_i, p(\delta^*(q,a)) = 0 } \\
-    & = \setof{ q \in Q }{ \forall p' \in \idl[J], p'(q) = 0 }
-  \end{align*}
-  Where, the \kl{equivariant ideal} $\idl[J]$ is generated by the
-  polynomials $\mathrm{pullback}(p,a) \defined p [ x \mapsto \delta(a)(x)]$
-  for every pair $(p, a) \in \idl_i \times \Sigma$. 
-  As a consequence, we have $E_{i+1} = \mathcal{V}(\idl_{i+1})$, where
-  $\idl_{i+1} = \idl_i + \idl[J]$.
-
-  Because the sequence $\seqof{ \idl_i }[ i \in \N]$ is increasing, and thanks
-  to the \kl{equivariant Hilbert basis property} of $\poly{\K}{\Indets}$, there
-  exists an $n_0 \in \N$ such that $\idl_{n_0} = \idl_{n_0 + 1} = \idl_{n_0 +
-  2} = \cdots$. In particular, we do have $E_{n_0} = E_{n_0 + 1} = E_{n_0 + 2}
-  = \cdots$.
-
-  Let us argue that we can compute the sequence $\idl_i$ effectively.
-  First,  $\idl_0 = \EqIdlGen{F}$ is finitely represented.
-  Now, 
-  given an \kl{equivariant ideal} $\idl$, represented by an \kl{orbit finite}
-  set of generators $H$,
-  we can compute the \kl{equivariant ideal} $\idl[J]$ generated by the
-  polynomials $\mathrm{pullback}(p,a) \defined p [ x_i \mapsto \delta(a)(x_i)]$
-  for every pair $(p, a) \in H \times \Sigma$. Indeed, $H \times \Sigma$ is
-  \kl{orbit finite} because the action of $\group$ on $\Indets$ is
-  \kl{effectively oligomorphic}, and the function $\mathrm{pullback}$ is
-  computable and \kl(func){equivariant}: indeed, given $\gelem \in \group$, we can
-  show that
-  \begin{align*}
-    \gelem \cdot \mathrm{pullback}(p, a) & = 
-    \gelem \cdot (p [ x_i \mapsto \delta(a)(x_i)]) \\
-    & = p [ x_i \mapsto (\gelem \cdot \delta(a, x_i))] \\
-    & = p [ x_i \mapsto \delta(\gelem \cdot a, \gelem \cdot x_i))] \\
-    & = (\gelem \cdot p) [ x_i \mapsto \delta(\gelem \cdot a, x_i)] \\
-    & = \mathrm{pullback}(\gelem \cdot p, \gelem \cdot a).
-  \end{align*}
-  
-  Finally, one can detect when the sequence stabilises, by checking whether
-  $\idl_i = \idl_{i+1}$, which is decidable because the
-  \kl{equivariant ideal membership problem} is decidable 
-  by \cref{thm:compute-egb}.
-
-  To conclude, it remains to check whether $q_0 \in E_\infty$,
-  which amounts to check that $q_0 \in \mathcal{V}(\idl_\infty)$.
-  This is equivalent to checking whether for every element $p \in \Basis$
-  where $\Basis$ is an \kl{equivariant Gröbner basis} of $\idl_\infty$, we have
-  $p(q_0) = 0$, which can be done by enumerating relevant orbits.
-\end{proof}
-
-
-\begin{remark}
-  \label{rem:topological-wsts}
-  The notion of
-  \intro{topological well-structured transition system} was introduced by
-  Goubault-Larrecq in \cite{JGL07}, noticing that the pre-existing notion of
-  \kl{Noetherian space} could serve as a topological generalisation of
-  \kl{Noetherian rings} (where ideal-based method can be applied),
-  and 
-  \kl{well-quasi-orderings}, for which the celebrated decision procedures on
-  \kl{well-structured transition systems} can be applied \cite{ABDU96}. In particular,
-  Goubault-Larrecq used such systems to verify properties of \emph{polynomial
-  programs} computing over the complex numbers, that can communicate over lossy
-  channels using a finite alphabet \cite{JGL10}. 
-  Because of \cref{cor:equivariant-ideals-computations}, we do have an 
-  effective way to compute on the topological spaces at hand, 
-  and therefore we can apply the theory of
-  \kl{topological well-structured transition systems} to verify systems
-  such as \emph{orbit finite polynomial automata communicating using a finite alphabet
-  over lossy channels}.
-  We refer to \cite[Chapter 9]{JGL13} for a survey on the theory of 
-  Noetherian spaces.
-\end{remark}
-
-\paragraph{Reachability problem of symmetric data Petri nets.}
-%
-Define a Petri net with data $\group\actson\Indets$ to be a Petri net which uses elements from $\Indets$ to label its tokens,
-and its transitions are invariant under the action of $\group$.
-As observed in \cite[Section 8]{GHOLAS24},
-a reversible data Petri nets are same as a monomial rewrite system.
-Using \Cref{thm:compute-egb}, \Cref{lem:reducts-equiv-hilbert} and \cite[Theorem 64]{GHOLAS24} we can get the following corollary:
-%
-\begin{corollary}\label{cor:rev data VAS}
-The reachability problem is decidable for reversible Petri net with data $\group\actson\Indets$ if $\group\actson\Indets$ is a reduct of $\calH\actson\Indets$ such that ...
-\end{corollary}
-%
-\begin{proof}
-The proof follows from the fact that for a \kl{WQO} $Y$ and finite set $P$,
-\[
-(\mon[Y]{\X{\times}P},\gdivleq)
-\cong
-(\mon[Y\times P]{\X},\gdivleq) \ ,
-\]
-where $Y\times P$ denotes the product of \kl{WQOs} $Y$ and $P$.
-
-\arka{did we define it?}
-\end{proof}
-%
-\paragraph{Orbit-finite systems of equations}
-%
-Let $\group\actson\Indets$ be a group action.
-Fix a field $\K$ and $n\in\N$.
-Let $\lin(\Indets^n)$ denote the vector space generated by $\Indets^n$ over $\K$.
-The action of $\group$ extends to the set $\Indets^n$ and then to $\lin(\Indets^n)$ in the obvious way.
-An \intro{orbit-finite system of equations} asks whether a given vector $u\in\lin(\Indets^n)$ is in the vector space generated by an \kl{orbit-finite} set of vectors $V$ in $\lin(\Indets^n)$ \cite[Section 9]{GHOLAS24}.
-Theorem 68 in \cite{GHOLAS24} reduces this problem to the \kl{equivariant ideal membership problem}.
-As a consequence of this reduction and \Cref{thm:compute-egb,lem:reducts-equiv-hilbert} we get that:
-\begin{corollary}\label{cor:lin solv}
-The solvability problem for orbit-finite systems of equations is decidable for the action $\group\actson\Indets$ if it is a reduct of an action $\calH\actson\Indets$ such that ...
-\end{corollary}
-%
-The above corollary extends 
-%
-\arka{Maybe we can define this property and have an explicit corollary for decidabilty of ideal membership}
-
-%
