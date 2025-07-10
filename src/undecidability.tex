@@ -166,9 +166,10 @@ undecidable, it is therefore enough to show that the \kl{monomial reachability
 problem} is undecidable. To that end, we will encode the Halting problem of a
 Turing machine. There are two main obstacles to overcome: first, the
 reversibility of the rewriting system, which can be (partially) solved by
-considering \emph{reversible} Turing machines; and second, the fact that the
-configurations of the Turing machine cannot staightforwardly be encoded as
-monomials due to the commutativity of the multiplication.
+considering \emph{deterministic} and \emph{reversible} Turing machines; and
+second, the fact that the configurations of the Turing machine cannot
+staightforwardly be encoded as monomials due to the commutativity of the
+multiplication.
 
 
 \paragraph{Structures Containing Paths.} \AP Let us assume for the rest of this
@@ -272,7 +273,7 @@ we will consider the following alphabet $\Gamma \defined \set{ \triangleleft,
   where $u \in (Q \uplus \Sigma \uplus \square)^n$.
 \end{lemma}
 \begin{proof}
-  Transitions of the reversible Turing machine using bounded tape size can be 
+  Transitions of the deterministic reversible Turing machine using bounded tape size can be 
   modelled as a reversible string rewriting system using finitely many rules 
   of the form $u \leftrightarrow v$, where $u$ and $v$ are words
   over $(Q \uplus \Sigma \uplus \square)$ having the same length $\ell$
