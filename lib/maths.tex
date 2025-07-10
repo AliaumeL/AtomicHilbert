@@ -163,6 +163,7 @@
 % Group actions
 %
 \newcommand{\group}{\mathcal{G}}
+\newcommand{\grp}[1][G]{\mathcal{#1}}
 \newcommand{\actson}{\curvearrowright}
 \NewDocumentCommand{\gelem}{ O{\pi} }{\mathgr{#1}}
 
@@ -188,8 +189,10 @@
 %
 \newcommand{\ordfin}[1]{\kl[\ordfin]{#1}}
 \newcommand{\om}{\kl[\om]{\omega}}
-\newcommand{\ordplus}{\mathrel{\kl[\ordplus]{+}}}
+\newcommand{\ordplus}{\mathbin{\kl[\ordplus]{+}}}
+\newcommand{\ordtimes}{\mathbin{\kl[\ordtimes]{\times}}}
 \knowledge{\ordplus}{notion}
+\knowledge{\ordtimes}{notion}
 \knowledge{\ordfin}{notion}
 \knowledge{\om}{notion}
 
@@ -267,3 +270,7 @@
 
 \newcommand{\TreeAtoms}{\kl[\TreeAtoms]{\mathcal{T}}}
 \knowledge{\TreeAtoms}{notion}
+
+
+\newcommand{\lexGroupAction}{\mathbin{\kl[\lexGroupAction]{\otimes}}}
+\knowledge{\lexGroupAction}{notion}

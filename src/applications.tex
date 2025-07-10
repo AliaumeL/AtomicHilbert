@@ -4,79 +4,94 @@
 \section{Applications}
 \label{sec:applications}
 
-\subsection{Stabilty}
+\subsection{Closure properties}
+\label{subsec:closure-properties}
 
-\arka{Stability has a meaning already in this context}
+In this section, we are interested in listing the operations on sets of
+indeterminates equipped with a group action that preserve our \kl{computability
+assumptions} and the \kl{well-quasi-ordering} property ensuring that our
+\cref{thm:compute-egb} can be applied. For the
+remainder of this section, we fix a pair of group actions $\grp[H] \actson \X$
+and $\grp[G] \actson \Y$, where $\X$ is equipped with a total order $<_{\X}$
+and $\Y$ is equipped with a total order $<_{\Y}$. The constructions that what
+we mention in this section were already studied in \cite{GHOLAS24}, via
+\cite[Example 10]{GHOLAS24} or \cite[Lemma 9]{GHOLAS24}, but they did not take
+into account our stronger requirement that $\gdivleq$ should be a
+\kl{well-quasi-ordering} for any \kl{well-quasi-ordered} set $(Y, \leq)$ of
+exponents on the monomials. We summarise in \cref{tab:closure-properties}
+the
+closure properties of the \kl{computability assumptions} and the
+\kl{well-quasi-ordering} property, and we give their definitions of the
+operations in \cref{def:union,def:product,def:nested product}.
 
-\todo[inline]{arka: create a new subsection: stability of our hypotheses, and place 
-  it after the section on effective oligomorphisms. Because right now you do not prove
-  that these constructions can be used to apply our results.
-  Also, a table would be nice. This way, we can separate definitions/examples
-  and the actual \emph{results} (that were all already proven somewhere else)
-  in a simple table}
+\begin{table}
+  \label{tab:closure-properties}
+\centering
+\caption{Closure properties of the \kl{computability assumptions} and \kl{well-quasi-ordering} property.}
+\begin{tabular}{l|l|l|l|l}
+  \toprule
+  \textbf{Name} &
+  \textbf{Group action} & \textbf{Effective} & \textbf{WQO} & \textbf{Reference} \\
+  \midrule
+  Sum & $\grp[G] \times \grp[H] \actson \X \ordplus \Y$ &  Yes & Yes & \cref{def:union} \\
+  Product &  $\grp[G] \times \grp[H] \actson \X \ordtimes \Y$ & Yes & No & \cref{def:product} \\
+  Lex. Product & $\grp[G] \lexGroupAction \grp[H] \actson \X \ordtimes \Y$ & Yes & Yes & \cref{def:nested product} \\
+  \bottomrule
+\end{tabular}
+\end{table}
 
-For the remainder of this section fix a pair of group actions
-$\G\actson\X$ and $\calH\actson\Y$
-%
-\begin{example}\label{ex:union}
-The group actions $\G\actson\X$ and $\calH\actson\Y$ can be extended to a group action $(\G\times\calH)\actson(\X\uplus\Y)$ by defining
-\[
-(\pi,\sigma)(z) =
-\begin{cases}
-\pi(z) & \text{if }z\in\X,\\
-\sigma(z) & \text{if }z\in \Y.
-\end{cases}
-\]
-\todo[inline]{what is the new linear ordering on the union?}
-If the actions $\G\actson\X$ and $\calH\actson\Y$ preserve linear orders then so does the actions $(\G\times\calH)\actson(\X\uplus\Y)$.
-Fix a \kl{WQO} $Q$.
-We have
-\[
-(\mon[Q]{\X\uplus\Y}, \gdivleq[\G\times\calH])
-\cong
-(\mon[Q]{\X}\times\mon[Q]{\Y}, \gdivleq[\G]\times\gdivleq[\calH])
-\]
-where $\gdivleq[\G]\times\gdivleq[\calH]$ is the product of the orders $\gdivleq[\G]$ and $\gdivleq[\calH]$ defined as
-\[
-(x,y) \gdivleq[\G]\times\gdivleq[\calH] (x',y')
-\quad
-\text{if}
-\quad
-x \gdivleq[\G] x' \text{ and } y \gdivleq[\calH] y' \ .
-\]
-This implies if $(\mon[Q]{\X},\gdivleq{\G}$ and $(\mon[Q]{\Y},\gdivleq{\calH}$ are \kl{WQOs},
-so is $(\mon[Q]{\X\uplus\Y}, \gdivleq[\G\times\calH])$ \cite[Lemma 1.5]{SCSC17}.
-\end{example}
-%
-\begin{example}[\protect{\textnormal{\cite[Example 10]{GHOLAS24}}}]\label{ex:product}
-We extend the group actions $\G\actson\X$ and $\calH\actson\Y$ to a group action $(\G \times \calH)\actson(\X\times\Y)$, as 
-\[
-(\pi,\sigma)((x,y)) = (\pi(x),\sigma(y)) \ .
-\]
-This group action corresponds to taking products of structures (\arka{citation}).
-$(\mon[Q]{\X\times\Y}, \gdivleq[\G \times \calH])$ is not a \kl{WQO} even when $Q$ is a singleton.
-For every element $q\in Q$ and two infinite sets $\{x_1,x_2,\dots\}\subseteq\X$ and $\{y_1,y_2,\dots\}\subseteq\Y$,
-the set
-\[
-\setof{(x_1,y_1)^q(x_1,y_2)^q(x_2,y_2)\dots(x_{n-1},y_n)^q(x_n,y_n)^q(x_n,y_0)^q}{
-n = 3,4,5,\dots} \subseteq \mon[Q]{\X\times\Y}
-\]
-is an infinite antichain.
-\end{example}
-%
-The above example shows that products of structures do not preserve our \kl{WQO} property.
-Now we show that the lexicographic product of structures
-(\cite[Section 2]{GHOLAS24}) preserve this property.
-\arka{any other citation?}
-%
-\begin{example}\label{ex:nested product}
-Let $\G\otimes\calH$ be the group whose elements are of the form $(\pi,(\sigma^{x})_{x\in\X})$, where $\sigma_{x}\in\calH$ for every $x\in\X$.
-Multiplication is defined as
-\[
-(\pi_1,(\sigma^{x}_1)_{x\in\X})\cdot(\pi_2,(\sigma^{x}_2)_{x\in\X})
-=
-(\pi_1\cdot\pi_2, (\sigma_1^{\pi_2(x)}\cdot\sigma_2^x)_{x\in\X}) \ .
-\]
+\begin{definition}[Sum action]\label{def:union}
+  Given $(\gelem[\pi], \gelem[\sigma]) \in \grp[G] \times \grp[H]$ 
+  and $z \in \X \ordplus \Y$, we define the action
+  $(\gelem[\pi], \gelem[\sigma])(z)$ as
+  $\gelem[\pi](z)$ if $z \in \X$ and $\gelem[\sigma](z)$ if $z \in \Y$.
+  This action is called the \reintro{sum action} of $\grp[G]$ and $\grp[H]$ on $\X \ordplus \Y$.
+\end{definition}
+
+\begin{definition}[Product action]\label{def:product}
+  Given $(\gelem[\pi], \gelem[\sigma]) \in \grp[G] \times \grp[H]$ and $(x,y) \in \X \ordtimes \Y$, we define the \intro{product action} of $\grp[G]$ and $\grp[H]$ on $\X \ordtimes \Y$ as
+  $(\gelem[\pi], \gelem[\sigma])((x,y))$ as $(\gelem[\pi](x), \gelem[\sigma](y))$.
+  Note that the ordering of $\X \ordtimes \Y$ is preserved by this action.
+\end{definition}
+
+\begin{definition}[Lex. Product Action]\label{def:nested product}
+  Let $\grp[G] \lexGroupAction \grp[H]$ be the group whose elements are of the form 
+  $(\gelem,\seqof{\gelem[\sigma]^{x}}[x\in\X])$, where 
+  $\gelem[\sigma]_{x} \in \grp[H]$ for every $x\in\X$, and where the multiplication
+  is defined as 
+  $(\gelem_1,(\gelem[\sigma]_1^{x})_{x\in\X})\cdot(\gelem_2,(\gelem[\sigma]_2^{x})_{x\in\X})
+  = (\gelem_1\cdot\gelem_2, (\gelem[\sigma]_1^{\gelem_2(x)}\cdot\gelem[\sigma]_2^x)_{x\in\X})$.
+  The \intro{lexicographic product action} of $\grp[G]$ and $\grp[H]$ on $\X \ordtimes \Y$ is defined as
+  $\grp[G] \lexGroupAction \grp[H]$ on $\X \ordtimes \Y$ is defined as
+  $(\gelem,(\gelem[\sigma]^{x})_{x\in\X})(x',y') = 
+  (\gelem(x'), \gelem[\sigma]^{x'}(y'))$ for every $(x',y')\in\X \ordtimes \Y$.
+\end{definition}
+
+
+\begin{lemma}
+  \label{lem:closure-properties-order}
+  All the operations defined in \cref{def:union,def:product,def:nested product}
+  preserve the \kl{computabilitiy assumptions} and define actions that are 
+  \kl(ord){compatible with the order} on the sets they act upon.
+\end{lemma}
+\begin{proof}
+  \todo[inline]{for arka: is this already stated somewhere?}
+\end{proof}
+
+\begin{lemma}
+  \label{lem:closure-properties-wqo}
+  The \kl{sum action} and the \kl{lexicographic product action} preserve the
+  \kl{well-quasi-ordering} property, while the \kl{product action} does not.
+\end{lemma}
+\begin{proof}
+  \todo[inline]{for aliaume: cleanup this}
+The \kl{sum action} preserves the order $<_{\X \ordplus \Y}$, and if
+$(\mon[Q]{\X}, \gdivleq[\grp[G]])$ and $(\mon[Q]{\Y}, \gdivleq[\grp[H]])$ are
+\kl{WQOs}, then $(\mon[Q]{\X \ordplus \Y}, \gdivleq[\grp[G] \times \grp[H]])$
+is a \kl{WQO}. Indeed, the \kl{divisibility up to $\grp[G] \times \grp[H]$}
+order is essentially the product of the orders $\gdivleq[\grp[G]]$ and
+$\gdivleq[\grp[H]]$, hence is a \kl{WQO} if both orders are \kl{WQOs}
+\cite[Lemma 1.5]{SCSC17}.
 The action $\G\otimes\calH \actson \X\times\Y$ is given as
 \[
 (\pi,(\sigma^{x})_{x\in\X})(x',y') =
@@ -94,42 +109,7 @@ then $\G\otimes\calH \actson \X\times\Y$ preserves the lexicographic linear orde
 Moreover, for every \kl{WQO} $Q$,
 if $(\mon[Q]{\X},\gdivleq{\G})$ and $(\mon[Q]{\Y},\gdivleq{\calH})$ are \kl{WQOs},
 so is $(\mon[Q]{\X\uplus\Y}, \gdivleq[\G\otimes\calH])$ \cite[Lemma 9]{GHOLAS24}.
-\end{example}
-%
-%\paragraph{Sets with atoms.}
-%
-%
-%\todo[inline]{Say that if one starts with atoms and equality, then we can only 
-%  have dimension 1, and that this is the case of the rationals.}
-%
-%\paragraph{Relational structures.} Let $\mathbb{A}$ be an infinite relational
-%structure with finitely many relations. Then, one can consider the set of
-%polynomials $\poly{\K}{\mathbb{A}}$, where indeterminates are elements of the
-%universe of $\mathbb{A}$. The group of all automorphisms of $\mathbb{A}$ (i.e.,
-%bijections of the universe that preserve the relations) acts on
-%$\poly{\K}{\mathbb{A}}$ by permuting the indeterminates.
-%
-%Natural examples are polynomials whose indeterminates are indexed by the
-%natural numbers (with inequality), or the rationals (with inequality). In this
-%setting, \kl{effective oligomorphcity} means that \todo{do it}. The fact that
-%$(\mon{\mathbb{A}}, \gdivleq)$ is a well-quasi-ordering corresponds to ordering
-%\emph{finite substructures} of $\mathbb{A}$ by the \emph{labelled induced
-%substructure} relation, and asking whether the class obtained is
-%well-quasi-ordered. This is a well-studied question in graph theory, where a
-%conjecture of Pouzet states that this holds with two labels if and only if it
-%holds for every ordinal. In particular, for such structures, it is therefore
-%conjectured that $(\mon{\Indets}, \gdivleq)$ is a well-quasi-ordering if and
-%only if $(\mon[\om \ordplus \ordfin{1}]{\Indets}, \gdivleq)$, $(\mon[\om
-%\ordplus \om]{\Indets}, \gdivleq)$, and $(\mon[\om^2]{\Indets}, \gdivleq)$ are
-%well-quasi-orderings too.
-%\arka{So we can use any well-ordered set of labels?} 
-%\todo[inline]{
-%  Cite \cite{POUZ72},
-%  \cite{DRT10} for the conjecture.
-%}
-
-
-
+\end{proof}
 
 \subsection{Computations using orbits.}
 \paragraph{Polynomial computations.} \AP The fact that (finite control) systems
