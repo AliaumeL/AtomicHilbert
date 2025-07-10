@@ -173,14 +173,15 @@ To overcome the second issue, we will use the following notion of
 
 \paragraph{Structures Containing Paths.} \AP Let us assume for the rest of this
 section that $\Indets$ is a set of indeterminates that contains an
-\kl(of){infinite path} $P \defined \seqof{x_i}[i \in \N]$, and let us fix a
-binary alphabet $\Sigma \defined \set{a,b}$. We define a function
-$\intro*\wenc{ \cdot} \colon \Sigma^* \to \mon{\Indets}$, where $\Sigma$ is a
-finite alphabet, that encodes a word $u \in \Sigma^*$ as a monomial. Namely, we
-define inductively $\wenc{\varepsilon} \defined 1$, $\wenc{a u} = x_0^3 x_1^2
-x_2^1 x_3^3 (\mathsf{shift}_{+4} \cdot \wenc{u})$ and $\wenc{b u} = x_0^3 x_1^1
-x_2^2 x_3^3 (\mathsf{shift}_{+4} \cdot \wenc{u})$ for all $u \in \Sigma^*$,
-where $\mathsf{shift}_{+k}$ acts on $P$ by shifting the indices by
+\kl(of){infinite path}, let us fix a binary alphabet $\Sigma \defined
+\set{a,b}$. Given a \kl(of){finite path} $P \defined \seqof{x_i}[0 \leq i <
+4n]$, we define a function $\intro*\wenc{ \cdot}_P \colon \Sigma^{\leq n} \to
+\mon{\Indets}$, where $\Sigma$ is a finite alphabet, that encodes a word $u \in
+\Sigma^{\leq n}$ as a monomial. Namely, we define inductively
+$\wenc{\varepsilon} \defined 1$, $\wenc{a u}_P = x_0^3 x_1^2 x_2^1 x_3^3
+(\mathsf{shift}_{+4} \cdot \wenc{u}_P)$ and $\wenc{b u}_P = x_0^3 x_1^1 x_2^2
+x_3^3 (\mathsf{shift}_{+4} \cdot \wenc{u}_P)$ for all $u \in \Sigma^*$, where
+$\mathsf{shift}_{+k}$ acts on $P$ by shifting the indices by
 $k$.\footnote{There may be no element $\gelem \in \group$ that acts like
 $\mathsf{shift}_{+1}$, we only use it as a function.} Let us remark that
 \kl{monomial rewriting} applied on \kl{word encodings} can simulate
@@ -188,17 +189,18 @@ $\mathsf{shift}_{+1}$, we only use it as a function.} Let us remark that
 
 \begin{lemma}
   \label{lem:word-encoding-string-subst}
-  Let $u,v,w \in \Sigma^*$ be three words, such that $|u| = |v|$,
+  Let $P \defined \seqof{x_i}[0 \leq i < 4n]$ be a finite path in $\Indets$,
+  let $u,v,w \in \Sigma^{\leq n}$ be three words, such that $|u| = |v|$,
   and let $\monelt[n] \in \mon{\Indets}$ be a monomial.
   The following are equivalent:
   \begin{enumerate}
     \item \label{item:rewrite-submonomial} 
       There exists $\gelem \in \group$
-      such that $\wenc{w} = \monelt[m] (\gelem \cdot \wenc{u})$
-      and $\monelt[n] = \monelt[m] (\gelem \cdot \wenc{v})$,
+      such that $\wenc{w}_P = \monelt[m] (\gelem \cdot \wenc{u}_P)$
+      and $\monelt[n] = \monelt[m] (\gelem \cdot \wenc{v}_P)$,
     \item \label{item:rewrite-subword}
       There exists $x, y \in \Sigma^*$
-      such that $x u y = w$ and $\wenc{x v y} = \monelt[n]$.
+      such that $x u y = w$ and $\wenc{x v y}_P = \monelt[n]$.
   \end{enumerate}
 \end{lemma}
 \begin{proof}
