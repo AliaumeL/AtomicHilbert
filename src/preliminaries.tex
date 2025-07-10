@@ -280,84 +280,49 @@ computing \kl{Gröbner bases} for every possible ordering of the indeterminates,
 and taking their union.\footnote{This algorithm is correct because we are
   considering the \kl{reverse lexicographic} ordering.}
 
-\section{Previous Research}
-\todo[inline]{This is way too technical. 
-  the applications when using infinite number of indeterminates 
-  should be in the introduction stating ``growing interest''.
-I strongly advise againts putting a proof sketch (it is going to be bad) of another paper (does not serve our narrative)... this is 
-  clearly not possible to be understood at this stage. Also, you add again 2/3
-  pages before examples and proofs with definitions that will never be used again
-  and even worse, closely resemble the actual ones we will be using
-  (shortlex / co-lex, reduction game / changing indeterminates, well-founded-ordering preserved / total orderding preserved).
-  My suggestions would develop the ``artificial assumptions''
-  of the introduction to say: ok, they need a well-founded ordering 
-  to be preserved, and they can also deal with equality using a trick.
-  While already very useful (state results), this does not give a 
-  total answer and leads to tedious proofs.
-}
-%
-\arka{Maybe put it before}
+\section{Related Research}
+\todo[inline]{Check new version. Maybe merge?}
 %
 The existence of \kl{equivariant Gr\"{o}bner basis} for the case when $\group$ is equal to the group $\symgr{\Indets}$ of all bijections from $\Indets$ to itself,
 is proven in \cite[Proposition 2]{COHEN67},
 and the computability can be found in \cite[Theorem 10]{COHEN87} and \cite{Emmott87}.
 Their definition of Gr\"{o}bner basis is different than ours.
-We quickly sketch their ideas.
+The crucial observation made by them is that ideal invariant under the action of $\symgr{\Indets}$ is also invariant under the action of monoid $\inc{<}$ of one-to-one functions from $\Indets$ to itself which preserve a fixed well-order $<$.
+Well-ordering the set of variables allows one to extend intuition from the classical setting of polynomials rings with finitely many variables to the infinitely many variable case.
 
-Let $<$ be a well-order on $\Indets$.
-Let $\inc{<}$ be the set of all strictly increasing one-to-one function from $\Indets$ to itself.
-An obvious but crucial observation is that,
-an ideal that is invariant under the action of $\symgr{\Indets}$ is also invariant under the action of $\inc{<}$.
-Hence we can consider ideals invariant under the action of $\inc{<}$.
-Using the well-order we define the leading monomial of a polynomial by the short-lex order : \arka{todo:define $\shortlexlt$}.
-Since $<$ is a well-order, $\shortlexlt$ is also a well-order.
-Hence any sequence of reductions that decreases the leading monomial with respect to $\shortlexlt$ terminates.
-Again, due to the fact that $<$ is a well-order,
-the divisibility relation $\gdivleq[\inc{<}]$ upto $\inc{<}$ is a \kl{well-partial-order}.
-As a consequence, for every $\inc{<}$-equivariant ideal $\idl[I]$,
-we can find a finite set of polynomials $B\subseteq \idl[I]$ which is a Gr\"{o}bner basis of $\idl{I}$ in the sense that,
-for every polynomial $f$ in $\idl[I]$,
-there exists a polynomial $b$ in $B$ such that $\lm(b) \gdivleq[\inc{<}] \lm(f)$.
-It can be proven that $B$ is a set of generators of $\idl[I]$.
-This proves that every $\inc{<}$-equivariant ideal, and hence every $\symgr{\Indets}$-equivariant ideal is finitely generated.
-Now for the computation of a Gr\"{o}bner basis,
-one can extend the Buchberger's algorithm to this setting,
-which terminates due to the fact that $\gdivleq[\inc{<}]$ is a \kl{well-partial-order}.
+%Let $<$ be a well-order on $\Indets$.
+%Let $\inc{<}$ be the set of all strictly increasing one-to-one function from $\Indets$ to itself.
+%An obvious but crucial observation is that,
+%an ideal that is invariant under the action of $\symgr{\Indets}$ is also invariant under the action of $\inc{<}$.
+%Hence we can consider ideals invariant under the action of $\inc{<}$.
+%Using the well-order we define the leading monomial of a polynomial by the short-lex order : \arka{todo:define $\shortlexlt$}.
+%Since $<$ is a well-order, $\shortlexlt$ is also a well-order.
+%Hence any sequence of reductions that decreases the leading monomial with respect to $\shortlexlt$ terminates.
+%Again, due to the fact that $<$ is a well-order,
+%the divisibility relation $\gdivleq[\inc{<}]$ upto $\inc{<}$ is a \kl{well-partial-order}.
+%As a consequence, for every $\inc{<}$-equivariant ideal $\idl[I]$,
+%we can find a finite set of polynomials $B\subseteq \idl[I]$ which is a Gr\"{o}bner basis of $\idl{I}$ in the sense that,
+%for every polynomial $f$ in $\idl[I]$,
+%there exists a polynomial $b$ in $B$ such that $\lm(b) \gdivleq[\inc{<}] \lm(f)$.
+%It can be proven that $B$ is a set of generators of $\idl[I]$.
+%This proves that every $\inc{<}$-equivariant ideal, and hence every $\symgr{\Indets}$-equivariant ideal is finitely generated.
+%Now for the computation of a Gr\"{o}bner basis,
+%one can extend the Buchberger's algorithm to this setting,
+%which terminates due to the fact that $\gdivleq[\inc{<}]$ is a \kl{well-partial-order}.
 
 The above mentioned results were rediscovered in \cite{AH07,AH08,HKL18}.
 In \cite{HS12} these results were used to prove the Independent Set Conjecture in algebraic statistics.
-In \cite{HKL18}, the authors showed that one can even take a submonoid $\calM$ of $\inc{<}$ and prove existence and computability of finite Gr\"{o}bner basis assuming that $\gdivleq[\calM]$ is a well-partial-order.
+In \cite{HS12}, the authors also showed that one can even take a submonoid $\calM$ of $\inc{<}$ and prove existence and computability of finite Gr\"{o}bner basis assuming that $\gdivleq[\calM]$ is a well-partial-order.
 
-\todo[inline]{The reference does not explain the result: this is very misleading, 
-I really expected to be told how to add the well-founded ordering...}
+\arka{Either add \cite{GHOLAS24} here or merge this part into the intro}
 
 \cite[Corollary 59]{GHOLAS24} shows that one can use a similar strategy for the action $\aut{\calQ}\actson\calQ$ (\Cref{ex:dlo}).
 However, it becomes difficult to do the same for a general action $\group\actson\Indets$ satisfying the conditions in \Cref{thm:compute-egb}.
-The ideas that were useful in the well-ordered case can not used in directly,
-since now even though we can define leading monomials,
-we can order them by a well-order preserved by the action of $\group$.
-As a consequence, a sequence of reductions which decreases the leading monomial may not be terminating.
-To take care of this \cite[GHOLAS24] considers only those reductions that do not introduce new variables.
-As described by the proof of \cite[Theorem 12]{GHOLAS24},
-the assumption that $\gdivleq$ is a \kl{WQO} ensures that every equivariant ideal $\idl{I}$ contains a finite basis, using which every element of the ideal can be reduced to $0$,
-even when reductions are not allowed to introduce new variables.
-Thus existence of a finite basis is proven.
-Finite subsets such as $B$ of equivariant ideals $\idl[I]$ are called equivariant Gr\"{o}bner bases in this paper.
-Strictly speaking, we consider orbit-finite bases and not finite one.
-However, a finite basis up to the action of $\group$ is same as an orbit-finite basis.
 
-The Buchberger algorithm can be extended to the equivariant setting (\Cref{alg:weakgb}) and terminates due to the fact that $\gdivleq$ is a \kl{WQO}.
-However, it does not give an equivariant Gr\"{o}bner bases.
-The intuitive reason behind this is that \kl{$S$-polynomials} only considers cancellation of leading monomials, and not cancellation of variables.
-We show how to take care of this in \Cref{sec:equivariant-grobner-basis}
 
-\arka{Maybe put the intuition in a remark after the proof}
-Intuitively speaking,
-we colour the variables using two colours $0 < 1$,
-and declare variables coloured with $0$ to be smaller than the variables coloured with $1$.
-This colouring
-%
-
-\arka{Add other orbit-finite research: weighted automata, equations, linear programming}
+Last but not least,
+our result fits nicely into the paradigm of computation with orbit-finite sets, in particular to the study of orbit-finitely generated vector spaces,
+orbit-finite systems of equations and inequalities.
+\arka{Add citations}
 
 

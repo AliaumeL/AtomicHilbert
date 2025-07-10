@@ -167,7 +167,7 @@ for our \cref{thm:decide-equiv-ideal-mem,thm:compute-egb}.
 
 \AP 
 %
-\begin{remark}
+\begin{remark}\label{rem:reduct}
 \Cref{lem:reducts-equiv-hilbert} implies that one can apply our results to an action $\group\actson\Indets$ that does not preserve a linear order,
 if it is a reduct of some another action $\calH\actson\Indets$ which preserves a linear order.
 For example, $\symgr{\calQ}$ is a reduct of $\aut{\calQ}\actson\Q$.
@@ -184,24 +184,16 @@ Hence our results also apply to $\aut{\T}\actson\T$.
 %
 \paragraph{Effective oligomorphicity}
 %
-\cite[Theorem 7.6]{BOJAN16inf} implies that the structures mentioned in  \Cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree} are \kl{oligomorphic}.
+\cite[Theorem 7.6]{BOJAN16inf} implies that the structures mentioned in  \Cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree,rem:reduct} are \kl{oligomorphic}.
 They are also \kl{effectively oligomorphic}.
 To show effectivity we need to give a way to represent the element of the structures and show point (2) and (3) in the definition of \kl{effective oligomorphicity} holds under the representations.
-
-
-
-
-\arka{WQO implies oligo (cite prev paper).
-To have computability we need to give a way to represent the element of the structures and show point (2) and (3) in the definition of oligomorphicity holds under the representation.
-Elements of the structure $\Q$ (cf. example ..) ... can be 
-The structure can be though as the set of strings over a finite alphabet and can be represented accordingly.
-For trees ...
-Showing point (2) and (3) in the definition of effective oligomorphicity holds for this representation is a tedious exercise and hence is left for the reader
-}
+This is possible for all the structures mentioned in \Cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree,rem:reduct}.
+For example, $\A$ can be identified with the set of strings over a fixed finite alphabet.
+Elements of $\calQ$ can be represented in the usual way.
+A representation of elements of $\T$ is given in \cite[Page 244-245]{BOJAN16inf}.
+\cite{CompFraisse} gives a general way to represent Fra\"{i}sse limits.
 %
-
 \section{Applications}
-
 
 \paragraph{Polynomial computations.} \AP The fact that (finite control) systems
 performing polynomial computations can be verified follows from the theory of
