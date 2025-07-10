@@ -166,14 +166,30 @@ for our \cref{thm:decide-equiv-ideal-mem,thm:compute-egb}.
 \end{proof}
 
 \AP 
-As a consequence, one can apply our results to structures that are not equipped 
-with an ordering, because one can always consider the 
-
-\todo[inline]{Talk about $\N$ I guess.}
-
+%
+\begin{remark}
+\Cref{lem:reducts-equiv-hilbert} implies that one can apply our results to an action $\group\actson\Indets$ that does not preserve a linear order,
+if it is a reduct of some another action $\calH\actson\Indets$ which preserves a linear order.
+For example, $\symgr{\calQ}$ is a reduct of $\aut{\calQ}\actson\Q$.
+Since $\aut{\A}\actson\A$ and $\symgr{\calQ}$ are isomorphic as group actions,
+our results are applicable to $\aut{\A}\actson\A$.
+Let $\T_<$ be the countable dense-meet tree with a lexicographic ordering \cite[Remark 6.14]{KRS21}.
+\footnote{The remark says that finite meet-trees expanded with a lexicographic ordering is a Fra\"{i}sse class,
+from which it follows that there exists a Fra\"{i}sse limit $\T_<$ for that class.}
+Let $\group$ be the group of bijections of $\T_<$ which do not necessarily preserve the lexicographic ordering.
+Then $\group\actson\T_<$ is isomorphic to $\aut{\T}\actson\T$,
+and is a reduct of $\aut{\T_<}\actson\T_<$.
+Hence our results also apply to $\aut{\T}\actson\T$.
+\end{remark}
+%
 \paragraph{Effective oligomorphicity}
 %
-The structures mentioned in \Cref{ex:eq atoms,ex:dlo,ex:int,ex:rado,ex:bit vector,ex:dense trr} are \kl{homogenous} over a finite signature and every and hence \kl{oligomorphic} ().
+\cite[Theorem 7.6]{BOJAN16inf} implies that the structures mentioned in  \Cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree} are \kl{oligomorphic}.
+They are also \kl{effectively oligomorphic}.
+To show effectivity we need to give a way to represent the element of the structures and show point (2) and (3) in the definition of \kl{effective oligomorphicity} holds under the representations.
+
+
+
 
 \arka{WQO implies oligo (cite prev paper).
 To have computability we need to give a way to represent the element of the structures and show point (2) and (3) in the definition of oligomorphicity holds under the representation.
