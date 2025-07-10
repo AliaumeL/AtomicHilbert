@@ -4,7 +4,7 @@
 \label{sec:undecidability}
 
 In this section, we aim to show that the \kl{equivariant ideal membership
-problem} is undecidable under the usual \kl{effectiveness conditions} on the
+problem} is undecidable under the usual \kl{computability assumptions} on the
 group action, when we do not assume that $(\mon{\Indets}, \gdivleq)$ is a
 \kl{well-quasi-ordering}. In particular, this would show that computing
 \kl{equivariant Gröbner bases} is not possible in these settings, proving the
@@ -43,7 +43,7 @@ prevents $(\mon{\Indets}, \gdivleq)$ from being a \kl{well-quasi-ordering}, as
 shown by the following \cref{rem:not-wqo}. Furthermore, for
 indeterminates obtained by considering \kl{homogeneous structures} and their
 automorphism groups
-(\cref{sec:examples}),
+(\cref{sec:act ex}),
 the presence of an \kl(of){infinite path} has been conjectured to be a
 necessary and sufficient condition for $(\mon{\Indets}, \gdivleq)$ to be a
 \kl{well-quasi-ordering}: this follows from a conjecture of Schmitz restated in
@@ -92,9 +92,10 @@ of Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
 \begin{remark}
   \label{rem:conj-wqo-pouzet}
   The conjecture of Schmitz is a generalization of Pouzet's conjecture
-  \cite{POUZ72} that states that the class of finite structures is
-  \kl{well-quasi-ordered} under the labelled-induced-substructure relation if and
-  it is for two labels.
+  \cite{POUZ72} that states that a class $\mathcal{C}$  of finite structures is
+  \kl{well-quasi-ordered} under the labelled induced-substructure relation for
+  every \kl{well-quasi-ordered} set of labels, 
+  if and only if it is the case for the set of two incomparable labels.
 \end{remark}
 
 \begin{remark}
@@ -168,8 +169,7 @@ reversibility of the rewriting system, which can be (partially) solved by
 considering \emph{reversible} Turing machines; and second, the fact that the
 configurations of the Turing machine cannot staightforwardly be encoded as
 monomials due to the commutativity of the multiplication.
-To overcome the second issue, we will use the following notion of 
-\kl{word encoding}.
+
 
 \paragraph{Structures Containing Paths.} \AP Let us assume for the rest of this
 section that $\Indets$ is a set of indeterminates that contains an
@@ -178,8 +178,8 @@ section that $\Indets$ is a set of indeterminates that contains an
 4n]$, we define a function $\intro*\wenc{ \cdot}_P \colon \Sigma^{\leq n} \to
 \mon{\Indets}$, where $\Sigma$ is a finite alphabet, that encodes a word $u \in
 \Sigma^{\leq n}$ as a monomial. Namely, we define inductively
-$\wenc{\varepsilon} \defined 1$, $\wenc{a u}_P = x_0^3 x_1^2 x_2^1 x_3^3
-(\mathsf{shift}_{+4} \cdot \wenc{u}_P)$ and $\wenc{b u}_P = x_0^3 x_1^1 x_2^2
+$\wenc{\varepsilon} \defined 1$, $\wenc{a u}_P = x_0^4 x_1^2 x_2^1 x_3^3
+(\mathsf{shift}_{+4} \cdot \wenc{u}_P)$ and $\wenc{b u}_P = x_0^4 x_1^1 x_2^2
 x_3^3 (\mathsf{shift}_{+4} \cdot \wenc{u}_P)$ for all $u \in \Sigma^*$, where
 $\mathsf{shift}_{+k}$ acts on $P$ by shifting the indices by
 $k$.\footnote{There may be no element $\gelem \in \group$ that acts like
@@ -189,144 +189,190 @@ $\mathsf{shift}_{+1}$, we only use it as a function.} Let us remark that
 
 \begin{lemma}
   \label{lem:word-encoding-string-subst}
-  Let $P \defined \seqof{x_i}[0 \leq i < 4n]$ be a finite path in $\Indets$,
-  let $u,v,w \in \Sigma^{\leq n}$ be three words, such that $|u| = |v|$,
+  Let $P,Q$ be two \kl(of){finite paths} in $\Indets$,
+  such that $(p_0,p_1)$ is in the same orbit as 
+  $(q_0,q_1)$.
+  Let $u,v,w \in \Sigma^*$ be three words, such that $|u| = |v| \leq |w|$,
   and let $\monelt[n] \in \mon{\Indets}$ be a monomial.
-  The following are equivalent:
-  \begin{enumerate}
-    \item \label{item:rewrite-submonomial} 
-      There exists $\gelem \in \group$
-      such that $\wenc{w}_P = \monelt[m] (\gelem \cdot \wenc{u}_P)$
-      and $\monelt[n] = \monelt[m] (\gelem \cdot \wenc{v}_P)$,
-    \item \label{item:rewrite-subword}
-      There exists $x, y \in \Sigma^*$
+  Assume that there exists $\gelem \in \group$
+      such that $\wenc{w}_P = \monelt[m] (\gelem \cdot \wenc{u}_Q)$,
+       $\monelt[n] = \monelt[m] (\gelem \cdot \wenc{v}_Q)$,
+  and that $\wenc{w}_P$, $\wenc{u}_Q$ and $\wenc{v}_Q$
+  are well-defined.
+  Then,
+      there exists $x, y \in \Sigma^*$
       such that $x u y = w$ and $\wenc{x v y}_P = \monelt[n]$.
-  \end{enumerate}
 \end{lemma}
 \begin{proof}
-  Let us prove \cref{item:rewrite-submonomial} implies
-  \cref{item:rewrite-subword}. To that end,
-  
-  Conversely, let us prove that \cref{item:rewrite-subword} implies
-  \cref{item:rewrite-submonomial}.
-
-  \todo[inline]{aliaume todo}
-
+  Let us write $\gelem \cdot q_0 = p_k$ for some $k \in \N$.
+  Because the only indeterminates with degree $4$ in $\wenc{w}_P$ are
+  the ones of the form $p_{4i}$, we have that $k$ is a multiple of $4$
+  (i.e. at the start of a letter block).
+  Since $(q_0, q_1)$ is in the same orbit as $(p_0, p_1)$,
+  and both $P$ and $Q$ are \kl(of){finite paths},
+  we conclude that $\gelem \cdot (q_0, q_1) = (p_{4i}, p_{4i+1})$
+  or $\gelem \cdot (q_0, q_1) = (p_{4i+1}, p_{4i-1})$.
+  Applying the same reasoning, thrice, 
+  we have either $\gelem \cdot (q_0, q_1, q_2, q_3) = (p_{4i}, p_{4i+1}, p_{4i+2}, p_{4i+3})$
+  or $\gelem \cdot (q_0, q_1, q_2, q_3) = (p_{4i}, p_{4i-1}, p_{4i-2}, p_{4i-3})$.
+  However, in the second case, the exponent of $p_{4i-3}$ in $\wenc{w}_P$ is at most $2$,
+  which is incompatible with the fact that the one of $q_3$ in $\wenc{u}_Q$ is $3$.
+  By induction on the length of $u$, we immediately obtain that 
+  $\gelem \cdot \wenc{u}_Q = \mathsf{shift}_{+4i} \cdot \wenc{u}_P$ and
+  therefore that 
+  $w = x u y$ for some $x,y \in \Sigma^*$.
+  Finally, because $\wenc{v}_Q$ uses exactly the same indeterminates as 
+  $\wenc{u}_Q$, we can also conclude that
+  $\wenc{xvy}_P = \monelt[n]$.
 \end{proof}
 
-Note that without loss of generality, thanks to
-\cref{lem:word-encoding-string-subst}, we can assume that the alphabet is any
-finite set of letters, using a suitable unambiguous encoding of the alphabet
-in binary \cite{BERST09}. This bigger alphabet size will simplify
-the statement and proof of the following \cref{lem:reversible-machine}, which
-explains how to simulate a reversible Turing machine using \kl{monomial
-rewriting}. Given a reversible Turing machine $M$ with a finite set $Q$ of
-states and tape alphabet $\Sigma$, we will consider the following alphabet
-$\Gamma \defined \set{ \triangleleft, \triangleright } \times \set{ \text{pre},
-\text{run}, \text{post} } \uplus Q \uplus \Sigma \uplus \set{ \square,
-\square_1, \square_2}$. The letter $\square$ is a blank symbol, and the letters
-$\triangleleft$ and $\triangleright$ are used to delimit the beginning and the
-end of the tape, with some extra ``phase information''. In a first \kl{monomial
-rewrite system}, we will encode a run of a reversible Turing machine $M$ on a
-fixed size input tape (\cref{lem:reversible-machine}), and in a second
-\kl{monomial rewrite system}, we will create a tape of arbitrary size
-(\cref{lem:tape-creation}). The union of these two \kl{monomial rewrite
-systems} will then be used to prove the undecidability of the \kl{equivariant
-ideal membership problem} in \cref{thm:undecidable-paths}.
+\Cref{lem:word-encoding-string-subst} shows that all encodings
+using \kl(of){finite paths} with the same initial orbit are compatible with
+each other for the purpose of \kl{monomial rewriting}. Let us now assume that
+the alphabet is any finite set of letters, using a suitable unambiguous
+encoding of the alphabet in binary \cite{BERST09}. This bigger alphabet size
+will simplify the statement and proof of the following
+\cref{lem:reversible-machine}, which explains how to simulate a
+reversible Turing machine using \kl{monomial rewriting}. Given a reversible
+Turing machine $M$ with a finite set $Q$ of states and tape alphabet $\Sigma$,
+we will consider the following alphabet $\Gamma \defined \set{ \triangleleft,
+  \triangleright } \times \set{ \text{pre}, \text{run}, \text{post} } \uplus Q
+  \uplus \Sigma \uplus \set{ \square, \square_1, \square_2}$. The letter
+  $\square$ is a blank symbol, and the letters $\triangleleft$ and
+  $\triangleright$ are used to delimit the beginning and the end of the tape,
+  with some extra ``phase information''. In a first \kl{monomial rewrite
+  system}, we will encode a run of a reversible Turing machine $M$ on a fixed
+  size input tape (\cref{lem:reversible-machine}), and in a second
+  \kl{monomial rewrite system}, we will create a tape of arbitrary size
+  (\cref{lem:tape-creation}). The union of these two \kl{monomial
+  rewrite systems} will then be used to prove the undecidability of the
+  \kl{equivariant ideal membership problem} in \cref{thm:undecidable-paths}.
 
 \begin{lemma}
   \label{lem:reversible-machine}
+  Let us fix $(x_0, x_1)$ a pair of indeterminates.
   There exists a
   \kl{monomial rewrite system} $R_M$ such that the following
-  are equivalent for every $n \geq 1$:
+  are equivalent for every $n \geq 1$,
+  and for any \kl(of){finite path} $P$ of length $4(n+2)$ 
+  such that $(p_0, p_1)$ is in the same orbit as $(x_0, x_1)$:
   \begin{enumerate}
-    \item $\wenc{ \triangleright^{\text{pre}} \square^n 
-                  \triangleleft^{\text{pre}}
-     } \leftrightarrow_{R_M}^* 
-     \wenc{ \triangleright^{\text{post}} \square^n 
-                  \triangleleft^{\text{post}} }$,
+    \item $\wenc{ \triangleright^{\text{run}} q_0 \square^{n-1}
+                  \triangleleft^{\text{run}}
+     }_P \leftrightarrow_{R_M}^* 
+     \wenc{ \triangleright^{\text{run}} q_f \square^{n-1}
+                  \triangleleft^{\text{run}} }_P$,
       \item $M$ halts on the empty word using a tape bounded by $n-1$ cells.
   \end{enumerate}
   Furthermore, every monomial that is 
-  reachable from $\wenc{ \triangleright^{\text{pre}} \square^n \triangleleft^{\text{pre}} }$
-  or $\wenc{ \triangleright^{\text{post}} \square^n \triangleleft^{\text{post}} }$
+  reachable from $\wenc{ \triangleright^{\text{run}} q_0 \square^{n-1} \triangleleft^{\text{pre}} }_P$
+  or $\wenc{ \triangleright^{\text{run}} q_f \square^{n-1} \triangleleft^{\text{run}} }_P$
   is the image of a word of the form
-  $\wenc{\triangleright^{\text{run}} u \triangleleft^{\text{run}}}$  
+  $\wenc{\triangleright^{\text{run}} u \triangleleft^{\text{run}}}_P$  
   where $u \in (Q \uplus \Sigma \uplus \square)^n$.
 \end{lemma}
 \begin{proof}
-  The rewrite system simply acts on the tape of the reversible Turing machine 
-  using blank symbols. Because transitions of the reversible Turing machine
-  are substitutions of strings having the same size if one does not create new
-  tape cells, the rewriting system can straigthforwardly simulate the 
-  substitutions because of \cref{lem:word-encoding-string-subst}.
-  To this monomial rewriting system, we add two rules,
-  respectively of the form
-  $\wenc{ \triangleright^{\text{pre}} \square^n \triangleleft^{\text{pre}} }
-  \leftrightarrow_{R_M}^*
-  \wenc{ \triangleright^{\text{run}} q_0 \square^{n-1} \triangleleft^{\text{run}} }$
-  and 
-  $\wenc{ \triangleright^{\text{post}} \square^n \triangleleft^{\text{post}} }
-  \leftrightarrow_{R_M}^*
-  \wenc{ \triangleright^{\text{run}} q_f \square^{n-1} \triangleleft^{\text{run}} }$,
-  where $q_0$ is the initial state of the Turing machine $M$ and $q_f$ is its
-  final state.
-  This is not problematic because one can 
-  simply write $\wenc{\triangleright^{\text{run}} q_0} (\gelem \cdot \wenc{\triangleleft^{\text{run}}})$
-  for a suitable $\gelem \in \group$, in order
-  to ignore the number of blank symbols in the tape,
-  and because we can assume that the reversible Turing machine
+  Transitions of the reversible Turing machine using bounded tape size can be 
+  modelled as a reversible string rewriting system using finitely many rules 
+  of the form $u \leftrightarrow v$, where $u$ and $v$ are words
+  over $(Q \uplus \Sigma \uplus \square)$ having the same length $\ell$
+  For each rule $u \leftrightarrow v$, we create rules 
+  $\wenc{u}_P \leftrightarrow_{R_M} \wenc{v}_P$ 
+  for every \kl(of){finite path} $P$ of length $4l$.
+  Note that there are only orbit finitely many such \kl(of){finite paths} $P$,
+  and one can effectively list some representatives,
+  because $\Indets$ is \kl{effectively oligomorphic}.
+  This system is clearly complete, in the sense that one can perform a substitution
+  by applying a monomial rewriting rule, but \cref{lem:word-encoding-string-subst}
+  also tells us it is correct, in the sense that it cannot perform anything else
+  than string substitutions.
+  Furthermore, we can assume 
+  that the reversible Turing machine
   starts with a clean tape and ends with a clean tape.
 \end{proof}
 
-\Cref{lem:reversible-machine} shows that one can simulate the runs, provided we
-know in advance the maximal size of the tape used by the reversible Turing
-machine. The key ingredient that remains to be explained is how one can start
-from a finite monomial $\monelt$ and create a tape of arbitrary size using a
-\kl{monomial rewrite system}. Note that because the set of indeterminates can
-very well contain multiple copies of an \kl(of){infinite path} $P$, we will not
-be able to guarantee that we create exactly the tape $\wenc{
-\triangleright^{\text{pre}} \square^n \triangleleft^{\text{pre}} }$ for some $n
-\in \N$, but rather that we can find some equivalent monomial up to the action
-of $\group$.
+\Cref{lem:reversible-machine} shows that one can simulate the
+runs, provided we know in advance the maximal size of the tape used by the
+reversible Turing machine. The key ingredient that remains to be explained is
+how one can start from a finite monomial $\monelt$ and create a tape of
+arbitrary size using a \kl{monomial rewrite system}. The difficulty is that we
+will not be able to ensure that we follow one specific \kl(of){finite path}
+when creating the tape.
 
 \begin{lemma}
   \label{lem:tape-creation}
+  Let $(x_0, x_1)$ be a pair of indeterminates, $P$ be a \kl(of){finite path}
+  such that $(p_0, p_1)$ is in the same orbit as $(x_0, x_1)$.
   There exists a \kl{monomial rewrite system} $R_\text{pre}$
   such that for every monomial $\monelt \in \mon{\Indets}$, the following are
   equivalent:
   \begin{enumerate}
-    \item $\wenc{ \triangleright^{\text{pre}} \square \triangleleft^{\text{pre}}} 
+    \item $\wenc{ \triangleright^{\text{pre}} \square \square_1 \square_2 \triangleleft^{\text{pre}}}_P
       \leftrightarrow_{R_\text{pre}}^* 
       \monelt$
-    \item there exists $n \in \N$ and $\gelem \in \group$, such that
-      $\gelem \cdot \monelt = \wenc{ \triangleright^{\text{pre}} \square^n 
-                        \triangleleft^{\text{pre}} }$.
+      and $\wenc{\triangleright^{\text{run}}}_{P'}
+      \gdivleq \monelt$ for some \kl(of){finite path} $P'$ such that
+      $(p_0', p_1')$ is in the same orbit as $(x_0, x_1)$.
+    \item There exists $n \geq 2$ and a \kl(of){finite path} $P'$ such that 
+      $(p_0', p_1')$ is in the same orbit as $(x_0, x_1)$,
+      and 
+      $\monelt = \wenc{ \triangleright^{\text{run}} q_0 \square^{n}
+      \triangleleft^{\text{run}} }_{P'}$.
   \end{enumerate}
   Similarly, there exists a \kl{monomial rewrite system} $R_\text{post}$
-  with analogue properties.
+  with analogue properties using $q_f$ instead of $q_0$.
 \end{lemma}
 \begin{proof}
-  The rewrite system is going to have two phases.
-  In a first phase, we will consider the rules
-  $\wenc{ \square \triangleleft^{\text{pre}} } \leftrightarrow_{R_\text{pre}}
-   \wenc{ \square \square \triangleleft^{\text{pre}} }$.
-  This is \emph{almost} leading to the desired \kl{word encoding}.
-  The only thing left to check is that we do not reuse indeterminates when 
-  creating new letters.
-  To ensure that we did not, we will implement the 
-  Floyd cycle-finding algorithm, which uses two pointers moving at different speeds.
-  To that end, we will use two new blank symbols $\square_1$ and $\square_2$,
-  and the rules 
-  $\wenc{ \square_1 \square } ( \gelem \cdot \wenc{ \square_2 \square \square })
-  \leftrightarrow_{R_\text{pre}}
-  \wenc{ \square \square_1 } (\gelem \cdot \wenc{ \square \square \square_2 })$,
-  where $\pi$ is a permutation of the indeterminates that ensures that the
-  indetermitates of the two words are distinct.
-  Finally, one adds the possibility to switch to the second phase,
-  and end the second phase when pointer $\square_2$ reaches the end of the tape.
+  We create the following rules,
+  where $P_1$ and $P_2$ range over \kl(of){finite paths} such that
+  their first two elements are in the same orbit as $(x_0, x_1)$,
+  and assuming that the indeterminates of $P_1$ and $P_2$ are disjoint:
+  \begin{enumerate}
+    \item Cell creation: 
+      $\wenc{\triangleright^{\text{pre}} \square}_{P_1}
+        \wenc{ \square_1 \square_2 \triangleleft^{\text{pre}}}_{P_2}
+      \leftrightarrow_{R_\text{pre}}
+      \wenc{\triangleright^{\text{pre}} \square_1}_{P_1}
+      \wenc{ \square \square \square_2 \triangleleft^{\text{pre}}}_{P_2}$
+    \item Linearity checking:
+      $\wenc{\square_1 \square}_{P_1} \wenc{\square_2 \triangleleft^{\text{pre}}}_{P_2}
+      \leftrightarrow_{R_\text{pre}}
+      \wenc{\square \square_1}_{P_1} \wenc{\square_2 \triangleleft^{\text{pre}}}_{P_2}$
+    \item Phase transition:
+      $\wenc{\triangleright^{\text{pre}} \square}_{P_1}
+       \wenc{\square_1 \square_2 \triangleleft^{\text{pre}}}_{P_2}
+      \leftrightarrow_{R_\text{pre}}
+       \wenc{\triangleright^{\text{run}} q_0}_{P_1}
+       \wenc{\square \square \triangleleft^{\text{run}}}_{P_2}$
+  \end{enumerate}
+  Note that there are only orbit finitely many such pairs of monomials,
+  and that we can enumerate representative of these orbits because 
+  $\Indets$ is \kl{effectively oligomorphic}.
 
-  \todo[inline]{Aliaume: complete the proof}
+  Let us first argue that this system is complete. Because there exists an
+  infinite path $P_{\infty}$, it is indeed possible to reach
+  $\wenc{\triangleright^{\text{run}} q_0 \square^n
+  \triangleleft^{\text{run}}}_{P_\infty}$ by repeatedly applying the first
+  rule, and then the second rule until $\square_1$ reaches the end of the tape,
+  and continuing so until one decides to apply the third rule to reach the
+  desired tape configuration.
+
+  We now claim that the system is correct, in the sense that it can only reach
+  valid tape encodings. First, let us observe that in a rewrite sequence, one
+  can always assume that the rewriting takes the form of applying the first
+  rule, then the second rule until one cannot apply it anymore, and repeating
+  this process until one applies the third rule. Because rule (2) ensures that
+  when we add new indeterminates using rule (1), they were not already present
+  in the monomial, and because rule (1) ensures that locally the structure of
+  the indeterminates remains a \kl(of){finite path}, we can conclude that the
+  whole set of indeterminates used come from a \kl(of){finite path} $P'$. As a
+  consequence, if one can reach a state where (1) or (3) are applicable, then
+  the tape is of the form $\wenc{ \triangleright^{\text{pre}} \square^n
+  \square_1 \square_2 \triangleleft^{\text{pre}} }_{P'}$, with $n \geq 1$. It
+  follows that when one can apply rule (3), the monomial obtained is of the
+  form $\wenc{ \triangleright^{\text{run}} q_0 \square^n
+  \triangleleft^{\text{run}} }_{P'}$, where $P'$ is a \kl(of){finite path} such
+  that $(p_0', p_1')$ is in the same orbit as $(x_0, x_1)$. 
 \end{proof}
 
 \csname thm:undecidable-paths\endcsname*
