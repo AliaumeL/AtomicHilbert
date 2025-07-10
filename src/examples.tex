@@ -107,32 +107,32 @@ However, $(\mon[Y]{\calZ}, \gdivleq[\aut{\calZ}])$ is not a \kl{WQO} even when $
 An example of an infinite antichain is the set $\setof{a b}{b\in\calZ\setminus\{a\}}$, for any fixed $a\in\calZ$.
 \end{example}
 %
-\paragraph{On reducts of structures.} \AP Let $\sigma$ be a finite relational
-signature, and $\tau \subseteq \sigma$ be another finite relational signature.
-Let $\mathbb{A}, \mathbb{B}$ be respectively a $\sigma$ and a $\tau$ structure. We say
-that \intro{$\mathbb{B}$ is a reduct of $\mathbb{A}$} when $\mathbb{B}$ is
-obtained from $\mathbb{A}$ by keeping the same universe, and relations. It was noted by \cite[Lemma 13]{GHOLAS24} that in
-this case, the \kl{equivariant Hilbert basis property} transfers from
-$\mathbb{A}$ to $\mathbb{B}$. Let us briefly argue that this transfer holds too
-for our \cref{thm:decide-equiv-ideal-mem,thm:compute-egb}.
-
-\arka{The next lemma should be rewritten, right?}
-\todo[inline]{yes, it should be rephrased}
-
+%\paragraph{On reducts of structures.} \AP Let $\sigma$ be a finite relational
+%signature, and $\tau \subseteq \sigma$ be another finite relational signature.
+%Let $\mathbb{A}, \mathbb{B}$ be respectively a $\sigma$ and a $\tau$ structure. We say
+%that \intro{$\mathbb{B}$ is a reduct of $\mathbb{A}$} when $\mathbb{B}$ is
+%obtained from $\mathbb{A}$ by keeping the same universe, and relations. It was noted by \cite[Lemma 13]{GHOLAS24} that in
+%this case, the \kl{equivariant Hilbert basis property} transfers from
+%$\mathbb{A}$ to $\mathbb{B}$. Let us briefly argue that this transfer holds too
+%for our \cref{thm:decide-equiv-ideal-mem,thm:compute-egb}.
+%
+\paragraph{Reducts}
+%
+A group action $\group\actson\Indets$ is said to be a \intro{reduct} of another group action $\calH\actson\Y$ if there exists a bijection $f : \Indets\to\Y$ such that $f^{-1}\circ\pi\circ f \in\group$ for every $\pi\in\calH$.
+We write it in symbols as
+\[
+\group\actson\Indets \reduct{f} \calH\actson\Y \ .
+\]
+It is called a \intro{effective reduct} if $f$ is \kl{effective}.
+%
 \begin{lemma}\label{lem:reducts-equiv-hilbert}
-  Let $\mathbb{A}$ be a relational structure, let $\mathbb{B}$ be a 
-  \kl(struct){reduct} of $\mathbb{A}$. Then, if $\mathbb{A}$ satisfies the
-  hypotheses of \cref{thm:decide-equiv-ideal-mem},
-  then one can decide the \kl{equivariant ideal membership problem} for
-  $\poly{\K}{\mathbb{B}}$. Similarly, 
-  if $\mathbb{A}$ satisfies the hypotheses of
-  \cref{thm:compute-egb}, then one can compute an
-  \kl{equivariant Gröbner basis} of an
-  \kl{equivariant ideal} of $\poly{\K}{\mathbb{B}}$.
+If $\group\actson\Indets \reduct{f} \calH\actson\Y$ then:
+\begin{enumerate}
+\item for every $\group$-equivariant ideal $\idl[I]\subseteq\poly{\K}{\X}$,
+$f(\idl[I])\subseteq\poly[\K][\Y]$ is a $\calH$-equivariant ideal.
+\item if $\Basis\subseteq\poly[\K][\Y]$ is a $\calH$-equivariant Gr\"{o}bner basis then $\cup_{\pi\in\g}f^{-1}(b)$ is a $\group$-equivariant Gr\"{o}bner basis.
+\end{enumerate}
 \end{lemma}
-\begin{proof}
-  \todo[inline]{Just write it, and it works.}
-\end{proof}
 
 \AP 
 %
@@ -392,7 +392,9 @@ As a consequence of this reduction and \Cref{thm:compute-egb,lem:reducts-equiv-h
 \begin{corollary}\label{cor:lin solv}
 The solvability problem for orbit-finite systems of equations is decidable for the action $\group\actson\Indets$ if it is a reduct of an action $\calH\actson\Indets$ such that ...
 \end{corollary}
-
+%
+The above corollary extends 
+%
 \arka{Maybe we can define this property and have an explicit corollary for decidabilty of ideal membership}
 
 %
