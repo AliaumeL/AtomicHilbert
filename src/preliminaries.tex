@@ -282,49 +282,6 @@ In the finite case, one can always compute an \kl{equivariant Gröbner basis} by
 computing \kl{Gröbner bases} for every possible ordering of the indeterminates,
 and taking their union.\footnote{This algorithm is correct because we are
   considering the \kl{reverse lexicographic} ordering.}
-
-\section{Related Research}
-\todo[inline]{Check new version. Maybe merge?}
-%
-The existence of \kl{equivariant Gr\"{o}bner basis} for the case when $\group$ is equal to the group $\symgr{\Indets}$ of all bijections from $\Indets$ to itself,
-is proven in \cite[Proposition 2]{COHEN67},
-and the computability can be found in \cite[Theorem 10]{COHEN87} and \cite{Emmott87}.
-Their definition of Gr\"{o}bner basis is different than ours.
-The crucial observation made by them is that ideal invariant under the action of $\symgr{\Indets}$ is also invariant under the action of monoid $\inc{<}$ of one-to-one functions from $\Indets$ to itself which preserve a fixed well-order $<$.
-Well-ordering the set of variables allows one to extend intuition from the classical setting of polynomials rings with finitely many variables to the infinitely many variable case.
-
-%Let $<$ be a well-order on $\Indets$.
-%Let $\inc{<}$ be the set of all strictly increasing one-to-one function from $\Indets$ to itself.
-%An obvious but crucial observation is that,
-%an ideal that is invariant under the action of $\symgr{\Indets}$ is also invariant under the action of $\inc{<}$.
-%Hence we can consider ideals invariant under the action of $\inc{<}$.
-%Using the well-order we define the leading monomial of a polynomial by the short-lex order : \arka{todo:define $\shortlexlt$}.
-%Since $<$ is a well-order, $\shortlexlt$ is also a well-order.
-%Hence any sequence of reductions that decreases the leading monomial with respect to $\shortlexlt$ terminates.
-%Again, due to the fact that $<$ is a well-order,
-%the divisibility relation $\gdivleq[\inc{<}]$ upto $\inc{<}$ is a \kl{well-partial-order}.
-%As a consequence, for every $\inc{<}$-equivariant ideal $\idl[I]$,
-%we can find a finite set of polynomials $B\subseteq \idl[I]$ which is a Gr\"{o}bner basis of $\idl{I}$ in the sense that,
-%for every polynomial $f$ in $\idl[I]$,
-%there exists a polynomial $b$ in $B$ such that $\lm(b) \gdivleq[\inc{<}] \lm(f)$.
-%It can be proven that $B$ is a set of generators of $\idl[I]$.
-%This proves that every $\inc{<}$-equivariant ideal, and hence every $\symgr{\Indets}$-equivariant ideal is finitely generated.
-%Now for the computation of a Gr\"{o}bner basis,
-%one can extend the Buchberger's algorithm to this setting,
-%which terminates due to the fact that $\gdivleq[\inc{<}]$ is a \kl{well-partial-order}.
-
-The above mentioned results were rediscovered in \cite{AH07,AH08,HKL18}.
-In \cite{HS12} these results were used to prove the Independent Set Conjecture in algebraic statistics.
-In \cite{HS12}, the authors also showed that one can even take a submonoid $\calM$ of $\inc{<}$ and prove existence and computability of finite Gr\"{o}bner basis assuming that $\gdivleq[\calM]$ is a well-partial-order.
-
-\arka{Either add \cite{GHOLAS24} here or merge this part into the intro}
-
-\cite[Corollary 59]{GHOLAS24} shows that one can use a similar strategy for the action $\aut{\calQ}\actson\calQ$ (\Cref{ex:dlo}).
-However, it becomes difficult to do the same for a general action $\group\actson\Indets$ satisfying the conditions in \Cref{thm:compute-egb}.
-
-Last but not least,
-our results are closely related to some of the recent results regarding computation with orbit-finite sets,
-in particular on algebraic problems \cite{BFKM24,GHL22,GHL25,KKOT15,Prz23}.
  
 
 
