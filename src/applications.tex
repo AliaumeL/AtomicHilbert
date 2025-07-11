@@ -12,20 +12,16 @@ that a given group action $\grp[G] \actson \X$ satisfies the \kl{computability
 assumptions} and the \kl{well-quasi-ordering} property, and we aim to provide a
 list of operations that preserve these properties, so that simpler examples
 (\cref{ex:dlo,ex:eq atoms,ex:dense tree}) can serve as building blocks to model
-complex systems.\footnote{This is a common theme in the theory of 
-  \kl{well-quasi-ordered} sets, where numerous closure properties are
-established \cite[\textbf{TODO}]{SCSC17}.}
+complex systems.
 
-For the
-remainder of this section, we fix a pair of group actions $\grp[H] \actson \X$
-and $\grp[G] \actson \Y$, where $\X$ is equipped with a total order $<_{\X}$
-and $\Y$ is equipped with a total order $<_{\Y}$. The constructions that what
-we mention in this section were already studied in \cite{GHOLAS24}, via
-\cite[Example 10]{GHOLAS24} or \cite[Lemma 9]{GHOLAS24}, but they did not take
-into account our stronger requirement that $\gdivleq$ should be a
+For the remainder of this section, we fix a pair of group actions $\grp[H]
+\actson \X$ and $\grp[G] \actson \Y$, where $\X$ is equipped with a total order
+$<_{\X}$ and $\Y$ is equipped with a total order $<_{\Y}$. The constructions
+that what we mention in this section were already studied in \cite{GHOLAS24},
+via \cite[Example 10]{GHOLAS24} or \cite[Lemma 9]{GHOLAS24}, but they did not
+take into account our stronger requirement that $\gdivleq$ should be a
 \kl{well-quasi-ordering} for any \kl{well-quasi-ordered} set $(Y, \leq)$ of
-exponents on the monomials. We summarise in \cref{tab:closure-properties}
-the
+exponents on the monomials. We summarise in \cref{tab:closure-properties} the
 closure properties of the \kl{computability assumptions} and the
 \kl{well-quasi-ordering} property, and we give their definitions of the
 operations in \cref{def:union,def:product,def:nested product}.
@@ -33,7 +29,9 @@ operations in \cref{def:union,def:product,def:nested product}.
 \begin{table}
   \label{tab:closure-properties}
 \centering
-\caption{Closure properties of the \kl{computability assumptions} and \kl{well-quasi-ordering} property.}
+\caption{Closure properties of the \kl{computability assumptions} and \kl{well-quasi-ordering} property
+for group actions on sets of indeterminates, recapitulating \cref{def:union,def:product,def:nested product}
+and \cref{lem:closure-properties-wqo,lem:closure-properties-comp}.}
 \begin{tabular}{l|l|l|l|l}
   \toprule
   \textbf{Name} &
@@ -75,63 +73,58 @@ Essentially,
 each element $x\in\X$ carries its own copy $\{x\}\times\Y$ of the structure $\Y$,
 and different copies of the structure $\Y$ can be permuted independently.
 \end{definition}
-%
+
 \begin{lemma}\label{lem:closure-properties-wqo}
 If $(\mon[Q]{\X}, \gdivleq[\grp[G]])$ and $(\mon[Q]{\Y}, \gdivleq[\grp[H]])$ are \kl{WQOs},
 then $(\mon[Q]{\X \ordplus \Y}, \gdivleq[\grp[G] \times \grp[H]])$ and $(\mon[Q]{\X\uplus\Y}, \gdivleq[\grp[G]\otimes\grp[H]])$ are also \kl{WQOs}.
 \end{lemma}
-%
+
 \begin{proof}
 The \kl{divisibility up to $\grp[G] \times \grp[H]$} order is essentially the product of the orders $\gdivleq[\grp[G]]$ and $\gdivleq[\grp[H]]$,
 hence is a \kl{WQO} if both orders are \kl{WQOs} \cite[Lemma 1.5]{SCSC17}.
 For, $(\mon[Q]{\X\uplus\Y}, \gdivleq[\G\otimes\calH])$ it follows from \cite[Lemma 9]{GHOLAS24}.
 \end{proof}
-%
+
 \begin{lemma}\label{lem:product-not-wqo}
 If $(\mon[Q]{\X \ordtimes \Y}, \gdivleq[\grp[G] \times \grp[H]])$ is not a \kl{WQO} even if both $\X$ and $\Y$ are infinite.
 \end{lemma}
-%
 \begin{proof}
-We restate the antichain given in \cite[Example 10]{GHOLAS24}.
+We restate the antichain given in \cite[Example 10]{GHOLAS24},
+that will also be used is \cref{rem:multiple-orbits} of \cref{sec:undecidability}
+when discussing the undecidability of the \kl{equivariant ideal membership problem}.
 Let $\{x_1,x_2,\dots\}$ and $\{y_1,y_2,\dots\}$ be infinite subsets of $\X$ and $\Y$ respectively.
 For $n = 3,4,\dots$, let $\monelt{c}_n$ be the monomial
-\[
-\monelt[c]_n = (x_1,y_1)(x_1,y_2)(x_2,y_2)(x_2,y_3)\ldots(x_n,y_n)(x_n,y_1) \ .
-\]
+$
+\monelt[c]_n = (x_1,y_1)(x_1,y_2)(x_2,y_2)(x_2,y_3)\cdots(x_n,y_n)(x_n,y_1)$.
 Then $\setof{\monelt[c]_n}{n = 3,4,\dots}$ is an infinite antichain.
 \end{proof}
-%
+
 \begin{lemma}\label{lem:closure-properties-comp}
 If $\grp[G]\actson\X$ and $\grp[H]\actson\Y$ satisfy our \kl{computability assumptions},
 then so do $(\grp[G] \times \grp[H])\actson (\X \ordplus \Y)$ and $(\grp[G] \otimes \grp[H])\actson (\X \times \Y)$.
 \end{lemma}
-%
 \begin{proof}
-\todo[inline]{for aliaume: cleanup this}
-First we show that they are compatible with a computable linear order.
-The \kl{sum action} preserves the order $<_{\X \ordplus \Y}$ defined as
-\[
-u < v \quad\iff\quad \text{either $u\in\X$ and $v\in\Y$, or $u < v \in \X$, or $u < v \in \Y$}\ .
-\]
-If $\G\actson\X$ and $\calH\actson\Y$ preserves the linear orders $<_{\X}$ and $<_{\Y}$, respectively,
-then $\G\otimes\calH \actson \X\times\Y$ preserves the lexicographic linear order on $\X\times\Y$ defined as
-\[
-(x,y) <_{\ell ex} (x',y')\quad\text{if}\quad
-\text{$x <_{\X} x'$, or $x = x'$ and $y <_{\Y} y'$.}
-\]
+  It is an easy check that the actions defined are all \kl(ord){compatible}
+  with the total ordering on the set of indeterminates.
+  Let us now sketch the proof that points (2) and (3) of our
+  \kl{computability assumptions} hold for the action $(\grp[G] \times \grp[H])\actson (\X \ordplus \Y)$,
+  the proof being similar for $(\grp[G] \otimes \grp[H])\actson (\X \times \Y)$.
+  We represent elements of $\X \ordplus \Y$ as elements of a tagged union,
+  and given a word $w \in (\X \ordplus \Y)^*$, we can 
+  create three words: one $w_\X$ in $\X^*$, one $w_\Y$ in $\Y^*$, and one $w_\text{tag}$ in $\set{ 0, 1 }^*$,
+  obtained by considering respectively only the elements of $\X$,
+  only the elements of $\Y$, and restricting the elements of $\X \ordplus \Y$ to whether 
+  or not they belong to $\X$.
+  It is an easy check that two words $u,v$ are in the same orbit if and only if
+  their $u_\X$ and $v_\X$ are in the same orbit under $\grp[G]$,
+  their $u_\Y$ and $v_\Y$ are in the same orbit under $\grp[H]$, and their $u_\text{tag}$ and $v_\text{tag}$ are equal.
 
-Now we show point (2) hold in our \kl{computability assumptions} holds for $(\grp[G] \times \grp[H])\actson (\X \ordplus \Y)$ and $(\grp[G] \otimes \grp[H])\actson (\X \times \Y)$.
-The proofs can be extended to show that point (3) hold as well.
-
-Every tuple of element $z_1\dots z_n$ in $(\X + \Y)^*$ can be written as a pair  of elements $z_{\X} = z_{i_1}\dots z_{i_k}$ and $z_{\Y} = z_{j_1}\dots z_{j_{\ell}}$ of elements respectively in $\X^*$ and $\Y^*$, for some partition .
-Two elements $z_1\dots z_n$ and $z'_1\dots z'_n$ are in the same orbit if and only if $z_{\X} = z_{i_1}\dots z_{i_k}$ and $z'_{\X} = z'_{i'_1}\dots z'_{i'_{k'}}$,
-and $z_{\Y} = z'_{j'_1}\dots z_{j'_{\ell'}}$ and $z'_{\Y} = z'_{j'_1}\dots z'_{j'_{\ell'}}$ are respectively in the same orbits,
-$\{i_1,\dots,i_k\} = \{i'_1,\dots,i'_{k'}\}$ and $\{j'_1,\dots,j'_{\ell'}\} = \{j'_1,\dots,j'_{\ell'}\}$.
-
-From an element $(x_1,y_1)\dots (x_n,y_n)$ we can create a list of words in $u_1,\dots,u_n \in \Y^*$ by defining $u_i = y_{j_1}\dots y_{j_k}$ such that $\{j_1 < \dots < j_k\} = \setof{j\in\{1,\dots,n}{x_j = x_i}$.
-Two elements $(x_1,y_1)\dots (x_n,y_n)$ and $(x'_1,y'_1)\dots (x'_n,y'_n)$ in $(\X \times \Y)^*$ are in the same orbit under the action of $(\grp[G] \times \grp[H])$ if and only if $x_1\dots x_n$ and $x'_1 \dots x'_n$ are in the same orbit,
-and $u_i$ and $u'_i$ are in the same orbit for every $i = 1,\dots,n$.
-We can extend this idea
+  To list representatives of the orbits in $(\X \ordplus \Y)^n$ for a fixed 
+  $n \in \N$, we can list representatives $u_\X$ of the orbits in $\X^{\leq n}$,
+  representatives $u_\Y$  of the orbits in $\Y^{\leq n}$,
+  and words $u_\text{tag} \in \set{0,1}^n$, and consider triples
+  $(u_\X, u_\Y, u_\text{tag})$ such that $|u_\X| + |u_\Y| = n$,
+  $|u_\text{tag}|_0 = |u_\X|$, and $|u_\text{tag}|_1 = |u_\Y|$.
 \end{proof}
 %
 \section{Applications}
