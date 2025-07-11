@@ -167,7 +167,9 @@ In order to show that the \kl{equivariant ideal membership problem} is
 undecidable, it is therefore enough to show that the \kl{monomial reachability
 problem} is undecidable. To that end, we will encode the Halting problem of a
 Turing machine. There are two main obstacles to overcome: first, the
-reversibility of the rewriting system, which can be (partially) solved by
+reversibility of the rewriting system,
+\todo[inline]{cite Simulation by bidirected systems page 15 of \cite{GAMAPASCZE22}}
+which can be (partially) solved by
 considering \emph{deterministic} and \emph{reversible} Turing machines; and
 second, the fact that the configurations of the Turing machine cannot
 staightforwardly be encoded as monomials due to the commutativity of the
@@ -385,9 +387,74 @@ when creating the tape.
 \end{proof}
 
 
-\todo[inline]{
-  todo aliaume: add remark pairs of indeterminates + multiple orbits.
-  }
+\begin{remark}
+  \label{rem:multiple-orbits}
+  The undecidability result of \cref{thm:undecidable-paths} can be generalised
+  to a \emph{relaxed} notion of \kl(of){infinite path}. Given finitely
+  many orbits $\mathcal{O}_1, \ldots, \mathcal{O}_k$ of pairs of
+  indeterminates, a \emph{relaxed path} is a set of indeterminates 
+  such that $(x_i, x_j)$ is belongs to one of the orbits $\mathcal{O}_k$
+  if and only if $|i - j| = 1$ for all $i,j \in \N$.
+\end{remark}
+
+\begin{remark}
+  \label{rem:indeterminates-infinite-path}
+  Given an \kl{oligomorphic} set of indeterminates $\Indets$,
+  it is equivalent to say that $\Indets$ contains an \kl(of){infinite path}
+  or to say that it contains \kl(of){finite paths} of arbitrary length.
+\end{remark}
+\begin{proof}
+  Assume that there are arbitrarily long finite paths in $\Indets$.
+  Then, one can create an infinite tree whose nodes 
+  are representatives of (distinct) orbits of finite paths, whose root is the empty path, and 
+  where the ancestor relation is obtained by projecting on a subset of
+  indeterminates.
+  Because $\Indets$ is \kl{oligomorphic}, there are finitely many 
+  nodes at each depth in the tree (i.e. at each length of the finite path).
+  Hence, there exists an infinite branch in the tree due to König's lemma,
+  and this branch is a witness for the existence of an \kl(of){infinite path}
+  in $\Indets$.
+\end{proof}
+
+
+\begin{example}
+  \label{ex:rado-graph-path}
+  The \kl{Rado graph}, as introduced in \cref{ex:rado},
+  contains an \kl(of){infinite path} $P$. Indeed, the Rado graph
+  contains every finite graph as an induced subgraph, and in particular,
+  it contains arbitrarily long finite paths. 
+  As a consequence of \cref{thm:undecidable-paths},
+  which applies thanks to \cref{rem:indeterminates-infinite-path},
+  we conclude that the \kl{equivariant ideal membership problem}
+  is undecidable for the Rado graph.
+\end{example}
+
+\begin{example}
+  \label{ex:product-indets}
+  Let $\Indets$ be an \kl{oligomorphic} infinite set of indeterminates.
+  Then $\Indets \times \Indets$ contains a (generalised) \kl(of){infinite path}
+  as defined in \cref{rem:multiple-orbits}.
+\end{example}
+\begin{proof}
+  Let $\seqof{x_i}[i \in \N]$
+  and $\seqof{y_i}[i \in \N]$ be two infinite sets of distinct indeterminates
+  in $\Indets$.
+  Let us define $P \defined (x_0, y_0), (x_1, y_0), (x_1, y_1), (x_2, y_1), \ldots$.
+  The orbits of pairs that define the successor relation 
+  are the orbits of $((x_i, y_j), (x_k, y_l))$,
+  where $x_i = x_k$ and $y_j \neq y_l$, or where $x_i \neq x_k$ and $y_j = y_l$.
+  Because $\Indets$ is \kl{oligomorphic}, there are finitely many such orbits.
+  Let us sketch the fact that this defines a generalised path.
+  Consider that
+  $((x_i, y_j), (x_k, y_l))$ is in the same orbit as $((x_0, y_0), (x_1, y_0))$,
+  then there exists $\gelem \in \group$ such that
+  $\gelem \cdot (x_i, y_j) = (x_0, y_0)$ and $\gelem \cdot (x_k, y_l) = (x_1, y_0)$,
+  but then $\gelem \cdot y_j = \gelem \cdot y_l = y_0$, and because $\gelem$ is 
+  invertible, $y_j = y_l$. Similarly, we conclude that $x_i \neq x_k$.
+  The same reasoning shows that if
+  $((x_i, y_j), (x_k, y_l))$ is in the same orbit as $((x_0, y_0), (x_0, y_1))$,
+  then $y_j \neq y_l$ and $x_i = x_k$.
+\end{proof}
 
 \todo[inline]{
   Add examples of indeterminates with infinite paths. Ex. rado graph.
