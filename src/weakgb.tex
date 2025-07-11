@@ -1,3 +1,4 @@
+%!TEX root = ../atomic.asmart.tex
 % LTeX: language=en
 \section{Weak Equivariant Gröbner Bases}
 \label{sec:weakgb}
@@ -193,25 +194,29 @@ an actual algorithm (\cref{lem:weakgb-computable}) that is
         \Return{$\Basis$}\;
     }
 \end{algorithm}
-
+%
 \begin{lemma}
   \label{lem:weakgb-computable}
-  The \cref{alg:weakgb} is a computable function that is itself
-  \kl(func){equivariant}, and produces an \kl{orbit finite} set $\Basis$
-  if it terminates.
+  The \cref{alg:weakgb} is a computable function that is itself \kl(func){equivariant},
+  and produces an \kl{orbit finite} set $\Basis$ if it terminates.
+  \kl(func){equivariant}, and produces an \kl{orbit finite} set $\Basis$ if it terminates.
 \end{lemma}
+%
 \begin{proof}
-  Let us prove that $\spolyset(H)$ is a computable function
-  that is \kl(func){equivariant}. First,
-  one can  compute $H^2$, which is an \kl{orbit finite} set of pairs,
-  because $H$ is \kl{orbit finite} and $\Indets$ is 
+  Observe that it is enough to show that $\spolyset{\Basis}$ is orbit-finite for every orbit-finite set $\Basis$.
+  First, we compute $\Basis^2$, which is an \kl{orbit finite} set of pairs,
+  because $\Basis$ is \kl{orbit finite} and $\Indets$ is 
   \kl{effectively oligomorphic}.
-  Then, one can remark that $\spoly{p}{q}$ is computable and \kl(func){equivariant},
-  hence one can compute $\spolyset(H)$ as the set of all
-  $\spoly{p}{q}$ for $(p,q) \in H^2$.
-  Furthermore, one can decide whether the set $\Basis$ stabilizes because the 
-  membership of a polynomial $p$ in $\Basis$ is decidable, since 
-  $\poly{\K}{\Indets}$ is \kl{effectively oligomorphic} and $\Basis$ is \kl{orbit finite}.
+  Then, noting that $\spoly{-\ }{-}$ is computable and \kl(func){equivariant},
+  we conclude
+  \[
+  \bigcup_{p,q \in H}{\spoly{p}{q}}
+  \]
+  is computable and orbit-finite.
+  Now using \Cref{lem:normalisation} one can compute the set $\spolyset(\Basis)$ which is also orbit-finite.
+  Furthermore, one can decide whether the set $\Basis$ stabilizes,
+  because the membership of a polynomial $p$ in $\Basis$ is decidable,
+  since $\group\actson\Indets$ is \kl{effectively oligomorphic} and $\Basis$ is \kl{orbit finite}.
 \end{proof}
 
 
