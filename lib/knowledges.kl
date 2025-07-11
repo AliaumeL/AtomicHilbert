@@ -8,15 +8,19 @@
  | group
 \knowledge{notion}
  | orbits
+ | orbit
  | $\group _V$-orbits
 
 \knowledge{notion}
+ | oligomorphic
+\knowledge{notion}
  | effectively oligomorphic
- | effective oligomorphcity
+ | effective oligomorphicity
  | effective oligomorphism
  | effectively oligomorphically
 
 \knowledge{notion}
+ | orbit-finite
  | orbit finite
  | orbit finite set
  | orbit finite sets
@@ -29,6 +33,7 @@
  | respects a computable linear order
  | comatible with a linear order
  | compatible@ord
+ | compatible with the order@ord
 
 
  \knowledge{notion}
@@ -89,6 +94,8 @@
  
 \knowledge{notion}
  | divisibility up-to $\group $
+ | divisibility relation up-to-$\group $
+ | divisibility up to $\grp [G] \times \grp [H]$
 
 \knowledge{notion}
  | $T$-strong basis
@@ -101,8 +108,8 @@
  | reverse lexicographic 
  | reverse lexicographic order
  | reverse lexicographic ordering
+ | revlex ordering
  | revlex order
- | revlex
 
 %% WQO
 \knowledge{notion}
@@ -114,9 +121,6 @@
  | WQO
  | WQOs
 
-
-\knowledge{notion}
- | well-founded
 
 \knowledge{notion}
  | effective total ordering
@@ -137,6 +141,7 @@
  | ideal membership problem
 \knowledge{notion}
  | equivariant ideal membership problem
+ | equivariant ideal membership
  | equivariant ideal membership problems
  | equivariant ideal membership queries
 
@@ -195,6 +200,8 @@
 \knowledge{notion}
  | equivariant Gröbner basis
  | equivariant Gröbner bases
+ | equivariant Gr\"{o}bner basis
+ | equivariant Gr\"{o}bner bases
 
 \knowledge{notion}
  | weak equivariant Gröbner basis
@@ -232,7 +239,9 @@
  | monomial reachability problem
 \knowledge{notion}
  | monomial rewrite system
+ | monomial rewriting system
  | monomial rewriting
+ | monomial rewrite systems
 \knowledge{notion}
  | rewrite step@monrew
 
@@ -241,20 +250,28 @@
  | word encoding
 
 \knowledge{notion}
+ | define paths@efo
+ | defines a path@efo
+
+\knowledge{notion}
  | infinite path@of
  | infinite paths@of
+ | finite path@of
+ | finite paths@of
 \knowledge{notion}
  | infinite dimensional vector space
  
 
+\knowledge{notion}
+ | Rado graph
 
 % algorithms
 \knowledge{notion,typewriter,ensuretext}
  | weakgb
 \knowledge{notion,typewriter,ensuretext}
  | egb
-\knowledge{notion,typewriter,ensuretext}
- | vsgb
+%\knowledge{notion,typewriter,ensuretext}
+% | vsgb
 
 
 %%%%%
@@ -270,6 +287,30 @@
 \knowledge{notion}
  | closed subsets
  | closed subset
+
+%%%% 
+% STRUCTURES
+%%%%%
+
+\knowledge{notion}
+ | non-homogeneous
+ | homogeneous
+ | homogeneous structures
+ | homogeneous structure
+\knowledge{notion}
+ | nicely orderable
+
+\knowledge{notion}
+ | reduct
+\knowledge{notion}
+ | effective reduct
+\knowledge{notion}
+ | sum action
+\knowledge{notion}
+ | product action
+\knowledge{notion}
+ | lexicographic product action
+
 
  %%%%
  %  NOETHERIAN SPACES 
@@ -310,5 +351,8 @@
 \knowledge{notion}
  | orbit finite polynomial automata
  | orbit finite polynomial automaton
+ | Orbit finite polynomial automata
 \knowledge{notion}
  | zeroness problem@ofpa
+
+

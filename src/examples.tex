@@ -9,15 +9,14 @@ some relations and functions on that set, and $\group$ is the group
 $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve and
 reflect the structure) of $\Indets$. A monomial $\monelt[p] \in
 \mon[Q]{\Indets}$ can be thought as a labelling of a finite substructure of
-$\X$ using elements of $Y$. If the structure $\Indets$ is \intro{homogenous},
+$\X$ using elements of $Y$. If the structure $\Indets$ is \intro{homogeneous},
 that is, if isomorphisms between finite induced substructures extends to
 automorphisms of the whole structure, then $\gdivleq$ is same as embedding of
 labelled finite induced substructures of $\X$. \footnote{ We refer the reader
 to \cite[Chapter 7]{BOJAN16inf} and \cite{homsurvey} for more details on
 homogeneous structures.} Let us now give some examples of such structures and
 whether they satisfy our \kl{computability assumptions}, and whether the
-\kl{divisibility relation up-to-$\group$} is a \kl{well-quasi-ordering} for
-\kl{generalised monomials}.
+\kl{divisibility relation up-to-$\group$} is a \kl{well-quasi-ordering}.
 
 
 \begin{example}[Equality Atoms]
@@ -41,7 +40,7 @@ and $\gdivleq[\aut{\OrderAtoms}]$ is the scattered subword ordering, which is a 
 
 \begin{example}[The Rado graph]
   \label{ex:rado}
-Let $\intro*\RadoAtoms$ be the Rado graph (\cite[Section 7.3.1]{BOJAN16inf},\cite[Example 2.2.1]{homsurvey}).
+  Let $\intro*\RadoAtoms$ be the \intro{Rado graph} (\cite[Section 7.3.1]{BOJAN16inf},\cite[Example 2.2.1]{homsurvey}).
 Up to isomorphism,
 finite induced substructures of $\RadoAtoms$ are finite undirected graphs,
 monomials in $\mon[Y]{\RadoAtoms}$ are graphs with vertices labelled with $Y$,
@@ -69,8 +68,8 @@ Then, $\setof{\monelt[p]_n}{n = 3,4,\dots}$ forms an infinite antichain.
 The previous \cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector}
 are
 well known examples in the theory of \emph{sets with atoms} \cite{BOJAN16inf}.
-Let us now give a new example of \kl{well-quasi-ordered} \kl{generalised
-monomials}, by extending \Cref{ex:dlo} that
+Let us now give a new example of \kl{well-quasi-ordered} \kl{divisibility relation
+up-to-$\group$}, by extending \Cref{ex:dlo} that
 relied on Higman's lemma \cite{HIG52} via Kruskal's tree theorem
 \cite{Kruskal60}.
 
@@ -80,24 +79,22 @@ relied on Higman's lemma \cite{HIG52} via Kruskal's tree theorem
 Let $\intro*\TreeAtoms$ denote the universal countable dense meet-tree, as
 defined in 
 \cite[Page 2]{KRS21} or \cite[Section 7.3.3]{BOJAN16inf}.
-Note that the tree structure is given by the \intro{least common ancestor} (\reintro{meet})
+Note that the tree structure is given by the \emph{least common ancestor} (\emph{meet})
 operation, and not by its edges.
 For a subset $S\subset \TreeAtoms$,
-define its \intro(meet-tree){closure} to be the smallest subtree of $\TreeAtoms$ containing $S$.
+define its \emph{closure} to be the smallest subtree of $\TreeAtoms$ containing $S$.
 Up to isomorphism, finite induced substructures of $\TreeAtoms$ are finite meet-trees.
 Monomials in $\mon[Y]{\TreeAtoms}$ are finite meet-trees labelled with $1 + Y$.
 Here $1 + Y$ is the \kl{WQO} containing one more element than $Y$ which is incomparable to elements in $Y$,
-and is used to label nodes that are in the \kl(meet-tree){closure} of the set of variable of a monomial, but not in the monomial itself.
-The relation $\gdivleq[\aut{\TreeAtoms}]$ is the embedding of labelled meet-trees,
+and is used to label nodes that are in the closure of the set of variable of a monomial, but not in the monomial itself.
+The divisibility relation $\gdivleq[\aut{\TreeAtoms}]$ is exactly the embedding of labelled meet-trees,
 which is a \kl{WQO} due to Kruskal's tree theorem \cite{Kruskal60}.
 \end{example}
 
-Even though the above examples using \kl{homogeneous} 
-structures nicely illustrate the correspondance between 
-monomials and labelled finite substructures, 
-we can also consider \kl{non-homogeneous} structures,
-such as in \Cref{ex:int} below.
-%
+The above examples using \kl{homogeneous} structures nicely illustrate the
+correspondence between monomials and labelled finite substructures, but we can
+also consider \kl{non-homogeneous} structures, such as in \Cref{ex:int} below.
+
 \begin{example}\label{ex:int}
 Let $\calZ$ be the set of integers ordered by the usual ordering.
 Then $\aut{\calZ}$ is the set of all order preserving bijections of $\D$.
@@ -164,8 +161,6 @@ isomorphic to $\aut{\TreeAtoms}\actson\TreeAtoms$, and hence
 $\aut{\TreeAtoms}\actson\TreeAtoms$ is a reduct of $\aut{\T_<}\actson\T_<$.
 \end{remark}
 
-
-\todo[inline]{Rework this paragraph (aliaume)}
 
 \paragraph{Effective oligomorphicity} Recall that in our \kl{computability
 assumptions} we require the action $\group\actson\Indets$ to be \kl{effectively

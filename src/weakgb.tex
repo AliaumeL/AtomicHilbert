@@ -71,8 +71,8 @@ the analogues of $\dom$ and $\lm$ for decompositions.
   The same proof works for decompositions.
 \end{proof}
 
-\AP As a consequence of \cref{lem:chm}, we know that the rewriting
-relation $\toeucl{H}$ is \kl{terminating} for every set $H$. Given a $H$ of
+\AP As a consequence of \cref{lem:chm}, we know that the rewriting relation
+$\toeucl{H}$ is \intro{terminating} for every set $H$. Given a set $H$ of
 polynomials, and given a polynomial $p \in \poly{\K}{\X}$, we say that $p$ is
 \intro{normalised} with respect to $H$ if there are no transitions $p
 \toeucl{H} r$. The set of \intro{remainders} of $p$ with respect to $H$ is
@@ -194,8 +194,6 @@ an actual algorithm (\cref{lem:weakgb-computable}) that is
     }
 \end{algorithm}
 
-\todo[inline]{say that the output is orbit finite}
-
 \begin{lemma}
   \label{lem:weakgb-computable}
   The \cref{alg:weakgb} is a computable function that is itself
@@ -275,7 +273,7 @@ and the correctness of the resulting orbit finite set
   for all $i \in I$.
 
   Leveraging \cref{lem:chm}, we know that the ordering $\pmonleq$ is
-  \kl{well-founded}. As a consequence, we can consider a minimal 
+  well-founded. As a consequence, we can consider a minimal 
   decomposition $\mathfrak{d}'$ of $p$ with respect to $\Basis$ such that $\mathfrak{d}'
   \pmonleq \mathfrak{d}$. We now distinguish two cases, depending on whether
   the leading monomial $\lmdec(\mathfrak{d}')$ of the decomposition $\mathfrak{d}'$ is
