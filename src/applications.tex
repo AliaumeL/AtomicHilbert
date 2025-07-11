@@ -328,29 +328,17 @@ orbit finite setting for future work.
 \end{remark}
 
 
+\paragraph{Reachability problem of symmetric data Petri nets.} The classical
+model of Petri nets was extended to account for arbitrary data attached to
+tokens to form what is called data Petri nets. We will not discuss the precise
+definitions of these models, but point out  that a reversible data Petri net is
+exactly what is called a \kl{monomial rewriting system} \cite[Section
+8]{GHOLAS24}. Because reachability in such rewriting systems can be decided
+using \kl{equivariant ideal membership} queries \cite[Theorem 64]{GHOLAS24}, we
+can use \cref{thm:compute-egb} and \cref{lem:reducts-equiv-hilbert} to show
+\cref{cor:rev data VAS}. Note that \kl{monomial rewrite systems} will be at the
+center of our undecidability results in \cref{sec:undecidability}.
 
-\todo[inline]{ for arka: fill this. 
-  The classical model of Petri nets [cite]
-  was extended to account for arbitrary data attached to tokens 
-  to form what is called data petri nets [cite]. We will not 
-  discuss the precise definitions of these models, but 
-  point out  
-  that a reversible data Petri net is exactly what is called a 
-  \kl{monomial rewriting system} \cite[Section 8]{GHOLAS24}.
-  Because reachability in such rewriting systems can be decided 
-  using \kl{equivariant ideal membership} queries \cite[Theorem 64]{GHOLAS24},
-  we can use \cref{thm:compute-egb} and \cref{lem:reducts-equiv-hilbert} to
-  show \cref{cor:rev data VAS}. Note that \kl{monomial rewrite systems}
-  will be at the center of our undecidability results in
-  \cref{sec:undecidability}.
-}
-\paragraph{Reachability problem of symmetric data Petri nets.}
-Define a Petri net with data $\group\actson\Indets$ to be a Petri net which uses elements from $\Indets$ to label its tokens,
-and its transitions are invariant under the action of $\group$.
-As observed in \cite[Section 8]{GHOLAS24},
-a reversible data Petri nets are same as a monomial rewrite system.
-Using \Cref{thm:compute-egb}, \Cref{lem:reducts-equiv-hilbert} and \cite[Theorem 64]{GHOLAS24} we can get the following corollary:
-%
 \begin{corollary}\label{cor:rev data VAS}
   For every \kl{nicely orderable} group action $\group\actson\Indets$,
   the reachability problem for reversible Petri nets with data in $\Indets$ is decidable.

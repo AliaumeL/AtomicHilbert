@@ -109,7 +109,7 @@
 \begin{document}
 
 \title[Equivariant Gröbner bases]{Computability of Equivariant Gröbner bases \\
-       2025-07-11 08:32:30 +0200
+       2025-07-11 12:19:31 +0200
 }
 
 
@@ -125,7 +125,7 @@
 \date{\today}
 %
 \begin{abstract}
-    The ring of polynomials in infinitely many variables over a field is never Noetherian. However, it is often the case that the set of indeterminates comes equipped with an additional structure. This extra structure can be taken into account by the means of a group action on the indeterminates, and by considering polynomials up to this action. In this setting, one can recover Noetherianity by restricting the attention to equivariant ideals, under mild assumptions on the group action, as shown by Ghosh and Lasota in 2024. We extend this result by proving algorithmic counterparts to this theoretical result: we show that one can decide the equivariant membership problem, and that one can even compute equivariant Gröbner bases, under similar assumptions as the ones made by Ghosh and Lasota. In addition to these positive results, we also establish sufficient conditions for the equivariant membership problem to be undecidable. Finally, we discuss how these computational results can be applied to various mathematical and computer science decidability problems.
+    Let \(\mathbb{K}\) be a field, \(\mathcal{X}\) be an infinite set (of indeterminates), and \(\mathcal{G}\) be a group acting on \(\mathcal{X}\). An ideal in the polynomial ring \(\mathbb{K}[\mathcal{X}]\) is called equivariant if it is invariant under the action of \(\mathcal{G}\). We show Gröbner bases for equivariant ideals are computable are hence the equivariant ideal membership is decidable when \(\mathcal{G}\) and \(\mathcal{X}\) satisfies the Hilbert's basis property, that is, when every equivariant ideal in \(\mathbb{K}[\mathcal{X}]\) is finitely generated. Moreover, we give a sufficient condition for the undecidability of the equivariant ideal membership problem. This condition is satisfied by the most common examples not satisfying the Hilbert's basis property.
 \end{abstract}
 
 
@@ -190,7 +190,6 @@
 % If there are any appendices, we include them here.
 \appendix
 \input{src/appendix.tex}
-\input{src/algorithm.tex}
 
 
 \end{document}
