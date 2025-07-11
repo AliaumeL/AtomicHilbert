@@ -16,26 +16,32 @@ be turned into undecidability results for the \kl{equivariant ideal membership
 problem}. Let us now discuss the main open questions raised by
 the present paper.
 
-\paragraph*{Total orderings.} We assumed that the indeterminates $\Indets$ were
-equipped with a total ordering $\varleq$. This assumption seems necessary, as
-the notions of \kl{leading monomials} would cease to be well-defined without
-it. However, we do not have a clear understanding of whether this assumption is
-vacuous or not. Indeed, as noticed by \cite[Lemma 13]{GHOLAS24}, and
-\cref{lem:reducts-equiv-hilbert}, it often suffices to extend the
-structures of the indeterminates to account for a total ordering. A conjecture
-of Pouzet \todo{cite} states that such an ordering always exists, and this was
-remarked by \cite[Remark 14]{GHOLAS24}. Note that in this case, one would 
+\paragraph*{Total orderings.}
+We assumed that the indeterminates $\Indets$ were equipped with a total ordering $\varleq$ that is preserved by the group action.
+This assumption seems necessary,
+as the notions of \kl{leading monomials} would cease to be well-defined without it.
+However, we do not have a clear understanding of whether this assumption is vacuous or not.
+Indeed, as noticed by \cite[Lemma 13]{GHOLAS24}, and \cref{lem:reducts-equiv-hilbert},
+it often suffices to extend the structures of the indeterminates to account for a total ordering.
+A conjecture of Pouzet \cite[Section 4.4]{POUZ24} states that such an ordering always exists,
+and this was remarked by \cite[Remark 14]{GHOLAS24}.
+Note that in this case, one would get a complete characterisation of the \kl{equivariant Hilbert basis property} \cite[Property 4]{GHOLAS24}.
+
 \todo[inline]{complete this}
 %
-\paragraph*{All our hypotheses and Pouzet in the middle.} We conjecture that
+\arka{changed title}
+\paragraph*{\kl{WQO} property under different sets of labels}
+%
+We conjecture that
 $(\mon{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} if and only if
 $(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} for every
 \kl{well-quasi-ordered} set $Y$ of exponents. This is a form of Pouzet's
 conjecture, which has been verified on some classes of structures.
+\arka{some citation}
 %
-\paragraph*{Undecidability.} It would be nice to obtain a dichotomy result
-for the decidability, but it seems beyond reach for now.
-talk about VASS here  for coverability.
+\paragraph*{Dichotomy.}
+%
+We conjecture that the ideal membership problem is undecidable for every action $\group\actson\X$ that is \kl{oligomorphic} but does not have the \kl{equivariant Hilbert basis property} (cf. \Cref{rem:conj-wqo-infinite-path}).
 %
 \paragraph*{Complexity.} We do not have complexity lower bounds, and there may
 be better algorithms like adaptations of Faugère's algorithm that could be
