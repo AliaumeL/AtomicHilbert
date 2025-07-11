@@ -10,7 +10,6 @@ libraries:
     - lib/knowledges.kl
 appendix:
     - src/appendix.tex
-    - src/algorithm.tex
 ---
 
 \input{src/intro.tex}
