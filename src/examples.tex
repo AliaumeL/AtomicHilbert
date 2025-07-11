@@ -21,6 +21,7 @@ whether they satisfy our \kl{computability assumptions}, and whether the
 
 \begin{example}[Equality Atoms]
   \label{ex:eq atoms}
+  \AP
 Let $\intro*\EqualityAtoms$ be an infinite set without any additional structure other than the equality relation.
 Up to isomorphism, finite induced substructures of $\EqualityAtoms$ are finite sets,
 monomials in $\mon[Y]{\EqualityAtoms}$ are finite multisets of elements in $Y$,
@@ -30,6 +31,7 @@ which is a \kl{WQO} \cite[Corollary 1.21]{SCSC17}.
 
 \begin{example}[Dense linear order]
   \label{ex:dlo}
+  \AP
 Let $\intro*\OrderAtoms$ be the set of rational numbers ordered by the usual ordering.
 Note that under this ordering, $\OrderAtoms$ is a dense linear order without endpoints.
 We write $\OrderAtoms$ instead of $\Q$ to emphasise that we use its elements as indeterminates and not as coefficients of polynomials. 
@@ -40,6 +42,7 @@ and $\gdivleq[\aut{\OrderAtoms}]$ is the scattered subword ordering, which is a 
 
 \begin{example}[The Rado graph]
   \label{ex:rado}
+  \AP
   Let $\intro*\RadoAtoms$ be the \intro{Rado graph} (\cite[Section 7.3.1]{BOJAN16inf},\cite[Example 2.2.1]{homsurvey}).
 Up to isomorphism,
 finite induced substructures of $\RadoAtoms$ are finite undirected graphs,
@@ -50,6 +53,7 @@ For example, cycles of length more than three form an infinite antichain.
 
 \begin{example}[Infinite dimensional vector space]
   \label{ex:bit vector}
+  \AP
 Let $\intro*\BitVectorAtoms$ be an infinite dimensional vector space over $\ftwo$.
 Up to isomorphism,
 finite induced substructures of $\BitVectorAtoms$ are finite dimensional vector spaces over $\ftwo$.
@@ -76,6 +80,7 @@ relied on Higman's lemma \cite{HIG52} via Kruskal's tree theorem
 
 \begin{example}[Dense Tree]
   \label{ex:dense tree}
+  \AP
 Let $\intro*\TreeAtoms$ denote the universal countable dense meet-tree, as
 defined in 
 \cite[Page 2]{KRS21} or \cite[Section 7.3.3]{BOJAN16inf}.
@@ -96,6 +101,7 @@ correspondence between monomials and labelled finite substructures, but we can
 also consider \kl{non-homogeneous} structures, such as in \Cref{ex:int} below.
 
 \begin{example}\label{ex:int}
+  \AP
 Let $\calZ$ be the set of integers ordered by the usual ordering.
 Then $\aut{\calZ}$ is the set of all order preserving bijections of $\D$.
 Note that every order preserving bijection of the set $\calZ$ is a translation $n \mapsto n + c$ for some constant $c\in\calZ$.
@@ -149,7 +155,7 @@ results to an action $\group\actson\Indets$ that does not preserve a linear
 order, as soon as it is  a reduct of some another action $\calH\actson\Indets$ which
 does preserves a linear order. 
 
-For example, $\aut{\EqualityAtoms}\actson\EqualityAtoms$ is a reduct of
+For example, $\aut{\EqualityAtoms}\actson\EqualityAtoms$ is a \kl{reduct} of
 $\aut{\OrderAtoms}\actson\OrderAtoms$ assuming $\EqualityAtoms$ is countable.
 Similarly, let $\T_<$ be the countable dense-meet tree with a lexicographic
 ordering, as defined in \cite[Remark 6.14]{KRS21}.\footnote{The remark says
@@ -162,7 +168,7 @@ $\aut{\TreeAtoms}\actson\TreeAtoms$ is a reduct of $\aut{\T_<}\actson\T_<$.
 \end{remark}
 
 
-\paragraph{Effective oligomorphicity} Recall that in our \kl{computability
+\paragraph{Effective oligomorphicity} \AP Recall that in our \kl{computability
 assumptions} we require the action $\group\actson\Indets$ to be \kl{effectively
 oligomorphic}. It is already known that all the structures of \cref{ex:eq
 atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree} are \kl{oligomorphic}
