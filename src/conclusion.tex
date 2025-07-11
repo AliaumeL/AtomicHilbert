@@ -61,17 +61,22 @@ conjectured to be a necessary condition \cite[Conjecture 1]{Lasota16}.
 decidability of the \kl{equivariant ideal membership problem} and the
 computability of \kl{equivariant Gröbner bases}. However, we have not addressed
 the complexity of such problems, and have only adapted the most basic
-algorithms for computing \kl{Gröbner bases}. 
+algorithms for computing \kl{Gröbner bases}. It would be interesting to know,
+on the theoretical side, if one can obtain complexity lower bounds for such
+problems, but also on the more practical side if advanced algorithms like
+Faugère's algorithm \cite{FAUGERE02} can be adapted to the equivariant setting
+and yield better performance in practice.
 
-We do not have complexity lower bounds, and there may
-be better algorithms like adaptations of Faugère's algorithm that could be
-better in practice.
 
 \paragraph*{Duals of orbit-finitely generated vector spaces} An interesting
 question posed by S\l{a}womir Lasota is that whether for group actions
-$\group\actson\Indets$ for which $(\mon[Y]{\Indets},\gdivleq)$ is a \kl{WQO},
-duals of orbit-finitely generated vector spaces are also orbit-finitely
-generated. This follows for the structures in \Cref{ex:eq atoms,ex:dlo} by the
-results of \cite{BFKM24,GHL22,Prz23}. Proving it for the general case would be
-a big step towards generalising the results of \cite{GHL22}. 
+$\group\actson\Indets$ for which $(\mon[Y]{\Indets},\gdivleq)$ is a \kl{WQO}
+for every \kl{WQO} $Y$, the duals of orbit-finitely generated vector spaces are
+also orbit-finitely generated. This is a well-known fact that finitely
+generated vector spaces have finitely generated duals, and the extension to the
+orbit-finite setting would find applications in solving orbit-finite linear
+systems of equations and extend the results of \cite{GHL22}. It is already
+known to hold for actions originating from the \kl{homogeneous structures}
+considered in \Cref{ex:eq atoms,ex:dlo}, via the work of
+\cite{BFKM24,GHL22,Prz23}. 
 
