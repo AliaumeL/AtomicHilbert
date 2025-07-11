@@ -81,6 +81,8 @@ such that $p \toeucl{H}^* r$ and $r$ is \kl{normalised} with respect to $H$.
 The following lemma states that $\rem{H}{\cdot}$ is a computable function from
 in our setting.
 
+
+\todo[inline]{aliaume: use König + say that the image is orbit finite}
 \begin{lemma}
   \label{lem:normalisation}
   Let $H$ be an \kl{orbit finite set} of polynomials, and let $p \in \poly{\K}{\X}$ be a
@@ -191,6 +193,8 @@ an actual algorithm (\cref{lem:weakgb-computable}) that is
         \Return{$\Basis$}\;
     }
 \end{algorithm}
+
+\todo[inline]{say that the output is orbit finite}
 
 \begin{lemma}
   \label{lem:weakgb-computable}
@@ -330,6 +334,8 @@ and the correctness of the resulting orbit finite set
 As a consequence of the above lemmas, we can now conclude that the 
 \cref{alg:weakgb} computes a \kl{weak equivariant Gröbner basis} of the
 ideal $\EqIdlGen{H}$, as stated in \cref{thm:weakgb-comput}.
+
+\todo[inline]{say we take orbit finite set as input}
 
 \begin{theorem}
   \label{thm:weakgb-comput}
