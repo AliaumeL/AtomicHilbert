@@ -8,16 +8,12 @@ problem} is undecidable under the usual \kl{computability assumptions} on the
 group action, when we do not assume that $(\mon{\Indets}, \gdivleq)$ is a
 \kl{well-quasi-ordering}. In particular, this would show that computing
 \kl{equivariant Gröbner bases} is not possible in these settings, proving the
-optimality of our decidability
-\cref{thm:compute-egb}.
-Beware that there are some pathological cases where the \kl{equivariant ideal
-membership problem} is easily decidable, even when $(\mon{\Indets}, \gdivleq)$
-is not a well-quasi-ordering, as illustrated by the following
-\cref{ex:non-wqo-undecidable}, and it is not possible to obtain
-such a dichotomy result.
-
-\todo[inline]{write conjecture that 
-  under effective assumptions, the two are the same}
+optimality of our decidability \cref{thm:compute-egb}. Beware that there are
+some pathological cases where the \kl{equivariant ideal membership problem} is
+easily decidable, even when $(\mon{\Indets}, \gdivleq)$ is not a
+well-quasi-ordering, as illustrated by the following
+\cref{ex:non-wqo-undecidable}, and it is not possible to obtain such a
+dichotomy result without further assumptions on the group action.
 
 \begin{example}
   \label{ex:non-wqo-undecidable}
@@ -33,7 +29,6 @@ such a dichotomy result.
 \end{example}
 
 
-\todo[inline]{Say that we take an easy version first}
 \AP However, one we are able to prove the undecidability of the \kl{equivariant
 ideal membership problem} under the assumption that the set of indeterminates
 $\Indets$  contains an \intro(of){infinite path} $P \defined \seqof{x_i}[i \in
@@ -44,15 +39,13 @@ finitely many elements. The prototypical example of a set of indeterminates
 containing an \kl(of){infinite path} is $\Indets = \Z$ equipped with the group
 $\group$ of all shifts. The presence of an \kl(of){infinite path} clearly
 prevents $(\mon{\Indets}, \gdivleq)$ from being a \kl{well-quasi-ordering}, as
-shown by the following \cref{rem:not-wqo}. Furthermore, for
-indeterminates obtained by considering \kl{homogeneous structures} and their
-automorphism groups
-(\cref{sec:act ex}),
-the presence of an \kl(of){infinite path} has been conjectured to be a
-necessary and sufficient condition for $(\mon{\Indets}, \gdivleq)$ to be a
-\kl{well-quasi-ordering}: this follows from a conjecture of Schmitz restated in
-\cref{conj:wqo-infinite-path}, that generalises one
-of Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
+shown by the following \cref{rem:not-wqo}. Furthermore, for indeterminates
+obtained by considering \kl{homogeneous structures} and their automorphism
+groups (\cref{sec:act ex}), the presence of an \kl(of){infinite path} has been
+conjectured to be a necessary and sufficient condition for $(\mon{\Indets},
+\gdivleq)$ to be a \kl{well-quasi-ordering}: this follows from a conjecture of
+Schmitz restated in \cref{conj:wqo-infinite-path}, that generalises one of
+Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
 \cref{rem:conj-wqo-infinite-path}.
 
 
@@ -74,10 +67,9 @@ of Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
   in $\monelt_m$, which contradicts the fact that $\gelem \cdot \monelt_n \divleq \monelt_m$.
 \end{remark}
 
-\todo[inline]{refine to say that it is for finite relational structures}
 \begin{conjecture}[Schmitz]
   \label{conj:wqo-infinite-path}
-  Let $\mathcal{C}$ be a class of finite structures. Then, the following are
+  Let $\mathcal{C}$ be a class of finite relational structures. Then, the following are
   equivalent:
   \begin{enumerate}
     \item The class of structures of $\mathcal{C}$ labelled with 
@@ -122,6 +114,21 @@ of Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
   $\Indets$ contains an \kl(of){infinite path} $P$, as introduced
   for generic sets of indeterminates.
 \end{remark}
+
+
+As already mentioned in \cref{rem:conj-wqo-infinite-path}, it is conjectured
+that the presence of an \kl(of){infinite path} is a necessary condition for the
+\kl{equivariant ideal membership problem} to be undecidable in the case of
+\kl{homogeneous structures} over relational signatures. Let us briefly argue
+that in the case of \kl{homogeneous} \emph{$3$-graphs} $\mathcal{G}_3$ (i.e. a
+structure with three distinct edge relations), the \emph{WQO dichotomy theorem}
+\cite[Theorem 4]{LAPIO20}, exactly states that: either
+$(\mon[Y]{\mathcal{G}_3}, \gdivleq)$ is a \kl{well-quasi-ordering} for all
+\kl{well-quasi-ordered} sets $Y$, or there exists an \kl(of){infinite path} in
+$\mathcal{G}_3$. We conclude that for \kl{homogeneous} \emph{$3$-graphs},
+either the \kl{equivariant ideal membership problem} is undecidable
+(\cref{thm:undecidable-paths}), or our \cref{thm:compute-egb} can be applied to
+compute \kl{equivariant Gröbner bases}.
 
 \paragraph{Monomial Reachability}
 The undecidability results we will present in this section regarding the
@@ -173,13 +180,12 @@ In order to show that the \kl{equivariant ideal membership problem} is
 undecidable, it is therefore enough to show that the \kl{monomial reachability
 problem} is undecidable. To that end, we will encode the Halting problem of a
 Turing machine. There are two main obstacles to overcome: first, the
-reversibility of the rewriting system,
-\todo[inline]{cite Simulation by bidirected systems page 15 of \cite{GAMAPASCZE22}}
-which can be (partially) solved by
-considering \emph{deterministic} and \emph{reversible} Turing machines; and
-second, the fact that the configurations of the Turing machine cannot
-staightforwardly be encoded as monomials due to the commutativity of the
-multiplication.
+reversibility of the rewriting system, which can be (partially) solved by
+considering a \emph{reversible version} of a \emph{deterministic} Turing
+machines, as explained in \cite[Simulation by bidirected systems, p.
+15]{GAMAPASCZE22}; and second, the fact that the configurations of the Turing
+machine cannot staightforwardly be encoded as monomials due to the
+commutativity of the multiplication.
 
 
 \paragraph{Structures Containing Paths.} \AP Let us assume for the rest of this
@@ -462,20 +468,4 @@ when creating the tape.
   then $y_j \neq y_l$ and $x_i = x_k$.
 \end{proof}
 
-\todo[inline]{
-  Add examples of indeterminates with infinite paths. Ex. rado graph.
-  Ex. 3-graphs (\cite[Theorem 4]{LAPIO20}).
-}
 
-\todo[inline]{edit remark to work for infinite dimensional vector spaces.}
-
-\begin{remark}
-  \label{rem:more-generally}
-  The undecidability result of \cref{thm:undecidable-paths} can be generalised to
-  any set of indeterminates in which one can encode words over a binary alphabet,
-  and for which there is a \kl{monomial rewrite system} that can
-  produce arbitrary long words.
-  We strongly conjecture that this is the case for 
-  the \kl{infinite dimensional vector space}, as defined in 
-  \cref{ex:bit vector}.
-\end{remark}

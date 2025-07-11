@@ -167,13 +167,23 @@ $\aut{\TreeAtoms}\actson\TreeAtoms$ is a reduct of $\aut{\T_<}\actson\T_<$.
 
 \todo[inline]{Rework this paragraph (aliaume)}
 
-\paragraph{Effective oligomorphicity}
-%
-\cite[Theorem 7.6]{BOJAN16inf} implies that the structures mentioned in  \Cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree,rem:reduct} are \kl{oligomorphic}.
-They are also \kl{effectively oligomorphic}.
-To show effectivity we need to give a way to represent the element of the structures and show point (2) and (3) in the definition of \kl{effective oligomorphicity} holds under the representations.
-This is possible for all the structures mentioned in \Cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree,rem:reduct}.
-For example, $\A$ can be identified with the set of strings over a fixed finite alphabet.
-Elements of $\calQ$ can be represented in the usual way.
-A representation of elements of $\T$ is given in \cite[Page 244-245]{BOJAN16inf}.
-\cite{CompFraisse} gives a general way to represent Fra\"{i}sse limits.
+\paragraph{Effective oligomorphicity} Recall that in our \kl{computability
+assumptions} we require the action $\group\actson\Indets$ to be \kl{effectively
+oligomorphic}. It is already known that all the structures of \cref{ex:eq
+atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree} are \kl{oligomorphic}
+\cite[Theorem 7.6]{BOJAN16inf}. 
+
+Let us show on an example that they are also
+\kl{effectively oligomorphic}. It is clear that $\OrderAtoms$ can be
+represented by integer fractions, and that the \kl{orbit} of a tuple $(q_1,
+q_2, \ldots, q_n)$ of rational numbers is given by their relative ordering in
+$\Q$, which can be effectively computed. Finally, one can enumerate such
+orderings and produce representatives by selecting $n$ integers. 
+This can be generalised to all the structures mentioned in \Cref{ex:eq
+atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree}, by using dedicated
+representations (such as \cite[Page 244-245]{BOJAN16inf} for $\TreeAtoms$), or
+the general theory of Fra\"{i}sse limits \cite{CompFraisse}. 
+
+Finally, let us
+remark that \cref{rem:reduct} preserves the \kl{effective oligomorphicity} of
+the action.

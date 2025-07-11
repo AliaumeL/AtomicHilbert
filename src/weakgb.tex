@@ -82,20 +82,20 @@ The following lemma states that $\rem{H}{\cdot}$ is a computable function from
 in our setting.
 
 
-\todo[inline]{aliaume: use König + say that the image is orbit finite}
 \begin{lemma}
   \label{lem:normalisation}
   Let $H$ be an \kl{orbit finite set} of polynomials, and let $p \in \poly{\K}{\X}$ be a
   polynomial. Then $\rem{H}{p}$ is finite.
   Furthermore, this computation
-  is \kl(func){equivariant}.
+  is \kl(func){equivariant}. In particular, 
+  $\rem{H}{K}$ is a computable \kl{orbit finite} for every \kl{orbit finite} set $K$ of polynomials.
 \end{lemma}
 \begin{proof}
   Let us write $H = \orbit[\group]{H'}$, where $H'$ is a finite set of
   polynomials.
   Because the relation $\toeucl{H}$ is \kl{terminating}, it suffices to 
   show that for every polynomial $p$, there are finitely many polynomials $r$ 
-  such that $p \toeucl{H} r$. This is because 
+  such that $p \toeucl{H} r$, leveraging König's lemma. This is because 
   $p \toeucl{H} r$ implies that 
   $p = \alpha \monelt[n] (\gelem\cdot q) + r$ for some $q \in H'$, 
   $\alpha \in \K$, $\monelt[n] \in \mon{\X}$, and $\gelem \in \group$.
@@ -199,7 +199,7 @@ an actual algorithm (\cref{lem:weakgb-computable}) that is
 \begin{lemma}
   \label{lem:weakgb-computable}
   The \cref{alg:weakgb} is a computable function that is itself
-  \kl(func){equivariant}.
+  \kl(func){equivariant}, and produces an \kl{orbit finite} set $\Basis$.
 \end{lemma}
 \begin{proof}
   Let us prove that $\spolyset(H)$ is a computable function
@@ -274,7 +274,7 @@ and the correctness of the resulting orbit finite set
   Where $\alpha_i \in \K$, $p_i \in \Basis$, and $\monelt_i \in \mon{\X}$,
   for all $i \in I$.
 
-  Leveriging \cref{lem:chm}, we know that the ordering $\pmonleq$ is
+  Leveraging \cref{lem:chm}, we know that the ordering $\pmonleq$ is
   \kl{well-founded}. As a consequence, we can consider a minimal 
   decomposition $\mathfrak{d}'$ of $p$ with respect to $\Basis$ such that $\mathfrak{d}'
   \pmonleq \mathfrak{d}$. We now distinguish two cases, depending on whether
@@ -292,7 +292,7 @@ and the correctness of the resulting orbit finite set
       Let us remark that 
       the sum of leading coefficients 
       of the polynomials in $J$ must vanish: $\sum_{i \in J} \alpha_i \lc(p_i) = 0$.
-      As a concequence, the set $J$ has size at least $2$.
+      As a consequence, the set $J$ has size at least $2$.
       Let us distinguish one element $\star \in J$, and 
       write $J_\star = J \setminus \set{\star}$.
       We conclude that 
@@ -316,7 +316,7 @@ and the correctness of the resulting orbit finite set
       By \cref{lem:spoly}, we know that these polynomials are obtained by
       multiplying the \kl{S-polynomial} $\spoly{p_i}{p_\star}$ by some monomial.
       Because \cref{alg:weakgb} terminated, we know that 
-      $\spoly{p_i}{p_\star} \toeucl{\Basis}^* 0$ by contruction.
+      $\spoly{p_i}{p_\star} \toeucl{\Basis}^* 0$ by construction.
 
       By definition of the rewriting relation, we conclude that one can rewrite
       $\spoly{p_i}{p_\star}$ as combination of polynomials in $\Basis$ that
@@ -335,14 +335,12 @@ As a consequence of the above lemmas, we can now conclude that the
 \cref{alg:weakgb} computes a \kl{weak equivariant Gröbner basis} of the
 ideal $\EqIdlGen{H}$, as stated in \cref{thm:weakgb-comput}.
 
-\todo[inline]{say we take orbit finite set as input}
-
 \begin{theorem}
   \label{thm:weakgb-comput}
   Assume that $(\mon[\omega]{\X}, \gdivleq)$ is a \kl{WQO}, and that the order
   $\varleq$ is effectively computable, and that the action of $\group$ is
   \kl{effectively oligomorphic}. 
-  Then, the algorithm $\mathsf{weakgb}$ that takes as input a finite set $H$ of generators of an
+  Then, the algorithm $\mathsf{weakgb}$ that takes as input an \kl{orbit finite} set $H$ of generators of an
   \kl{equivariant ideal} $\idl$ and computes a \kl{weak equivariant Gröbner
   basis} $\Basis$ of $\idl$.
 \end{theorem}
