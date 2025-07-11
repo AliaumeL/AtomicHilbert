@@ -1,60 +1,77 @@
 %!TEX root = ../atomic.asmart.tex
+% LTeX: language=en
 %
 \section{Concluding Remarks}
 \label{sec:conclusion}
 
-We have proven that the \kl{equivariant ideal membership problem} is decidable
-under classical effective assumptions on the group action and the
-representation of the set of indeterminates, and under a mild hypothesis on the
-behavior of monomials. Furthermore, we have developed an algorithm that
-computes an \kl{equivariant Gröbner basis} of an \kl{equivariant ideal}, and
-shown that it provides an effective representation to work with ideals
-(allowing us to compute unions, intersections, etc.) under a slightly stronger
-hypothesis on the divisibility ordering. Finally, we have discussed how the
-classical counter-examples to our assumptions on the behavior of monomials can
-be turned into undecidability results for the \kl{equivariant ideal membership
-problem}. Let us now discuss the main open questions raised by
-the present paper.
+We have given a sufficient condition for \kl{equivariant Gröbner bases} to be
+computable, under natural \kl{computability assumptions}, and we have shown
+that our sufficient condition is close to being optimal since the
+undecidability of the \kl{equivariant ideal membership problem} can be derived
+for a large class of group actions that do not satisfy our condition.
+Let us now discuss some open questions and conjectures that arise from our work.
 
-\paragraph*{Total orderings.}
-We assumed that the indeterminates $\Indets$ were equipped with a total ordering $\varleq$ that is preserved by the group action.
-This assumption seems necessary,
-as the notions of \kl{leading monomials} would cease to be well-defined without it.
-However, we do not have a clear understanding of whether this assumption is vacuous or not.
-Indeed, as noticed by \cite[Lemma 13]{GHOLAS24}, and \cref{lem:reducts-equiv-hilbert},
-it often suffices to extend the structures of the indeterminates to account for a total ordering.
-A conjecture of Pouzet \cite[Section 4.4]{POUZ24} states that such an ordering always exists,
-and this was remarked by \cite[Remark 14]{GHOLAS24}.
-Note that in this case, one would get a complete characterisation of the \kl{equivariant Hilbert basis property} \cite[Property 4]{GHOLAS24}.
+\paragraph{Total orderings on the set of indeterminates} We assumed that the
+indeterminates $\Indets$ were equipped with a total ordering $\varleq$ that is
+preserved by the group action. This assumption seems necessary, as the notions
+of \kl{leading monomials} would cease to be well-defined without it. However,
+we do not have a clear understanding of whether this assumption is vacuous or
+not. Indeed, as noticed by \cite[Lemma 13]{GHOLAS24}, and
+\cref{lem:reducts-equiv-hilbert}, it often suffices to extend the structures of
+the indeterminates to account for a total ordering. A conjecture of Pouzet
+\cite[Problems 12]{POUZ24} states that such an ordering always exists, and this
+was remarked by \cite[Remark 14]{GHOLAS24}. Note that in this case, one would
+get a complete characterisation of the group actions for which the
+\kl{equivariant Hilbert basis property} holds \cite[Property 4]{GHOLAS24}.
 
-\todo[inline]{complete this}
-%
-\arka{changed title}
-\paragraph*{\kl{WQO} property under different sets of labels}
-%
-We conjecture that
-$(\mon{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} if and only if
-$(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} for every
-\kl{well-quasi-ordered} set $Y$ of exponents. This is a form of Pouzet's
-conjecture, which has been verified on some classes of structures.
-\arka{some citation}
-%
-\paragraph*{Dichotomy.}
-%
-We conjecture that the ideal membership problem is undecidable for every action $\group\actson\X$ that is \kl{oligomorphic} but does not have the \kl{equivariant Hilbert basis property} (cf. \Cref{rem:conj-wqo-infinite-path}).
-%
-\paragraph*{Complexity.} We do not have complexity lower bounds, and there may
+\paragraph{Labelled well-quasi-orderings and dichotomy conjectures} As noted in
+\Cref{sec:undecidability}, there are many conjectures relating the fact that
+$(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} (for every
+\kl{well-quasi-ordered} set $Y$) and the presence of long
+paths of some king (\cref{conj:wqo-infinite-path,rem:conj-wqo-infinite-path}).
+In particular, Pouzet's conjecture \cite{POUZ72} would imply that for actions
+arising from \kl{homogeneous structures} (as in the examples given in
+\cref{sec:act ex}), \cref{thm:compute-egb} and \cref{thm:undecidable-paths} are
+two sides of a dichotomy theorem: either the \kl{equivariant ideal membership
+problem} is undecidable and there are \kl{equivariant ideals} that are not
+\kl{orbit-finitely generated}, or every \kl{equivariant ideal} is
+\kl{orbit-finitely generated} and one can compute \kl{equivariant Gröbner
+bases}. Let us note that for some classes of graphs having bounded clique
+width, Pouzet's conjecture is known to hold \cite{DRT10,LOPEZ24}.
+This leads us to the following conjecture:
+
+\begin{conjecture}
+  For every action $\group\actson\Indets$ of a group $\group$ on a set
+  of indeterminates that is \kl{effectively oligomorphic}, exactly
+  one of the following holds:
+  \begin{enumerate}
+    \item The \kl{equivariant ideal membership problem} is decidable. 
+    \item There exists an \kl{equivariant ideal} that is not
+      \kl{orbit-finitely generated}.
+  \end{enumerate}
+\end{conjecture}
+
+Let us point out that a similar conjecture was already stated in the context of
+Petri nets with data. Indeed, the condition that $(\mon[Y]{\Indets},\gdivleq)$
+is a \kl{WQO} for every \kl{WQO} $Y$ also guarantees coverability of Petri nets
+with data $\X$ is decidable \cite[Theorem 1]{Lasota16}, and it was actually
+conjectured to be a necessary condition \cite[Conjecture 1]{Lasota16}. 
+
+\paragraph{Complexity} In the present paper, we have focused on the
+decidability of the \kl{equivariant ideal membership problem} and the
+computability of \kl{equivariant Gröbner bases}. However, we have not addressed
+the complexity of such problems, and have only adapted the most basic
+algorithms for computing \kl{Gröbner bases}. 
+
+We do not have complexity lower bounds, and there may
 be better algorithms like adaptations of Faugère's algorithm that could be
 better in practice.
-%
-\paragraph*{WQO dichotomy conjecture}
-The condition that $(\mon[Y]{\Indets},\gdivleq)$ is a \kl{WQO} for every \kl{WQO} also guarantees coverability of Petri nets with data $\X$ is decidable \cite[Theorem 1]{Lasota16}.
-In fact it is conjectured to be equivalent \cite[Conjecture 1]{Lasota16}.
-%
-\paragraph*{Duals of orbit-finitely generated vector spaces}
-%
-An interesting question posed by S\l{a}womir Lasota is that whether for group actions $\group\actson\Indets$ for which $(\mon[Y]{\Indets},\gdivleq)$ is a \kl{WQO},
-duals of orbit-finitely generated vector spaces are also orbit-finitely generated.
-This follows for the structures in \Cref{ex:eq atoms,ex:dlo} by the results of \cite{BFKM24,GHL22,Prz23}.
-Proving it for the general case would be a big step towards generalising the results of \cite{GHL22}. 
-%
+
+\paragraph*{Duals of orbit-finitely generated vector spaces} An interesting
+question posed by S\l{a}womir Lasota is that whether for group actions
+$\group\actson\Indets$ for which $(\mon[Y]{\Indets},\gdivleq)$ is a \kl{WQO},
+duals of orbit-finitely generated vector spaces are also orbit-finitely
+generated. This follows for the structures in \Cref{ex:eq atoms,ex:dlo} by the
+results of \cite{BFKM24,GHL22,Prz23}. Proving it for the general case would be
+a big step towards generalising the results of \cite{GHL22}. 
+
