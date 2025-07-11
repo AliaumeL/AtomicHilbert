@@ -56,7 +56,7 @@ operations in \cref{def:union,def:product,def:nested product}.
 
 \begin{definition}[Product action]\label{def:product}
   Given $(\gelem[\pi], \gelem[\sigma]) \in \grp[G] \times \grp[H]$ and $(x,y) \in \X \ordtimes \Y$, we define the \intro{product action} of $\grp[G]$ and $\grp[H]$ on $\X \ordtimes \Y$ as
-  $(\gelem[\pi], \gelem[\sigma])((x,y))$ as $(\gelem[\pi](x), \gelem[\sigma](y))$.
+  $(\gelem[\pi], \gelem[\sigma])\cdot (x,y)$ as $(\gelem[\pi](x), \gelem[\sigma](y))$.
   Note that the ordering of $\X \ordtimes \Y$ is preserved by this action.
 \end{definition}
 
@@ -65,58 +65,75 @@ operations in \cref{def:union,def:product,def:nested product}.
   $(\gelem,\seqof{\gelem[\sigma]^{x}}[x\in\X])$, where 
   $\gelem[\sigma]_{x} \in \grp[H]$ for every $x\in\X$, and where the multiplication
   is defined as 
-  $(\gelem_1,(\gelem[\sigma]_1^{x})_{x\in\X})\cdot(\gelem_2,(\gelem[\sigma]_2^{x})_{x\in\X})
-  = (\gelem_1\cdot\gelem_2, (\gelem[\sigma]_1^{\gelem_2(x)}\cdot\gelem[\sigma]_2^x)_{x\in\X})$.
+  $(\gelem_1,(\gelem[\sigma]_1^{x})_{x\in\X})(\gelem_2,(\gelem[\sigma]_2^{x})_{x\in\X})
+  = (\gelem_1\gelem_2, (\gelem[\sigma]_1^{\gelem_2(x)}\gelem[\sigma]_2^x)_{x\in\X})$.
   The \intro{lexicographic product action} of $\grp[G]$ and $\grp[H]$ on $\X \ordtimes \Y$ is defined as
   $\grp[G] \lexGroupAction \grp[H]$ on $\X \ordtimes \Y$ is defined as
-  $(\gelem,(\gelem[\sigma]^{x})_{x\in\X})(x',y') = 
-  (\gelem(x'), \gelem[\sigma]^{x'}(y'))$ for every $(x',y')\in\X \ordtimes \Y$.
-\end{definition}
-
-
-\begin{lemma}
-  \label{lem:closure-properties-order}
-  All the operations defined in \cref{def:union,def:product,def:nested product}
-  preserve the \kl{computabilitiy assumptions} and define actions that are 
-  \kl(ord){compatible with the order} on the sets they act upon.
-\end{lemma}
-\begin{proof}
-  \todo[inline]{for arka: is this already stated somewhere?}
-\end{proof}
-
-\begin{lemma}
-  \label{lem:closure-properties-wqo}
-  The \kl{sum action} and the \kl{lexicographic product action} preserve the
-  \kl{well-quasi-ordering} property, while the \kl{product action} does not.
-\end{lemma}
-\begin{proof}
-  \todo[inline]{for aliaume: cleanup this}
-The \kl{sum action} preserves the order $<_{\X \ordplus \Y}$, and if
-$(\mon[Q]{\X}, \gdivleq[\grp[G]])$ and $(\mon[Q]{\Y}, \gdivleq[\grp[H]])$ are
-\kl{WQOs}, then $(\mon[Q]{\X \ordplus \Y}, \gdivleq[\grp[G] \times \grp[H]])$
-is a \kl{WQO}. Indeed, the \kl{divisibility up to $\grp[G] \times \grp[H]$}
-order is essentially the product of the orders $\gdivleq[\grp[G]]$ and
-$\gdivleq[\grp[H]]$, hence is a \kl{WQO} if both orders are \kl{WQOs}
-\cite[Lemma 1.5]{SCSC17}.
-The action $\G\otimes\calH \actson \X\times\Y$ is given as
-\[
-(\pi,(\sigma^{x})_{x\in\X})\cdot(x',y') =
-(\pi\cdot x'),\sigma^{x'}\cdot y')\ , \text{ for }(x',y')\in\X\times\Y \ .
-\]
+  $(\gelem,(\gelem[\sigma]^{x})_{x\in\X})\cdot(x',y') = 
+  (\gelem\cdot x', \gelem[\sigma]^{x'}\cdot y')$ for every $(x',y')\in\X \ordtimes \Y$.
 Essentially,
 each element $x\in\X$ carries its own copy $\{x\}\times\Y$ of the structure $\Y$,
 and different copies of the structure $\Y$ can be permuted independently.
+\end{definition}
+%
+\begin{lemma}\label{lem:closure-properties-wqo}
+If $(\mon[Q]{\X}, \gdivleq[\grp[G]])$ and $(\mon[Q]{\Y}, \gdivleq[\grp[H]])$ are \kl{WQOs},
+then $(\mon[Q]{\X \ordplus \Y}, \gdivleq[\grp[G] \times \grp[H]])$ and $(\mon[Q]{\X\uplus\Y}, \gdivleq[\grp[G]\otimes\grp[H]])$ are also \kl{WQOs}.
+\end{lemma}
+%
+\begin{proof}
+The \kl{divisibility up to $\grp[G] \times \grp[H]$} order is essentially the product of the orders $\gdivleq[\grp[G]]$ and $\gdivleq[\grp[H]]$,
+hence is a \kl{WQO} if both orders are \kl{WQOs} \cite[Lemma 1.5]{SCSC17}.
+For, $(\mon[Q]{\X\uplus\Y}, \gdivleq[\G\otimes\calH])$ it follows from \cite[Lemma 9]{GHOLAS24}.
+\end{proof}
+%
+\begin{lemma}\label{lem:product-not-wqo}
+If $(\mon[Q]{\X \ordtimes \Y}, \gdivleq[\grp[G] \times \grp[H]])$ is not a \kl{WQO} even if both $\X$ and $\Y$ are infinite.
+\end{lemma}
+%
+\begin{proof}
+We restate the antichain given in \cite[Example 10]{GHOLAS24}.
+Let $\{x_1,x_2,\dots\}$ and $\{y_1,y_2,\dots\}$ be infinite subsets of $\X$ and $\Y$ respectively.
+For $n = 3,4,\dots$, let $\monelt{c}_n$ be the monomial
+\[
+\monelt[c]_n = (x_1,y_1)(x_1,y_2)(x_2,y_2)(x_2,y_3)\ldots(x_n,y_n)(x_n,y_1) \ .
+\]
+Then $\setof{\monelt[c]_n}{n = 3,4,\dots}$ is an infinite antichain.
+\end{proof}
+%
+\begin{lemma}\label{lem:closure-properties-comp}
+If $\grp[G]\actson\X$ and $\grp[H]\actson\Y$ satisfy our \kl{computability assumptions},
+then so do $(\grp[G] \times \grp[H])\actson (\X \ordplus \Y)$ and $(\grp[G] \otimes \grp[H])\actson (\X \times \Y)$.
+\end{lemma}
+%
+\begin{proof}
+\todo[inline]{for aliaume: cleanup this}
+First we show that they are compatible with a computable linear order.
+The \kl{sum action} preserves the order $<_{\X \ordplus \Y}$ defined as
+\[
+u < v \quad\iff\quad \text{either $u\in\X$ and $v\in\Y$, or $u < v \in \X$, or $u < v \in \Y$}\ .
+\]
 If $\G\actson\X$ and $\calH\actson\Y$ preserves the linear orders $<_{\X}$ and $<_{\Y}$, respectively,
 then $\G\otimes\calH \actson \X\times\Y$ preserves the lexicographic linear order on $\X\times\Y$ defined as
 \[
 (x,y) <_{\ell ex} (x',y')\quad\text{if}\quad
 \text{$x <_{\X} x'$, or $x = x'$ and $y <_{\Y} y'$.}
 \]
-Moreover, for every \kl{WQO} $Q$,
-if $(\mon[Q]{\X},\gdivleq{\G})$ and $(\mon[Q]{\Y},\gdivleq{\calH})$ are \kl{WQOs},
-so is $(\mon[Q]{\X\uplus\Y}, \gdivleq[\G\otimes\calH])$ \cite[Lemma 9]{GHOLAS24}.
-\end{proof}
 
+Now we show point (2) hold in our \kl{computability assumptions} holds for $(\grp[G] \times \grp[H])\actson (\X \ordplus \Y)$ and $(\grp[G] \otimes \grp[H])\actson (\X \times \Y)$.
+The proofs can be extended to show that point (3) hold as well.
+
+Every tuple of element $z_1\dots z_n$ in $(\X + \Y)^*$ can be written as a pair  of elements $z_{\X} = z_{i_1}\dots z_{i_k}$ and $z_{\Y} = z_{j_1}\dots z_{j_{\ell}}$ of elements respectively in $\X^*$ and $\Y^*$, for some partition .
+Two elements $z_1\dots z_n$ and $z'_1\dots z'_n$ are in the same orbit if and only if $z_{\X} = z_{i_1}\dots z_{i_k}$ and $z'_{\X} = z'_{i'_1}\dots z'_{i'_{k'}}$,
+and $z_{\Y} = z'_{j'_1}\dots z_{j'_{\ell'}}$ and $z'_{\Y} = z'_{j'_1}\dots z'_{j'_{\ell'}}$ are respectively in the same orbits,
+$\{i_1,\dots,i_k\} = \{i'_1,\dots,i'_{k'}\}$ and $\{j'_1,\dots,j'_{\ell'}\} = \{j'_1,\dots,j'_{\ell'}\}$.
+
+From an element $(x_1,y_1)\dots (x_n,y_n)$ we can create a list of words in $u_1,\dots,u_n \in \Y^*$ by defining $u_i = y_{j_1}\dots y_{j_k}$ such that $\{j_1 < \dots < j_k\} = \setof{j\in\{1,\dots,n}{x_j = x_i}$.
+Two elements $(x_1,y_1)\dots (x_n,y_n)$ and $(x'_1,y'_1)\dots (x'_n,y'_n)$ in $(\X \times \Y)^*$ are in the same orbit under the action of $(\grp[G] \times \grp[H])$ if and only if $x_1\dots x_n$ and $x'_1 \dots x'_n$ are in the same orbit,
+and $u_i$ and $u'_i$ are in the same orbit for every $i = 1,\dots,n$.
+We can extend this idea
+\end{proof}
+%
 \section{Applications}
 \label{sec:applications}
 
