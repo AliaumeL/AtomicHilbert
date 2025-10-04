@@ -44,7 +44,7 @@ equivariant Gröbner basis} algorithm.
 
 \begin{lemma}
   \label{lem:colored-hypothesis-sat}
-  Assume that $(\Indets, \varleq, \group)$
+  Assume that $\group \actson \Indets$ is
   is \kl{effectively oligomorphic},
   and that $(\mon[\N \times \N]{\Indets}, \gdivleq)$
   is a \kl{well-quasi-order}.
@@ -107,7 +107,7 @@ prove that it is an \kl{equivariant Gröbner basis}
 \end{lemma}
 \begin{proof}
   Let us remark that $\forgetCol(\freeColor(H)) = H$.
-  Because we know that $\kl{weakgb}(\freeColor(H))$
+  Since $\kl{weakgb}(\freeColor(H))$
   generates the same ideal as $\freeColor(H)$,
   and since $\forgetCol$ is a morphism,
   we conclude that 
@@ -174,7 +174,7 @@ used in algorithms as we will see in \cref{sec:applications}.
 
 \begin{corollary}
   \label{cor:equivariant-ideals-computations}
-  Assume that $(\Indets, \varleq, \group)$
+  Assume that $\group \actson \Indets$
   is \kl{effectively oligomorphic},
   and that $(\mon[Y]{\Indets}, \gdivleq)$
   is a \kl{well-quasi-ordered} set
