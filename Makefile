@@ -13,11 +13,22 @@ TEMPLATES=templates/plain-article.tex \
 	  templates/git-meta.lua      \
 	  templates/lipics/lipics.tex \
 	  templates/lncs/lncs.tex     \
-		templates/asmart/asmart-small.tex
+		templates/asmart/asmart-small.tex \
+		templates/ieee/IEEE-conference-template.tex
 
 FIGURES=
 
 all: $(PAPER).pdf
+
+
+arxiv-meta.txt: paper-meta.yaml 
+	pandoc --metadata-file=paper-meta.yaml \
+		   --lua-filter=templates/git-meta.lua \
+			 --template=templates/arxiv-submission.txt \
+			 -t plain \
+			 --wrap=none \
+			 -o arxiv-meta.txt \
+			 $(PAPER).md
 
 # Default target: create the pdf file
 %.pdf: %.tex $(FIGURES)
@@ -65,6 +76,16 @@ $(PAPER).asmart.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
 		   -o $(PAPER).asmart.tex \
 		   $(PAPER).md
 
+
+# Create an IEEE document for submission
+$(PAPER).ieee.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
+	pandoc --template=templates/ieee/IEEE-conference-template.tex \
+		   --lua-filter=templates/git-meta.lua \
+		   --metadata-file=./paper-meta.yaml \
+		   --wrap=none \
+		   -o $(PAPER).ieee.tex \
+		   $(PAPER).md
+
 # Create a single file tex document for arXiv
 $(PAPER).arxiv.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
 	pandoc --template=templates/plain-article.tex \
@@ -83,11 +104,11 @@ $(PAPER).arxiv.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
 
 # Create an archive with the single file tex document and the license
 $(PAPER).arxiv.tar.gz: $(PAPER).arxiv.tex
-	tar -czf $(PAPER).arxiv.tar.gz \
+	tar -czf $(PAPER).arxiv.tar.gz  \
              $(PAPER).arxiv.tex    \
-			 plainurl.bst          \
-			 ensps-colorscheme.sty \
-             ../LICENSE
+						 plainurl.bst          \
+						 ensps-colorscheme.sty \
+             ./LICENSE
 
 $(PAPER).arxiv.pdf: $(PAPER).arxiv.tar.gz
 	# create temporary directory
