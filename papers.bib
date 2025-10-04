@@ -43,25 +43,6 @@
   year          = {2024},
 }
 
-@inproceedings{FAUGERE02,
-  author = {Faug\`{e}re, Jean Charles},
-  title = {A new efficient algorithm for computing Gr\"{o}bner bases without reduction to zero (F5)},
-  year = {2002},
-  isbn = {1581134843},
-  publisher = {Association for Computing Machinery},
-  address = {New York, NY, USA},
-  url = {https://doi.org/10.1145/780506.780516},
-  doi = {10.1145/780506.780516},
-  abstract = {This paper introduces a new efficient algorithm for computing Gr\"{o}bner bases. We replace the Buchberger criteria by an optimal criteria. We give a proof that the resulting algorithm (called F5) generates no useless critical pairs if the input is a regular sequence. This a new result by itself but a first implementation of the algorithm F5 shows that it is also very efficient in practice: for instance previously untractable problems can be solved (cyclic 10). In practice for most examples there is no reduction to zero. We illustrate this algorithm by one detailed example.},
-  booktitle = {Proceedings of the 2002 International Symposium on Symbolic and Algebraic Computation},
-  pages = {75–83},
-  numpages = {9},
-  location = {Lille, France},
-  series = {ISSAC '02}
-}
-
-  
-
 @inproceedings{GHOLAS24,
   address       = {New York, NY, USA},
   articleno     = {38},
@@ -617,7 +598,6 @@
 }
 
 @inproceedings{10.1145/964001.964028,
-  abstract      = {We present a new technique for the generation of non-linear (algebraic) invariants of a program. Our technique uses the theory of ideals over polynomial rings to reduce the non-linear invariant generation problem to a numerical constraint solving problem. So far, the literature on invariant generation has been focussed on the construction of linear invariants for linear programs. Consequently, there has been little progress toward non-linear invariant generation. In this paper, we demonstrate a technique that encodes the conditions for a given template assertion being an invariant into a set of constraints, such that all the solutions to these constraints correspond to non-linear (algebraic) loop invariants of the program. We discuss some trade-offs between the completeness of the technique and the tractability of the constraint-solving problem generated. The application of the technique is demonstrated on a few examples.},
   address       = {New York, NY, USA},
   author        = {Sankaranarayanan, Sriram and Sipma, Henny B. and Manna, Zohar},
   booktitle     = {Proceedings of the 31st ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages},
@@ -652,6 +632,23 @@
   url           = {https://doi.org/10.1145/982962.964028},
   volume        = {39},
   year          = {2004},
+}
+
+@inproceedings{FAUGERE02,
+  abstract      = {This paper introduces a new efficient algorithm for computing Gr\"{o}bner bases. We replace the Buchberger criteria by an optimal criteria. We give a proof that the resulting algorithm (called F5) generates no useless critical pairs if the input is a regular sequence. This a new result by itself but a first implementation of the algorithm F5 shows that it is also very efficient in practice: for instance previously untractable problems can be solved (cyclic 10). In practice for most examples there is no reduction to zero. We illustrate this algorithm by one detailed example.},
+  address       = {New York, NY, USA},
+  author        = {Faug\`{e}re, Jean Charles},
+  booktitle     = {Proceedings of the 2002 International Symposium on Symbolic and Algebraic Computation},
+  doi           = {10.1145/780506.780516},
+  isbn          = {1581134843},
+  location      = {Lille, France},
+  numpages      = {9},
+  pages         = {75–83},
+  publisher     = {Association for Computing Machinery},
+  series        = {ISSAC '02},
+  title         = {A new efficient algorithm for computing Gr\"{o}bner bases without reduction to zero (F5)},
+  url           = {https://doi.org/10.1145/780506.780516},
+  year          = {2002},
 }
 
 @inbook{MULSEI02,
@@ -856,8 +853,6 @@
 }
 
 @incollection{KNBEND70,
-  abstract      = {Summary
-                   An algorithm is described which is capable of solving certain word problems: i.e. of deciding whether or not two words composed of variables and operators can be proved equal as a consequence of a given set of identities satisfied by the operators. Although the general word problem is well known to be unsolvable, this algorithm provides results in many interesting cases. For example in elementary group theory if we are given the binary operator ·, the unary operator −, and the nullary operator e, the algorithm is capable of deducing from the three identities a · (b · c) = (a · b) · c, a · a− = e, a · e = a, the laws a− · a = e, e · a = a, a– = a, etc.; and furthermore it can show that a · b = b · a− is not a consequence of the given axioms. The method is based on a well-ordering of the set of all words, such that each identity can be construed as a “reduction”, in the sense that the right-hand side of the identity represents a word smaller in the ordering than the left-hand side. A set of reduction identities is said to be “complete” when two words are equal as a consequence of the identities if and only if they reduce to the same word by a series of reductions. The method used in this algorithm is essentially to test whether a given set of identities is complete; if it is not complete the algorithm in many cases finds a new consequence of the identities which can be added to the list. The process is repeated until either a complete set is achieved or until an anomalous situation occurs which cannot at present be handled. Results of several computational experiments using the algorithm are given.},
   author        = {Knuth, Donald E. and Bendix, Peter B.},
   booktitle     = {Computational Problems in Abstract Algebra},
   doi           = {https://doi.org/10.1016/B978-0-08-012975-4.50028-X},
