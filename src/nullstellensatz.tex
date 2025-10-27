@@ -1,0 +1,26 @@
+% LTeX: language=en
+%!TEX root = ../atomic.ieee.tex
+%
+\section{Equivariant Nullstellensatz}
+%
+In this section we assume $\K$ is an \intro{algebraically closed} field,
+i.e.\ every non-constant univariate polynomial $f$ with coefficients in $\K$ has a root in $\K$.
+The most common example of an algebraically closed field is the field $\C$ of complex numbers
+\cite[Section 1.1, Theorem 7]{CLO15}.
+
+Thinking a polynomial $f\in\poly{\K}{\Indets}$ as a function from $\Indets \to \K$ to $\K$,
+for an element $\iota : \Indets \to \K$ we use $f(\iota)$ to denote the value of $f$ at $\iota$.
+%
+\begin{example}\label{ex:inst}
+    If $f = x^2 + 3y - 2$ and $\iota(x) = \iota(y) = 1$ then $f(\iota) = 2$.
+\end{example}
+%
+\begin{definition}\label{def:variety}
+    The \intro{variety} of an ideal $I\subseteq\poly{\K}{\Indets}$ is the set of all functions $\iota : \Indets \to \K$ such that $f(\iota) = 0$.
+\end{definition}
+%
+\begin{theorem}[Weak Equivariant Nullstellensatz]\label{thm:weak null}
+    If $\calH\actson\Indets$ is \kl{nicely orderable},
+    then $\zeros{\idl}$ is non-empty for every equivariant ideal $\idl \subsetneq \poly{\K}{\X}$.
+\end{theorem}
+%

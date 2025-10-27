@@ -19,4 +19,5 @@ appendix:
 \input{src/fullbasis.tex}
 \input{src/applications.tex}
 \input{src/undecidability.tex}
+\input{src/nullstellensatz.tex}
 \input{src/conclusion.tex}
