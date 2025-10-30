@@ -20,4 +20,5 @@ appendix:
 \input{src/applications.tex}
 \input{src/undecidability.tex}
 \input{src/nullstellensatz.tex}
+\input{src/notnull.tex}
 \input{src/conclusion.tex}

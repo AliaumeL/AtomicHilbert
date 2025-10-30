@@ -12,7 +12,7 @@
 
 % we setup a custom geometry because the default one is too narrow
 \usepackage{geometry}
-\geometry{margin=3.5cm}
+\geometry{margin=2.5cm}
 
 % utf-8 for old systems
 \usepackage[utf8]{inputenc}
@@ -24,8 +24,6 @@
 % microtype for better typography
 \usepackage{microtype}
 
-\usepackage{todonotes}
-\usepackage{lineno}
 
 
 % math packages
@@ -67,7 +65,7 @@
 \usepackage{hyperref}
 \usepackage[capitalise,noabbrev,nameinlink]{cleveref}
 \Crefname{assumption}{Assumption}{Assumptions}
-\usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
+\usepackage[electronic,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
 
 % Tables 
@@ -80,6 +78,8 @@
 \crefname{algocfline}{Algorithm}{Algorithms}
 \crefname{algocf}{Algorithm}{Algorithms}
 \Crefname{algocf}{Algorithm}{Algorithms}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\Crefname{conjecture}{Conjecture}{Conjectures}
 
 % Packages for macro definitions
 \usepackage{xparse}
@@ -126,9 +126,6 @@ Arka Ghosh\thanks{Université de Bordeaux}\thanks{University of Warsaw}
 Aliaume Lopez\thanks{University of Warsaw}
 }
 
-% For the date, we first check if the user has provided a date,
-% and otherwise use the git meta inforamtion (if available).
-\date{2025-06-23 13:56:47 +0200\footnote{5f4e6197c6998cbcb0d4e0f71ec2ac50ee148396 -- branch main at git@github.com:AliaumeL/AtomicHilbert.git}}
 
 \newcommand{\repositoryUrl}{\url{https://github.com/AliaumeL/AtomicHilbert}}
 
@@ -141,7 +138,7 @@ Aliaume Lopez\thanks{University of Warsaw}
 \maketitle
 % Print the abstract
 \begin{abstract}
-    Polynomials with infinite number of variables do not have the Hilbert basis property. However, if the variables are considered up to the action of a group, one can focus on the equivariant ideals, for which it has recently been proven that they do have the Hilbert basis property, under mild assumptions on the group action. We extend this result by showing that the ideal membership problem (that is, given a polynomial, does it belong to a given equivariant ideal) is decidable under similar assumptions. This is significant because it paves the way towards decision procedures based on the Hilbert method in the presence of infinite data structures with symmetries.
+    Let \(\mathbb{K}\) be a field, \(\mathcal{X}\) be an infinite set (of indeterminates), and \(\mathcal{G}\) be a group acting on \(\mathcal{X}\). An ideal in the polynomial ring \(\mathbb{K}[\mathcal{X}]\) is called equivariant if it is invariant under the action of \(\mathcal{G}\). We show Gröbner bases for equivariant ideals are computable are hence the equivariant ideal membership is decidable when \(\mathcal{G}\) and \(\mathcal{X}\) satisfies the Hilbert's basis property, that is, when every equivariant ideal in \(\mathbb{K}[\mathcal{X}]\) is finitely generated. Moreover, we give a sufficient condition for the undecidability of the equivariant ideal membership problem. This condition is satisfied by the most common examples not satisfying the Hilbert's basis property.
     \paragraph{Keywords:}
     equivariant ideal, Hilbert basis, ideal membership problem, orbit finite, oligomorphic, well-quasi-ordering
 \paragraph{Repository:} \repositoryUrl
@@ -154,10 +151,13 @@ Aliaume Lopez\thanks{University of Warsaw}
 % Include the content of the paper
 \input{src/intro.tex}
 \input{src/preliminaries.tex}
+\input{src/examples.tex}
 \input{src/weakgb.tex}
 \input{src/fullbasis.tex}
+\input{src/applications.tex}
 \input{src/undecidability.tex}
-\input{src/examples.tex}
+\input{src/nullstellensatz.tex}
+\input{src/notnull.tex}
 \input{src/conclusion.tex}
 
 % Include the bibliography
@@ -166,7 +166,6 @@ Aliaume Lopez\thanks{University of Warsaw}
 
 % If there are any appendices, we include them here.
 \appendix
-\input{src/algorithm.tex}
 \input{src/appendix.tex}
 
 
