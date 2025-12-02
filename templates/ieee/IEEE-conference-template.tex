@@ -24,6 +24,12 @@ $if(draft)$
 \usepackage{todonotes}
 $endif$
 
+$if(camera-ready)$
+$else$
+\usepackage[columnwise,switch]{lineno}
+\linenumbers
+$endif$
+
 % babel for language settings
 \usepackage[english]{babel}
 
@@ -120,6 +126,7 @@ $if(draft)$
   $if(acknowledgements)$
   \thanks{$acknowledgements$}
   $endif$
+  }
 $else$
 \title{$title$
   $if(anonymous)$
