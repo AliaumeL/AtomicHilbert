@@ -1,8 +1,10 @@
 ---
 bibliography: papers.bib
 draft: true
-final: false
+camera-ready: false
 anonymous: false
+acmart:
+  format: sigconf
 libraries:
     - lib/aliaume
     - lib/arka
