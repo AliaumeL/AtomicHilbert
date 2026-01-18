@@ -1,4 +1,5 @@
 % LTeX: language=en
+%!TEX root = ../atomic.sigconf.tex
 \section{Computing the Equivariant Gröbner Basis}
 \label{sec:equivariant-grobner-basis}
 
@@ -37,10 +38,13 @@ $\freeColor$ does not equal $\forgetCol^{-1}$, since we only consider
 
 \AP
 We are now ready to write our algorithm to compute an \kl{equivariant Gröbner
-basis} by computing the ``congugacy'' $\intro{egb} \defined \forgetCol \circ
-\mathop{\kl{weakgb}} \circ \freeColor$. To prove the correctness of our
-algorithm, let us first argue that one can indeed compute the \kl{weak
-equivariant Gröbner basis} algorithm.
+basis} by computing the ``congugacy'' 
+\[
+\intro{egb} \defined \forgetCol \circ
+\mathop{\kl{weakgb}} \circ \freeColor \ .
+\]
+To prove the correctness of our algorithm,
+let us first argue that one can indeed compute the \kl{weak equivariant Gröbner basis} algorithm.
 
 \begin{lemma}
   \label{lem:colored-hypothesis-sat}
@@ -106,7 +110,10 @@ prove that it is an \kl{equivariant Gröbner basis}
   $\EqIdlGen{H}$.
 \end{lemma}
 \begin{proof}
-  Let us remark that $\forgetCol(\freeColor(H)) = H$.
+  Let us remark that
+  \[
+  \forgetCol(\freeColor(H)) = H \ .
+  \]
   Since $\kl{weakgb}(\freeColor(H))$
   generates the same ideal as $\freeColor(H)$,
   and since $\forgetCol$ is a morphism,

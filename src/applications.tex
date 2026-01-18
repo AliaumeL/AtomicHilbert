@@ -1,5 +1,5 @@
 % LTeX: language=en
-%!TEX root = ../atomic.asmart.tex
+%!TEX root = ../atomic.sigconf.tex
 %
 \section{Closure properties}
 \label{sec:closure-properties}
@@ -94,8 +94,9 @@ that will also be used is \cref{rem:multiple-orbits} of \cref{sec:undecidability
 when discussing the undecidability of the \kl{equivariant ideal membership problem}.
 Let $\{x_1,x_2,\dots\}$ and $\{y_1,y_2,\dots\}$ be infinite subsets of $\X$ and $\Y$ respectively.
 For $n = 3,4,\dots$, let $\monelt{c}_n$ be the monomial
-$
-\monelt[c]_n = (x_1,y_1)(x_1,y_2)(x_2,y_2)(x_2,y_3)\cdots(x_n,y_n)(x_n,y_1)$.
+\[
+\monelt[c]_n = (x_1,y_1)(x_1,y_2)(x_2,y_2)(x_2,y_3)\cdots(x_n,y_n)(x_n,y_1) \ .
+\]
 Then $\setof{\monelt[c]_n}{n = 3,4,\dots}$ is an infinite antichain.
 \end{proof}
 
@@ -260,7 +261,8 @@ $F(\delta^*(w, q_0))$ is zero.
   computable and \kl(func){equivariant}: given $\gelem \in \group$, we can
   show that
   \begin{align*}
-    \gelem \cdot \mathrm{pullback}(p, a) & = 
+    & \phantom{=.}\gelem \cdot \mathrm{pullback}(p, a) \\
+    & = 
     \gelem \cdot (p [ x_i \mapsto \delta(a,x_i)]) & \text{ by definition }\\
                                                   & = p [ x_i \mapsto (\gelem \cdot \delta(a, x_i))] 
                                                   & \text{ $\gelem$ acts as a morphism } \\
@@ -270,9 +272,9 @@ $F(\delta^*(w, q_0))$ is zero.
     & \text{ definition of substitution }
     \\
     & = \mathrm{pullback}(\gelem \cdot p, \gelem \cdot a).
-    & \text{ by definition }
+    & \text{ by definition.}
   \end{align*}
-  
+%  
   Finally, one can detect when the sequence stabilises, by checking whether
   $\idl_i = \idl_{i+1}$, which is decidable because the
   \kl{equivariant ideal membership problem} is decidable 
