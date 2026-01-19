@@ -46,7 +46,7 @@ basis} by computing the ``congugacy''
 To prove the correctness of our algorithm,
 let us first argue that one can indeed compute the \kl{weak equivariant Gröbner basis} algorithm.
 
-\begin{lemma}
+\begin{lemma}[name={},restate={lem:colored-hypothesis-sat}]
   \label{lem:colored-hypothesis-sat}
   Assume that $\group \actson \Indets$ is
   is \kl{effectively oligomorphic},
@@ -55,74 +55,24 @@ let us first argue that one can indeed compute the \kl{weak equivariant Gröbner
   Then $\kl{egb}$ is a computable function,
   and the function $\kl{weakgb}$ is called 
   on correct inputs.
+  \proofref{lem:colored-hypothesis-sat}
 \end{lemma}
-\begin{proof}
-  We need to prove that the set $\freeColor(H)$ is computable and 
-  \kl{orbit finite}, that $\poly{\K}{\IndetsCol}$ satistfies 
-  the \kl{computability assumptions} of \kl{weakgb},
-  and that $(\mon{\IndetsCol}, \gdivleq)$ is a
-  \kl{well-quasi-ordered} set.
-  Finally, we also need to prove that if $H$ is \kl{orbit finite},
-  $\forgetCol(H)$ is computable and \kl{orbit finite}. 
 
-  Let us start by proving that $\freeColor(H)$ is computable and \kl{orbit
-  finite}. Because $H$ is \kl{orbit finite}, there exists a finite set $H_0
-  \subseteq H$ of polynomials such that $\orbit{H_0} = \orbit{H}$. Then, let us
-  remark that $\freeColor(H_0)$ can be obtained by considering all finite
-  subsets $V$ of variables that appear in $H_0$, which is a computable finite
-  set. As a consequence, $\freeColor(H_0)$ is computable, and since
-  $\freeColor$ is \kl(func){equivariant}, $\orbit{\freeColor(H_0)} =
-  \freeColor(\orbit{H_0}) = \freeColor(H)$.
-
-  Let us now focus on the set $\poly{\K}{\IndetsCol}$. First, it is clear that
-  $\group$ is \kl(ord){compatible} with the ordering on $\IndetsCol$ by
-  definition of the action, and because $\group$ was compatible with the
-  ordering on $\Indets$. Then, $\poly{\K}{\IndetsCol}$ is an \kl{effectively
-  oligomorphic} because a polynomial $p$ can be represented in $(\K \times
-  (\Indets)^{\leq d} \times (\Indets)^{\leq d})^n$, where $n$ is the number of
-  monomials in $p$, and $d$ is the maximal degree of a monomial in $p$.
-
-  Let us now prove that $(\mon{\IndetsCol}, \gdivleq)$ is a
-  \kl{well-quasi-ordered} set. To that end, consider a sequence
-  $\seqof{\monelt_i}{i \in \N}$ of monomials in $\mon{\IndetsCol}$. A monomial
-  in $\mon{\IndetsCol}$ naturally corresponds to a monomial in $\mon[\N \times
-  \N]{\Indets}$, where the two exponents are respectively the one of the lower
-  copy and the one of the upper copy of the variable.
-  Because $(\mon[\N \times \N]{\Indets}, \gdivleq)$ is a
-  \kl{well-quasi-ordered} set, we immediately conclude that $(\mon{\IndetsCol}, \gdivleq)$ is a
-  \kl{well-quasi-ordered} set.
-
-  Finally, let us prove that $\forgetCol(H)$ is computable and \kl{orbit
-  finite}. This is clear because $\forgetCol$ simply consists in forgetting
-  the color of the variables.
-\end{proof}
 
 Let us now argue that the result of \kl{egb} is indeed a generating set of the
 ideal (\cref{lem:correct-gen-set}), and then refine our analysis to
 prove that it is an \kl{equivariant Gröbner basis}
 (\cref{lem:strong-gb-correct}).
 
-\begin{lemma}
+\begin{lemma}[name={},restate={lem:correct-gen-set}]
   \label{lem:correct-gen-set}
   Let $H \subseteq \poly{\K}{\Indets}$,
   then $\mathsf{egb}(H)$
   \kl(idl){generates}
   $\EqIdlGen{H}$.
+  \proofref{lem:correct-gen-set}
 \end{lemma}
-\begin{proof}
-  Let us remark that
-  \[
-  \forgetCol(\freeColor(H)) = H \ .
-  \]
-  Since $\kl{weakgb}(\freeColor(H))$
-  generates the same ideal as $\freeColor(H)$,
-  and since $\forgetCol$ is a morphism,
-  we conclude that 
-  the set of polynomial
-  $\forgetCol(\kl{weakgb}(\freeColor(H)))$
-  generates the same ideal as
-  $\forgetCol(\freeColor(H)) = H$.
-\end{proof}
+
 
 \begin{lemma}
   \label{lem:strong-gb-correct}
@@ -132,12 +82,20 @@ prove that it is an \kl{equivariant Gröbner basis}
   of $\EqIdlGen{H}$.
 \end{lemma}
 \begin{proof}
-  Let $p \in \IdlGen{H}$,
-  $H_\star = \freeColor(H)$,
-  $V \defined \dom(p)$,
+  Let $H_\star = \freeColor(H)$,
+  $\Basis_\star = \kl{weakgb}(H_\star)$,
+  and $\Basis = \forgetCol(\Basis_\star)$.
+  We want to prove that $\Basis$ is an \kl{equivariant Gröbner basis} of
+  $\IdlGen{H}$.
+  Let us consider an arbitrary polynomial
+  $p \in \EqIdlGen{H}$, our goal is to construct an 
+  $h \in \Basis$ such that $\lm(h) \divleq \lm(p)$
+  and $\dom(h) \subseteq \dom(p)$.
+
+  Let us define 
+  $V \defined \dom(p)$
+  and 
   $H_V \defined \colorWith{V}(H)$.
-  We let $\Basis_\star = \kl{weakgb}(H_\star)$.
-  Finally, $\Basis = \forgetCol(\Basis_\star)$.
   It is clear that $\colorWith{V}(p)$
   belongs to $\IdlGen{H_V}$.
   Let us write 
@@ -158,14 +116,27 @@ prove that it is an \kl{equivariant Gröbner basis}
   In particular, $\mathfrak{d}'$ is a decomposition of $\colorWith{V}(p)$
   using only \kl{$V$-compatible} polynomials in $\Basis_\star$.
 
-  This proves that there exists $\monelt \in \mon{\IndetsCol}$ and $h \in
-  \Basis_\star$ such that $\lm(\colorWith{V}(p)) = \lm(\monelt h)$ and $\monelt
-  h$ is \kl{$V$-compatible}. In particular, $\monelt h$ must have all its
-  variables in $V$, and therefore $\lm(\colorWith{V}(p)) =
-  \colorWith{V}(\lm(p)) = \lm(\forgetCol(\monelt h))$. We conclude that
-  $\lm(\forgetCol(h)) \divleq \lm(p)$, and that $\forgetCol(h)$ has all its
-  variables in $V$.
+  Let us consider some element  $(a_i', \monelt[m]_i', h_i')$
+  of the \kl{decomposition} $\mathfrak{d}'$ 
+  such that 
+  $\lm(\monelt[m]_i' h_i') = \lm(\colorWith{V}(p))$, which exists 
+  by assumption on $\mathfrak{d}'$. Since 
+  $\dom(\monelt[m]_i' h_i) \subseteq 
+  \dwset{\dom(\lm(\colorWith{V}(p)))}$,
+  we conclude that all variables of $\monelt[m]_i' h_i'$
+  are in the first copy of $\IndetsCol$.
+  Furthermore, since $h_i'$ is \kl{$V$-compatible},
+  we conclude that all variables of $h_i'$ 
+  correspond to variables in $V$ in the first copy of $\IndetsCol$.
+  Similarly, all variables of $\monelt[m]_i'$
+  correspond to variables in $V$ in the first copy of $\IndetsCol$.
 
+  Therefore, $\colorWith{V}(\forgetCol(h_i')) = h_i'$
+  and $\colorWith{V}(\forgetCol(\monelt[m]_i')) = \monelt[m]_i'$.
+  If we define $h \defined \forgetCol(h_i')$ and
+  $\monelt \defined \forgetCol(\monelt[m]_i')$,
+  we conclude that 
+  $\lm(p) = \lm(\monelt h)$.
   We have proven that $\forgetCol(\Basis_\star)$ is 
   an \kl{equivariant Gröbner basis} of $\EqIdlGen{H}$.
 \end{proof}
@@ -179,7 +150,7 @@ of indeterminates satisfies that $(\mon[\N \times \N]{\Indets}, \gdivleq)$ is a
 obtain effective representations of \kl{equivariant ideals}, which can then be
 used in algorithms as we will see in \cref{sec:applications}.
 
-\begin{corollary}
+\begin{corollary}[name={},restate={cor:equivariant-ideals-computations}]
   \label{cor:equivariant-ideals-computations}
   Assume that $\group \actson \Indets$
   is \kl{effectively oligomorphic},
@@ -190,7 +161,7 @@ used in algorithms as we will see in \cref{sec:applications}.
   the \kl{equivariant ideals} of $\poly{\K}{\Indets}$,
   such that:
   \begin{enumerate}
-    \item One can obtain a representation from a finite set of generators,
+    \item One can obtain a representation from an orbit-finite set of generators,
     \item One can effectively decide the \kl{equivariant ideal membership problem}
       given a representation,
     \item The following operations are computable at the level of representations:
@@ -199,37 +170,6 @@ used in algorithms as we will see in \cref{sec:applications}.
       the intersection of two \kl{equivariant ideals},
       and checking whether two \kl{equivariant ideals} are equal.
   \end{enumerate}
+  \proofref{cor:equivariant-ideals-computations}
 \end{corollary}
-\begin{proof}
-  Most of this statement follows from \cref{thm:compute-egb}, using
-  \kl{equivariant Gröbner bases} as a representation of \kl{equivariant ideals}.
-  Indeed, because $\N \times \N$ is a \kl{well-quasi-ordered} set,
-  we conclude $(\mon[\N \times \N]{\Indets}, \gdivleq)$ is a 
-  \kl{well-quasi-ordered} set too.
-  The only non-trivial part is the fact that one can compute an
-  \kl{equivariant Gröbner basis} of the
-  \emph{intersection} of two \kl{equivariant ideals}.
-  To that end, we will adapt the classical argument using 
-  \kl{Gröbner bases} to the case of \kl{equivariant Gröbner bases}
-  \cite[Chapter 4, Theorem 11]{CLO15}.
 
-  Let $I$ and $J$ be two \kl{equivariant ideals} of $\poly{\K}{\Indets}$,
-  respectively represented by \kl{equivariant Gröbner bases} $\Basis_I$ and
-  $\Basis_J$. Let $t$ be a fresh indeterminate, and let us consider $\IndetsCol
-  \defined \Indets \ordplus \set{t}$, that is, the disjoint union of $\Indets$
-  and $\set{t}$, where $t$ is greater than all the variables in $\Indets$.
-  
-  We construct the \kl{equivariant ideal} $T$ of $\poly{\K}{\IndetsCol}$,
-  generated by all the polynomials $t \times h_i$, and $(1-t) \times h_j$,
-  where $h_i$ ranges over $\Basis_I$ and $h_j$ ranges over $\Basis_J$. It is
-  clear that $T \cap \poly{\K}{\Indets} = I \cap J$.
-  Now, because of the hypotheses on $\Indets$, we know that 
-  one can compute the \kl{equivariant Gröbner basis} $\Basis_T$ of $T$
-  by applying \kl{egb} to the generating set of $T$.
-  Finally, we can obtain the \kl{equivariant Gröbner basis} of $I \cap J$ by
-  considering $\Basis_T \cap \poly{\K}{\Indets}$, that is, 
-  selecting the polynomials of $\Basis_T$ that do not contain the
-  indeterminate $t$, which is possible because $\Basis_T$ is an 
-  \kl{orbit finite set}
-  and $\poly{\K}{\IndetsCol}$ is \kl{effectively oligomorphic}.
-\end{proof}

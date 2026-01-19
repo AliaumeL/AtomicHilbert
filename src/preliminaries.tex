@@ -53,8 +53,8 @@ define the \intro{reverse lexicographic} (revlex) ordering on monomials as
 follows: $\monelt[n] \intro*\revlexlt \monelt[m]$ if there exists an
 indeterminate $x \in \Indets$ such that $\monelt[n](x) < \monelt[m](x)$, and such
 that for every $y \in \Indets$, if $x \varlt y$ then $\monelt[n](y) =
-\monelt[m](y)$. Remark that if $\monelt[n] \revlexleq \monelt[m]$, then in
-particular $\monelt[n] \divleq \monelt[m]$. 
+\monelt[m](y)$. Remark that if $\monelt[n] \divleq \monelt[m]$, then in
+particular $\monelt[n] \revlexleq \monelt[m]$. 
 
 \AP We can now use the \kl{reverse lexicographic} ordering to identify particular elements in
 a given polynomial. Namely, for a polynomial $p \in \poly{\K}{\X}$, we define
@@ -70,22 +70,26 @@ $\intro*\dom(\monelt[m])$ of indeterminates $x \in \X$ such that $\monelt[m](x) 
 0$. Because the coefficients and monomial in question are highly dependent on
 the ordering $\varleq$, we allow ourselves to write $\lm[\Indets](p)$ to
 highlight the precise ordered set of variables that was used to compute the
-\kl{leading monomial} of $p$.
+\kl{leading monomial} of $p$. We extend $\dom$ from 
+monomials to polynomials by defining $\dom(p)$ as 
+the union of the \kl(monomial){domains} of all monomials appearing in $p$.
 
-\arka{use remark environment. send to conclusions}
-Let us briefly argue in favor of the \kl{reverse lexicographic} ordering. In
+\begin{remark}
+  \label{rem:other-monomial-orderings}
+In
 the case of a finite set of indeterminates, one can choose any total ordering
 on $\mon{\Indets}$, as long as it contains the \kl{divisibility}
 quasi-ordering, and is compatible with the product of monomials.\footnote{This
 is often called a \emph{monomial ordering}, see \cite{CLO15}.} In our case,
 having an infinite number of indeterminates, we rely on a connection between
 $\lm(p)$ and $\dom(p)$: $\dom(p) \subseteq \dwset{\dom(\lm(p))}$, where
-$\dwset{S}$ is the downward closure of a set $S \subseteq \Indets$, i.e. the
+$\dwset{S}$ is the downwards closure of a set $S \subseteq \Indets$, i.e. the
 set of all indeterminates $x \in \Indets$ such that $y \leq x$ for some $y \in
 S$. This means that the \kl{leading monomial} encodes a \emph{global property}
 of the polynomial, and it will be crucial in our termination arguments. This is
 already at the core of the classical \emph{elimination theorems} \cite[Chapter 3, Theorem
 2]{CLO15}.
+\end{remark}
 
 
 \paragraph{Ideals, and Gröbner Bases.} \AP An \intro{ideal} $\idl$ of
@@ -111,9 +115,17 @@ subtracting multiples of elements in $\Basis$, until one cannot apply any
 reductions. If the result is $0$, then $p$ belongs to $\idl$, and otherwise it
 does not. 
 
+\begin{example}
+  Let $\Indets \defined \set{x,y,z}$ with $z < y < x$ The
+  set $\Basis \defined \set{x^2y - z, x^2 - y}$ is not 
+  a \kl{Gröbner basis} of the ideal $\idl$ it generates,
+  because the polynomial $p \defined y^2 - z$ belongs to $\idl$
+  but its \kl{leading monomial} $y^2$ is not divisible by 
+  $\lm(x^2y - z) = x^2y$ nor by $\lm(x^2 - y) = x^2$.
+\end{example}
 
-
-\paragraph{Group actions, equivariance, and orbit finite sets.}  \AP A
+\paragraph{Group actions, equivariance, and orbit finite sets.} 
+\AP A
 \intro{group} $\group$ is a set equipped with a binary operation that is
 associative, has an identity element and has inverses. In our setting, we are
 interested in infinite sets $\X$ of indeterminates that is equipped with a
@@ -209,14 +221,16 @@ we will develop in this paper will all be \kl(func){equivariant}.
 \intro{effectively oligomorphic} if:
 %
 \begin{enumerate}
-\item It is \intro{oligomorphic}, i.e.\ for every $n \in \N$ and every \kl{orbit
-finite set} $E \subseteq \Indets$,
-the set $E^n$ is \kl{orbit finite} under the action of $\group$ on $\Indets^n$.
+\item It is \intro{oligomorphic}, i.e.\ for every $n \in \N$,
+$\Indets^n$ is \kl{orbit finite},
 \item There exists an algorithm that decides whether two elements $\vec{x},
-\vec{y} \in \Indets^*$ are in the same orbit under the action of $\group$ on $\Indets^*$.
-\item There exists an algorithm which on input $n\in\N$ outputs a set $A\subseteqfin\Indets^n$ such that $|A\cap U| = 1$ for every orbit $U\in\Indets^n$.
+\vec{y} \in \Indets^*$ are in the same orbit under the action of 
+$\group$ on $\Indets^*$.
+\item There exists an algorithm which on input $n\in\N$ outputs a set
+$A \subseteqfin \Indets^n$ such that $|A\cap U| = 1$ for every orbit
+$U \subseteq \Indets^n$.
 \end{enumerate}
-%
+In particular, $\Indets$ itself is \kl{orbit finite} under the action of $\group$.
 
 
 A group action $\group \actson \X$ is said to be \intro(ord){compatible}
@@ -242,10 +256,11 @@ on $\Indets$.
 
 Note that under our \kl{computability assumptions}, the set of polynomials
 $\poly{\K}{\Indets}$ is also \kl{effectively oligomorphic} under the action of
-$\group$ on $\Indets$. This is because a polynomial $p \in \poly{\K}{\Indets}$
+$\group$ on $\Indets$ when restricted to polynomials with bounded degree.
+This is because a polynomial $p \in \poly{\K}{\Indets}$
 can be seen as an element of $(\K \times \Indets^{\leq d})^n$ where $n$ is the
 number of monomials in $p$, and $d$ is the maximal degree of a monomial
-appearing in $p$. Beware that the set of polynomials $\poly{\K}{\Indets}$ is
+appearing in $p$. Beware that the set of all polynomials $\poly{\K}{\Indets}$ is
 not \kl{orbit finite}, precisely because the orbit of a polynomial $p$ under 
 the action of $\group$ cannot change the degree of $p$, and that there are 
 polynomials of arbitrarily large degree.

@@ -24,12 +24,12 @@ dichotomy result without further assumptions on the group action.
   $H$ of generators of an \kl{equivariant ideal} $I$, one can
   in fact work in $\poly{\K}{V}$, where $V$ is the set of indeterminates
   that appear in $H$.
-  Then, the \kl{equivariant ideal membership problem} is reduces to 
+  Then, the \kl{equivariant ideal membership problem} reduces to 
   the \kl{ideal membership problem} in $\poly{\K}{V}$, which is decidable.
 \end{example}
 
 
-\AP However, one we are able to prove the undecidability of the \kl{equivariant
+\AP However, we are able to prove the undecidability of the \kl{equivariant
 ideal membership problem} under the assumption that the set of indeterminates
 $\Indets$  contains an \intro(of){infinite path} $P \defined \seqof{x_i}[i \in
 \N] \subseteq \Indets$, that is, a set of indeterminates such that $(x_i,x_j)
@@ -41,7 +41,8 @@ $\group$ of all shifts. The presence of an \kl(of){infinite path} clearly
 prevents $(\mon{\Indets}, \gdivleq)$ from being a \kl{well-quasi-ordering}, as
 shown by the following \cref{rem:not-wqo}. Furthermore, for indeterminates
 obtained by considering \kl{homogeneous structures} and their automorphism
-groups (\cref{sec:act ex}), the presence of an \kl(of){infinite path} has been
+groups (\cref{sec:act ex}), the 
+absence of an \kl(of){infinite path} has been
 conjectured to be a necessary and sufficient condition for $(\mon{\Indets},
 \gdivleq)$ to be a \kl{well-quasi-ordering}: this follows from a conjecture of
 Schmitz restated in \cref{conj:wqo-infinite-path}, that generalises one of
@@ -173,7 +174,8 @@ indeterminates \cite{MAME82}. This reduction was also noticed in \cite[Theorem
 
 \begin{lemma}[label=lem:mon-rewrite-red-membership,restate=lem:mon-rewrite-red-membership]
   \AP
-  One can solve the \kl{monomial reachability problem}
+  Assuming that $\K = \mathbb{Q}$,
+  one can solve the \kl{monomial reachability problem}
   provided that one can solve the \kl{equivariant ideal membership problem}.
   \proofref{lem:mon-rewrite-red-membership}
 \end{lemma}
@@ -206,7 +208,7 @@ $\mathsf{shift}_{+1}$, we only use it as a function.} Let us remark that
 \kl{monomial rewriting} applied on \kl{word encodings} can simulate
 (reversible) string rewriting on words of a given size.
 
-\begin{lemma}
+\begin{lemma}[name={},restate=lem:word-encoding-string-subst]
   \label{lem:word-encoding-string-subst}
   Let $P,Q$ be two \kl(of){finite paths} in $\Indets$,
   such that $(p_0,p_1)$ is in the same orbit as 
@@ -221,29 +223,9 @@ $\mathsf{shift}_{+1}$, we only use it as a function.} Let us remark that
   Then,
       there exists $x, y \in \Sigma^*$
       such that $x u y = w$ and $\wenc{x v y}_P = \monelt[n]$.
+  \proofref{lem:word-encoding-string-subst}
 \end{lemma}
-\begin{proof}
-  Let us write $\gelem \cdot q_0 = p_k$ for some $k \in \N$.
-  Because the only indeterminates with degree $4$ in $\wenc{w}_P$ are
-  the ones of the form $p_{4i}$, we have that $k$ is a multiple of $4$
-  (i.e. at the start of a letter block).
-  Since $(q_0, q_1)$ is in the same orbit as $(p_0, p_1)$,
-  and both $P$ and $Q$ are \kl(of){finite paths},
-  we conclude that $\gelem \cdot (q_0, q_1) = (p_{4i}, p_{4i+1})$
-  or $\gelem \cdot (q_0, q_1) = (p_{4i+1}, p_{4i-1})$.
-  Applying the same reasoning, thrice, 
-  we have either $\gelem \cdot (q_0, q_1, q_2, q_3) = (p_{4i}, p_{4i+1}, p_{4i+2}, p_{4i+3})$
-  or $\gelem \cdot (q_0, q_1, q_2, q_3) = (p_{4i}, p_{4i-1}, p_{4i-2}, p_{4i-3})$.
-  However, in the second case, the exponent of $p_{4i-3}$ in $\wenc{w}_P$ is at most $2$,
-  which is incompatible with the fact that the one of $q_3$ in $\wenc{u}_Q$ is $3$.
-  By induction on the length of $u$, we immediately obtain that 
-  $\gelem \cdot \wenc{u}_Q = \mathsf{shift}_{+4i} \cdot \wenc{u}_P$ and
-  therefore that 
-  $w = x u y$ for some $x,y \in \Sigma^*$.
-  Finally, because $\wenc{v}_Q$ uses exactly the same indeterminates as 
-  $\wenc{u}_Q$, we can also conclude that
-  $\wenc{xvy}_P = \monelt[n]$.
-\end{proof}
+
 
 \Cref{lem:word-encoding-string-subst} shows that all encodings
 using \kl(of){finite paths} with the same initial orbit are compatible with
@@ -267,7 +249,7 @@ we will consider the following alphabet $\Gamma \defined \set{ \triangleleft,
   rewrite systems} will then be used to prove the undecidability of the
   \kl{equivariant ideal membership problem} in \cref{thm:undecidable-paths}.
 
-\begin{lemma}
+\begin{lemma}[name={},restate=lem:reversible-machine]
   \label{lem:reversible-machine}
   Let us fix $(x_0, x_1)$ a pair of indeterminates.
   There exists a
@@ -289,26 +271,9 @@ we will consider the following alphabet $\Gamma \defined \set{ \triangleleft,
   is the image of a word of the form
   $\wenc{\triangleright^{\text{run}} u \triangleleft^{\text{run}}}_P$  
   where $u \in (Q \uplus \Sigma \uplus \square)^n$.
+  \proofref{lem:reversible-machine}
 \end{lemma}
-\begin{proof}
-  Transitions of the deterministic reversible Turing machine using bounded tape size can be 
-  modelled as a reversible string rewriting system using finitely many rules 
-  of the form $u \leftrightarrow v$, where $u$ and $v$ are words
-  over $(Q \uplus \Sigma \uplus \square)$ having the same length $\ell$
-  For each rule $u \leftrightarrow v$, we create rules 
-  $\wenc{u}_P \leftrightarrow_{R_M} \wenc{v}_P$ 
-  for every \kl(of){finite path} $P$ of length $4l$.
-  Note that there are only orbit finitely many such \kl(of){finite paths} $P$,
-  and one can effectively list some representatives,
-  because $\Indets$ is \kl{effectively oligomorphic}.
-  This system is clearly complete, in the sense that one can perform a substitution
-  by applying a monomial rewriting rule, but \cref{lem:word-encoding-string-subst}
-  also tells us it is correct, in the sense that it cannot perform anything else
-  than string substitutions.
-  Furthermore, we can assume 
-  that the reversible Turing machine
-  starts with a clean tape and ends with a clean tape.
-\end{proof}
+
 
 \Cref{lem:reversible-machine} shows that one can simulate the
 runs, provided we know in advance the maximal size of the tape used by the
@@ -318,7 +283,7 @@ arbitrary size using a \kl{monomial rewrite system}. The difficulty is that we
 will not be able to ensure that we follow one specific \kl(of){finite path}
 when creating the tape.
 
-\begin{lemma}
+\begin{lemma}[name={},restate=lem:tape-creation]
   \label{lem:tape-creation}
   Let $(x_0, x_1)$ be a pair of indeterminates, $P$ be a \kl(of){finite path}
   such that $(p_0, p_1)$ is in the same orbit as $(x_0, x_1)$.
@@ -340,59 +305,9 @@ when creating the tape.
   \end{enumerate}
   Similarly, there exists a \kl{monomial rewrite system} $R_\text{post}$
   with analogue properties using $q_f$ instead of $q_0$.
+  \proofref{lem:tape-creation}
 \end{lemma}
-\begin{proof}
-  We create the following rules,
-  where $P_1$ and $P_2$ range over \kl(of){finite paths} such that
-  their first two elements are in the same orbit as $(x_0, x_1)$,
-  and assuming that the indeterminates of $P_1$ and $P_2$ are disjoint:
-  \begin{enumerate}
-    \item Cell creation: 
-      $\wenc{\triangleright^{\text{pre}} \square}_{P_1}
-        \wenc{ \square_1 \square_2 \triangleleft^{\text{pre}}}_{P_2}
-      \leftrightarrow_{R_\text{pre}}
-      \wenc{\triangleright^{\text{pre}} \square_1}_{P_1}
-      \wenc{ \square \square \square_2 \triangleleft^{\text{pre}}}_{P_2}$
-    \item Linearity checking:
-      $\wenc{\square_1 \square}_{P_1} \wenc{\square_2 \triangleleft^{\text{pre}}}_{P_2}
-      \leftrightarrow_{R_\text{pre}}
-      \wenc{\square \square_1}_{P_1} \wenc{\square_2 \triangleleft^{\text{pre}}}_{P_2}$
-    \item Phase transition:
-      $\wenc{\triangleright^{\text{pre}} \square}_{P_1}
-       \wenc{\square_1 \square_2 \triangleleft^{\text{pre}}}_{P_2}
-      \leftrightarrow_{R_\text{pre}}
-       \wenc{\triangleright^{\text{run}} q_0}_{P_1}
-       \wenc{\square \square \triangleleft^{\text{run}}}_{P_2}$
-  \end{enumerate}
-  Note that there are only orbit finitely many such pairs of monomials,
-  and that we can enumerate representative of these orbits because 
-  $\Indets$ is \kl{effectively oligomorphic}.
 
-  Let us first argue that this system is complete. Because there exists an
-  infinite path $P_{\infty}$, it is indeed possible to reach
-  $\wenc{\triangleright^{\text{run}} q_0 \square^n
-  \triangleleft^{\text{run}}}_{P_\infty}$ by repeatedly applying the first
-  rule, and then the second rule until $\square_1$ reaches the end of the tape,
-  and continuing so until one decides to apply the third rule to reach the
-  desired tape configuration.
-
-  We now claim that the system is correct, in the sense that it can only reach
-  valid tape encodings. First, let us observe that in a rewrite sequence, one
-  can always assume that the rewriting takes the form of applying the first
-  rule, then the second rule until one cannot apply it anymore, and repeating
-  this process until one applies the third rule. Because rule (2) ensures that
-  when we add new indeterminates using rule (1), they were not already present
-  in the monomial, and because rule (1) ensures that locally the structure of
-  the indeterminates remains a \kl(of){finite path}, we can conclude that the
-  whole set of indeterminates used come from a \kl(of){finite path} $P'$. As a
-  consequence, if one can reach a state where (1) or (3) are applicable, then
-  the tape is of the form $\wenc{ \triangleright^{\text{pre}} \square^n
-  \square_1 \square_2 \triangleleft^{\text{pre}} }_{P'}$, with $n \geq 1$. It
-  follows that when one can apply rule (3), the monomial obtained is of the
-  form $\wenc{ \triangleright^{\text{run}} q_0 \square^n
-  \triangleleft^{\text{run}} }_{P'}$, where $P'$ is a \kl(of){finite path} such
-  that $(p_0', p_1')$ is in the same orbit as $(x_0, x_1)$. 
-\end{proof}
 
 \csname thm:undecidable-paths\endcsname*
 \begin{proof}
@@ -411,24 +326,14 @@ when creating the tape.
   if and only if $|i - j| = 1$ for all $i,j \in \N$.
 \end{remark}
 
-\begin{remark}
+\begin{remark}[name={},restate=rem:indeterminates-infinite-path]
   \label{rem:indeterminates-infinite-path}
   Given an \kl{oligomorphic} set of indeterminates $\Indets$,
   it is equivalent to say that $\Indets$ contains an \kl(of){infinite path}
   or to say that it contains \kl(of){finite paths} of arbitrary length.
+  \proofref{rem:indeterminates-infinite-path}
 \end{remark}
-\begin{proof}
-  Assume that there are arbitrarily long finite paths in $\Indets$.
-  Then, one can create an infinite tree whose nodes 
-  are representatives of (distinct) orbits of finite paths, whose root is the empty path, and 
-  where the ancestor relation is obtained by projecting on a subset of
-  indeterminates.
-  Because $\Indets$ is \kl{oligomorphic}, there are finitely many 
-  nodes at each depth in the tree (i.e. at each length of the finite path).
-  Hence, there exists an infinite branch in the tree due to König's lemma,
-  and this branch is a witness for the existence of an \kl(of){infinite path}
-  in $\Indets$.
-\end{proof}
+
 
 
 \begin{example}
@@ -443,31 +348,12 @@ when creating the tape.
   is undecidable for the Rado graph.
 \end{example}
 
-\begin{example}
+\begin{example}[name={},restate=ex:product-indets]
   \label{ex:product-indets}
   Let $\Indets$ be an \kl{oligomorphic} infinite set of indeterminates.
   Then $\Indets \times \Indets$ contains a (generalised) \kl(of){infinite path}
   as defined in \cref{rem:multiple-orbits}.
+  \proofref{ex:product-indets}
 \end{example}
-\begin{proof}
-  Let $\seqof{x_i}[i \in \N]$
-  and $\seqof{y_i}[i \in \N]$ be two infinite sets of distinct indeterminates
-  in $\Indets$.
-  Let us define $P \defined (x_0, y_0), (x_1, y_0), (x_1, y_1), (x_2, y_1), \ldots$.
-  The orbits of pairs that define the successor relation 
-  are the orbits of $((x_i, y_j), (x_k, y_l))$,
-  where $x_i = x_k$ and $y_j \neq y_l$, or where $x_i \neq x_k$ and $y_j = y_l$.
-  Because $\Indets$ is \kl{oligomorphic}, there are finitely many such orbits.
-  Let us sketch the fact that this defines a generalised path.
-  Consider that
-  $((x_i, y_j), (x_k, y_l))$ is in the same orbit as $((x_0, y_0), (x_1, y_0))$,
-  then there exists $\gelem \in \group$ such that
-  $\gelem \cdot (x_i, y_j) = (x_0, y_0)$ and $\gelem \cdot (x_k, y_l) = (x_1, y_0)$,
-  but then $\gelem \cdot y_j = \gelem \cdot y_l = y_0$, and because $\gelem$ is 
-  invertible, $y_j = y_l$. Similarly, we conclude that $x_i \neq x_k$.
-  The same reasoning shows that if
-  $((x_i, y_j), (x_k, y_l))$ is in the same orbit as $((x_0, y_0), (x_0, y_1))$,
-  then $y_j \neq y_l$ and $x_i = x_k$.
-\end{proof}
 
 

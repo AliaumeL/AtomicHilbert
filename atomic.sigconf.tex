@@ -37,7 +37,7 @@
 
 % math packages
 \usepackage{stmaryrd,upgreek}
-\usepackage{keytheorems}
+\usepackage{thmtools}
 
 
 % adding new theorems, taken from  
@@ -162,7 +162,9 @@
 
 \begin{document}
 
-\title[Equivariant Gröbner bases]{Computability of Equivariant Gröbner bases
+\title[Equivariant Gröbner bases]{Computability of Equivariant Gröbner bases \\
+       main 189daa886c9ec0cc2d9ecf5085f5bfae9340675d \\
+       2026-01-19 14:38:33 +0100
 }
 
 
@@ -195,8 +197,6 @@
 %
 \begin{abstract}
     Let \(\mathbb{K}\) be a field, \(\mathcal{X}\) be an infinite set (of indeterminates), and \(\mathcal{G}\) be a group acting on \(\mathcal{X}\). An ideal in the polynomial ring \(\mathbb{K}[\mathcal{X}]\) is called equivariant if it is invariant under the action of \(\mathcal{G}\). We show Gröbner bases for equivariant ideals are computable are hence the equivariant ideal membership is decidable when \(\mathcal{G}\) and \(\mathcal{X}\) satisfies the Hilbert's basis property, that is, when every equivariant ideal in \(\mathbb{K}[\mathcal{X}]\) is finitely generated. Moreover, we give a sufficient condition for the undecidability of the equivariant ideal membership problem. This condition is satisfied by the most common examples not satisfying the Hilbert's basis property.
-    
-    \arka{Add a sentence on applications here}
 \end{abstract}
 
 \begin{CCSXML}
@@ -226,9 +226,9 @@ a \kl[kl-usage]{notion} points to its \intro[kl-usage]{definition}.
 % Include the content of the paper
 \input{src/intro.tex}
 \input{src/preliminaries.tex}
-\input{src/examples.tex}
 \input{src/weakgb.tex}
 \input{src/fullbasis.tex}
+\input{src/examples.tex}
 \input{src/applications.tex}
 \input{src/undecidability.tex}
 \input{src/conclusion.tex}

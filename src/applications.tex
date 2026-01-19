@@ -18,31 +18,10 @@ For the remainder of this section, we fix a pair of group actions $\grp[H]
 \actson \X$ and $\grp[G] \actson \Y$, where $\X$ is equipped with a total order
 $<_{\X}$ and $\Y$ is equipped with a total order $<_{\Y}$. The constructions
 that what we mention in this section were already studied in \cite{GHOLAS24},
-via \cite[Example 10]{GHOLAS24} or \cite[Lemma 9]{GHOLAS24}, but they did not
-take into account our stronger requirement that $\gdivleq$ should be a
-\kl{well-quasi-ordering} for any \kl{well-quasi-ordered} set $(Y, \leq)$ of
-exponents on the monomials. We summarise in \cref{tab:closure-properties} the
-closure properties of the \kl{computability assumptions} and the
-\kl{well-quasi-ordering} property, and we give their definitions of the
-operations in \cref{def:union,def:product,def:nested product}.
+via \cite[Example 10]{GHOLAS24} or \cite[Lemma 9]{GHOLAS24}, and 
+our contribution is to prove that they also preserve our 
+\kl{computability assumptions}.
 
-\begin{table}
-  \label{tab:closure-properties}
-\centering
-\caption{Closure properties of the \kl{computability assumptions} and \kl{well-quasi-ordering} property
-for group actions on sets of indeterminates, recapitulating \cref{def:union,def:product,def:nested product}
-and \cref{lem:closure-properties-wqo,lem:closure-properties-comp}.}
-\begin{tabular}{l|l|l|l|l}
-  \toprule
-  \textbf{Name} &
-  \textbf{Group action} & \textbf{Effective} & \textbf{WQO} & \textbf{Reference} \\
-  \midrule
-  Sum & $\grp[G] \times \grp[H] \actson \X \ordplus \Y$ &  Yes & Yes & \cref{def:union} \\
-  Product &  $\grp[G] \times \grp[H] \actson \X \ordtimes \Y$ & Yes & No & \cref{def:product} \\
-  Lex. Product & $\grp[G] \lexGroupAction \grp[H] \actson \X \ordtimes \Y$ & Yes & Yes & \cref{def:nested product} \\
-  \bottomrule
-\end{tabular}
-\end{table}
 
 \begin{definition}[Sum action]\label{def:union}
   Given $(\gelem[\pi], \gelem[\sigma]) \in \grp[G] \times \grp[H]$ 
@@ -75,18 +54,24 @@ and different copies of the structure $\Y$ can be permuted independently.
 \end{definition}
 
 \begin{lemma}\label{lem:closure-properties-wqo}
-If $(\mon[Q]{\X}, \gdivleq[\grp[G]])$ and $(\mon[Q]{\Y}, \gdivleq[\grp[H]])$ are \kl{WQOs},
-then $(\mon[Q]{\X \ordplus \Y}, \gdivleq[\grp[G] \times \grp[H]])$ and $(\mon[Q]{\X\uplus\Y}, \gdivleq[\grp[G]\otimes\grp[H]])$ are also \kl{WQOs}.
+If $(\mon[Q]{\X}, \gdivleq[\grp[G]])$ and $(\mon[Q]{\Y}, \gdivleq[\grp[H]])$
+are \kl{WQOs},
+then $(\mon[Q]{\X \ordplus \Y}, \gdivleq[\grp[G] \times \grp[H]])$
+and $(\mon[Q]{\X\times\Y}, \gdivleq[\grp[G]\otimes\grp[H]])$ are
+also \kl{WQOs}.
 \end{lemma}
 
 \begin{proof}
 The \kl{divisibility up to $\grp[G] \times \grp[H]$} order is essentially the product of the orders $\gdivleq[\grp[G]]$ and $\gdivleq[\grp[H]]$,
 hence is a \kl{WQO} if both orders are \kl{WQOs} \cite[Lemma 1.5]{SCSC17}.
-For, $(\mon[Q]{\X\uplus\Y}, \gdivleq[\G\otimes\calH])$ it follows from \cite[Lemma 9]{GHOLAS24}.
+For, $(\mon[Q]{\X\times\Y}, \gdivleq[\G\otimes\calH])$
+it follows from \cite[Lemma 9]{GHOLAS24}.
 \end{proof}
 
 \begin{lemma}\label{lem:product-not-wqo}
-If $(\mon[Q]{\X \ordtimes \Y}, \gdivleq[\grp[G] \times \grp[H]])$ is not a \kl{WQO} even if both $\X$ and $\Y$ are infinite.
+  When $\X$ and $\Y$ are infinite,
+  $(\mon[Q]{\X \ordtimes \Y}, \gdivleq[\grp[G] \times \grp[H]])$
+  is not a \kl{WQO}, even with $Q = \set{0,1}$.
 \end{lemma}
 \begin{proof}
 We restate the antichain given in \cite[Example 10]{GHOLAS24},
@@ -105,6 +90,9 @@ If $\grp[G]\actson\X$ and $\grp[H]\actson\Y$ satisfy our \kl{computability assum
 then so do $(\grp[G] \times \grp[H])\actson (\X \ordplus \Y)$ and $(\grp[G] \otimes \grp[H])\actson (\X \times \Y)$.
 \end{lemma}
 \begin{proof}
+  Let us first check that the actions are \kl{effectively oligomorphic}.
+  \todo[inline]{\textbf{for arka}: do it?}
+
   It is an easy check that the actions defined are all \kl(ord){compatible}
   with the total ordering on the set of indeterminates.
   Let us now sketch the proof that points (2) and (3) of our
@@ -178,7 +166,8 @@ Gröbner bases}, and not meant to be a fully-fledged model of computation.
 \begin{definition}
   \label{def:orbit-finite-polynomial-automaton}
   An \intro{orbit finite polynomial
-  automaton} is a tuple $A \defined (Q, \delta, q_0, F)$, where $Q =
+  automaton} over $\K$ and $\Indets$ 
+  is a tuple $A \defined (Q, \delta, q_0, F)$, where $Q =
   \Indets \to \K$, $q_0 \in Q$ is a function that is non-zero for finitely
   many indeterminates, $\delta \colon
   \Indets \times \Indets \toequiv \poly{\K}{\Indets}$ 
@@ -202,90 +191,7 @@ polynomial computations. As for \kl{polynomial automata}, the
 following decision problem: decide if for every input word $w$, the output
 $F(\delta^*(w, q_0))$ is zero.
 
-\begin{theorem}
-  \label{cor:orbit-finite-polynomial-automata-zeroness}
-  Let $\Indets$ be a set of indeterminates that satisfies the
-  \kl{computability assumptions} and such that $(\mon[Y]{\Indets}, \gdivleq)$ is a
-  \kl{well-quasi-ordering}, for every \kl{well-quasi-ordered} set $(Y, \leq)$.
-  Then, the \kl(ofpa){zeroness problem} is decidable for \kl{orbit finite polynomial automata}.
-\end{theorem}
-\begin{proof}
-  Let $A = (Q, \delta, q_0, F)$ be an \kl{orbit finite polynomial
-  automaton}. Following the classical \emph{backward procedure} for such
-  systems, we will compute a sequence of sets $E_0 \defined \setof{ q \in Q }{
-  F(q) = 0 }$, and $E_{i+1} \defined \mathrm{pre}^\forall(E_i) \cap E_i$, where
-  $\mathrm{pre}^\forall(E)$ is the set of states $q \in Q$ such that for every
-  $a \in \Sigma$, $\delta^*(q,a) \in E$. We will prove that the sequence of
-  sets $E_i$ stabilises, and that it is computable. As an immediate
-  consequence, it suffices to check that $q_0 \in E_{\infty}$, where $E_\infty$
-  is the limit of the sequence $(E_i)_{i \in \N}$, to decide the
-  \kl(ofpa){zeroness problem}.
 
-  The only idea of the proof is to notice that all the sets $E_i$ are
-  representable as zero-sets of \kl{equivariant ideals} in
-  $\poly{\K}{\Indets}$, allowing us to leverage the effective computations of
-  \cref{cor:equivariant-ideals-computations}. Given a set $H$ of polynomials,
-  we write $\mathcal{V}(H)$ the collections of states $q \in Q$ such that $p(q)
-  = 0$ for all $p \in H$.
-  It is easy to see that $E_0 = \mathcal{V}(\set{F}) = \mathcal{V}(\idl_0)$,
-  where $\idl_0$ is the \kl{equivariant ideal} generated by $F$, since 
-  $F \in \poly{\K}{V}$ and $V$ is invariant under the action of $\group$.
-  Furthermore, assuming that $E_i = \mathcal{V}(\idl_i)$, we can
-  see that 
-  \begin{align*}
-    \mathrm{pre}^\forall(E_i) 
-    & = \setof{ q \in Q }{ \forall a \in \Sigma, \delta^*(a,q) \in E_i } \\
-    & = \setof{ q \in Q }{ \forall a \in \Sigma, \forall p \in \idl_i, p(\delta^*(a,q)) = 0 } \\
-    & = \setof{ q \in Q }{ \forall p' \in \idl[J], p'(q) = 0 }
-  \end{align*}
-  Where, the \kl{equivariant ideal} $\idl[J]$ is generated by the
-  polynomials $\mathrm{pullback}(p,a) \defined p [ x \mapsto \delta(a,x)]$
-  for every pair $(p, a) \in \idl_i \times \Sigma$. 
-  As a consequence, we have $E_{i+1} = \mathcal{V}(\idl_{i+1})$, where
-  $\idl_{i+1} = \idl_i + \idl[J]$.
-  Because the sequence $\seqof{ \idl_i }[ i \in \N]$ is increasing, and thanks
-  to the \kl{equivariant Hilbert basis property} of $\poly{\K}{\Indets}$, there
-  exists an $n_0 \in \N$ such that $\idl_{n_0} = \idl_{n_0 + 1} = \idl_{n_0 +
-  2} = \cdots$. In particular, we do have $E_{n_0} = E_{n_0 + 1} = E_{n_0 + 2}
-  = \cdots$.
-
-  Let us argue that we can compute the sequence $\idl_i$.
-  First,  $\idl_0 = \EqIdlGen{F}$ is finitely represented.
-  Now, 
-  given an \kl{equivariant ideal} $\idl$, represented by an \kl{orbit finite}
-  set of generators $H$,
-  we can compute the \kl{equivariant ideal} $\idl[J]$ generated by the
-  polynomials $\mathrm{pullback}(p,a) \defined p [ x_i \mapsto \delta(a)(x_i)]$
-  for every pair $(p, a) \in H \times \Sigma$. Indeed, $H \times \Sigma$ is
-  \kl{orbit finite}, and the function $\mathrm{pullback}$ is
-  computable and \kl(func){equivariant}: given $\gelem \in \group$, we can
-  show that
-  \begin{align*}
-    & \phantom{=.}\gelem \cdot \mathrm{pullback}(p, a) \\
-    & = 
-    \gelem \cdot (p [ x_i \mapsto \delta(a,x_i)]) & \text{ by definition }\\
-                                                  & = p [ x_i \mapsto (\gelem \cdot \delta(a, x_i))] 
-                                                  & \text{ $\gelem$ acts as a morphism } \\
-    & = p [ x_i \mapsto \delta(\gelem \cdot a, \gelem \cdot x_i))] 
-    & \text{ $\delta$ is \kl(func){equivariant} } \\
-    & = (\gelem \cdot p) [ x_i \mapsto \delta(\gelem \cdot a, x_i)] 
-    & \text{ definition of substitution }
-    \\
-    & = \mathrm{pullback}(\gelem \cdot p, \gelem \cdot a).
-    & \text{ by definition.}
-  \end{align*}
-%  
-  Finally, one can detect when the sequence stabilises, by checking whether
-  $\idl_i = \idl_{i+1}$, which is decidable because the
-  \kl{equivariant ideal membership problem} is decidable 
-  by \cref{thm:compute-egb}.
-
-  To conclude, it remains to check whether $q_0 \in E_\infty$,
-  which amounts to check that $q_0 \in \mathcal{V}(\idl_\infty)$.
-  This is equivalent to checking whether for every element $p \in \Basis$
-  where $\Basis$ is an \kl{equivariant Gröbner basis} of $\idl_\infty$, we have
-  $p(q_0) = 0$, which can be done by enumerating relevant orbits.
-\end{proof}
 
 The \kl{orbit finite polynomial automata} model could be extended to allow for
 inputs of the form $\Indets^k$ for some $k \in \N$, or even be recast in the
@@ -330,14 +236,13 @@ definitions of these models, but point out  that a reversible data Petri net is
 exactly what is called a \kl{monomial rewriting system} \cite[Section
 8]{GHOLAS24}. Because reachability in such rewriting systems can be decided
 using \kl{equivariant ideal membership} queries \cite[Theorem 64]{GHOLAS24}, we
-can use \cref{thm:compute-egb} and \cref{lem:reducts-equiv-hilbert} to show
-\cref{cor:rev data VAS}. Note that \kl{monomial rewrite systems} will be at the
+can use \cref{thm:compute-egb}
+ and \cref{lem:reducts-equiv-hilbert} to show
+\cref{cor:rev data VAS}.
+Note that \kl{monomial rewrite systems} will be at the
 center of our undecidability results in \cref{sec:undecidability}.
 
-\begin{corollary}\label{cor:rev data VAS}
-  For every \kl{nicely orderable} group action $\group\actson\Indets$,
-  the reachability problem for reversible Petri nets with data in $\Indets$ is decidable.
-\end{corollary}
+\csname cor:rev-data-VAS\endcsname*
 
 
 
@@ -354,10 +259,76 @@ shown that the solvability of these systems of equations reduces to the
 consequence of this reduction and
 \Cref{thm:compute-egb,lem:reducts-equiv-hilbert} we get that:
 
-\begin{corollary}\label{cor:lin solv}
-  For every \kl{nicely orderable} group action $\group\actson\Indets$,
-  the solvability problem for orbit-finite systems of equations
-  is decidable.
+
+\csname cor:lin-solv\endcsname*
+
+Note that the above corollary is an extension of
+\cite[Theorem 6.1]{GHL22} to all nicely orderable group actions.
+
+
+
+\subsection{Reducts} 
+
+\todo[inline]{\textbf{for arka}: 
+this section is non-sensical: we are saying that things are gröbner bases 
+without having an ordering. This needs to be fixed, for instance 
+by saying that \cref{cor:equivariant-ideals-computations}
+lifts to this setting via the reduct, but without mentioning gröbner bases.
+}
+
+\AP As mentioned in the introduction, some examples of
+group actions $\group\actson\Indets$ do not preserve a linear order on
+$\Indets$, such as the set $\EqualityAtoms$ of indistinguishable names without
+any relations. However, there are techniques that allow us to reduce the
+problem of computing \kl{equivariant Gröbner bases} to the case where the
+action preserves a linear ordering, using what is called a \kl{reduct} of the
+action. A group action $\group\actson\Indets$ is said to be a \intro{reduct} of
+another group action $\calH\actson\Y$ if there exists a bijection $f \colon
+\Indets\to\Y$ such that $f^{-1}\circ \gelem \circ f \in\group$ for every
+$\gelem \in \calH$. It is called an \intro{effective reduct} if $f$ is
+computable.
+
+\begin{lemma}\label{lem:reducts-equiv-hilbert}
+  Let $\group\actson\Indets$ be an \kl{effective reduct} of $\calH\actson\Y$ 
+  via a computable function $f\colon\Indets\to\Y$. Then,
+  \begin{enumerate}
+    \item for every $\group$-equivariant ideal $\idl[I]\subseteq\poly{\K}{\X}$,
+    $f(\idl[I])\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant ideal,
+    \item if $\Basis\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant Gr\"{o}bner basis then \\$\orbit[\group]{f^{-1}(\Basis)}$ is a $\group$-equivariant Gr\"{o}bner basis.
+  \end{enumerate}
+\end{lemma}
+
+\AP We say that an action $\group\actson\Indets$ is \intro{nicely orderable} if
+it is an \kl{effective reduct} of some  \kl{effectively oligomorphic} action
+$\calH\actson\Y$ that satisfies the conditions mentioned in
+\Cref{thm:compute-egb},
+i.e.\ $\calH\actson\Y$ preserves an effective linear order and
+$\gdivleq[\calH]$ is a \kl{WQO}. As an immediate corollary of
+\Cref{thm:compute-egb},
+\Cref{lem:reducts-equiv-hilbert} we get the desired \cref{cor:egb}.
+  
+\begin{corollary}\label{cor:egb} If $\group\actson\Indets$ is
+  \kl{nicely orderable} then
+  one can compute an \kl{equivariant Gröbner basis} of any 
+  \kl{equivariant ideal} given by an \kl{orbit finite} set of
+  generators.
 \end{corollary}
-%
-Note that the above corollary is an extension of \cite[Theorem 6.1]{GHL22} to all nicely orderable group actions.
+
+\begin{remark}\label{rem:reduct}
+
+\Cref{lem:reducts-equiv-hilbert} implies that one can apply our
+results to an action $\group\actson\Indets$ that does not preserve a linear
+order, as soon as it is  a reduct of some another action $\calH\actson\Indets$ which
+does preserves a linear order. 
+
+For example, $\aut{\EqualityAtoms}\actson\EqualityAtoms$ is a \kl{reduct} of
+$\aut{\OrderAtoms}\actson\OrderAtoms$ assuming $\EqualityAtoms$ is countable.
+Similarly, let $\T_<$ be the countable dense-meet tree with a lexicographic
+ordering, as defined in \cite[Remark 6.14]{KRS21}.\footnote{The remark says
+that finite meet-trees expanded with a lexicographic ordering is a Fra\"{i}sse
+class, from which it follows that there exists a Fra\"{i}sse limit $\T_<$ for
+that class.} Let $\group$ be the group of bijections of $\T_<$ which do not
+necessarily preserve the lexicographic ordering. Then $\group\actson\T_<$ is
+isomorphic to $\aut{\TreeAtoms}\actson\TreeAtoms$, and hence
+$\aut{\TreeAtoms}\actson\TreeAtoms$ is a reduct of $\aut{\T_<}\actson\T_<$.
+\end{remark}

@@ -4,14 +4,14 @@
 \section{Examples of group actions}\label{sec:act ex}
 
 \AP Many of the common examples of group actions $\group\actson\Indets$ are
-obtained by considering $\Indets$  as set with some structure, described by
+obtained by considering $\Indets$ as set with some structure, described by
 some relations and functions on that set, and $\group$ is the group
 $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve and
 reflect the structure) of $\Indets$. A monomial $\monelt[p] \in
-\mon[Q]{\Indets}$ can be thought as a labelling of a finite substructure of
+\mon[Y]{\Indets}$ can be thought as a labelling of a finite substructure of
 $\X$ using elements of $Y$. If the structure $\Indets$ is \intro{homogeneous},
 that is, if isomorphisms between finite induced substructures extends to
-automorphisms of the whole structure, then $\gdivleq$ is same as embedding of
+automorphisms of the whole structure, then $\gdivleq$ is the same as embedding of
 labelled finite induced substructures of $\X$. \footnote{ We refer the reader
 to \cite[Chapter 7]{BOJAN16inf} and \cite{homsurvey} for more details on
 homogeneous structures.} Let us now give some examples of such structures and
@@ -110,62 +110,6 @@ However, $(\mon[Y]{\calZ}, \gdivleq[\aut{\calZ}])$ is not a \kl{WQO} even when $
 An example of an infinite antichain is the set $\setof{a b}{b\in\calZ\setminus\{a\}}$, for any fixed $a\in\calZ$.
 \end{example}
 
-\paragraph{Reducts} \AP As mentioned in the introduction, some examples of
-group actions $\group\actson\Indets$ do not preserve a linear order on
-$\Indets$, such as the set $\EqualityAtoms$ of indistinguishable names without
-any relations. However, there are techniques that allow us to reduce the
-problem of computing \kl{equivariant Gröbner bases} to the case where the
-action preserves a linear ordering, using what is called a \kl{reduct} of the
-action. A group action $\group\actson\Indets$ is said to be a \intro{reduct} of
-another group action $\calH\actson\Y$ if there exists a bijection $f \colon
-\Indets\to\Y$ such that $f^{-1}\circ \gelem \circ f \in\group$ for every
-$\gelem \in \calH$. It is called an \intro{effective reduct} if $f$ is
-computable.
-
-\begin{lemma}\label{lem:reducts-equiv-hilbert}
-  Let $\group\actson\Indets$ be an \kl{effective reduct} of $\calH\actson\Y$ 
-  via a computable function $f\colon\Indets\to\Y$. Then,
-  \begin{enumerate}
-    \item for every $\group$-equivariant ideal $\idl[I]\subseteq\poly{\K}{\X}$,
-    $f(\idl[I])\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant ideal,
-    \item if $\Basis\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant Gr\"{o}bner basis then \\$\orbit[\group]{f^{-1}(\Basis)}$ is a $\group$-equivariant Gr\"{o}bner basis.
-  \end{enumerate}
-\end{lemma}
-
-\AP We say that an action $\group\actson\Indets$ is \intro{nicely orderable} if
-it is an \kl{effective reduct} of some  \kl{effectively oligomorphic} action
-$\calH\actson\Y$ that satisfies the conditions mentioned in
-\Cref{thm:compute-egb},
-i.e.\ $\calH\actson\Y$ preserves an effective linear order and
-$\gdivleq[\calH]$ is a \kl{WQO}. As an immediate corollary of
-\Cref{thm:compute-egb},
-\Cref{lem:reducts-equiv-hilbert} we get the desired \cref{cor:egb}.
-  
-\begin{corollary}\label{cor:egb} If $\group\actson\Indets$ is
-  \kl{nicely orderable} then
-  one can compute an \kl{equivariant Gröbner basis} of any 
-  \kl{equivariant ideal} given by an \kl{orbit finite} set of
-  generators.
-\end{corollary}
-
-\begin{remark}\label{rem:reduct}
-
-\Cref{lem:reducts-equiv-hilbert} implies that one can apply our
-results to an action $\group\actson\Indets$ that does not preserve a linear
-order, as soon as it is  a reduct of some another action $\calH\actson\Indets$ which
-does preserves a linear order. 
-
-For example, $\aut{\EqualityAtoms}\actson\EqualityAtoms$ is a \kl{reduct} of
-$\aut{\OrderAtoms}\actson\OrderAtoms$ assuming $\EqualityAtoms$ is countable.
-Similarly, let $\T_<$ be the countable dense-meet tree with a lexicographic
-ordering, as defined in \cite[Remark 6.14]{KRS21}.\footnote{The remark says
-that finite meet-trees expanded with a lexicographic ordering is a Fra\"{i}sse
-class, from which it follows that there exists a Fra\"{i}sse limit $\T_<$ for
-that class.} Let $\group$ be the group of bijections of $\T_<$ which do not
-necessarily preserve the lexicographic ordering. Then $\group\actson\T_<$ is
-isomorphic to $\aut{\TreeAtoms}\actson\TreeAtoms$, and hence
-$\aut{\TreeAtoms}\actson\TreeAtoms$ is a reduct of $\aut{\T_<}\actson\T_<$.
-\end{remark}
 
 
 \paragraph{Effective oligomorphicity} \AP Recall that in our \kl{computability
