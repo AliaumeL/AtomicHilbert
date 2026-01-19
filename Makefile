@@ -12,15 +12,6 @@ SRC=src/*.tex             \
 all: $(PAPER).pdf
 
 
-      arxiv-meta.txt: paper-meta.yaml 
-	pandoc --metadata-file=paper-meta.yaml \
-		     --lua-filter=templates/git-meta.lua \
-			   --template=templates/arxiv-submission.txt \
-			   -t plain \
-			   --wrap=none \
-			   -o arxiv-meta.txt \
-			   $(PAPER).md
-
 # Default target: create the pdf file
 %.pdf: %.tex 
 	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $<
