@@ -12,9 +12,9 @@ every ideal in $\poly{\K}{\Indets}$ is finitely generated~\cite{HILB1890}, where
 addition and multiplication by elements of $\poly{\K}{\Indets}$.
 This property follows from 
 \kl{Hilbert's basis theorem}, stating that for every ring 
-$\A$ that is \kl{Noetherian}, 
+$\A$ that is \intro{Noetherian}, 
 the polynomial ring $\poly{\A}{x}$ in one variable over $\A$ is also
-\kl{Noetherian}~\cite[Theorem 4.1]{Lang02}.
+\reintro{Noetherian}~\cite[Theorem 4.1]{Lang02}.
 
 \AP In this paper, we will 
 assume that elements of $\K$ can be effectively represented 
@@ -191,11 +191,11 @@ to obtain decision procedures for the following problems,
 where $\group \actson \Indets$ is a \kl{nicely orderable} group action:
 \begin{enumerate}
   \item \cref{cor:orbit-finite-polynomial-automata-zeroness}:
-    The \kl{zeroness problem} for \kl{orbit finite polynomial automata},
+    The \kl(ofpa){zeroness problem} for \kl{orbit finite polynomial automata},
   \item \cref{cor:rev data VAS}:
     The \kl(revdatapn){reachability problem} for \kl{reversible Petri nets with data},
   \item \cref{cor:lin solv}:
-    The \kl(ofeq){solvability problem} for \kl{orbit-finite systems of equations}.
+    The \kl(ofeq){solvability problem} for \kl{orbit-finite linear systems of equations}.
 \end{enumerate}
 
 \AP Finally, we provide undecidability results for the \kl{equivariant ideal
@@ -205,7 +205,7 @@ that our assumptions are close to optimal. One classical obstruction for a
 group action to be \kl{well-structured} is to have the ability to represent an
 \emph{infinite path} (a formal definition will be given in
 \cref{sec:undecidability}). We prove that whenever one can (effectively)
-represent an infinite path in the set of \kl{monomials} $\mon{\Indets}$, then
+represent an infinite path in the set of monomials $\mon{\Indets}$, then
 the \kl{equivariant ideal membership problem} is undecidable.
 
 \begin{theorem}[name={Undecidability of Equivariant Ideal Membership},restate=thm:undecidable-paths]
@@ -252,7 +252,7 @@ conjectured that \cref{item:equiv-hilb-om} and \cref{item:equiv-hilb-om-ord}
 are equivalent\footnote{Up to modifying the group action to respect the
 ordering.} \cite[Problems 12]{POUZ24}. As a consequence, our
 \cref{thm:compute-egb} is conjectured to hold whenever the \kl{equivariant
-Hilbert property} does. Beware that
+Hilbert basis property} does. Beware that
 \cref{thm:equiv-hilbert-property,thm:compute-egb} are incomparable: the former
 does not talk about decidability, while the latter only considers
 \kl{equivariant ideals} that are already finitely presented, and we will show
@@ -265,7 +265,7 @@ which are only special cases of our general result. A reason why this happens
 is that, until this paper, the only way to provide a decision procedure was to
 assume that the ordering on the indeterminates was \emph{well-founded}
 \cite[Section 6]{GHOLAS24}, or to encode the behaviour of the indeterminates in
-a set with a \kl{well-founded total ordering} \cite[Section 7, Reduction
+a set with a \emph{well-founded total ordering} \cite[Section 7, Reduction
 Game]{GHOLAS24}. We provide the first result that gets rid of the assumption
 that the ordering is \emph{well-founded}. As a consequence, we can deal with
 the \kl{Dense Linear Order} without using any encoding tricks. Furthermore, we

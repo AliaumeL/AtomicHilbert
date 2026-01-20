@@ -21,6 +21,7 @@
 
 \knowledge{notion}
  | orbit-finite
+ | orbit-finite set
  | orbit finite
  | orbit finite set
  | orbit finite sets
@@ -68,6 +69,7 @@
  | domain@polynomial
  | domain@poly
  | domain@monomial
+ | domains@monomial
  | domain of a polynomial
 
 
@@ -124,6 +126,15 @@
 
 \knowledge{notion}
  | computability assumptions
+
+
+
+\knowledge{notion}
+ | $\omega $-well-structured
+ | $\omega $-W.S.
+\knowledge{notion}
+ | well-structured
+ | W.S.
 
  %% IDEALS
 
@@ -255,12 +266,28 @@
  | infinite paths@of
  | finite path@of
  | finite paths@of
-\knowledge{notion}
- | infinite dimensional vector space
  
 
+
+\knowledge{notion}
+ | Equality Atoms
 \knowledge{notion}
  | Rado graph
+\knowledge{notion}
+ | Dense linear order
+ | Dense Linear Order
+ | Dense Linear Orders
+\knowledge{notion}
+ | Dense tree
+ | Dense Meet Tree
+\knowledge{notion}
+ | Integers with order
+ | integers with order
+\knowledge{notion}
+ | Infinite dim. vector space
+ | infinite dimensional vector space
+ | infinite dim. vector space
+ | Infinite dimensional vector space
 
 % algorithms
 \knowledge{notion,typewriter,ensuretext}
@@ -308,6 +335,15 @@
 \knowledge{notion}
  | lexicographic product action
 
+\knowledge{notion}
+ | disjoint sum
+ | disjoint sums
+\knowledge{notion}
+ | direct product
+ | direct products
+\knowledge{notion}
+ | lexicographic product
+ | lexicographic products
 
  %%%%
  %  NOETHERIAN SPACES 
@@ -351,5 +387,19 @@
  | Orbit finite polynomial automata
 \knowledge{notion}
  | zeroness problem@ofpa
+
+\knowledge{notion}
+ | reversible Petri nets with data
+ | reversible Petri-nets with data
+\knowledge{notion}
+ | reachability problem@revdatapn
+ | reachability problem@rpnd
+
+\knowledge{notion}
+ | orbit-finite linear systems of equations
+ | orbit-finite linear system of equations
+\knowledge{notion}
+ | solvability problem@ofeq
+ | solvability@oflns
 
 
