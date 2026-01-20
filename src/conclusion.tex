@@ -17,45 +17,45 @@ preserved by the group action. This assumption seems necessary, as the notions
 of \kl{leading monomials} would cease to be well-defined without it. However,
 we do not have a clear understanding of whether this assumption is vacuous or
 not. Indeed, as noticed by \cite[Lemma 13]{GHOLAS24}, and
-\cref{lem:reducts-equiv-hilbert}, it often suffices to extend the structures of
+\cref{thm:reducts-computable}, it often suffices to extend the structures of
 the indeterminates to account for a total ordering. A conjecture of Pouzet
 \cite[Problems 12]{POUZ24} states that such an ordering always exists, and this
 was remarked by \cite[Remark 14]{GHOLAS24}. Note that in this case, one would
 get a complete characterisation of the group actions for which the
 \kl{equivariant Hilbert basis property} holds \cite[Property 4]{GHOLAS24}.
 
-\paragraph{Labelled well-quasi-orderings and dichotomy conjectures} As noted in
-\Cref{sec:undecidability}, there are many conjectures relating the fact that
-$(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} (for every
-\kl{well-quasi-ordered} set $Y$) and the presence of long
-paths of some kind (\cref{conj:wqo-infinite-path,rem:conj-wqo-infinite-path}).
-In particular, Pouzet's conjecture \cite{POUZ72} would imply that for actions
-arising from \kl{homogeneous structures} (as in the examples given in
-\cref{sec:act ex}), \cref{thm:compute-egb} and \cref{thm:undecidable-paths} are
-two sides of a dichotomy theorem: either the \kl{equivariant ideal membership
-problem} is undecidable and there are \kl{equivariant ideals} that are not
-\kl{orbit-finitely generated}, or every \kl{equivariant ideal} is
-\kl{orbit-finitely generated} and one can compute \kl{equivariant Gröbner
-bases}. Let us note that for some classes of graphs having bounded clique
-width, Pouzet's conjecture is known to hold \cite{DRT10,LOPEZ24}.
-This leads us to the following conjecture:
-
-\begin{conjecture}
-  For every action $\group\actson\Indets$ of a group $\group$ on a set
-  of indeterminates that is \kl{effectively oligomorphic}, exactly
-  one of the following holds:
-  \begin{enumerate}
-    \item The \kl{equivariant ideal membership problem} is decidable. 
-    \item There exists an \kl{equivariant ideal} that is not
-      \kl{orbit-finitely generated}.
-  \end{enumerate}
-\end{conjecture}
-
-Let us point out that a similar conjecture was already stated in the context of
-Petri nets with data. Indeed, the condition that $(\mon[Y]{\Indets},\gdivleq)$
-is a \kl{WQO} for every \kl{WQO} $Y$ also guarantees coverability of Petri nets
-with data $\X$ is decidable \cite[Theorem 1]{Lasota16}, and it was actually
-conjectured to be a necessary condition \cite[Conjecture 1]{Lasota16}. 
+%\paragraph{Labelled well-quasi-orderings and dichotomy conjectures} As noted in
+%\Cref{sec:undecidability}, there are many conjectures relating the fact that
+%$(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{well-quasi-ordering} (for every
+%\kl{well-quasi-ordered} set $Y$) and the presence of long
+%paths of some kind (\cref{conj:wqo-infinite-path,rem:conj-wqo-infinite-path}).
+%In particular, Pouzet's conjecture \cite{POUZ72} would imply that for actions
+%arising from \kl{homogeneous structures} (as in the examples given in
+%\cref{sec:act ex}), \cref{thm:compute-egb} and \cref{thm:undecidable-paths} are
+%two sides of a dichotomy theorem: either the \kl{equivariant ideal membership
+%problem} is undecidable and there are \kl{equivariant ideals} that are not
+%\kl{orbit-finitely generated}, or every \kl{equivariant ideal} is
+%\kl{orbit-finitely generated} and one can compute \kl{equivariant Gröbner
+%bases}. Let us note that for some classes of graphs having bounded clique
+%width, Pouzet's conjecture is known to hold \cite{DRT10,LOPEZ24}.
+%This leads us to the following conjecture:
+%
+%\begin{conjecture}
+%  For every action $\group\actson\Indets$ of a group $\group$ on a set
+%  of indeterminates that is \kl{effectively oligomorphic}, exactly
+%  one of the following holds:
+%  \begin{enumerate}
+%    \item The \kl{equivariant ideal membership problem} is decidable. 
+%    \item There exists an \kl{equivariant ideal} that is not
+%      \kl{orbit-finitely generated}.
+%  \end{enumerate}
+%\end{conjecture}
+%
+%Let us point out that a similar conjecture was already stated in the context of
+%Petri nets with data. Indeed, the condition that $(\mon[Y]{\Indets},\gdivleq)$
+%is a \kl{WQO} for every \kl{WQO} $Y$ also guarantees coverability of Petri nets
+%with data $\X$ is decidable \cite[Theorem 1]{Lasota16}, and it was actually
+%conjectured to be a necessary condition \cite[Conjecture 1]{Lasota16}. 
 
 \paragraph{Complexity} In the present paper, we have focused on the
 decidability of the \kl{equivariant ideal membership problem} and the
@@ -80,7 +80,13 @@ and yield better performance in practice.
 %considered in \Cref{ex:eq atoms,ex:dlo}, via the work of
 %\cite{BFKM24,GHL22,Prz23}.
 
-\arka{Maybe add radical and prime ideals as something to be studied next}
-
+\paragraph{Equivariant algebraic geometry} The development of \kl{equivariant
+Gröbner bases} opens the door to the study of other classical results from
+algebraic geometry to the equivariant setting. In particular, the status of the
+fundamental result of algebraic geometry, \emph{Hilbert's Nullstellensatz},
+that relates \kl{ideals} and \emph{varieties} (sets of common zeros of
+polynomials), is still unclear in the equivariant setting. Other classical
+notions, such as the one of Krull dimension, also deserve to be investigated
+from the equivariant point of view.
 
 

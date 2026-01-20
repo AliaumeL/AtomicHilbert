@@ -41,13 +41,11 @@ $\group$ of all shifts. The presence of an \kl(of){infinite path} clearly
 prevents $(\mon{\Indets}, \gdivleq)$ from being a \kl{well-quasi-ordering}, as
 shown by the following \cref{rem:not-wqo}. Furthermore, for indeterminates
 obtained by considering \kl{homogeneous structures} and their automorphism
-groups (\cref{sec:act ex}), the 
-absence of an \kl(of){infinite path} has been
+groups (\cref{sec:act ex}), the absence of an \kl(of){infinite path} has been
 conjectured to be a necessary and sufficient condition for $(\mon{\Indets},
 \gdivleq)$ to be a \kl{well-quasi-ordering}: this follows from a conjecture of
-Schmitz restated in \cref{conj:wqo-infinite-path}, that generalises one of
-Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
-\cref{rem:conj-wqo-infinite-path}.
+Schmitz restated in \cref{conj:wqo-infinite-path}.
+
 
 
 \begin{remark}
@@ -87,49 +85,49 @@ Pouzet (\cref{rem:conj-wqo-pouzet}), as explained in
   such that $\varphi(a_i, a_j)$ holds if and only if $|i - j| = 1$.
 \end{conjecture}
 
-\begin{remark}
-  \label{rem:conj-wqo-pouzet}
-  The conjecture of Schmitz is a generalization of Pouzet's conjecture
-  \cite{POUZ72} that states that a class $\mathcal{C}$  of finite relational structures is
-  \kl{well-quasi-ordered} under the labelled induced-substructure relation for
-  every \kl{well-quasi-ordered} set of labels, 
-  if and only if it is the case for the set of two incomparable labels
-  \cite[Problem 9]{POUZ24}. A negative answer to Pouzet's conjecture
-  has been obtained in \cite{KRTH90,KS91} for finite (non-relational) structures,
-  but the conjecture remains open for finite relational structures.
-\end{remark}
+%\begin{remark}
+%  \label{rem:conj-wqo-pouzet}
+%  The conjecture of Schmitz is a generalization of Pouzet's conjecture
+%  \cite{POUZ72} that states that a class $\mathcal{C}$  of finite relational structures is
+%  \kl{well-quasi-ordered} under the labelled induced-substructure relation for
+%  every \kl{well-quasi-ordered} set of labels, 
+%  if and only if it is the case for the set of two incomparable labels
+%  \cite[Problem 9]{POUZ24}. A negative answer to Pouzet's conjecture
+%  has been obtained in \cite{KRTH90,KS91} for finite (non-relational) structures,
+%  but the conjecture remains open for finite relational structures.
+%\end{remark}
+%
+% \begin{remark}
+%   \label{rem:conj-wqo-infinite-path}
+%   Let $\Indets$ be an infinite \kl{homogeneous structure},
+%   such that $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
+%   Then, the collection of finite substructures of $\Indets$
+%   labelled by $(\N,\leq)$ is not \kl{well-quasi-ordered} under the
+%   labelled-induced-substructure relation.
+%   Hence, if one believes that \cref{conj:wqo-infinite-path} holds,
+%   there exists an existential formula $\varphi(x,y)$ such that
+%   $\varphi$ defines arbitrarily long paths in $\Indets$.
+%   Because $\Indets$ is \kl{homogeneous},
+%   this means that $\varphi$ defines an infinite path in $\Indets$,
+%   and in particular, 
+%   $\Indets$ contains an \kl(of){infinite path} $P$, as introduced
+%   for generic sets of indeterminates.
+% \end{remark}
 
-\begin{remark}
-  \label{rem:conj-wqo-infinite-path}
-  Let $\Indets$ be an infinite \kl{homogeneous structure},
-  such that $(\mon{\Indets}, \gdivleq)$ is not a \kl{well-quasi-ordering}.
-  Then, the collection of finite substructures of $\Indets$
-  labelled by $(\N,\leq)$ is not \kl{well-quasi-ordered} under the
-  labelled-induced-substructure relation.
-  Hence, if one believes that \cref{conj:wqo-infinite-path} holds,
-  there exists an existential formula $\varphi(x,y)$ such that
-  $\varphi$ defines arbitrarily long paths in $\Indets$.
-  Because $\Indets$ is \kl{homogeneous},
-  this means that $\varphi$ defines an infinite path in $\Indets$,
-  and in particular, 
-  $\Indets$ contains an \kl(of){infinite path} $P$, as introduced
-  for generic sets of indeterminates.
-\end{remark}
 
-
-As already mentioned in \cref{rem:conj-wqo-infinite-path}, it is conjectured
-that the presence of an \kl(of){infinite path} is a necessary condition for the
-\kl{equivariant ideal membership problem} to be undecidable in the case of
-\kl{homogeneous structures} over relational signatures. Let us briefly argue
-that in the case of \kl{homogeneous} \emph{$3$-graphs} $\mathcal{G}_3$ (i.e. a
-structure with three distinct edge relations), the \emph{WQO dichotomy theorem}
-\cite[Theorem 4]{LAPIO20}, exactly states that: either
-$(\mon[Y]{\mathcal{G}_3}, \gdivleq)$ is a \kl{well-quasi-ordering} for all
-\kl{well-quasi-ordered} sets $Y$, or there exists an \kl(of){infinite path} in
-$\mathcal{G}_3$. We conclude that for \kl{homogeneous} \emph{$3$-graphs},
-either the \kl{equivariant ideal membership problem} is undecidable
-(\cref{thm:undecidable-paths}), or our \cref{thm:compute-egb} can be applied to
-compute \kl{equivariant Gröbner bases}.
+% As already mentioned in \cref{rem:conj-wqo-infinite-path}, it is conjectured
+% that the presence of an \kl(of){infinite path} is a necessary condition for the
+% \kl{equivariant ideal membership problem} to be undecidable in the case of
+% \kl{homogeneous structures} over relational signatures. Let us briefly argue
+% that in the case of \kl{homogeneous} \emph{$3$-graphs} $\mathcal{G}_3$ (i.e. a
+% structure with three distinct edge relations), the \emph{WQO dichotomy theorem}
+% \cite[Theorem 4]{LAPIO20}, exactly states that: either
+% $(\mon[Y]{\mathcal{G}_3}, \gdivleq)$ is a \kl{well-quasi-ordering} for all
+% \kl{well-quasi-ordered} sets $Y$, or there exists an \kl(of){infinite path} in
+% $\mathcal{G}_3$. We conclude that for \kl{homogeneous} \emph{$3$-graphs},
+% either the \kl{equivariant ideal membership problem} is undecidable
+% (\cref{thm:undecidable-paths}), or our \cref{thm:compute-egb} can be applied to
+% compute \kl{equivariant Gröbner bases}.
 
 \paragraph{Monomial Reachability}
 The undecidability results we will present in this section regarding the
