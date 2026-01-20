@@ -110,14 +110,14 @@ for every $(x',y')\in\X \otimes \Y$.
 Essentially, it means that every element $x\in\X$ carries its own copy $\{x\}\times\Y$ of the structure $\Y$,
 and one can act independently on different copies of the structure $\Y$.
 
-
-
 \begin{lemma}[{\cite[Lemmas 9 and 39]{GHOLAS24}}]
   \label{lem:lexicographic-product}
   If $\grp[G] \actson \X$ and $\grp[H] \actson \Y$ are
   \kl{well-structured} (resp. \kl{effectively oligomorphic}),
   then so is $(\grp[G] \otimes \grp[H]) \actson (\X \times \Y)$.
 \end{lemma}
+
+\csname cor:closure-properties\endcsname*
 
 \paragraph{Reducts and nicely orderable actions.} \AP Another important operation
 on group actions is the notion of \kl{reduct}, which allows one to encode
@@ -129,15 +129,7 @@ $\gelem[\theta] \in \calH$, we have some $\gelem \in \group$ such that
 $f^{-1} \circ \gelem[\theta] \circ f$ acts like $\gelem$ on $\Indets$.
 This is called an \intro{effective reduct} if $f$ is computable.
 
-\begin{theorem}
-  \label{thm:reducts-computable}
-  Let $\calH\actson\Y$ be an action satisfying the requirements of 
-  \cref{cor:equivariant-ideals-computations}, and let
-  $\group\actson\Indets$ be an \kl{effective reduct} of $\calH\actson\Y$.
-  Then one has an \emph{effective representation} of
-  the \kl{equivariant ideals} of $\poly{\K}{\Indets}$
-  satisfying the properties of \cref{cor:equivariant-ideals-computations}.
-\end{theorem}
+\csname thm:reducts-computable\endcsname*
 
 \Cref{thm:reducts-computable} implies that one can apply our results to an
 action $\group\actson\Indets$ that does not preserve a linear order, as soon as
@@ -251,31 +243,31 @@ a more detailed investigation of the generalisation of \kl{polynomial automata}
 to the orbit finite setting for future work.
 
 
-\begin{remark}
-  \label{rem:topological-wsts}
-  The proof of \cref{cor:orbit-finite-polynomial-automata-zeroness} can be
-  recast in the more general setting of 
-  \intro{topological well-structured transition system}, that were introduced by
-  Goubault-Larrecq in \cite{JGL07}, who noticed that the pre-existing notion of
-  \emph{Noetherian space} could serve as a topological generalisation of
-  \kl{Noetherian rings} (where ideal-based method can be applied),
-  and 
-  \kl{well-quasi-orderings}, for which the celebrated decision procedures on
-  \emph{well-structured transition systems} can be applied \cite{ABDU96}. In particular,
-  Goubault-Larrecq used such systems to verify properties of \emph{polynomial
-  programs} computing over the complex numbers, that can communicate over lossy
-  channels using a finite alphabet \cite{JGL10}. 
-  Because of \cref{cor:equivariant-ideals-computations}, we do have an 
-  effective way to compute on the topological spaces at hand, 
-  and therefore we can apply the theory of
-  \kl{topological well-structured transition systems} to verify systems
-  such as \emph{orbit finite polynomial automata communicating using a finite alphabet
-  over lossy channels}.
-  We refer to \cite[Chapter 9]{JGL13} for a survey on the theory of 
-  Noetherian spaces.
-\end{remark}
+%\begin{remark}
+%  \label{rem:topological-wsts}
+%  The proof of \cref{cor:orbit-finite-polynomial-automata-zeroness} can be
+%  recast in the more general setting of 
+%  \intro{topological well-structured transition system}, that were introduced by
+%  Goubault-Larrecq in \cite{JGL07}, who noticed that the pre-existing notion of
+%  \emph{Noetherian space} could serve as a topological generalisation of
+%  \kl{Noetherian rings} (where ideal-based method can be applied),
+%  and 
+%  \kl{well-quasi-orderings}, for which the celebrated decision procedures on
+%  \emph{well-structured transition systems} can be applied \cite{ABDU96}. In particular,
+%  Goubault-Larrecq used such systems to verify properties of \emph{polynomial
+%  programs} computing over the complex numbers, that can communicate over lossy
+%  channels using a finite alphabet \cite{JGL10}. 
+%  Because of \cref{cor:equivariant-ideals-computations}, we do have an 
+%  effective way to compute on the topological spaces at hand, 
+%  and therefore we can apply the theory of
+%  \kl{topological well-structured transition systems} to verify systems
+%  such as \emph{orbit finite polynomial automata communicating using a finite alphabet
+%  over lossy channels}.
+%  We refer to \cite[Chapter 9]{JGL13} for a survey on the theory of 
+%  Noetherian spaces.
+%\end{remark}
 
-
+\todo[inline]{Actually write a definition of what a petri net is}
 \paragraph{Reachability problem of symmetric data Petri nets.} The classical
 model of Petri nets was extended to account for arbitrary data attached to
 tokens to form what is called data Petri nets. We will not discuss the precise
@@ -293,6 +285,7 @@ center of our undecidability results in \cref{sec:undecidability}.
 
 
 
+\todo[inline]{Actually write a definition of what an orbit-finite linear system of equations is}
 \paragraph{Orbit-finite systems of equations} The classical theory of solving
 finite systems of linear equations has been generalised to the infinite setting
 by \cite{GHL22}, \cite[Section 9]{GHOLAS24}. In this setting, one considers an
