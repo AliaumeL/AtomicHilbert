@@ -2,7 +2,7 @@
 bibliography: papers.bib
 draft: true
 camera-ready: false
-anonymous: false
+anonymous: true 
 acmart:
   format: sigconf
 libraries:

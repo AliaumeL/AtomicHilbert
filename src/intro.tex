@@ -3,9 +3,6 @@
 %
 \section{Introduction}
 \label{sec:intro}
-\textbf{TODO: use well-structured and $\omega$-well-structured throughout the paper,
-to not repeat \kl{well-quasi-ordering} all the time.}
-
 \AP For a field $\K$ and a non-empty set $\Indets$ of indeterminates, we use
 $\poly{\K}{\Indets}$ to denote the ring of polynomials with coefficients from $\K$
 and indeterminates/variables from $\Indets$. A fundamental result in commutative
@@ -115,94 +112,101 @@ stating that
 has been recently given in \cite{GHOLAS24},
 and this paper aims at providing a computational counterpart.
 
-\textbf{Strict extensions of the results of \cite{GHOLAS24} 
-for orbit-finite linear systems of equations
-and data Petri nets should be mentioned here or later.}
 
 
-\subsection{Contributions.}
 
-\arka{Short. Strengthening is mild in the sense it is conjectured(?) to be equivalent}
-
-\arka{add applications}
-
-\AP In this paper, we bridge the gap between the
+\subsection{Contributions.} \AP In this paper, we bridge the gap between the
 theoretical understanding of the \intro{equivariant Hilbert basis property}
 \cite[Property 4]{GHOLAS24}, and the computational aspects of \kl{equivariant
 ideals}, by showing that under mild assumptions on the group action, one can
 compute an \kl{equivariant Gröbner basis} of an \kl{equivariant ideal}, hence,
 that one can decide the \kl{equivariant ideal membership problem}. 
-In order to
-compute such sets, we will need to introduce some classical \kl{computability
-assumptions} on the group action $\group \actson \Indets$, and on the set of
-indeterminates $\Indets$. These will be defined in
-\cref{sec:preliminaries}, but informally, we assume
-that one can compute representatives of the orbits of elements under the action
-of $\group$ (this is called \kl{effective oligomorphism}), and that one has
-access to a total ordering on $\Indets$ that is computable, and
-\kl(ord){compatible} with the action of $\group$. 
 
-A typical example satisfying these \kl{computability assumptions} is the
-set $\Q$ of rationals, equipped with the natural ordering $\leq$, and the
-group $\group$ of all order-preserving bijections from $\Q$ to itself.
-
-\AP Let us now focus on the semantic assumption that we will need to make
-on the set of indeterminates $\Indets$ and the group $\group$, that will
-guarantee the termination of our procedures. We refer to our preliminaries
-(\cref{sec:preliminaries}) for a more detailed
-discussion on these assumptions, but again informally, we ask that the set of
-\kl{monomials} $\mon{\Indets}$ is well-behaved with respect to divisibility up
-to the action of $\group$. 
-A monomial $\monelt$ can be seen as a function 
-from $\Indets$ to $\N$ with finite support, 
-and divisibility amounts to the pointwise comparison of these functions.
-By allowing to first relabel the variables of a monomial
-using the action of $\group$, we obtain a
-generalised divisibility relation $\gdivleq$ on $\mon{\Indets}$.
-Our semantic assumption is that \emph{generalised monomials},
-that is monomials whose variables are labelled by elements of a
-\kl{well-quasi-ordered} set $(Y, \leq)$,
-or equivalently functions from $\Indets$ to $Y$ with finite support,
-which we write as the fact that $(\mon[Y]{\Indets}, \gdivleq)$
-is a \kl{well-quasi-ordering} (\kl{WQO}).
-
-\AP For instance, when $\Indets$ is the set $\Q$ of rationals,
-an example of a generalised monomial
-could be $x_{1/2}^{(2,\bullet)} x_{3/4}^{(1, \circ)}$,
-where $Y = \N \times \set{\circ, \bullet}$.
-To a monomial $\monelt$, one can associate 
-the word obtained by listing the labels of the variables
-of $\monelt$ in increasing order. It turns out that 
-$\monelt \gdivleq \monelt[n]$ if and only if 
-the word associated to $\monelt$ is a subsequence of the word
-associated to $\monelt[n]$. Since words over a \kl{well-quasi-ordered}
-alphabet are \kl{well-quasi-ordered} under the subsequence relation
-\cite{HIG52}, we conclude that 
-that $(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{WQO}.
-
-\AP Our main positive result states that under these assumptions,
-one can compute an \kl{equivariant Gröbner basis} of an \kl{equivariant ideal}.
+\AP We divide our hypotheses in two parts. First, we will require some
+\kl{computability assumptions} to be satisfied by the group action that are
+fairly standard in the literature on computation with infinite data. Then, we
+will require a semantic assumption on the set of indeterminates that will
+guarantee the termination of our procedures, that we call being
+\kl{well-structured}, and implies that the set of monomials is
+\kl{well-quasi-ordered} with respect to divisibility. Both of these will be
+formally introduced in \cref{sec:preliminaries}. Our main positive result
+states that under these assumptions, one can compute an \kl{equivariant Gröbner
+basis} of an \kl{equivariant ideal}.
 
 \begin{theorem}[name={Equivariant Gröbner Basis},restate=thm:compute-equiv-gb]
   \label{thm:compute-egb}
   Let $\Indets$ be a totally ordered set of indeterminates
-  equipped with a group action $\group \actson \Indets$, under our \kl{computability assumptions}.
-  If $(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{WQO} for every 
-  \kl{well-quasi-ordered} set $(Y,\leq)$, then one can
-  compute an \kl{equivariant Gröbner bases} of \kl{equivariant ideals}.
+  equipped with a group action $\group \actson \Indets$, that satisfies our \kl{computability assumptions}
+  and is \kl{well-structured}.
+  Then, one can
+  compute a \kl{equivariant Gröbner bases} of \kl{equivariant ideals}.
 \end{theorem}
 
-\AP We then focus on providing undecidability results for the \kl{equivariant
-ideal membership problem} in the case where our effective assumptions are
-satisfied, but the \kl{well-quasi-ordering} condition is not. This aims at
-illustrating the fact that our assumptions are close to optimal. One classical
-way for a set of structures to not be \kl{well-quasi-ordered} (when labelled
-using integers) is to have the ability to represent an \emph{infinite path} (a
-formal definition will be given in
-\cref{sec:undecidability}). We prove that
-whenever one can (effectively) represent an infinite path in the set of
-\kl{monomials} $\mon{\Indets}$, then the \kl{equivariant ideal membership
-problem} is undecidable.
+Using standard techniques on polynomial ideals, we then use our
+\cref{thm:compute-egb} to provide an effective representation of
+\kl{equivariant ideals} under the same assumptions.
+
+\begin{corollary}[name={},restate=cor:equivariant-ideals-computations]
+  \label{cor:equivariant-ideals-computations}
+  Assume that $\group \actson \Indets$
+  is \kl{effectively oligomorphic}
+  and \kl{well-structured}.
+  Then one has an \emph{effective representation} of
+  the \kl{equivariant ideals} of $\poly{\K}{\Indets}$,
+  such that:
+  \begin{enumerate}
+    \item One can obtain a representation from an orbit-finite set of generators,
+    \item One can effectively decide the \kl{equivariant ideal membership problem}
+      given a representation,
+    \item The following operations are computable at the level of representations:
+      the union of two \kl{equivariant ideals}, 
+      the product of two \kl{equivariant ideals},
+      the intersection of two \kl{equivariant ideals},
+      and checking whether two \kl{equivariant ideals} are equal.
+  \end{enumerate}
+  \proofref{cor:equivariant-ideals-computations}
+\end{corollary}
+
+\AP Then, we illustrate how our positive results find applications in
+numerous situations. This is done by providing families of indeterminates that
+satisfy our \kl{computability assumptions} and are \kl{well-structured},
+and show that these are closed
+under \kl{disjoint sums} and \kl{lexicographic products}. Furthermore,
+we circumvent the requirement that a total ordering is present on 
+the indeterminates by defining \kl{nicely orderable} actions
+(\cref{thm:reducts-computable}). Examples of 
+indeterminates that we can therefore 
+deal with are:
+\begin{enumerate}
+  \item \kl{Equality Atoms}: the indeterminates are an infinite set 
+    and $\group$ is all permutations.
+  \item \kl{Dense Linear Orders}: the indeterminates are $\Q$,
+    and $\group$ is all order-preserving bijections.
+  \item \kl{Dense Meet Tree}: the indeterminates are elements of the 
+    infinite dense meet tree, and $\group$ is its group of automorphisms.
+\end{enumerate}
+
+\AP We then leverage our positive results (\cref{thm:compute-egb,cor:equivariant-ideals-computations})
+to obtain decision procedures for the following problems,
+where $\group \actson \Indets$ is a \kl{nicely orderable} group action:
+\begin{enumerate}
+  \item \cref{cor:orbit-finite-polynomial-automata-zeroness}:
+    The \kl{zeroness problem} for \kl{orbit finite polynomial automata},
+  \item \cref{cor:rev data VAS}:
+    The \kl(revdatapn){reachability problem} for \kl{reversible Petri nets with data},
+  \item \cref{cor:lin solv}:
+    The \kl(ofeq){solvability problem} for \kl{orbit-finite systems of equations}.
+\end{enumerate}
+
+\AP Finally, we provide undecidability results for the \kl{equivariant ideal
+membership problem} in the case where our effective assumptions are satisfied,
+but the action is not \kl{well-structured}. This aims at illustrating the fact
+that our assumptions are close to optimal. One classical obstruction for a
+group action to be \kl{well-structured} is to have the ability to represent an
+\emph{infinite path} (a formal definition will be given in
+\cref{sec:undecidability}). We prove that whenever one can (effectively)
+represent an infinite path in the set of \kl{monomials} $\mon{\Indets}$, then
+the \kl{equivariant ideal membership problem} is undecidable.
 
 \begin{theorem}[name={Undecidability of Equivariant Ideal Membership},restate=thm:undecidable-paths]
   \label{thm:undecidable-paths}
@@ -212,159 +216,98 @@ problem} is undecidable.
   then the \kl{equivariant ideal membership problem} is undecidable.
 \end{theorem}
 
-\AP
-Finally, we illustrate how our positive results find applications in numerous
-situations. This is done by providing families of indeterminates
- that satisfy our
-\kl{computability assumptions}, and for which we can compute \kl{equivariant
-Gröbner bases}, and also by showing how our results can be used in the context
-of \kl{topological well-structured transition systems} \cite{JGL10}, with
-applications to the verification of infinite state systems such as orbit
-finite weighted automata \cite{BOKLMO21}, \kl{orbit finite polynomial
-automata}, and more generally orbit finite systems dealing with polynomial
-computations.
-
-\begin{corollary}[name={}, restate={cor:closure-properties}]
-  \label{cor:closure-properties}
-  The class of group actions satisfying our \kl{computability assumptions} and
-  \kl{well-quasi-ordering} property is closed under
-  \kl{disjoint sums} and \kl{lexicographic products},
-  but not under \kl{direct products}.
-\end{corollary}
-
-\begin{theorem}[name={}, restate={thm:reducts-computable}]
-  \label{thm:reducts-computable}
-  Let $\calH\actson\Y$ be an action satisfying the requirements of 
-  \cref{cor:equivariant-ideals-computations}, and let
-  $\group\actson\Indets$ be an \kl{effective reduct} of $\calH\actson\Y$.
-  Then one has an \emph{effective representation} of
-  the \kl{equivariant ideals} of $\poly{\K}{\Indets}$
-  satisfying the properties of \cref{cor:equivariant-ideals-computations}.
-\end{theorem}
-
-\begin{theorem}[name={Orbit Finite Polynomial Automata},
-  restate=thm:orbit-finite-polynomial-automata-zeroness]
-  \label{cor:orbit-finite-polynomial-automata-zeroness}
-  Let $\Indets$ be a set of indeterminates that satisfies the
-  \kl{computability assumptions} and such that $(\mon[Y]{\Indets}, \gdivleq)$ is a
-  \kl{well-quasi-ordering}, for every \kl{well-quasi-ordered} set $(Y, \leq)$.
-  Then, the \kl(ofpa){zeroness problem} is decidable for
-  \kl{orbit finite polynomial automata} over $\K$ and $\Indets$.
-\end{theorem}
-
-
-\begin{corollary}[name={Reachability in Reversible Data Petri Nets},
-  restate=cor:rev-data-VAS]
-  \label{cor:rev data VAS}
-  For every \kl{nicely orderable} group action $\group\actson\Indets$,
-  the reachability problem for reversible Petri nets with data in $\Indets$
-  is decidable.
-\end{corollary}
-
-\begin{corollary}[name={Solvability of Orbit-Finite Systems of Equations},
-  restate=cor:lin-solv]
-  \label{cor:lin solv}
-  For every \kl{nicely orderable} group action $\group\actson\Indets$,
-  the solvability problem for orbit-finite systems of equations
-  is decidable.
-\end{corollary}
-
-\subsection{Related Research}
-\arka{needs rewrite}
-
-
-\textbf{todo: talk about the reduction game}
-of \cite[Section 7]{GHOLAS24} that handles the dense linear order.
-
-Say that before: total ordering that is well-founded, OR some games. New
-examples: dense meet trees. For decidability, the case of weighted automata
-followed from hilbert's basis property, but for polynomial ones, we need
-equivariant grobner bases. Rewrite the condition of \cite{GHOLAS24} 
-to make the three conditions apparent.
-
-\textbf{todo: what to do about this paragraph}
-It is known that this
-is a necessary condition for the \kl{equivariant Hilbert basis property}
-\cref{thm:equiv-hilbert-property}, and we will rely on a slightly stronger
-condition, namely that $(\mon[Y]{\Indets}, \gdivleq)$ is a \kl{WQO}, whenever
-$(Y, \leq)$ is one, which is conjectured to be equivalent to the first
-condition. Beware that \cref{thm:equiv-hilbert-property,thm:compute-egb}
-are
-incomparable: the former does not talk about decidability, while the latter 
-only considers \kl{equivariant ideals} that are already finitely presented, and we 
-will show in
-\cref{ex:non-wqo-undecidable} an example where \kl{equivariant
-Gröbner bases} are computable, but the \kl{equivariant Hilbert basis property} fails.
-
-
+\subsection{Related Research} Let us call \kl{Equality Atoms} the infinite set
+of indeterminates with all permutations acting on them. The fact that
+\kl{Hilbert's basis property} holds for polynomials with indeterminates being
+the \kl{Equality Atoms} is a frequently rediscovered fact
+\cite{AH07,AH08,HS12,HKL18}. Recently, Ghosh and Lasota provided a general
+answer to characterize which group actions enjoy \kl{Hilbert's basis property}
+\cite[Theorem 11 and 12]{GHOLAS24}, and provided in some limited setting a
+version of \kl{Buchberger's algorithm} \cite[Section 6]{GHOLAS24}.
+Let us recall their precise statements in order to compare it with our contributions.
 
 \begin{theorem}[name={\cite[Theorem 11 and 12]{GHOLAS24}}]
   \label{thm:equiv-hilbert-property}
-  Let $\Indets$ be a totally ordered set of indeterminates
-  equipped with a group action $\group \actson \Indets$ that is 
-  \kl(ord){compatible} with the ordering on $\Indets$.
-  Then, $(\mon{\Indets}, \gdivleq)$ is a \kl{WQO}, if and only if 
-  the \kl{equivariant Hilbert basis property} holds for $\poly{\K}{\Indets}$.
+  Let $\Indets$ be a set of indeterminates equipped with a
+  group action $\group \actson \Indets$.
+  Then,
+  \cref{item:equiv-hilb-om-ord} implies 
+  \cref{item:equiv-hilb-hbp} implies 
+  \cref{item:equiv-hilb-om}, where
+  \begin{enumerate}
+    \item \label{item:equiv-hilb-om-ord}
+      The action is \kl{$\omega$-well-structured} and the indeterminates are equipped with a total order
+      \kl(ord){compatible} with the group action,
+    \item \label{item:equiv-hilb-hbp}
+      The \kl{equivariant Hilbert basis property} holds for  $\poly{\K}{\Indets}$,
+    \item \label{item:equiv-hilb-om}
+      The action is \kl{$\omega$-well-structured}.
+  \end{enumerate}
 \end{theorem}
 
-\textbf{which above mentioned results?}
-The above-mentioned results were rediscovered in \cite{AH07,AH08,HKL18}. In
-\cite{HS12} these results were used to prove the Independent Set Conjecture in
-algebraic statistics. The necessary and
-sufficient conditions are equivalent up to a well-known conjecture by Pouzet
-\cite[Problems 12]{POUZ24}. But to obtain decision procedures, one still lacks
-a generalisation of \kl{Buchberger's algorithm} to the equivariant case, except
-under artificial extra assumptions \cite[Section 6]{GHOLAS24}. Overall, a
-general understanding of the decidability of the \kl{equivariant ideal
-membership problem} is still missing, and \emph{a fortiori}, a generalisation
-of \kl{Buchberger's algorithm} to the equivariant case is still an open
-problem.
+Let us briefly state that being \kl{$\omega$-well-structured} is \emph{a
+priori} a weaker condition than being \kl{well-structured}, but that the two
+are conjectured to be equivalent \cite[Problems 9]{POUZ24}. Similarly, it is
+conjectured that \cref{item:equiv-hilb-om} and \cref{item:equiv-hilb-om-ord}
+are equivalent\footnote{Up to modifying the group action to respect the
+ordering.} \cite[Problems 12]{POUZ24}. As a consequence, our
+\cref{thm:compute-egb} is conjectured to hold whenever the \kl{equivariant
+Hilbert property} does. Beware that
+\cref{thm:equiv-hilbert-property,thm:compute-egb} are incomparable: the former
+does not talk about decidability, while the latter only considers
+\kl{equivariant ideals} that are already finitely presented, and we will show
+in \cref{ex:non-wqo-undecidable} an example where \kl{equivariant Gröbner
+bases} are computable, but the \kl{equivariant Hilbert basis property} fails.
 
-Our results are part of a larger research direction that aims at establishing
-an algorithmic theory of computation with orbit-finite sets. For instance,
-\cite{BFKM24} studies equivariant subspaces of vector spaces generated by
-orbit-finite sets, \cite{GHL22,GHL25} study solvability of orbit-finite systems
-of linear equations and inequalities, and \cite{BFKM24,GHL22,Prz23} study duals
-of vector spaces generated by orbit-finite sets.
+Let us now comment on the decision procedures provided in the literature.
+First, most results focus on \kl{Dense Linear Orders} or \kl{Equality Atoms},
+which are only special cases of our general result. A reason why this happens
+is that, until this paper, the only way to provide a decision procedure was to
+assume that the ordering on the indeterminates was \emph{well-founded}
+\cite[Section 6]{GHOLAS24}, or to encode the behaviour of the indeterminates in
+a set with a \kl{well-founded total ordering} \cite[Section 7, Reduction
+Game]{GHOLAS24}. We provide the first result that gets rid of the assumption
+that the ordering is \emph{well-founded}. As a consequence, we can deal with
+the \kl{Dense Linear Order} without using any encoding tricks. Furthermore, we
+provided with the \kl{Dense Meet Tree} an example of group action that was not
+shown to have decidable \kl{equivariant ideal membership problem} prior to this
+work. Our applications to the decidability of other problems in theoretical
+computer science strictly extend those given in \cite[Section 4, 8, and
+9]{GHOLAS24}. Indeed, their encoding of \emph{orbit finite weighted automata}
+did not require the ability to test inclusion of \kl{equivariant ideals}, while
+it is central to our result on \kl{orbit finite polynomial automata} (that
+strictly generalise weighted automata). Furthermore, their solutions to the
+problems concerning \kl{reversible Petri-nets with data} and \kl{orbit-finite
+linear systems of equations} only apply when the indeterminates are equipped
+with a \emph{well-founded} total ordering, which we do not require.
+
+Finally, our results are part of a larger research direction that aims at
+establishing an algorithmic theory of computation with orbit-finite sets. For
+instance, \cite{BFKM24} studies equivariant subspaces of vector spaces
+generated by orbit-finite sets, \cite{GHL22,GHL25} study solvability of
+orbit-finite systems of linear equations and inequalities, and
+\cite{BFKM24,GHL22,Prz23} study duals of vector spaces generated by
+orbit-finite sets.
 
 
 \paragraph{Organisation.} \AP The rest of the paper is organised as follows. In
 \cref{sec:preliminaries}, we introduce formally the notions of \kl{Gröbner
 bases}, \kl{effectively oligomorphic} actions, and \kl{well-quasi-orderings},
-which are the main assumptions of our positive results. Then, we illustrate in
-\cref{sec:act ex} how these assumptions can be satisfied in practice, providing
-numerous examples of sets of indeterminates. After that, we introduce in
-\cref{sec:weakgb} an adaptation of \kl{Buchberger's algorithm} to the
-equivariant case, that computes a \kl{weak equivariant Gröbner basis} of an
+which are the main assumptions of our positive results. After that, we
+introduce in \cref{sec:weakgb} an adaptation of \kl{Buchberger's algorithm} to
+the equivariant case, that computes a \kl{weak equivariant Gröbner basis} of an
 \kl{equivariant ideal}. In \cref{sec:equivariant-grobner-basis}, we use
 \kl{weak equivariant Gröbner bases} to prove our main positive
 \cref{thm:compute-egb}, and we show that it provides a way to effectively
 represent \kl{equivariant ideals} (\cref{cor:equivariant-ideals-computations}).
-We continue by showing in \cref{sec:closure-properties} that the assumptions of our
-\cref{thm:compute-egb} are closed under two natural operations
-(\cref{lem:closure-properties-comp,lem:closure-properties-wqo}). The positive
-results regarding the \kl{equivariant ideal membership problem} are then
-leveraged to obtain several decision procedures for other problems in
-\cref{sec:applications}. Finally, in \cref{sec:undecidability}, we show that
-our assumptions are close to optimal by proving that the \kl{equivariant ideal
-membership problem} is undecidable whenever one can find \kl(of){infinite
-paths} in the set of indeterminates (\cref{thm:undecidable-paths}), which is
-conjectured to be a complete characterisation of the undecidability of the
-\kl{equivariant ideal membership problem} (\cref{rem:conj-wqo-infinite-path}).
-
-
-
-
-\AP To prove our \cref{thm:compute-egb}, we will first introduce a weaker
-notion of \kl{weak equivariant Gröbner basis}, which characterises the results
-obtained by naïvely adapting \kl{Buchberger's algorithm} to the equivariant
-case. Then, we will show that under our \kl{computability assumptions}, one can
-start from a finite set of generators $H$ of an \kl{equivariant ideal}, and
-compute a well-chosen \kl{weak equivariant Gröbner basis}, which happens to be
-an \kl{equivariant Gröbner basis} of the ideal generated by $H$. As a
-consequence, we obtain effective representations of \kl{equivariant ideals},
-over which one can check membership, inclusion, and compute the sum and
-intersection of \kl{equivariant ideals}
-(\cref{cor:equivariant-ideals-computations}).
-
-
+We continue by showing in \cref{sec:closure-properties} that the assumptions of
+our \cref{thm:compute-egb} are closed under natural operations
+(\cref{cor:closure-properties,thm:reducts-computable}). The positive results
+regarding the \kl{equivariant ideal membership problem} are then leveraged to
+obtain several decision procedures. Finally, in \cref{sec:undecidability}, we
+show that our assumptions are close to optimal by proving that the
+\kl{equivariant ideal membership problem} is undecidable whenever one can find
+\kl(of){infinite paths} in the set of indeterminates
+(\cref{thm:undecidable-paths}), which is conjectured to be a complete
+characterisation of the undecidability of the \kl{equivariant ideal membership
+problem} (\cref{rem:conj-wqo-infinite-path}).

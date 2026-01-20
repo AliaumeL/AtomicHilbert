@@ -188,7 +188,8 @@ and the correctness of the resulting orbit finite set
 
 \begin{lemma}[name={},restate={lem:weakgb-termination}]
   \label{lem:weakgb-termination}
-  Assume that $(\mon{\X}, \gdivleq)$ is a \kl{WQO}. Then, 
+  Assume that the action $\group \actson \Indets$ is \kl{$\omega$-well-structured}.
+  Then, 
   \cref{alg:weakgb} terminates
   on every \kl{orbit finite} set $H$ of polynomials.
   \proofref{lem:weakgb-termination}
@@ -279,9 +280,9 @@ ideal $\EqIdlGen{H}$, as stated in \cref{thm:weakgb-comput}.
 
 \begin{theorem}
   \label{thm:weakgb-comput}
-  Assume that $(\mon[\omega]{\X}, \gdivleq)$ is a \kl{WQO}, and that the order
-  $\varleq$ is effectively computable, and that the action of $\group$ is
-  \kl{effectively oligomorphic}. 
+  Assume that the action $\group \actson \Indets$
+  is \kl{$\omega$-well-structured}
+  and satisfies our \kl{computability assumptions}.
   Then, the algorithm $\mathsf{weakgb}$ that takes as input an \kl{orbit finite} set $H$ of generators of an
   \kl{equivariant ideal} $\idl$ and computes a \kl{weak equivariant Gröbner
   basis} $\Basis$ of $\idl$.

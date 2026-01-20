@@ -117,7 +117,14 @@ and one can act independently on different copies of the structure $\Y$.
   then so is $(\grp[G] \otimes \grp[H]) \actson (\X \times \Y)$.
 \end{lemma}
 
-\csname cor:closure-properties\endcsname*
+\begin{corollary}[name={}, restate={cor:closure-properties}]
+  \label{cor:closure-properties}
+  The class of group actions satisfying our \kl{computability assumptions} and
+  \kl{well-quasi-ordering} property is closed under
+  \kl{disjoint sums} and \kl{lexicographic products},
+  but not under \kl{direct products}.
+\end{corollary}
+
 
 \paragraph{Reducts and nicely orderable actions.} \AP Another important operation
 on group actions is the notion of \kl{reduct}, which allows one to encode
@@ -129,7 +136,16 @@ $\gelem[\theta] \in \calH$, we have some $\gelem \in \group$ such that
 $f^{-1} \circ \gelem[\theta] \circ f$ acts like $\gelem$ on $\Indets$.
 This is called an \intro{effective reduct} if $f$ is computable.
 
-\csname thm:reducts-computable\endcsname*
+\begin{theorem}[name={}, restate={thm:reducts-computable}]
+  \label{thm:reducts-computable}
+  Let $\calH\actson\Y$ be an action satisfying the requirements of 
+  \cref{cor:equivariant-ideals-computations}, and let
+  $\group\actson\Indets$ be an \kl{effective reduct} of $\calH\actson\Y$.
+  Then one has an \emph{effective representation} of
+  the \kl{equivariant ideals} of $\poly{\K}{\Indets}$
+  satisfying the properties of \cref{cor:equivariant-ideals-computations}.
+\end{theorem}
+
 
 \Cref{thm:reducts-computable} implies that one can apply our results to an
 action $\group\actson\Indets$ that does not preserve a linear order, as soon as
@@ -169,8 +185,7 @@ consequence of the effective computations of \kl{equivariant Gröbner bases} is
 that one can apply the same decision techniques to \emph{orbit finite
 polynomial computations}. For simplicity and clarity, we will focus on
 \kl{polynomial automata} without states or zero-tests \cite{BEDUSHWO17}, but
-the same reasoning would apply to more general systems as we will discuss in
-\cref{rem:topological-wsts}.
+the same reasoning would apply to more general systems.
 
 
 \AP Before discussing the case of orbit finite polynomial automata, let us
@@ -235,12 +250,22 @@ $F(\delta^*(w, q_0))$ is zero.
 The \kl{orbit finite polynomial automata} model could be extended to allow for
 inputs of the form $\Indets^k$ for some $k \in \N$, or even be recast in the
 theory of nominal sets \cite{BOJAN16inf}. Furthermore, leveraging the closure
-properties of \cref{lem:closure-properties-comp,lem:closure-properties-wqo},
+properties of \cref{cor:closure-properties},
 one can also reduce the equivalence problem for \kl{orbit finite polynomial
 automata} to the \kl(ofpa){zeroness problem}, by considering the \kl{sum
 action} on the registers to compute the difference of the two results. We leave
 a more detailed investigation of the generalisation of \kl{polynomial automata}
 to the orbit finite setting for future work.
+
+\begin{theorem}[name={orbit finite polynomial automata},
+  restate=thm:orbit-finite-polynomial-automata-zeroness]
+  \label{cor:orbit-finite-polynomial-automata-zeroness}
+  Let $\Indets$ be a set of indeterminates that satisfies the
+  \kl{computability assumptions} and such that $(\mon[Y]{\Indets}, \gdivleq)$ is a
+  \kl{well-quasi-ordering}, for every \kl{well-quasi-ordered} set $(Y, \leq)$.
+  Then, the \kl(ofpa){zeroness problem} is decidable for
+  \kl{orbit finite polynomial automata} over $\K$ and $\Indets$.
+\end{theorem}
 
 
 %\begin{remark}
@@ -267,7 +292,6 @@ to the orbit finite setting for future work.
 %  Noetherian spaces.
 %\end{remark}
 
-\todo[inline]{Actually write a definition of what a petri net is}
 \paragraph{Reachability problem of symmetric data Petri nets.} The classical
 model of Petri nets was extended to account for arbitrary data attached to
 tokens to form what is called data Petri nets. We will not discuss the precise
@@ -275,17 +299,21 @@ definitions of these models, but point out  that a reversible data Petri net is
 exactly what is called a \kl{monomial rewriting system} \cite[Section
 8]{GHOLAS24}. Because reachability in such rewriting systems can be decided
 using \kl{equivariant ideal membership} queries \cite[Theorem 64]{GHOLAS24}, we
-can use \cref{thm:compute-egb}
- and \cref{lem:reducts-equiv-hilbert} to show
+can use \cref{thm:reducts-computable} to show
 \cref{cor:rev data VAS}.
 Note that \kl{monomial rewrite systems} will be at the
 center of our undecidability results in \cref{sec:undecidability}.
 
-\csname cor:rev-data-VAS\endcsname*
+\begin{theorem}[name={Reachability in Reversible Data Petri Nets},
+  restate=cor:rev-data-VAS]
+  \label{cor:rev data VAS}
+  For every \kl{nicely orderable} group action $\group\actson\Indets$,
+  the reachability problem for reversible Petri nets with data in $\Indets$
+  is decidable.
+\end{theorem}
 
 
 
-\todo[inline]{Actually write a definition of what an orbit-finite linear system of equations is}
 \paragraph{Orbit-finite systems of equations} The classical theory of solving
 finite systems of linear equations has been generalised to the infinite setting
 by \cite{GHL22}, \cite[Section 9]{GHOLAS24}. In this setting, one considers an
@@ -296,11 +324,17 @@ $\K$. An orbit-finite system of equations asks whether a given vector $u \in
 of vectors $V$ in $\lin(\Indets^n)$ \cite[Section 9]{GHOLAS24}. It has been
 shown that the solvability of these systems of equations reduces to the
 \kl{equivariant ideal membership problem} \cite[Theorem 68]{GHOLAS24}, and as a
-consequence of this reduction and
-\Cref{thm:compute-egb,lem:reducts-equiv-hilbert} we get that:
+consequence of this reduction and \Cref{thm:reducts-computable} we obtain the
+following theorem.
 
 
-\csname cor:lin-solv\endcsname*
+\begin{theorem}[name={Solvability of Orbit-Finite Systems of Equations},
+  restate=cor:lin-solv]
+  \label{cor:lin solv}
+  For every \kl{nicely orderable} group action $\group\actson\Indets$,
+  the solvability problem for orbit-finite systems of equations
+  is decidable.
+\end{theorem}
 
 Note that the above corollary is an extension of
 \cite[Theorem 6.1]{GHL22} to all nicely orderable group actions.

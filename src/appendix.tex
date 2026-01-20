@@ -91,7 +91,7 @@
   We need to prove that the set $\freeColor(H)$ is computable and 
   \kl{orbit finite}, that $\poly{\K}{\IndetsCol}$ satistfies 
   the \kl{computability assumptions} of \kl{weakgb},
-  and that $(\mon{\IndetsCol}, \gdivleq)$ is a
+  and that the set $(\mon{\IndetsCol}, \gdivleq)$ is a
   \kl{well-quasi-ordered} set.
   Finally, we also need to prove that if $H$ is \kl{orbit finite},
   $\forgetCol(H)$ is computable and \kl{orbit finite}. 
@@ -319,10 +319,9 @@
 \section{Proofs of \cref{sec:applications}}
 \label{sec:applications:proof}
 
-\csname thm:orbit-finite-polynomial-automata-zeroness\endcsname*
 \begin{proofof}{cor:orbit-finite-polynomial-automata-zeroness}
-  Let $A = (Q, \delta, q_0, F)$ be an \kl{orbit finite polynomial
-  automaton}. Following the classical \emph{backward procedure} for such
+  Let us consider an \kl{orbit finite polynomial automaton} 
+  $A = (Q, \delta, q_0, F)$. Following the classical \emph{backward procedure} for such
   systems, we will compute a sequence of sets $E_0 \defined \setof{ q \in Q }{
   F(q) = 0 }$, and $E_{i+1} \defined \mathrm{pre}^\forall(E_i) \cap E_i$, where
   $\mathrm{pre}^\forall(E)$ is the set of states $q \in Q$ such that for every
