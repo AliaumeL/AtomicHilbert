@@ -39,6 +39,7 @@ abstract: |
   every equivariant ideal in $\mathbb{K}[\mathcal{X}]$ is finitely generated.
   Moreover, we give a sufficient condition for the undecidability of the equivariant ideal membership problem.
   This condition is satisfied by the most common examples not satisfying the Hilbert’s basis property.
+  Our results imply decidability of solvability of orbit-finite systems of linear equations and the reachability problem for reversible data Petri nets for a large class of data domains.
 classification:
   ccdesc:
     - desc: "Mathematics of computing Computations on polynomials"
