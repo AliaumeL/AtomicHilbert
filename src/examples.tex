@@ -1,7 +1,20 @@
 % LTeX: language=en
 %!TEX root = ../atomic.sigconf.tex
 %
-\section{Examples of group actions}\label{sec:act ex}
+\section{Applications and examples}
+\label{sec:applications}
+
+\AP In this section, we discuss how our main \cref{thm:compute-egb} and its
+\cref{cor:egb} can be applied in practice. First, we give some examples of
+group actions and discuss whether they satisfy our \kl{computability
+assumptions} and whether the \kl{divisibility relation up-to-$\group$} is a
+\kl{well-quasi-ordering}. We also provide an analogue of \cref{cor:egb}
+allowing us to work in the absence of a total ordering on the set of
+indeterminates $\Indets$. Finally, we discuss some applications of our results
+to several problems in algebra and computer science.
+
+
+\subsection{Examples of group actions}\label{sec:act ex}
 
 \AP Many of the common examples of group actions $\group\actson\Indets$ are
 obtained by considering $\Indets$ as set with some structure, described by
@@ -12,11 +25,21 @@ reflect the structure) of $\Indets$. A monomial $\monelt[p] \in
 $\X$ using elements of $Y$. If the structure $\Indets$ is \intro{homogeneous},
 that is, if isomorphisms between finite induced substructures extends to
 automorphisms of the whole structure, then $\gdivleq$ is the same as embedding of
-labelled finite induced substructures of $\X$. \footnote{ We refer the reader
+labelled finite induced substructures of $\X$.\footnote{ We refer the reader
 to \cite[Chapter 7]{BOJAN16inf} and \cite{homsurvey} for more details on
 homogeneous structures.} Let us now give some examples of such structures and
 whether they satisfy our \kl{computability assumptions}, and whether the
 \kl{divisibility relation up-to-$\group$} is a \kl{well-quasi-ordering}.
+
+\AP Let us say that a \kl{group action} $\group \actson \Indets$ is
+\intro{well-structured} (\reintro{W.S.}) if $(\mon[Y]{\Indets},
+\gdivleq[\group])$ is a \kl{WQO} for every \kl{WQO} $Y$, and
+\intro{$\omega$-well-structured} (\reintro{$\omega$.W.S}) if
+$(\mon[\N]{\Indets}, \gdivleq[\group])$ is a \kl{WQO}. Let us mention that the
+two properties are conjectured to be equivalent for group actions of the form
+$\aut{\Indets} \actson \Indets$~\cite[Problems 9, (1)]{POUZ24}.
+
+
 
 
 \begin{example}[Equality Atoms]
@@ -34,7 +57,6 @@ which is a \kl{WQO} \cite[Corollary 1.21]{SCSC17}.
   \AP
 Let $\intro*\OrderAtoms$ be the set of rational numbers ordered by the usual ordering.
 Note that under this ordering, $\OrderAtoms$ is a dense linear order without endpoints.
-We write $\OrderAtoms$ instead of $\Q$ to emphasise that we use its elements as indeterminates and not as coefficients of polynomials. 
 Up to isomorphism, finite induced substructures of $\OrderAtoms$ are finite linear orders,
 monomials in $\mon[Y]{\OrderAtoms}$ are words in $Y^*$ (i.e.\ finite linear order labelled with elements of $Y$)
 and $\gdivleq[\aut{\OrderAtoms}]$ is the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \cite{HIG52}.
@@ -50,6 +72,30 @@ monomials in $\mon[Y]{\RadoAtoms}$ are graphs with vertices labelled with $Y$,
 and $\gdivleq[\aut{\RadoAtoms}]$ is the labelled induced subgraph ordering even when $Y$ is a singleton.
 For example, cycles of length more than three form an infinite antichain.
 \end{example}
+
+
+\begin{figure}
+  \centering
+  \begin{tabular}{r|c|c}
+    \toprule
+    Example & \kl{W.S.} & \kl{$\omega$-W.S.} \\
+    \midrule
+    \kl{Equality Atoms} (\ref{ex:eq atoms}) & Yes & Yes \\
+    \kl{Dense linear order} (\ref{ex:dlo}) & Yes & Yes \\
+    \kl{Dense tree} (\ref{ex:dense tree}) & Yes & Yes \\
+    \addlinespace
+    \kl{Integers with order} (\ref{ex:int}) & No & No  \\
+    \kl{Rado graph} (\ref{ex:rado})  & No & No \\
+    \kl{Infinite dim. vector space} (\ref{ex:bit vector}) & No & No \\
+    \bottomrule
+  \end{tabular}
+  \caption{Summary of the examples of group actions
+  in \cref{sec:act ex}. Notice that on all examples,
+  being \kl{well-structured} is equivalent to being
+  \kl{$\omega$-well-structured}.}
+  \label{fig:structured}
+\end{figure}
+
 
 \begin{example}[Infinite dimensional vector space]
   \label{ex:bit vector}
@@ -110,25 +156,18 @@ However, $(\mon[Y]{\calZ}, \gdivleq[\aut{\calZ}])$ is not a \kl{WQO} even when $
 An example of an infinite antichain is the set $\setof{a b}{b\in\calZ\setminus\{a\}}$, for any fixed $a\in\calZ$.
 \end{example}
 
-
-
-\paragraph{Effective oligomorphicity} \AP Recall that in our \kl{computability
-assumptions} we require the action $\group\actson\Indets$ to be \kl{effectively
-oligomorphic}. It is already known that all the structures of \cref{ex:eq
-atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree} are \kl{oligomorphic}
-\cite[Theorem 7.6]{BOJAN16inf}. 
-
-Let us show on an example that they are also
-\kl{effectively oligomorphic}. It is clear that $\OrderAtoms$ can be
+\AP Recall that in our \kl{computability assumptions} we require the action
+$\group\actson\Indets$ to be \kl{effectively oligomorphic}. It is already known
+that all the structures of the upgoming \cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit
+vector,ex:dense tree} are \kl{oligomorphic} \cite[Theorem 7.6]{BOJAN16inf}. The
+other examples are not \kl{$\omega$-well-structured}, hence we will not verify
+\kl{effective oligomorphicity} for them. Let us argue on an example that they
+are \kl{effectively oligomorphic}. It is clear that $\OrderAtoms$ can be
 represented by integer fractions, and that the \kl{orbit} of a tuple $(q_1,
 q_2, \ldots, q_n)$ of rational numbers is given by their relative ordering in
 $\Q$, which can be effectively computed. Finally, one can enumerate such
-orderings and produce representatives by selecting $n$ integers. 
-This can be generalised to all the structures mentioned in \Cref{ex:eq
+orderings and produce representatives by selecting $n$ integers. This can be
+generalised to all the structures mentioned in \Cref{ex:eq
 atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree}, by using dedicated
 representations (such as \cite[Page 244-245]{BOJAN16inf} for $\TreeAtoms$), or
 the general theory of Fra\"{i}sse limits \cite{CompFraisse}. 
-
-Finally, let us
-remark that \cref{rem:reduct} preserves the \kl{effective oligomorphicity} of
-the action.

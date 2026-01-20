@@ -39,10 +39,10 @@ $\freeColor$ does not equal $\forgetCol^{-1}$, since we only consider
 \AP
 We are now ready to write our algorithm to compute an \kl{equivariant Gröbner
 basis} by computing the ``congugacy'' 
-\[
+\begin{equation}
 \intro{egb} \defined \forgetCol \circ
-\mathop{\kl{weakgb}} \circ \freeColor \ .
-\]
+\mathop{\kl{weakgb}} \circ \freeColor \quad .
+\end{equation}
 To prove the correctness of our algorithm,
 let us first argue that one can indeed compute the \kl{weak equivariant Gröbner basis} algorithm.
 
@@ -136,7 +136,7 @@ prove that it is an \kl{equivariant Gröbner basis}
   If we define $h \defined \forgetCol(h_i')$ and
   $\monelt \defined \forgetCol(\monelt[m]_i')$,
   we conclude that 
-  $\lm(p) = \lm(\monelt h)$.
+  $\lm(p) = \monelt \lm(h)$, and $\dom(h) \subseteq V = \dom(p)$.
   We have proven that $\forgetCol(\Basis_\star)$ is 
   an \kl{equivariant Gröbner basis} of $\EqIdlGen{H}$.
 \end{proof}

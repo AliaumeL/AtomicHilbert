@@ -1,5 +1,5 @@
 % LTeX: language=en
-
+\clearpage
 \section{Proofs of \cref{sec:weakgb}}
 \label{sec:weakgb:proof}
 
@@ -130,9 +130,9 @@
 
 \begin{proofof}{lem:correct-gen-set}
   Let us remark that
-  $$
-  \forgetCol(\freeColor(H)) = H \.
-  $$
+  \begin{equation}
+  \forgetCol(\freeColor(H)) = H \quad .
+  \end{equation}
   Since $\kl{weakgb}(\freeColor(H))$
   generates the same ideal as $\freeColor(H)$,
   and since $\forgetCol$ is a morphism,
@@ -231,21 +231,23 @@
   and assuming that the indeterminates of $P_1$ and $P_2$ are disjoint:
   \begin{enumerate}
     \item Cell creation: 
-      $\wenc{\triangleright^{\text{pre}} \square}_{P_1}
+      \[
+        \wenc{\triangleright^{\text{pre}} \square}_{P_1}
         \wenc{ \square_1 \square_2 \triangleleft^{\text{pre}}}_{P_2}
       \leftrightarrow_{R_\text{pre}}
       \wenc{\triangleright^{\text{pre}} \square_1}_{P_1}
-      \wenc{ \square \square \square_2 \triangleleft^{\text{pre}}}_{P_2}$
+      \wenc{ \square \square \square_2 \triangleleft^{\text{pre}}}_{P_2}
+      \]
     \item Linearity checking:
-      $\wenc{\square_1 \square}_{P_1} \wenc{\square_2 \triangleleft^{\text{pre}}}_{P_2}
+      \[ \wenc{\square_1 \square}_{P_1} \wenc{\square_2 \triangleleft^{\text{pre}}}_{P_2}
       \leftrightarrow_{R_\text{pre}}
-      \wenc{\square \square_1}_{P_1} \wenc{\square_2 \triangleleft^{\text{pre}}}_{P_2}$
+    \wenc{\square \square_1}_{P_1} \wenc{\square_2 \triangleleft^{\text{pre}}}_{P_2} \]
     \item Phase transition:
-      $\wenc{\triangleright^{\text{pre}} \square}_{P_1}
+      \[ \wenc{\triangleright^{\text{pre}} \square}_{P_1}
        \wenc{\square_1 \square_2 \triangleleft^{\text{pre}}}_{P_2}
       \leftrightarrow_{R_\text{pre}}
        \wenc{\triangleright^{\text{run}} q_0}_{P_1}
-       \wenc{\square \square \triangleleft^{\text{run}}}_{P_2}$
+     \wenc{\square \square \triangleleft^{\text{run}}}_{P_2} \]
   \end{enumerate}
   Note that there are only orbit finitely many such pairs of monomials,
   and that we can enumerate representative of these orbits because 

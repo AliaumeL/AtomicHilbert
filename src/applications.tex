@@ -1,10 +1,10 @@
 % LTeX: language=en
 %!TEX root = ../atomic.sigconf.tex
 %
-\section{Closure properties}
+\subsection{Closure properties}
 \label{sec:closure-properties}
 
-In this section, we are interested in listing the operations on sets of
+\AP In this section, we are interested in listing the operations on sets of
 indeterminates equipped with a group action that preserve our \kl{computability
 assumptions} and the \kl{well-quasi-ordering} property ensuring that our
 \cref{thm:compute-egb} can be applied.  Indeed, it is often tedious to prove
@@ -12,63 +12,60 @@ that a given group action $\grp[G] \actson \X$ satisfies the \kl{computability
 assumptions} and the \kl{well-quasi-ordering} property, and we aim to provide a
 list of operations that preserve these properties, so that simpler examples
 (\cref{ex:dlo,ex:eq atoms,ex:dense tree}) can serve as building blocks to model
-complex systems.
+complex systems. 
 
-For the remainder of this section, we fix a pair of group actions $\grp[H]
-\actson \X$ and $\grp[G] \actson \Y$, where $\X$ is equipped with a total order
-$<_{\X}$ and $\Y$ is equipped with a total order $<_{\Y}$. The constructions
-that what we mention in this section were already studied in \cite{GHOLAS24},
-via \cite[Example 10]{GHOLAS24} or \cite[Lemma 9]{GHOLAS24}, and 
-our contribution is to prove that they also preserve our 
-\kl{computability assumptions}.
+\paragraph{Structural operations.} Let us first focus on three standard
+operations on sets of indeterminates: the \kl{disjoint sum} (that was already
+at play in \cref{sec:equivariant-grobner-basis}), the \kl{direct product} (that
+will fail to preserve our assumptions), and its variant, the \kl{lexicographic
+product}. For the remainder of this section, we fix a pair of group actions
+$\grp[H] \actson \X$ and $\grp[G] \actson \Y$, where $\X$ is equipped with a
+total order $<_{\X}$ and $\Y$ is equipped with a total order $<_{\Y}$. 
 
+\AP The \intro{disjoint sum} $\X \ordplus \Y$ is the disjoint union of $\X$ and
+$\Y$, equipped with the total order obtained by stating that all elements of
+$\X$ are smaller than all elements of $\Y$, and preserving the original
+orderings inside $\X$ and $\Y$. The group $\grp[G] \times \grp[H]$ acts on $\X
+\ordplus \Y$ by acting as $\grp[H]$ on $\X$ and as $\grp[G]$ on $\Y$.
 
-\begin{definition}[Sum action]\label{def:union}
-  Given $(\gelem[\pi], \gelem[\sigma]) \in \grp[G] \times \grp[H]$ 
-  and $z \in \X \ordplus \Y$, we define the action
-  $(\gelem[\pi], \gelem[\sigma])(z)$ as
-  $\gelem[\pi](z)$ if $z \in \X$ and $\gelem[\sigma](z)$ if $z \in \Y$.
-  This action is called the \intro{sum action} of $\grp[G]$ and $\grp[H]$ on $\X \ordplus \Y$.
-\end{definition}
-
-\begin{definition}[Product action]\label{def:product}
-  Given $(\gelem[\pi], \gelem[\sigma]) \in \grp[G] \times \grp[H]$ and $(x,y) \in \X \ordtimes \Y$, we define the \intro{product action} of $\grp[G]$ and $\grp[H]$ on $\X \ordtimes \Y$ as
-  $(\gelem[\pi], \gelem[\sigma])\cdot (x,y)$ as $(\gelem[\pi](x), \gelem[\sigma](y))$.
-  Note that the ordering of $\X \ordtimes \Y$ is preserved by this action.
-\end{definition}
-
-\begin{definition}[Lex. Product Action]\label{def:nested product}
-  Let $\grp[G] \intro*\lexGroupAction \grp[H]$ be the group whose elements are of the form 
-  $(\gelem,\seqof{\gelem[\sigma]^{x}}[x\in\X])$, where 
-  $\gelem[\sigma]_{x} \in \grp[H]$ for every $x\in\X$, and where the multiplication
-  is defined as 
-  $(\gelem_1,(\gelem[\sigma]_1^{x})_{x\in\X})(\gelem_2,(\gelem[\sigma]_2^{x})_{x\in\X})
-  = (\gelem_1\gelem_2, (\gelem[\sigma]_1^{\gelem_2(x)}\gelem[\sigma]_2^x)_{x\in\X})$.
-  The \intro{lexicographic product action} of $\grp[G]$ and $\grp[H]$ on $\X \ordtimes \Y$ is defined as
-  $\grp[G] \lexGroupAction \grp[H]$ on $\X \ordtimes \Y$ is defined as
-  $(\gelem,(\gelem[\sigma]^{x})_{x\in\X})\cdot(x',y') = 
-  (\gelem\cdot x', \gelem[\sigma]^{x'}\cdot y')$ for every $(x',y')\in\X \ordtimes \Y$.
-Essentially,
-each element $x\in\X$ carries its own copy $\{x\}\times\Y$ of the structure $\Y$,
-and different copies of the structure $\Y$ can be permuted independently.
-\end{definition}
-
-\begin{lemma}\label{lem:closure-properties-wqo}
-If $(\mon[Q]{\X}, \gdivleq[\grp[G]])$ and $(\mon[Q]{\Y}, \gdivleq[\grp[H]])$
-are \kl{WQOs},
-then $(\mon[Q]{\X \ordplus \Y}, \gdivleq[\grp[G] \times \grp[H]])$
-and $(\mon[Q]{\X\times\Y}, \gdivleq[\grp[G]\otimes\grp[H]])$ are
-also \kl{WQOs}.
+\begin{lemma}
+  \label{lem:disjoint-sum}
+  If $\grp[G] \actson \X$ and $\grp[H] \actson \Y$ are
+  \kl{well-structured} (resp. \kl{effectively oligomorphic}),
+  then so is $\grp[G] \times \grp[H] \actson \X \ordplus \Y$.
 \end{lemma}
-
 \begin{proof}
-The \kl{divisibility up to $\grp[G] \times \grp[H]$} order is essentially the product of the orders $\gdivleq[\grp[G]]$ and $\gdivleq[\grp[H]]$,
-hence is a \kl{WQO} if both orders are \kl{WQOs} \cite[Lemma 1.5]{SCSC17}.
-For, $(\mon[Q]{\X\times\Y}, \gdivleq[\G\otimes\calH])$
-it follows from \cite[Lemma 9]{GHOLAS24}.
+  The \kl{divisibility up to $\grp[G] \times \grp[H]$} order is essentially the
+  disjoint sum of the orders $\gdivleq[\grp[G]]$ and
+  $\gdivleq[\grp[H]]$, hence is a \kl{WQO} if both orders are \kl{WQOs}
+  \cite[Lemma 1.5]{SCSC17}. Furthermore, it is folklore that 
+  the disjoint sum of two \kl{oligomorphic} actions is itself \kl{oligomorphic}.
+
+  Let us now check that the action is \kl{effectively oligomorphic} when both
+  actions are. It is an easy check that the action defined is
+  \kl(ord){compatible} with the total ordering on the set of indeterminates.
+  To list representatives of the orbits in $(\X \ordplus \Y)^n$ for a fixed $n
+  \in \N$, we can list representatives $u_\X$ of the orbits in $\X^{\leq n}$,
+  representatives $u_\Y$  of the orbits in $\Y^{\leq n}$, and words $u_\text{tag}
+  \in \set{0,1}^n$, and consider triples $(u_\X, u_\Y, u_\text{tag})$ such that
+  $|u_\X| + |u_\Y| = n$, $|u_\text{tag}|_0 = |u_\X|$, and $|u_\text{tag}|_1 =
+  |u_\Y|$. It is an easy check that one can effectively decide whether two such
+  triples are in the same orbit.
 \end{proof}
 
-\begin{lemma}\label{lem:product-not-wqo}
+\AP
+The \intro{direct product} $\X \ordtimes \Y$ is the Cartesian product
+$\X \times \Y$, equipped with the lexicographic ordering defined as
+\[
+  (x_1,y_1) <_{\X \ordtimes \Y} (x_2,y_2) \text{ if } x_1 <_{\X} x_2
+  \text{ or } (x_1 = x_2 \text{ and } y_1 <_{\Y} y_2) \ .
+\]
+The group $\grp[G] \times \grp[H]$ acts on $\X \ordtimes \Y$ by acting as
+$\grp[H]$ on the first component and as $\grp[G]$ on the second component.
+
+\begin{lemma}
+  \label{lem:direct-product}
+
   When $\X$ and $\Y$ are infinite,
   $(\mon[Q]{\X \ordtimes \Y}, \gdivleq[\grp[G] \times \grp[H]])$
   is not a \kl{WQO}, even with $Q = \set{0,1}$.
@@ -78,45 +75,95 @@ We restate the antichain given in \cite[Example 10]{GHOLAS24},
 that will also be used is \cref{rem:multiple-orbits} of \cref{sec:undecidability}
 when discussing the undecidability of the \kl{equivariant ideal membership problem}.
 Let $\{x_1,x_2,\dots\}$ and $\{y_1,y_2,\dots\}$ be infinite subsets of $\X$ and $\Y$ respectively.
-For $n = 3,4,\dots$, let $\monelt{c}_n$ be the monomial
+For $n = 3,4,\dots$, let $\monelt[c]_n$ be the monomial
 \[
 \monelt[c]_n = (x_1,y_1)(x_1,y_2)(x_2,y_2)(x_2,y_3)\cdots(x_n,y_n)(x_n,y_1) \ .
 \]
 Then $\setof{\monelt[c]_n}{n = 3,4,\dots}$ is an infinite antichain.
 \end{proof}
 
-\begin{lemma}\label{lem:closure-properties-comp}
-If $\grp[G]\actson\X$ and $\grp[H]\actson\Y$ satisfy our \kl{computability assumptions},
-then so do $(\grp[G] \times \grp[H])\actson (\X \ordplus \Y)$ and $(\grp[G] \otimes \grp[H])\actson (\X \times \Y)$.
+\AP
+The failure to consider \kl{direct products} is somewhat unfortunate,
+and motivates the introduction of the \intro{lexicographic product} $\X
+\otimes \Y$,
+whose underlying set is also $\X \times \Y$,
+with the same lexicographic ordering as the \kl{direct product},
+but where the group $\grp[G] \lexGroupAction \grp[H]$
+is defined as pairs $(\gelem,(\gelem[\sigma]^{x})_{x\in\X})$,
+where $\gelem \in \grp[G]$ and $\gelem[\sigma]^{x} \in \grp[H]$ for every $x\in\X$,
+and where the multiplication
+is defined as
+\begin{equation}
+  (\gelem_1,(\gelem[\sigma]_1^{x})_{x\in\X})
+  (\gelem_2,(\gelem[\sigma]_2^{x})_{x\in\X})
+= (\gelem_1\gelem_2, (\gelem[\sigma]_1^{\gelem_2(x)}\gelem[\sigma]_2^x)_{x\in\X})
+\quad .
+\end{equation}
+This group is sometimes called the \emph{wreath product} or the
+ \emph{semidirect product}
+of $\grp[G]$ and $\grp[H]$. It acts on $\X \otimes \Y$ as
+\begin{equation}
+  (\gelem,(\gelem[\sigma]^{x})_{x\in\X})\cdot(x',y') = 
+  (\gelem\cdot x', \gelem[\sigma]^{x'}\cdot y') \quad ,
+\end{equation}
+for every $(x',y')\in\X \otimes \Y$.
+Essentially, it means that every element $x\in\X$ carries its own copy $\{x\}\times\Y$ of the structure $\Y$,
+and one can act independently on different copies of the structure $\Y$.
+
+
+
+\begin{lemma}[{\cite[Lemmas 9 and 39]{GHOLAS24}}]
+  \label{lem:lexicographic-product}
+  If $\grp[G] \actson \X$ and $\grp[H] \actson \Y$ are
+  \kl{well-structured} (resp. \kl{effectively oligomorphic}),
+  then so is $(\grp[G] \otimes \grp[H]) \actson (\X \times \Y)$.
 \end{lemma}
-\begin{proof}
-  Let us first check that the actions are \kl{effectively oligomorphic}.
-  \todo[inline]{\textbf{for arka}: do it?}
 
-  It is an easy check that the actions defined are all \kl(ord){compatible}
-  with the total ordering on the set of indeterminates.
-  Let us now sketch the proof that points (2) and (3) of our
-  \kl{computability assumptions} hold for the action $(\grp[G] \times \grp[H])\actson (\X \ordplus \Y)$,
-  the proof being similar for $(\grp[G] \otimes \grp[H])\actson (\X \times \Y)$.
-  We represent elements of $\X \ordplus \Y$ as elements of a tagged union,
-  and given a word $w \in (\X \ordplus \Y)^*$, we can 
-  create three words: one $w_\X$ in $\X^*$, one $w_\Y$ in $\Y^*$, and one $w_\text{tag}$ in $\set{ 0, 1 }^*$,
-  obtained by considering respectively only the elements of $\X$,
-  only the elements of $\Y$, and restricting the elements of $\X \ordplus \Y$ to whether 
-  or not they belong to $\X$.
-  It is an easy check that two words $u,v$ are in the same orbit if and only if
-  their $u_\X$ and $v_\X$ are in the same orbit under $\grp[G]$,
-  their $u_\Y$ and $v_\Y$ are in the same orbit under $\grp[H]$, and their $u_\text{tag}$ and $v_\text{tag}$ are equal.
+\paragraph{Reducts and nicely orderable actions.} \AP Another important operation
+on group actions is the notion of \kl{reduct}, which allows one to encode
+actions that do not preserve a linear order into actions that do.
+We say that $\group\actson\Indets$ is a \intro{reduct} of
+another group action $\calH\actson\Y$ if there exists a bijection 
+$f \colon \Indets\to\Y$ such that, for every 
+$\gelem[\theta] \in \calH$, we have some $\gelem \in \group$ such that
+$f^{-1} \circ \gelem[\theta] \circ f$ acts like $\gelem$ on $\Indets$.
+This is called an \intro{effective reduct} if $f$ is computable.
 
-  To list representatives of the orbits in $(\X \ordplus \Y)^n$ for a fixed 
-  $n \in \N$, we can list representatives $u_\X$ of the orbits in $\X^{\leq n}$,
-  representatives $u_\Y$  of the orbits in $\Y^{\leq n}$,
-  and words $u_\text{tag} \in \set{0,1}^n$, and consider triples
-  $(u_\X, u_\Y, u_\text{tag})$ such that $|u_\X| + |u_\Y| = n$,
-  $|u_\text{tag}|_0 = |u_\X|$, and $|u_\text{tag}|_1 = |u_\Y|$.
-\end{proof}
-%
-\section{Applications}
+\begin{theorem}
+  \label{thm:reducts-computable}
+  Let $\calH\actson\Y$ be an action satisfying the requirements of 
+  \cref{cor:equivariant-ideals-computations}, and let
+  $\group\actson\Indets$ be an \kl{effective reduct} of $\calH\actson\Y$.
+  Then one has an \emph{effective representation} of
+  the \kl{equivariant ideals} of $\poly{\K}{\Indets}$
+  satisfying the properties of \cref{cor:equivariant-ideals-computations}.
+\end{theorem}
+
+\Cref{thm:reducts-computable} implies that one can apply our results to an
+action $\group\actson\Indets$ that does not preserve a linear order, as soon as
+it is  a \kl{reduct} of some another action $\calH\actson\Indets$ which does
+preserves a linear order. For example,
+$\aut{\EqualityAtoms}\actson\EqualityAtoms$ is a \kl{reduct} of
+$\aut{\OrderAtoms}\actson\OrderAtoms$ assuming $\EqualityAtoms$ is countable.
+Similarly, let $\T_<$ be the countable dense-meet tree with a lexicographic
+ordering, as defined in \cite[Remark 6.14]{KRS21}.\footnote{The remark says
+  that finite meet-trees expanded with a lexicographic ordering is a
+  Fra\"{i}sse class, from which it follows that there exists a Fra\"{i}sse
+  limit $\T_<$ for that class.} Let $\group$ be the group of bijections of
+  $\T_<$ which do not necessarily preserve the lexicographic ordering. Then
+  $\group\actson\T_<$ is isomorphic to $\aut{\TreeAtoms}\actson\TreeAtoms$, and
+  hence $\aut{\TreeAtoms}\actson\TreeAtoms$ is a \kl{reduct} of
+  $\aut{\T_<}\actson\T_<$.
+
+\AP We say that an action $\group\actson\Indets$ is \intro{nicely orderable} if
+there exists another action $\calH\actson\Y$ such that $\group\actson\Indets$
+is a \kl{reduct} of $\calH\actson\Y$, $\calH\actson\Y$ preserves a linear order
+on $\Y$, and $\calH \actson \Y$ satisfies our \kl{computability assumptions}. In
+the case of actions originating from \kl{homogeneous} structures, it is
+conjectured that being \kl{well-structured} is equivalent to being \kl{nicely
+orderable}~\cite[Problems 12]{POUZ24}.
+
+\subsection{Applications}
 \label{sec:applications}
 
 \paragraph{Polynomial computations.} \AP The fact that (finite control) systems
@@ -267,68 +314,3 @@ Note that the above corollary is an extension of
 
 
 
-\subsection{Reducts} 
-
-\todo[inline]{\textbf{for arka}: 
-this section is non-sensical: we are saying that things are gröbner bases 
-without having an ordering. This needs to be fixed, for instance 
-by saying that \cref{cor:equivariant-ideals-computations}
-lifts to this setting via the reduct, but without mentioning gröbner bases.
-}
-
-\AP As mentioned in the introduction, some examples of
-group actions $\group\actson\Indets$ do not preserve a linear order on
-$\Indets$, such as the set $\EqualityAtoms$ of indistinguishable names without
-any relations. However, there are techniques that allow us to reduce the
-problem of computing \kl{equivariant Gröbner bases} to the case where the
-action preserves a linear ordering, using what is called a \kl{reduct} of the
-action. A group action $\group\actson\Indets$ is said to be a \intro{reduct} of
-another group action $\calH\actson\Y$ if there exists a bijection $f \colon
-\Indets\to\Y$ such that $f^{-1}\circ \gelem \circ f \in\group$ for every
-$\gelem \in \calH$. It is called an \intro{effective reduct} if $f$ is
-computable.
-
-\begin{lemma}\label{lem:reducts-equiv-hilbert}
-  Let $\group\actson\Indets$ be an \kl{effective reduct} of $\calH\actson\Y$ 
-  via a computable function $f\colon\Indets\to\Y$. Then,
-  \begin{enumerate}
-    \item for every $\group$-equivariant ideal $\idl[I]\subseteq\poly{\K}{\X}$,
-    $f(\idl[I])\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant ideal,
-    \item if $\Basis\subseteq\poly{\K}{\Y}$ is a $\calH$-equivariant Gr\"{o}bner basis then \\$\orbit[\group]{f^{-1}(\Basis)}$ is a $\group$-equivariant Gr\"{o}bner basis.
-  \end{enumerate}
-\end{lemma}
-
-\AP We say that an action $\group\actson\Indets$ is \intro{nicely orderable} if
-it is an \kl{effective reduct} of some  \kl{effectively oligomorphic} action
-$\calH\actson\Y$ that satisfies the conditions mentioned in
-\Cref{thm:compute-egb},
-i.e.\ $\calH\actson\Y$ preserves an effective linear order and
-$\gdivleq[\calH]$ is a \kl{WQO}. As an immediate corollary of
-\Cref{thm:compute-egb},
-\Cref{lem:reducts-equiv-hilbert} we get the desired \cref{cor:egb}.
-  
-\begin{corollary}\label{cor:egb} If $\group\actson\Indets$ is
-  \kl{nicely orderable} then
-  one can compute an \kl{equivariant Gröbner basis} of any 
-  \kl{equivariant ideal} given by an \kl{orbit finite} set of
-  generators.
-\end{corollary}
-
-\begin{remark}\label{rem:reduct}
-
-\Cref{lem:reducts-equiv-hilbert} implies that one can apply our
-results to an action $\group\actson\Indets$ that does not preserve a linear
-order, as soon as it is  a reduct of some another action $\calH\actson\Indets$ which
-does preserves a linear order. 
-
-For example, $\aut{\EqualityAtoms}\actson\EqualityAtoms$ is a \kl{reduct} of
-$\aut{\OrderAtoms}\actson\OrderAtoms$ assuming $\EqualityAtoms$ is countable.
-Similarly, let $\T_<$ be the countable dense-meet tree with a lexicographic
-ordering, as defined in \cite[Remark 6.14]{KRS21}.\footnote{The remark says
-that finite meet-trees expanded with a lexicographic ordering is a Fra\"{i}sse
-class, from which it follows that there exists a Fra\"{i}sse limit $\T_<$ for
-that class.} Let $\group$ be the group of bijections of $\T_<$ which do not
-necessarily preserve the lexicographic ordering. Then $\group\actson\T_<$ is
-isomorphic to $\aut{\TreeAtoms}\actson\TreeAtoms$, and hence
-$\aut{\TreeAtoms}\actson\TreeAtoms$ is a reduct of $\aut{\T_<}\actson\T_<$.
-\end{remark}
