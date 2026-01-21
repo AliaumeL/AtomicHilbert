@@ -1,3 +1,4 @@
+%!TEX root = ../atomic.sigconf.tex
 % LTeX: language=en
 \clearpage
 \section{Proofs of \cref{sec:weakgb}}
@@ -34,8 +35,11 @@
 \end{proofof}
 
 \begin{proofof}{lem:normalisation}
-  Let us write $H = \orbit[\group]{H'}$, where $H'$ is a finite set of
-  polynomials.
+  Let us write
+  \[
+  H = \orbit[\group]{H'} \ ,
+  \]
+  where $H'$ is a finite set of polynomials.
   Because the relation $\toeucl{H}$ is \kl{terminating}, it suffices to 
   show that for every polynomial $p$, there are finitely many polynomials $r$ 
   such that $p \toeucl{H} r$, leveraging König's lemma. This is because 
@@ -177,7 +181,65 @@
   and $\poly{\K}{\IndetsCol}$ is \kl{effectively oligomorphic}.
 \end{proofof}
 
+\section{Proof of \Cref{sec:app}}
+%
+\newcommand{\rt}{\textsc{root}}
+\subsection{Homogenous ordered meet-tree}
+%
+A \emph{meet-tree} is a structure $(T,\prec_T,\wedge_T)$ where
+\begin{enumerate}
+\item $\prec_T$ is a partial order (called \emph{ancestry}),
+\item for every $a\in T$ the set $\setof{x \in T}{x \preceq_T a}$ is linearly ordered,
+\item $T$ has a smallest element with respect to $\prec$ which is called the \emph{root} of $T$ (written as $\rt(T)$),
+\item $\wedge_T$ is a binary operation computing the \emph{greatest common lower bound} operation of its inputs.
+\end{enumerate}
+%
+An \emph{ordered meet-tree} is a structure $(T,\prec_T,\wedge_T,<_T)$ where $(T,\prec_T)$ is a \emph{meet-tree} and $<_T$ is a linear order extending $\prec$ such that for every $a \leq_T b$, $a \preceq_T a'$ and $b\preceq_T b'$ , we have $a' \leq_T b'$.
+Essentially, $<_T$ is induced by a \emph{depth first search}.
 
+To show existence of a \emph{homogenous ordered meet-tree} we show that the class of such trees are closed under \emph{amalgamation},
+i.e., for every pair of embeddings $(f : A \to B$, $g : A \to C)$ there exists another pair of embeddings $(f' : B \to D$, $g' : C \to D)$ such that $f'\circ f = g' \circ g$.
+%\arka{explicit construction of Fr\"{i}sse limit?}
+
+We build $D$ by extending $A$.
+This extension is done in three steps.
+\newcommand{\para}[1]{\paragraph{\textnormal{\textbf{#1}}}}
+%
+\para{Step 1:}
+Add an element $r$ to $A$ that is smaller than $\rt(A)$.
+Observe that $r$ is the root of the resulting tree.
+Call this is tree $A_1$.
+At this point $f'$ and $g'$ is defined only on $f(A)$ and $g(B)$, respectively.
+
+\begin{definition}\label{def:interval}
+For two nodes $x \preceq_T y$ in a meet-tree $T$, we use $I(x,y)$ to denote the \emph{interval} between $x$ and $y$
+\[
+I(x,y) \defeq \setof{z\in T}{x \preceq_T z \preceq_T y} \ .
+\]
+\end{definition}
+
+\para{Step 2:}
+Let $R_B$ (resp. $R_C$) be the set of nodes of $B$ (resp. $C$) that belong to some interval between nodes in $f(B)\cup \set{\rt(B)}$ (resp. $g(C)\cup \set{\rt(C)}$).
+Add enough nodes in the intervals between nodes in $A_1$ such that $f'$ (resp. $g'$) can be extended to $R_B$ (resp. $R_C$).
+Call this is tree $A_2$.
+
+\para{Step 3:}
+Extend $A_2$ by adding enough subtrees to its nodes such that $f'$ (resp. $g'$) can be extended to subtrees rooted at $R_B$ (resp. $R_C$).
+Call this tree $A_3 = D$.
+
+We leave it to the reader to check the correctness of this construction.
+
+%
+\begin{figure}
+\includegraphics[width=0.35\textwidth]{tree_amal_1}
+%\caption{Amalgamation of finite ordered meet-tree}
+%\end{figure}
+%%
+%\begin{figure}
+\includegraphics[width=0.35\textwidth]{tree_amal_2}
+\caption{Amalgamation of finite ordered meet-tree}
+\end{figure}
+\clearpage
 \section{Proofs of \cref{sec:undecidability}}
 \label{sec:undecidability:proof}
 

@@ -3,8 +3,9 @@
 \section{Preliminaries}
 \label{sec:preliminaries}
 
-\paragraph{Partial orders, ordinals, well-founded sets, and well-quasi-ordered
-sets.} \AP We assume basic familiarity with partial orders, well-founded sets,
+%\subsection{Well-quasi-orders}
+\paragraph{Partial orders, ordinals, well-founded sets, and well-quasi-ordered sets.}
+\AP We assume basic familiarity with partial orders, well-founded sets,
 and ordinals. We will use the notation $\intro*\om$ for the first infinite
 ordinal (that is, $(\N, \leq)$), and write $X \intro*\ordplus Y$ for the
 lexicographic sum of two partial orders $X$ and $Y$. Similarly, the notation $X
@@ -24,7 +25,7 @@ any ordering, or $\N \times \N$ with the product ordering. We refer the reader
 to \cite{SCSC17} for a comprehensive introduction to \kl{well-quasi-orderings}
 and their applications in computer science.
 
-\paragraph*{Polynomials, monomials, divisibility.} \AP 
+\paragraph{Polynomials, monomials, divisibility.} \AP 
 We assume basic familiarity with the theory of
 commutative algebra, and polynomials. We will use the notation $\poly{\K}{\Indets}$
 for the ring of polynomials with coefficients from a field $\K$ and
@@ -74,10 +75,8 @@ highlight the precise ordered set of variables that was used to compute the
 monomials to polynomials by defining $\dom(p)$ as 
 the union of the \kl(monomial){domains} of all monomials appearing in $p$.
 
-\begin{remark}
-  \label{rem:other-monomial-orderings}
-In
-the case of a finite set of indeterminates, one can choose any total ordering
+\begin{remark}\label{rem:other-monomial-orderings}
+In the case of a finite set of indeterminates, one can choose any total ordering
 on $\mon{\Indets}$, as long as it contains the \kl{divisibility}
 quasi-ordering, and is compatible with the product of monomials.\footnote{This
 is often called a \emph{monomial ordering}, see \cite{CLO15}.} In our case,
@@ -91,8 +90,9 @@ already at the core of the classical \emph{elimination theorems} \cite[Chapter 3
 2]{CLO15}.
 \end{remark}
 
-
-\paragraph{Ideals, and Gröbner Bases.} \AP An \intro{ideal} $\idl$ of
+%\subsection{Ideals and Gr\"{o}bner Bases}
+\paragraph{Ideals, and Gröbner Bases.}
+\AP An \intro{ideal} $\idl$ of
 $\poly{\K}{\X}$ is a non-empty subset of $\poly{\K}{\X}$ that is closed under
 addition and multiplication by elements of $\poly{\K}{\X}$. Given a set $H
 \subseteq \poly{\K}{\X}$, we denote by $\intro*\IdlGen{H}$ the ideal generated
@@ -124,9 +124,8 @@ does not.
   $\lm(x^2y - z) = x^2y$ nor by $\lm(x^2 - y) = x^2$.
 \end{example}
 
-\paragraph{Group actions, equivariance, and orbit finite sets.} 
-\AP A
-\intro{group} $\group$ is a set equipped with a binary operation that is
+\paragraph{Group actions and equivariance} 
+\AP A \intro{group} $\group$ is a set equipped with a binary operation that is
 associative, has an identity element and has inverses. In our setting, we are
 interested in infinite sets $\X$ of indeterminates that is equipped with a
 \intro{group action} $\group \actson \X$. This means that for each $\gelem \in
@@ -171,6 +170,8 @@ of \intro{equivariant ideals}.
     not belong to the ideal.
 \end{proof}
 
+\paragraph{Orbit finiteness}
+%
 \AP An \kl{equivariant set} is said to be \intro{orbit finite} if it is the
 union of finitely many \intro{orbits} under the action of $\group$. We denote
 $\intro*\orbit[\group]{E}$ for the set of all elements $\gelem \cdot x$ for
@@ -217,7 +218,8 @@ $f(\gelem \cdot x) = \gelem \cdot f(x)$. For instance, the
 an \kl{equivariant function} is \kl{orbit finite}, and that the algorithms that
 we will develop in this paper will all be \kl(func){equivariant}.
 
-\paragraph*{Computability assumptions.} \AP We say that the action is
+\paragraph{Computability assumptions.}
+\AP We say that the action is
 \intro{effectively oligomorphic} if:
 %
 \begin{enumerate}
@@ -251,7 +253,7 @@ on $\Indets$.
   Let $\Indets \defined \Q$ and $\group$ be the group of all
   order preserving bijections of $\Q$.
   Then, $\group$ acts \kl{effectively oligomorphically} on $\Indets$,
-  and its action is \kl(ord){compatible} with the ordering of $\Q$ by definition.
+  and its action is \kl(ord){compatible} with the ordering of $\Q$ by definition. 
 \end{example}
 
 Note that under our \kl{computability assumptions}, the set of polynomials
@@ -265,7 +267,9 @@ not \kl{orbit finite}, precisely because the orbit of a polynomial $p$ under
 the action of $\group$ cannot change the degree of $p$, and that there are 
 polynomials of arbitrarily large degree.
 
-\paragraph{Equivariant Gröbner bases.} \AP We know from \cite{GHOLAS24} that a
+%\subsection{Equivariant Gröbner bases}
+\paragraph{Equivariant Gröbner bases.}
+\AP We know from \cite{GHOLAS24} that a
 necessary condition for the \kl{equivariant Hilbert basis property} to hold is
 that the set  $\mon{\X}$  of monomials is a \kl{well-quasi-ordering} when
 endowed with the \intro{divisibility up-to $\group$} relation
@@ -303,11 +307,13 @@ basis} is a \kl{Gröbner basis}.
   Indeed, $x_2 \in \idl$, but there is no polynomial $q \in \Basis$
   such that $\lm(q) \divleq x_2$ and $\dom(q) \subseteq \dom(x_2)$.
 \end{example}
-
-In the finite case, one can always compute an \kl{equivariant Gröbner basis} by
-computing \kl{Gröbner bases} for every possible ordering of the indeterminates,
-and taking their union.\footnote{This algorithm is correct because we are
-  considering the \kl{reverse lexicographic} ordering.}
+%
+%
+%\arka{Does not satisfy the domain condition}
+%In the finite case, one can always compute an \kl{equivariant Gröbner basis} by
+%computing \kl{Gröbner bases} for every possible ordering of the indeterminates,
+%and taking their union.\footnote{This algorithm is correct because we are
+%  considering the \kl{reverse lexicographic} ordering.}
  
 
 
