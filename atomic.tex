@@ -24,8 +24,6 @@
 % microtype for better typography
 \usepackage{microtype}
 
-\usepackage{todonotes}
-\usepackage{lineno}
 
 % Configure unicode support for xelatex
 \ifxetex
@@ -75,7 +73,7 @@
 \usepackage[capitalise,noabbrev,nameinlink]{cleveref}
 \Crefname{assumption}{Assumption}{Assumptions}
 \Crefname{conjecture}{Conjecture}{Conjectures}
-\usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
+\usepackage[electronic,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
 
 
@@ -150,6 +148,7 @@
 
 
 % we include whatever the user wants to include in the header
+\graphicspath{ {./tree_amal/} }
 
 % we include libraries (tex files) usually written in the `lib` directory
 \input{lib/aliaume}
@@ -170,9 +169,9 @@ Aliaume Lopez\thanks{University of Warsaw}
 
 % For the date, we first check if the user has provided a date,
 % and otherwise use the git meta inforamtion (if available).
-            \date{2026-01-13 11:55:24 +0100\footnote{21fb9502aa57616aa67be66e1c7ead753be7d06a -- branch main at git@github.com:AliaumeL/AtomicHilbert.git}}
-      
-\newcommand{\repositoryUrl}{\url{https://github.com/AliaumeL/AtomicHilbert}}
+      \date{\today}
+  
+\newcommand{\repositoryUrl}{Undefined Anonymous Repository}
 
 \knowledge{notion}
  | kl-usage
@@ -183,7 +182,7 @@ Aliaume Lopez\thanks{University of Warsaw}
 \maketitle
 % Print the abstract
 \begin{abstract}
-    Let \(\mathbb{K}\) be a field, \(\mathcal{X}\) be an infinite set (of indeterminates), and \(\mathcal{G}\) be a group acting on \(\mathcal{X}\). An ideal in the polynomial ring \(\mathbb{K}[\mathcal{X}]\) is called equivariant if it is invariant under the action of \(\mathcal{G}\). We show Gröbner bases for equivariant ideals are computable are hence the equivariant ideal membership is decidable when \(\mathcal{G}\) and \(\mathcal{X}\) satisfies the Hilbert's basis property, that is, when every equivariant ideal in \(\mathbb{K}[\mathcal{X}]\) is finitely generated. Moreover, we give a sufficient condition for the undecidability of the equivariant ideal membership problem. This condition is satisfied by the most common examples not satisfying the Hilbert's basis property.
+    Let \(\mathbb{K}\) be a field, \(\mathcal{X}\) be an infinite set (of indeterminates), and \(\mathcal{G}\) be a group acting on \(\mathcal{X}\). An ideal in the polynomial ring \(\mathbb{K}[\mathcal{X}]\) is called equivariant if it is invariant under the action of \(\mathcal{G}\). We show Gröbner bases for equivariant ideals are computable are hence the equivariant ideal membership is decidable when \(\mathcal{G}\) and \(\mathcal{X}\) satisfies the Hilbert's basis property, that is, when every equivariant ideal in \(\mathbb{K}[\mathcal{X}]\) is finitely generated. Moreover, we give a sufficient condition for the undecidability of the equivariant ideal membership problem. This condition is satisfied by the most common examples not satisfying the Hilbert's basis property. Our results imply decidability of solvability of orbit-finite systems of linear equations and the reachability problem for reversible data Petri nets for a large class of data domains.
 \end{abstract}
 
 \paragraph{Keywords:}
@@ -202,13 +201,11 @@ Aliaume Lopez was supported by the Polish National Science Centre (NCN) grant ``
 % Include the content of the paper
 \input{src/intro.tex}
 \input{src/preliminaries.tex}
-\input{src/examples.tex}
 \input{src/weakgb.tex}
 \input{src/fullbasis.tex}
+\input{src/examples.tex}
 \input{src/applications.tex}
 \input{src/undecidability.tex}
-\input{src/nullstellensatz.tex}
-\input{src/notnull.tex}
 \input{src/conclusion.tex}
 
 % Include the bibliography
