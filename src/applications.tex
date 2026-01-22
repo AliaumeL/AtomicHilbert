@@ -14,7 +14,7 @@ list of operations that preserve these properties, so that simpler examples
 (\cref{ex:dlo,ex:eq atoms,ex:dense tree}) can serve as building blocks to model
 complex systems. 
 
-\paragraph{Structural operations.} Let us first focus on three standard
+\para{Structural operations.} Let us first focus on three standard
 operations on sets of indeterminates: the \kl{disjoint sum} (that was already
 at play in \cref{sec:equivariant-grobner-basis}), the \kl{direct product} (that
 will fail to preserve our assumptions), and its variant, the \kl{lexicographic
@@ -126,7 +126,7 @@ and one can act independently on different copies of the structure $\Y$.
 \end{corollary}
 
 
-\paragraph{Reducts and nicely orderable actions.} \AP Another important operation
+\para{Reducts and nicely orderable actions.} \AP Another important operation
 on group actions is the notion of \kl{reduct}, which allows one to encode
 actions that do not preserve a linear order into actions that do.
 We say that $\group\actson\Indets$ is a \intro{reduct} of
@@ -174,7 +174,7 @@ orderable}~\cite[Problems 12]{POUZ24}.
 \subsection{Applications}
 \label{sec:applications}
 
-\paragraph{Polynomial computations.} \AP The fact that (finite control) systems
+\para{Polynomial computations.} \AP The fact that (finite control) systems
 performing polynomial computations can be verified follows from the theory of
 \kl{Gröbner bases} on finitely many indeterminates \cite{MULSEI02,BEDUSHWO17}.
 There were also numerous applications to automata theory, such as deciding
@@ -292,7 +292,7 @@ to the orbit finite setting for future work.
 %  Noetherian spaces.
 %\end{remark}
 
-\paragraph{Reachability problem of symmetric data Petri nets.} The classical
+\para{Reachability problem of reversible data Petri nets.} The classical
 model of Petri nets was extended to account for arbitrary data attached to
 tokens to form what is called data Petri nets. We will not discuss the precise
 definitions of these models, but point out  that a reversible data Petri net is
@@ -311,8 +311,14 @@ center of our undecidability results in \cref{sec:undecidability}.
   the \intro(rpnd){reachability problem} for \intro{reversible Petri nets with data} in $\Indets$
   is decidable.
 \end{theorem}
-
-\paragraph{Orbit-finite systems of equations} \AP The classical theory of
+%
+\begin{remark}
+The decidability of reachability for Petri nets with equality data is still open,
+and the for ordered data this problem is known to be undecidable \cite[Proposition 1 and Section 5.2]{RODA11}.
+\Cref{cor:rev data VAS} implies both of these become decidable when the Petri net is assumed to reversible.
+\end{remark}
+%
+\para{Orbit-finite systems of equations} \AP The classical theory of
 solving finite systems of linear equations has been generalised to the infinite
 setting by \cite{GHL22}, \cite[Section 9]{GHOLAS24}. In this setting, one
 considers an \kl{effectively oligomorphic} group action $\group\actson\Indets$,
@@ -324,8 +330,7 @@ by an \kl{orbit-finite} set of vectors $V$ in $\lin(\Indets^n)$ \cite[Section
 systems of equations reduces to the \kl{equivariant ideal membership problem}
 \cite[Theorem 68]{GHOLAS24}, and as a consequence of this reduction and
 \Cref{thm:reducts-computable} we obtain the following theorem.
-
-
+%
 \begin{theorem}[name={Solvability of Orbit-Finite Systems of Equations},
   restate=cor:lin-solv]
   \label{cor:lin solv}
@@ -333,9 +338,11 @@ systems of equations reduces to the \kl{equivariant ideal membership problem}
   the solvability problem for orbit-finite systems of equations
   is decidable.
 \end{theorem}
-
-Note that the above corollary is an extension of
-\cite[Theorem 6.1]{GHL22} to all nicely orderable group actions.
-
-
-
+%
+Previously,
+solvability of orbit-finite systems of equations were studied mostly for specific structures.
+In particular, \cite[Theorem 6.1]{GHL22} shows it to be decidable for equality atoms.
+Specific versions of this problem for ordered atoms were studied by \cite{HL18}.
+Finally, \cite{GHOLAS24} showed it to be decidable for ordered atoms,
+and also showed that decidability is preserved under taking lexicographic product.
+We generalise all these results to nicely orderable group actions.
