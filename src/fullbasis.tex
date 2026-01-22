@@ -6,19 +6,19 @@
 \AP The goal of this section is to prove
 \cref{thm:compute-egb},
 that is, to show that one can effectively compute an \kl{equivariant Gröbner
-basis} of an \kl{equivariant ideal}. To that end, we will apply the algorithm
+basis} of an \kl{equivariant ideal}. To that end, we apply the algorithm
 \kl{weakgb} on a slightly modified set of polynomials, and then show that the
 result is indeed an \kl{equivariant Gröbner basis}.
 
 \AP
 Let us fix a set $\Indets$ of indeterminates equipped with a total ordering
 $\varleq$. We define $\IndetsCol \defined \Indets \ordplus \Indets$, that is, the
-disjoint union of two copies of $\Indets$, ordered. It will be useful to refer
+disjoint union of two copies of $\Indets$, ordered. It is useful to refer
 to the first copy (lower copy) and the second copy (upper copy), noting the
 isomorphism between $\IndetsCol$ and $\set{\mathsf{first}, \mathsf{second}}
 \times \Indets$, ordered lexicographically, where $\mathsf{first} <
-\mathsf{second}$. We will also define $\intro*\forgetCol \colon \IndetsCol \to
-\Indets$ that maps a colored variable to its underlying variable.
+\mathsf{second}$. We also define $\intro*\forgetCol \colon \IndetsCol \to
+\Indets$ that maps a coloured variable to its underlying variable.
 Beware that $\forgetCol$ is not an order preserving map.
 We extend $\forgetCol$ as a morphism from polynomials in
 $\poly{\K}{\IndetsCol}$ to polynomials in $\poly{\K}{\Indets}$.
@@ -32,19 +32,19 @@ $\poly{\K}{\Indets}$ to $\poly{\K}{\IndetsCol}$. We say that a polynomial $p
 \in \poly{\K}{\IndetsCol}$ is \intro{$V$-compatible} if $p \in
 \colorWith{V}(\poly{\K}{\Indets})$. Using these definitions, we create
 $\intro*\freeColor$ that maps a set $H$ of polynomials to the union over all
-finite subsets $V$ of $\Indets$ of the set $\colorWith{V}(H)$. Beware that
+finite subsets $V$ of $\Indets$ of the set $\colorWith{V}(H)$. Note that
 $\freeColor$ does not equal $\forgetCol^{-1}$, since we only consider
 \kl{$V$-compatible} polynomials (for some finite set $V$).
 
 \AP
 We are now ready to write our algorithm to compute an \kl{equivariant Gröbner
-basis} by computing the ``congugacy'' 
+basis} by computing the ``conjugacy'' 
 \begin{equation}
 \intro{egb} \defined \forgetCol \circ
 \mathop{\kl{weakgb}} \circ \freeColor \quad .
 \end{equation}
 To prove the correctness of our algorithm,
-let us first argue that one can indeed compute the \kl{weak equivariant Gröbner basis} algorithm.
+let us first argue that one can indeed compute the \kl{weak equivariant Gröbner basis}.
 
 \begin{lemma}[name={},restate={lem:colored-hypothesis-sat}]
   \label{lem:colored-hypothesis-sat}
@@ -143,7 +143,7 @@ prove that it is an \kl{equivariant Gröbner basis}
 
 As a consequence, \kl{egb} is the algorithm of
 \cref{thm:compute-egb},
-and in particular obtain as a corollary that one can decide the \kl{equivariant
+and in particular we obtain as a corollary that one can decide the \kl{equivariant
 ideal membership problem} under our \kl{computability assumptions}, if the set
 of indeterminates satisfies that $(\mon[\N \times \N]{\Indets}, \gdivleq)$ is a
 \kl{well-quasi-ordered} set. We can leverage these decidability results to

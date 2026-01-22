@@ -6,7 +6,7 @@
 \AP In this section we prove that a natural adaptation of \kl{Buchberger's
 algorithm} to the equivariant setting computes a \kl{weak equivariant Gröbner
 basis} of an \kl{equivariant ideal}. This can be seen as an analysis of the
-classical algorithm in the equivariant setting. We will assume for the rest of
+classical algorithm in the equivariant setting. We assume for the rest of
 the section that $\Indets$ is a set of indeterminates equipped with a group
 $\group$ acting \kl{effectively oligomorphically} on $\X$, and that $\X$ is
 equipped with a total ordering $\varleq$ that is \kl(ord){compatible} with the
@@ -47,12 +47,12 @@ of polynomials.
   such that $\lmdec(\mathfrak{d}') = \lm(p)$.
 \end{definition}
 
-\AP To compute \kl{weak equivariant Gröbner bases}, we will use a rewriting
+\AP To compute \kl{weak equivariant Gröbner bases}, we use a rewriting
 relation. Given $p,r \in \poly{\K}{\X}$, we write $p \intro*\toeucl{H}
 r$ if and only if there exists $q \in H$, $a \in \K$, and $\monelt \in
 \mon{\X}$ such that $p = a \monelt q + r$, $\dom(r) \subseteq \dom(p)$, and
-$\lm[\Indets](r) \revlexlt \lm[\Indets](p)$. In order to simplify the
-notations, we will write $r \intro*\pmonlt p$ to denote $\dom(r) \subseteq
+$\lm[\Indets](r) \revlexlt \lm[\Indets](p)$. To simplify the
+notations, we write $r \intro*\pmonlt p$ to denote $\dom(r) \subseteq
 \dom(p)$, and $\lm[\Indets](r) \revlexlt \lm[\Indets](p)$, leaving the
 ordered set of indeterminates $\Indets$ implicit.
 The relation $\pmonleq$ is extended to decompositions by using 
@@ -69,7 +69,7 @@ the analogues of $\dom$ and $\lm$ for decompositions.
   The second property follows from the fact that $\revlexlt$ is a total
   well-founded ordering whenever one has fixed finitely many possible 
   indeterminates. In a decreasing sequence, the support of the leading 
-  monomials is also decreasing, so that sequence only contains finitely many 
+  monomials is also decreasing, so that sequence contains only finitely many 
   indeterminates, hence we conclude.
   The same proof works for decompositions.
 \end{proof}
@@ -97,10 +97,10 @@ our setting.
 \end{lemma}
 
 
-\AP Now that we have a quasi-ordering on polynomials, we will prove that given
+\AP Now that we have a quasi-ordering on polynomials, we prove that given
 an \kl{orbit finite} set $H$ of generators, we can compute a \kl{weak
-equivariant Gröbner basis}. The computation will closely follow the classical
-\kl{Buchberger's algorithm}. The main idea being to saturate the set of
+equivariant Gröbner basis}. The computation closely follows the classical
+\kl{Buchberger's algorithm}. The main idea is to saturate the set of
 generators $H$ to remove some \emph{critical pairs} of the rewriting relation
 $\toeucl{H}$. Namely, given two polynomials $p$ and $q$ in $H$, we compute the
 set $\intro*\CancelPoly{p}{q}$ of cancellations between $p$ and $q$ as the set of
@@ -109,7 +109,7 @@ that $\lm(r) < \max(\monelt[n] \lm(p), \monelt[m]\lm(q))$, where $\alpha,\beta
 \in \K$, and where $\monelt[n], \monelt[m] \in \mon{\X}$. Let us recall that
 given two monomials $\monelt[n], \monelt[m] \in \mon{\X}$, one can compute
 $\intro*\lcm(\monelt[n], \monelt[m])$ as the least common multiple of the two
-monomials, and that this in an \kl{equivariant operation}.
+monomials, and that this is an \kl{equivariant operation}.
 Using this, we can introduce the \intro{S-polynomial} of two polynomials $p$ and $q$
 as in \cref{eq:spoly}.
  \begin{equation}
@@ -136,11 +136,10 @@ Remark that the \kl{S-polynomial} is equivariant: if $\gelem \in \group$, then
 $\spoly{\gelem \cdot p}{\gelem \cdot q} = \gelem \cdot \spoly{p}{q}$. Given a
 set $H$, we write $\intro*\spolyset(H) \defined \bigcup_{p,q \in H}
 \rem{H}{\spoly{p}{q}}$. We are now ready to define the saturation algorithm
-that will compute \kl{weak equivariant Gröbner bases}, described in
+that computes \kl{weak equivariant Gröbner bases}, described in
 \cref{alg:weakgb}.
 Let us remark that \cref{alg:weakgb}
-is
-an actual algorithm (\cref{lem:weakgb-computable}) that is
+is an actual algorithm (\cref{lem:weakgb-computable}) that is
 \kl(func){equivariant}.
 
 \begin{algorithm}
@@ -173,8 +172,8 @@ an actual algorithm (\cref{lem:weakgb-computable}) that is
   we conclude
   that $\bigcup_{p,q \in H}{\spoly{p}{q}}$
   is computable and orbit-finite.
-  Now using \Cref{lem:normalisation} one can compute the set $\spolyset(\Basis)$ which is also orbit-finite.
-  Furthermore, one can decide whether the set $\Basis$ stabilizes,
+  Now, using \Cref{lem:normalisation}, one can compute the set $\spolyset(\Basis)$, which is also orbit-finite.
+  Furthermore, one can decide whether the set $\Basis$ stabilises,
   because the membership of a polynomial $p$ in $\Basis$ is decidable,
   since $\group\actson\Indets$ is \kl{effectively oligomorphic} and $\Basis$ is \kl{orbit finite}.
 \end{proof}

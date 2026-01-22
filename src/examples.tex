@@ -6,7 +6,7 @@
 
 \AP In this section, we discuss how our main \cref{thm:compute-egb} and its
 \cref{cor:equivariant-ideals-computations} can be applied in practice. First,
-we give some examples of group actions and discuss whether they satisfy our
+we provide some examples of group actions and discuss whether they satisfy our
 \kl{computability assumptions} and whether the \kl{divisibility relation
 up-to-$\group$} is a \kl{well-quasi-ordering}. We also provide an analogue of
 \cref{cor:equivariant-ideals-computations} allowing us to work in the absence
@@ -18,18 +18,18 @@ science.
 \subsection{Examples of group actions}\label{sec:act ex}
 
 \AP Many of the common examples of group actions $\group\actson\Indets$ are
-obtained by considering $\Indets$ as set with some structure, described by
+obtained by considering $\Indets$ as a set with some structure, described by
 some relations and functions on that set, and $\group$ is the group
 $\aut{\Indets}$ of all automorphisms (i.e.\ bijections that preserve and
 reflect the structure) of $\Indets$. A monomial $\monelt[p] \in
-\mon[Y]{\Indets}$ can be thought as a labelling of a finite substructure of
+\mon[Y]{\Indets}$ can be thought of as a labelling of a finite substructure of
 $\X$ using elements of $Y$. If the structure $\Indets$ is \intro{homogeneous},
-that is, if isomorphisms between finite induced substructures extends to
-automorphisms of the whole structure, then $\gdivleq$ is the same as embedding of
+that is, if isomorphisms between finite induced substructures extend to
+automorphisms of the whole structure, then $\gdivleq$ is the same as the embedding of
 labelled finite induced substructures of $\X$.\footnote{ We refer the reader
 to \cite[Chapter 7]{BOJAN16inf} and \cite{homsurvey} for more details on
-homogeneous structures.} Let us now give some examples of such structures and
-whether they satisfy our \kl{computability assumptions}, and whether the
+homogeneous structures.} Let us now provide some examples of such structures and
+discuss whether they satisfy our \kl{computability assumptions}, and whether the
 \kl{divisibility relation up-to-$\group$} is a \kl{well-quasi-ordering}.
 
 
@@ -49,7 +49,7 @@ which is a \kl{WQO} \cite[Corollary 1.21]{SCSC17}.
 Let $\intro*\OrderAtoms$ be the set of rational numbers ordered by the usual ordering.
 Note that under this ordering, $\OrderAtoms$ is a dense linear order without endpoints.
 Up to isomorphism, finite induced substructures of $\OrderAtoms$ are finite linear orders,
-monomials in $\mon[Y]{\OrderAtoms}$ are words in $Y^*$ (i.e.\ finite linear order labelled with elements of $Y$)
+monomials in $\mon[Y]{\OrderAtoms}$ are words in $Y^*$ (i.e.\ finite linear orders labelled with elements of $Y$)
 and $\gdivleq[\aut{\OrderAtoms}]$ is the scattered subword ordering, which is a \kl{WQO} due to Higman's lemma \cite{HIG52}.
 \end{example}
 
@@ -60,7 +60,7 @@ and $\gdivleq[\aut{\OrderAtoms}]$ is the scattered subword ordering, which is a 
 Up to isomorphism,
 finite induced substructures of $\RadoAtoms$ are finite undirected graphs,
 monomials in $\mon[Y]{\RadoAtoms}$ are graphs with vertices labelled with $Y$,
-and $\gdivleq[\aut{\RadoAtoms}]$ is the labelled induced subgraph ordering even when $Y$ is a singleton.
+and $\gdivleq[\aut{\RadoAtoms}]$ is the labelled induced subgraph ordering, even when $Y$ is a singleton.
 For example, cycles of length more than three form an infinite antichain.
 \end{example}
 
@@ -81,7 +81,7 @@ For example, cycles of length more than three form an infinite antichain.
     \bottomrule
   \end{tabular}
   \caption{Summary of the examples of group actions
-  in \cref{sec:act ex}. Notice that on all examples,
+  in \cref{sec:act ex}. Note that in all examples,
   being \kl{well-structured} (\reintro{W.S.}) is equivalent to being
   \kl{$\omega$-well-structured}
   (\reintro{$\omega$-W.S.}).}
@@ -97,10 +97,10 @@ Up to isomorphism,
 finite induced substructures of $\BitVectorAtoms$ are finite dimensional vector spaces over $\ftwo$.
 These are well-quasi-ordered in the absence of labelling.
 However, even when $Y = \N$,
-$(\mon[Y]{\BitVectorAtoms},\gdivleq[\aut{\BitVectorAtoms}])$ is not a \kl{WQO} as illustrated by the following antichain.
+$(\mon[Y]{\BitVectorAtoms},\gdivleq[\aut{\BitVectorAtoms}])$ is not a \kl{WQO}, as illustrated by the following antichain.
 Let $\{v_1,v_2,\dots\}\subseteq \BitVectorAtoms$ be a countable set of linearly independent vectors in $\BitVectorAtoms$.
 Let $\oplus$ denote the addition operation of $\BitVectorAtoms$.
-For $n \geq 3$ define the monomial 
+For $n \geq 3$, define the monomial 
 $
 \monelt[p]_n \defined v^2_1 \ldots v^2_n  (v_1\oplus v_2)(v_2\oplus v_3) \ldots (v_{n-1}\oplus v_n)  (v_{n}\oplus v_1)
 $.
@@ -108,10 +108,9 @@ Then, $\setof{\monelt[p]_n}{n = 3,4,\dots}$ forms an infinite antichain.
 \end{example}
 
 The previous \cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit vector}
-are
-well known examples in the theory of \emph{sets with atoms} \cite{BOJAN16inf}.
-Let us now give a new example of \kl{well-quasi-ordered} \kl{divisibility relation
-up-to-$\group$}, by extending \Cref{ex:dlo} that
+are well-known examples in the theory of \emph{sets with atoms} \cite{BOJAN16inf}.
+Let us now provide a new example of a \kl{well-quasi-ordered} \kl{divisibility relation
+up-to-$\group$}, by extending \Cref{ex:dlo}, which
 relied on Higman's lemma \cite{HIG52} via Kruskal's tree theorem
 \cite{Kruskal60}.
 
@@ -123,34 +122,34 @@ Let $\intro*\TreeAtoms$ denote the universal countable dense meet-tree, as
 defined in 
 \cite[Page 2]{KRS21} or \cite[Section 7.3.3]{BOJAN16inf}.
 Note that the tree structure is given by the \emph{least common ancestor} (\emph{meet})
-operation, and not by its edges.
+operation, not by its edges.
 For a subset $S\subset \TreeAtoms$,
 define its \emph{closure} to be the smallest subtree of $\TreeAtoms$ containing $S$.
 Up to isomorphism, finite induced substructures of $\TreeAtoms$ are finite meet-trees.
 Monomials in $\mon[Y]{\TreeAtoms}$ are finite meet-trees labelled with $1 + Y$.
-Here $1 + Y$ is the \kl{WQO} containing one more element than $Y$ which is incomparable to elements in $Y$,
-and is used to label nodes that are in the closure of the set of variable of a monomial, but not in the monomial itself.
-The divisibility relation $\gdivleq[\aut{\TreeAtoms}]$ is exactly the embedding of labelled meet-trees,
+Here $1 + Y$ is the \kl{WQO} containing one more element than $Y$, which is incomparable to elements in $Y$,
+and is used to label nodes that are in the closure of the set of variables of a monomial, but not in the monomial itself.
+The divisibility relation $\gdivleq[\aut{\TreeAtoms}]$ is the embedding of labelled meet-trees,
 which is a \kl{WQO} due to Kruskal's tree theorem \cite{Kruskal60}.
 \end{example}
 
 The above examples using \kl{homogeneous} structures nicely illustrate the
-correspondence between monomials and labelled finite substructures, but we can
+correspondence between monomials and labelled finite substructures, although we can
 also consider \kl{non-homogeneous} structures, such as in \Cref{ex:int} below.
 
 \begin{example}\label{ex:int}
   \AP
   Let $\calZ$ be the set of \intro[integers with order]{integers ordered by the usual ordering}.
-Then $\aut{\calZ}$ is the set of all order preserving bijections of $\D$.
-Note that every order preserving bijection of the set $\calZ$ is a translation $n \mapsto n + c$ for some constant $c\in\calZ$.
-By definition, the action $\aut{\calZ} \actson \calZ$ preserves the linear order on $\Z$.
-However, $(\mon[Y]{\calZ}, \gdivleq[\aut{\calZ}])$ is not a \kl{WQO} even when $Y$ is a singleton.
+Then $\aut{\calZ}$ is the set of all order-preserving bijections of $\calZ$.
+Note that every order-preserving bijection of the set $\calZ$ is a translation $n \mapsto n + c$ for some constant $c\in\calZ$.
+By definition, the action $\aut{\calZ} \actson \calZ$ preserves the linear order on $\calZ$.
+However, $(\mon[Y]{\calZ}, \gdivleq[\aut{\calZ}])$ is not a \kl{WQO}, even when $Y$ is a singleton.
 An example of an infinite antichain is the set $\setof{a b}{b\in\calZ\setminus\{a\}}$, for any fixed $a\in\calZ$.
 \end{example}
 
-\AP Recall that in our \kl{computability assumptions} we require the action
+\AP Recall that in our \kl{computability assumptions}, we require the action
 $\group\actson\Indets$ to be \kl{effectively oligomorphic}. It is already known
-that all the structures of the upgoming \cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit
+that all the structures of the upcoming \cref{ex:eq atoms,ex:dlo,ex:rado,ex:bit
 vector,ex:dense tree} are \kl{oligomorphic} \cite[Theorem 7.6]{BOJAN16inf}. The
 other examples are not \kl{$\omega$-well-structured}, hence we will not verify
 \kl{effective oligomorphicity} for them. Let us argue on an example that they
@@ -162,4 +161,4 @@ orderings and produce representatives by selecting $n$ integers. This can be
 generalised to all the structures mentioned in \Cref{ex:eq
 atoms,ex:dlo,ex:rado,ex:bit vector,ex:dense tree}, by using dedicated
 representations (such as \cite[Page 244-245]{BOJAN16inf} for $\TreeAtoms$), or
-the general theory of Fra\"{i}sse limits \cite{CompFraisse}. 
+the general theory of Fraïsse limits \cite{CompFraisse}. 

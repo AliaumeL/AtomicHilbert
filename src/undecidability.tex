@@ -180,13 +180,13 @@ indeterminates \cite{MAME82}. This reduction was also noticed in \cite[Theorem
 
 In order to show that the \kl{equivariant ideal membership problem} is
 undecidable, it is therefore enough to show that the \kl{monomial reachability
-problem} is undecidable. To that end, we will encode the Halting problem of a
+problem} is undecidable. To that end, we encode the Halting problem of a
 Turing machine. There are two main obstacles to overcome: first, the
 reversibility of the rewriting system, which can be (partially) solved by
 considering a \emph{reversible version} of a \emph{deterministic} Turing
 machines, as explained in \cite[Simulation by bidirected systems, p.
 15]{GAMAPASCZE22}; and second, the fact that the configurations of the Turing
-machine cannot staightforwardly be encoded as monomials due to the
+machine cannot straightforwardly be encoded as monomials due to the
 commutativity of the multiplication.
 
 
@@ -230,21 +230,21 @@ using \kl(of){finite paths} with the same initial orbit are compatible with
 each other for the purpose of \kl{monomial rewriting}. Let us now assume that
 the alphabet is any finite set of letters, using a suitable unambiguous
 encoding of the alphabet in binary \cite{BERST09}. This bigger alphabet size
-will simplify the statement and proof of the following
+simplifies the statement and proof of the following
 \cref{lem:reversible-machine}, which explains how to simulate a
 reversible Turing machine using \kl{monomial rewriting}. Given a reversible
 Turing machine $M$ with a finite set $Q$ of states and tape alphabet $\Sigma$,
-we will consider the following alphabet $\Gamma \defined \set{ \triangleleft,
+we consider the following alphabet $\Gamma \defined \set{ \triangleleft,
   \triangleright } \times \set{ \text{pre}, \text{run}, \text{post} } \uplus Q
   \uplus \Sigma \uplus \set{ \square, \square_1, \square_2}$. The letter
   $\square$ is a blank symbol, and the letters $\triangleleft$ and
   $\triangleright$ are used to delimit the beginning and the end of the tape,
   with some extra ``phase information''. In a first \kl{monomial rewrite
-  system}, we will encode a run of a reversible Turing machine $M$ on a fixed
+  system}, we encode a run of a reversible Turing machine $M$ on a fixed
   size input tape (\cref{lem:reversible-machine}), and in a second
-  \kl{monomial rewrite system}, we will create a tape of arbitrary size
+  \kl{monomial rewrite system}, we create a tape of arbitrary size
   (\cref{lem:tape-creation}). The union of these two \kl{monomial
-  rewrite systems} will then be used to prove the undecidability of the
+  rewrite systems} is then used to prove the undecidability of the
   \kl{equivariant ideal membership problem} in \cref{thm:undecidable-paths}.
 
 \begin{lemma}[name={},restate=lem:reversible-machine]
@@ -278,7 +278,7 @@ runs, provided we know in advance the maximal size of the tape used by the
 reversible Turing machine. The key ingredient that remains to be explained is
 how one can start from a finite monomial $\monelt$ and create a tape of
 arbitrary size using a \kl{monomial rewrite system}. The difficulty is that we
-will not be able to ensure that we follow one specific \kl(of){finite path}
+cannot ensure that we follow one specific \kl(of){finite path}
 when creating the tape.
 
 \begin{lemma}[name={},restate=lem:tape-creation]
@@ -316,11 +316,11 @@ when creating the tape.
 
 \begin{remark}
   \label{rem:multiple-orbits}
-  The undecidability result of \cref{thm:undecidable-paths} can be generalised
+  The undecidability result of \cref{thm:undecidable-paths} generalises
   to a \emph{relaxed} notion of \kl(of){infinite path}. Given finitely
   many orbits $\mathcal{O}_1, \ldots, \mathcal{O}_k$ of pairs of
-  indeterminates, a \emph{relaxed path} is a set of indeterminates 
-  such that $(x_i, x_j)$ is belongs to one of the orbits $\mathcal{O}_k$
+  indeterminates, a \emph{relaxed path} is a set of indeterminates
+  such that $(x_i, x_j)$ belongs to one of the orbits $\mathcal{O}_k$
   if and only if $|i - j| = 1$ for all $i,j \in \N$.
 \end{remark}
 

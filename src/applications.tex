@@ -6,7 +6,7 @@
 
 \AP In this section, we are interested in listing the operations on sets of
 indeterminates equipped with a group action that preserve our \kl{computability
-assumptions} and the \kl{well-quasi-ordering} property ensuring that our
+assumptions} and the \kl{well-quasi-ordering} property, ensuring that our
 \cref{thm:compute-egb} can be applied.  Indeed, it is often tedious to prove
 that a given group action $\grp[G] \actson \X$ satisfies the \kl{computability
 assumptions} and the \kl{well-quasi-ordering} property, and we aim to provide a
@@ -15,8 +15,8 @@ list of operations that preserve these properties, so that simpler examples
 complex systems. 
 
 \para{Structural operations.} Let us first focus on three standard
-operations on sets of indeterminates: the \kl{disjoint sum} (that was already
-at play in \cref{sec:equivariant-grobner-basis}), the \kl{direct product} (that
+operations on sets of indeterminates: the \kl{disjoint sum} (which was already
+at play in \cref{sec:equivariant-grobner-basis}), the \kl{direct product} (which
 will fail to preserve our assumptions), and its variant, the \kl{lexicographic
 product}. For the remainder of this section, we fix a pair of group actions
 $\grp[H] \actson \X$ and $\grp[G] \actson \Y$, where $\X$ is equipped with a
@@ -38,18 +38,18 @@ orderings inside $\X$ and $\Y$. The group $\grp[G] \times \grp[H]$ acts on $\X
   The \kl{divisibility up to $\grp[G] \times \grp[H]$} order is essentially the
   disjoint sum of the orders $\gdivleq[\grp[G]]$ and
   $\gdivleq[\grp[H]]$, hence is a \kl{WQO} if both orders are \kl{WQOs}
-  \cite[Lemma 1.5]{SCSC17}. Furthermore, it is folklore that 
+  \cite[Lemma 1.5]{SCSC17}. Furthermore, it is well known that 
   the disjoint sum of two \kl{oligomorphic} actions is itself \kl{oligomorphic}.
 
   Let us now check that the action is \kl{effectively oligomorphic} when both
-  actions are. It is an easy check that the action defined is
+  actions are. It is straightforward to verify that the action defined is
   \kl(ord){compatible} with the total ordering on the set of indeterminates.
   To list representatives of the orbits in $(\X \ordplus \Y)^n$ for a fixed $n
   \in \N$, we can list representatives $u_\X$ of the orbits in $\X^{\leq n}$,
   representatives $u_\Y$  of the orbits in $\Y^{\leq n}$, and words $u_\text{tag}
   \in \set{0,1}^n$, and consider triples $(u_\X, u_\Y, u_\text{tag})$ such that
   $|u_\X| + |u_\Y| = n$, $|u_\text{tag}|_0 = |u_\X|$, and $|u_\text{tag}|_1 =
-  |u_\Y|$. It is an easy check that one can effectively decide whether two such
+  |u_\Y|$. It is straightforward to verify that one can effectively decide whether two such
   triples are in the same orbit.
 \end{proof}
 
@@ -72,7 +72,7 @@ $\grp[H]$ on the first component and as $\grp[G]$ on the second component.
 \end{lemma}
 \begin{proof}
 We restate the antichain given in \cite[Example 10]{GHOLAS24},
-that will also be used is \cref{rem:multiple-orbits} of \cref{sec:undecidability}
+that will also be used in \cref{rem:multiple-orbits} of \cref{sec:undecidability}
 when discussing the undecidability of the \kl{equivariant ideal membership problem}.
 Let $\{x_1,x_2,\dots\}$ and $\{y_1,y_2,\dots\}$ be infinite subsets of $\X$ and $\Y$ respectively.
 For $n = 3,4,\dots$, let $\monelt[c]_n$ be the monomial
@@ -99,8 +99,7 @@ is defined as
 = (\gelem_1\gelem_2, (\gelem[\sigma]_1^{\gelem_2(x)}\gelem[\sigma]_2^x)_{x\in\X})
 \quad .
 \end{equation}
-This group is sometimes called the \emph{wreath product} or the
- \emph{semidirect product}
+This group is sometimes called the \emph{wreath product} or \emph{semidirect product}
 of $\grp[G]$ and $\grp[H]$. It acts on $\X \otimes \Y$ as
 \begin{equation}
   (\gelem,(\gelem[\sigma]^{x})_{x\in\X})\cdot(x',y') = 
@@ -149,14 +148,14 @@ This is called an \intro{effective reduct} if $f$ is computable.
 
 \Cref{thm:reducts-computable} implies that one can apply our results to an
 action $\group\actson\Indets$ that does not preserve a linear order, as soon as
-it is  a \kl{reduct} of some another action $\calH\actson\Indets$ which does
+it is a \kl{reduct} of some other action $\calH\actson\Indets$ which
 preserves a linear order. For example,
 $\aut{\EqualityAtoms}\actson\EqualityAtoms$ is a \kl{reduct} of
 $\aut{\OrderAtoms}\actson\OrderAtoms$ assuming $\EqualityAtoms$ is countable.
 Similarly, let $\T_<$ be the countable dense-meet tree with a lexicographic
 ordering, as defined in \cite[Remark 6.14]{KRS21}.\footnote{The remark says
   that finite meet-trees expanded with a lexicographic ordering is a
-  Fra\"{i}sse class, from which it follows that there exists a Fra\"{i}sse
+  Fraïsse class, from which it follows that there exists a Fraïsse
   limit $\T_<$ for that class.} Let $\group$ be the group of bijections of
   $\T_<$ which do not necessarily preserve the lexicographic ordering. Then
   $\group\actson\T_<$ is isomorphic to $\aut{\TreeAtoms}\actson\TreeAtoms$, and
@@ -190,8 +189,8 @@ the same reasoning would apply to more general systems.
 
 \AP Before discussing the case of orbit finite polynomial automata, let us
 recall the setting of \kl{polynomial automata} in the classical case, as
-studied by \cite{BEDUSHWO17}, with techniques that dates back to
-\cite{MULSEI02}. A \intro{polynomial automaton} is a tuple $A \defined (Q,
+studied by \cite{BEDUSHWO17}, with techniques that date back to
+\cite{MULSEI02}. An \intro{polynomial automaton} is a tuple $A \defined (Q,
 \Sigma, \delta, q_0, F)$, where $Q = \K^n$ for some finite $n \in \N$, $\Sigma$
 is a finite alphabet, $\delta \colon Q \times \Sigma \to Q$ is a transition
 function such that $\delta(\cdot,a)_i$ is a polynomial in the indeterminates
@@ -210,10 +209,10 @@ theory of \kl{Gröbner bases} on finitely many indeterminates.
 \AP Let us now propose a new model of computation called \kl{orbit finite
 polynomial automata}, and prove an analogue decidability result. Let us fix an
 \kl{effectively oligomorphic} action $\group \actson \Indets$, such that there
-exists finitely many indeterminates $V \subfin \Indets$ such that $\group$ acts
+exist finitely many indeterminates $V \subfin \Indets$ such that $\group$ acts
 as the identity on $V$. Given such a function $f \colon \Indets \to \K$, and
 given a polynomial $p \in \poly{\K}{\Indets}$, we write $p(f)$ for the
-evaluation of $p$ on $f$, that belongs to $\K$. Let us emphasis that the model
+evaluation of $p$ on $f$, which belongs to $\K$. Let us emphasise that the model
 is purposely designed to be simple and illustrate the usage of \kl{equivariant
 Gröbner bases}, and not meant to be a fully-fledged model of computation.
 
@@ -240,7 +239,7 @@ Gröbner bases}, and not meant to be a fully-fledged model of computation.
 \AP \kl{Orbit finite polynomial automata} can be used to model programs that
 read a string $w \in \Indets^*$ from left to right, having as internal state a
 dictionary of type \texttt{dict[indet, number]}, which is updated using
-polynomial computations. As for \kl{polynomial automata}, the
+polynomial computations. As with \kl{polynomial automata}, the
 \intro(ofpa){zeroness problem} for orbit finite polynomial automata is the
 following decision problem: decide if for every input word $w$, the output
 $F(\delta^*(w, q_0))$ is zero.
@@ -296,14 +295,14 @@ to the orbit finite setting for future work.
 \para{Reachability problem of reversible data Petri nets.} The classical
 model of Petri nets was extended to account for arbitrary data attached to
 tokens to form what is called data Petri nets. We will not discuss the precise
-definitions of these models, but point out  that a reversible data Petri net is
+definitions of these models, but point out that a reversible data Petri net is
 exactly what is called a \kl{monomial rewriting system} \cite[Section
 8]{GHOLAS24}. Because reachability in such rewriting systems can be decided
 using \kl{equivariant ideal membership} queries \cite[Theorem 64]{GHOLAS24}, we
 can use \cref{thm:reducts-computable} to show
 \cref{cor:rev data VAS}.
 Note that \kl{monomial rewrite systems} will be at the
-center of our undecidability results in \cref{sec:undecidability}.
+centre of our undecidability results in \cref{sec:undecidability}.
 
 \begin{theorem}[name={Reachability in Reversible Data Petri Nets},
   restate=cor:rev-data-VAS]
@@ -315,8 +314,8 @@ center of our undecidability results in \cref{sec:undecidability}.
 %
 \begin{remark}
 The decidability of reachability for Petri nets with equality data is still open,
-and the for ordered data this problem is known to be undecidable \cite[Proposition 1 and Section 5.2]{RODA11}.
-\Cref{cor:rev data VAS} implies both of these become decidable when the Petri net is assumed to reversible.
+and for ordered data this problem is known to be undecidable \cite[Proposition 1 and Section 5.2]{RODA11}.
+\Cref{cor:rev data VAS} implies both of these become decidable when the Petri net is assumed to be reversible.
 \end{remark}
 %
 \para{Orbit-finite systems of equations} \AP The classical theory of
