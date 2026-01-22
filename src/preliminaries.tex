@@ -4,7 +4,7 @@
 \label{sec:preliminaries}
 
 %\subsection{Well-quasi-orders}
-\paragraph{Partial orders, ordinals, well-founded sets, and well-quasi-ordered sets.}
+\para{Partial orders, ordinals, well-founded sets, and well-quasi-ordered sets.}
 \AP We assume basic familiarity with partial orders, well-founded sets,
 and ordinals. We use the notation $\intro*\om$ for the first infinite
 ordinal (that is, $(\N, \leq)$), and write $X \intro*\ordplus Y$ for the
@@ -25,7 +25,7 @@ any ordering, or $\N \times \N$ with the product ordering. We refer the reader
 to \cite{SCSC17} for a comprehensive introduction to \kl{well-quasi-orderings}
 and their applications in computer science.
 
-\paragraph{Polynomials, monomials, divisibility.} \AP 
+\para{Polynomials, monomials, divisibility.} \AP 
 We assume basic familiarity with the theory of
 commutative algebra and polynomials. We use the notation $\poly{\K}{\Indets}$
 for the ring of polynomials with coefficients from a field $\K$ and
@@ -89,7 +89,8 @@ already at the core of the classical \emph{elimination theorems} \cite[Chapter 3
 2]{CLO15}.
 \end{remark}
 
-\paragraph{Ideals and Gröbner Bases.}
+%\subsection{Ideals and Gr\"{o}bner Bases}
+\para{Ideals, and Gröbner Bases.}
 \AP An \intro{ideal} $\idl$ of
 $\poly{\K}{\X}$ is a non-empty subset of $\poly{\K}{\X}$ that is closed under
 addition and multiplication by elements of $\poly{\K}{\X}$. Given a set $H
@@ -122,7 +123,7 @@ does not.
   $\lm(x^2y - z) = x^2y$ nor by $\lm(x^2 - y) = x^2$.
 \end{example}
 
-\paragraph{Group actions and equivariance} 
+\para{Group actions and equivariance} 
 \AP A \intro{group} $\group$ is a set equipped with a binary operation that is
 associative, has an identity element and has inverses. In our setting, we are
 interested in infinite sets $\X$ of indeterminates that is equipped with a
@@ -168,7 +169,7 @@ of \intro{equivariant ideals}.
     not belong to the ideal.
 \end{proof}
 
-\paragraph{Orbit finiteness}
+\para{Orbit finiteness}
 %
 \AP An \kl{equivariant set} is said to be \intro{orbit finite} if it is the
 union of finitely many \intro{orbits} under the action of $\group$. We denote
@@ -216,7 +217,7 @@ $f(\gelem \cdot x) = \gelem \cdot f(x)$. For instance, the
 an \kl{equivariant function} is \kl{orbit finite}, and that the algorithms that
 we will develop in this paper are all \kl(func){equivariant}.
 
-\paragraph{Computability assumptions.}
+\para{Computability assumptions.}
 \AP We say that the action is
 \intro{effectively oligomorphic} if:
 %
@@ -266,7 +267,7 @@ the action of $\group$ cannot change the degree of $p$, and because there are
 polynomials of arbitrarily large degree.
 
 %\subsection{Equivariant Gröbner bases}
-\paragraph{Equivariant Gröbner bases.}
+\para{Equivariant Gröbner bases.}
 \AP We know from \cite{GHOLAS24} that a
 necessary condition for the \kl{equivariant Hilbert basis property} to hold is
 that the set  $\mon{\X}$  of monomials is a \kl{well-quasi-ordering} when
