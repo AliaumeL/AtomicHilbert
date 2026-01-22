@@ -6,19 +6,19 @@
 %\subsection{Well-quasi-orders}
 \paragraph{Partial orders, ordinals, well-founded sets, and well-quasi-ordered sets.}
 \AP We assume basic familiarity with partial orders, well-founded sets,
-and ordinals. We will use the notation $\intro*\om$ for the first infinite
+and ordinals. We use the notation $\intro*\om$ for the first infinite
 ordinal (that is, $(\N, \leq)$), and write $X \intro*\ordplus Y$ for the
 lexicographic sum of two partial orders $X$ and $Y$. Similarly, the notation $X
-\intro*\ordtimes Y$ will denote the product of two partial orders equipped with the
+\intro*\ordtimes Y$ denotes the product of two partial orders equipped with the
 lexigographic ordering, i.e. $(x_1, y_1) \leq (x_2, y_2)$ if either $x_1 <
-x_2$, or $x_1 = x_2$ and $y_1 \leq y_2$. We will also use the usual notations
+x_2$, or $x_1 = x_2$ and $y_1 \leq y_2$. We also use the usual notations
 for finite ordinals, writing $\intro*\ordfin{n}$ for the finite ordinal of size
 $n$. For instance, $\om \ordplus \ordfin{1}$ is the total order $\N \uplus
 \set{+\infty}$, where $+\infty$ is the new largest element.
 
 \AP In order to guarantee the termination of the algorithms presented in this
-paper, a key ingredient will be the notion of \intro{well-quasi-ordering}
-(WQO), that are sets $(X, \leq)$ such that every infinite sequence
+paper, a key ingredient is the notion of \intro{well-quasi-ordering}
+(WQO), which consists of sets $(X, \leq)$ such that every infinite sequence
 $\seqof{x_i}[i \in \N]$ of elements of $X$ contains a pair $i < j$ such that
 $x_i \leq x_j$. Examples of \kl{well-quasi-orderings} include finite sets with
 any ordering, or $\N \times \N$ with the product ordering. We refer the reader
@@ -27,34 +27,33 @@ and their applications in computer science.
 
 \paragraph{Polynomials, monomials, divisibility.} \AP 
 We assume basic familiarity with the theory of
-commutative algebra, and polynomials. We will use the notation $\poly{\K}{\Indets}$
+commutative algebra and polynomials. We use the notation $\poly{\K}{\Indets}$
 for the ring of polynomials with coefficients from a field $\K$ and
-indeterminates/variables from a set $\Indets$, and $\mon{\Indets}$ for the set of
-monomials in $\poly{\K}{\Indets}$. Letters $p,q,r$ are used to denote polynomials,
-$\monelt,\monelt[n]$ are used to denote monomials, and $a,b,\alpha,\beta$ are
-used to denote coefficients in $\K$.
+indeterminates from a set $\Indets$, and $\mon{\Indets}$ for the set of
+monomials in $\poly{\K}{\Indets}$. Letters $p,q,r$ denote polynomials,
+$\monelt,\monelt[n]$ denote monomials, and $a,b,\alpha,\beta$ denote coefficients in $\K$.
 
 A classical example of a \kl{WQO} is the set of monomials $\mon{\Indets}$,
-endowed with the \kl{divisibility} relation $\intro*\divleq$ whenever $\Indets$
+endowed with the \kl{divisibility} relation $\intro*\divleq$ when $\Indets$
 is finite. We recall that a monomial $\monelt[m]$ \intro{divides} a monomial
 $\monelt[n]$ if there exists a monomial $\monelt[l]$ such that $\monelt[m]
 \times \monelt[l] = \monelt[n]$. In this case, we write $\monelt[m]
 \reintro*\divleq \monelt[n]$. Note that monomials can be seen as functions from
-$\Indets$ to $\N$ having a finite support, and that the \kl{divisibility}
+$\Indets$ to $\N$ with finite support, and that the \kl{divisibility}
 relation can be extended to monomials that are functions from $\Indets$ to
 $(Y,\leq)$, where $Y$ is any partially ordered set. In this case, we write
 $\monelt[m] \divleq \monelt[n]$ if for every $x \in \Indets$, we have
-$\monelt[m](x) \leq \monelt[n](x)$. We will write $\intro*\mon[\om \ordplus
+$\monelt[m](x) \leq \monelt[n](x)$. We write $\intro*\mon[\om \ordplus
 1]{\Indets}$ (resp. $\mon[\om^2]{\Indets}$) for the set of monomials that are
 functions from $\Indets$ to $\om \ordplus \ordfin{1}$ (resp. $\om^2$).
 
-\AP Unless otherwise specified, we will assume that the set of indeterminates
+\AP Unless otherwise specified, we assume that the set of indeterminates
 $\Indets$ comes equipped with a total ordering $\varleq$. Using this order, we
 define the \intro{reverse lexicographic} (revlex) ordering on monomials as
 follows: $\monelt[n] \intro*\revlexlt \monelt[m]$ if there exists an
 indeterminate $x \in \Indets$ such that $\monelt[n](x) < \monelt[m](x)$, and such
 that for every $y \in \Indets$, if $x \varlt y$ then $\monelt[n](y) =
-\monelt[m](y)$. Remark that if $\monelt[n] \divleq \monelt[m]$, then in
+\monelt[m](y)$. Note that if $\monelt[n] \divleq \monelt[m]$, then in
 particular $\monelt[n] \revlexleq \monelt[m]$. 
 
 \AP We can now use the \kl{reverse lexicographic} ordering to identify particular elements in
@@ -62,7 +61,7 @@ a given polynomial. Namely, for a polynomial $p \in \poly{\K}{\X}$, we define
 the \intro{leading monomial} $\intro*\lm(p)$ of $p$ as the largest monomial
 appearing in $p$ with respect to the \kl{revlex ordering}, and the
 \intro{leading coefficient} $\intro*\lc(p)$ of $p$ as the coefficient of
-$\lm(p)$ in $p$. We can then define the \intro{leading term} $\intro*\lt(p)$ of
+$\lm(p)$ in $p$. We then define the \intro{leading term} $\intro*\lt(p)$ of
 $p$ as the product of its \kl{leading monomial} and its \kl{leading
 coefficient}, and the \intro{characteristic monomial} $\intro*\cm(p)$ of $p$ as
 the product of its \kl{leading monomial} and all the indeterminates appearing
@@ -90,8 +89,7 @@ already at the core of the classical \emph{elimination theorems} \cite[Chapter 3
 2]{CLO15}.
 \end{remark}
 
-%\subsection{Ideals and Gr\"{o}bner Bases}
-\paragraph{Ideals, and Gröbner Bases.}
+\paragraph{Ideals and Gröbner Bases.}
 \AP An \intro{ideal} $\idl$ of
 $\poly{\K}{\X}$ is a non-empty subset of $\poly{\K}{\X}$ that is closed under
 addition and multiplication by elements of $\poly{\K}{\X}$. Given a set $H
@@ -102,8 +100,8 @@ problem} is the following decision problem: given a polynomial $p \in
 whether $p$ belongs to the ideal $\IdlGen{H}$ generated by $H$. We know that
 this problem is decidable when $\X$ is finite, and that it is even
 $\EXPTIME$-complete \cite{MAME82}. The classical approach to the \kl{ideal
-membership problem} is to use the \kl{Gröbner basis} theory that was developed
-in the 70s by Buchberger~\cite{BUCH76}. 
+membership problem} is to use the \kl{Gröbner basis} theory, developed
+in the 1970s by Buchberger~\cite{BUCH76}. 
 A set $\Basis$ of polynomials is called a \intro{Gröbner basis} of
 an ideal $\idl$ if, $\IdlGen{\Basis} = \idl$ and for every polynomial $p \in
 \idl$, there exists a polynomial $q \in \Basis$ such that $\lm[\Indets](q)
@@ -116,7 +114,7 @@ reductions. If the result is $0$, then $p$ belongs to $\idl$, and otherwise it
 does not. 
 
 \begin{example}
-  Let $\Indets \defined \set{x,y,z}$ with $z < y < x$ The
+  Let $\Indets \defined \set{x,y,z}$ with $z < y < x$. The
   set $\Basis \defined \set{x^2y - z, x^2 - y}$ is not 
   a \kl{Gröbner basis} of the ideal $\idl$ it generates,
   because the polynomial $p \defined y^2 - z$ belongs to $\idl$
@@ -182,7 +180,7 @@ is a set of the form $\orbit[\group]{E}$ for some finite set $E$. Not every
 robust in the sense that \kl{equivariant subsets} of \kl{orbit finite sets} are
 also \kl{orbit finite}, and similarly, an \kl{equivariant subset} of $E^n$ is
 \kl{orbit finite} whenever $E$ is \kl{orbit finite} and $n \in \N$ is finite.
-For algorithmic purposes, \kl{orbit finite sets} are the ones that can be taken
+For algorithmic purposes, \kl{orbit finite sets} are those that can be taken
 as input as a finite set of representatives (one for each orbit). The notions
 of \kl{equivariance} and \kl{orbit finite sets} from a computational
 perspective are discussed in \cite{BOJAN16inf}, and we refer the reader to this
@@ -212,11 +210,11 @@ $\intro*\EqIdlGen{H}$ generated by $H$.
 actions $\group \actson X$ and $\group \actson Y$ is said to be
 \intro(func){equivariant} if for all $\gelem \in \group$ and $x \in X$, we have
 $f(\gelem \cdot x) = \gelem \cdot f(x)$. For instance, the
-\kl(monomial){domain} of a monomial is an \kl{equivariant function} if $\gelem
+\kl(monomial){domain} of a monomial is an \kl{equivariant function}: if $\gelem
 \in \group$, then $\gelem \cdot \dom(\monelt[m]) = \dom(\gelem \cdot
 \monelt[m])$. Let us point out that the image of an \kl{orbit finite set} under
 an \kl{equivariant function} is \kl{orbit finite}, and that the algorithms that
-we will develop in this paper will all be \kl(func){equivariant}.
+we will develop in this paper are all \kl(func){equivariant}.
 
 \paragraph{Computability assumptions.}
 \AP We say that the action is
@@ -228,7 +226,7 @@ $\Indets^n$ is \kl{orbit finite},
 \item There exists an algorithm that decides whether two elements $\vec{x},
 \vec{y} \in \Indets^*$ are in the same orbit under the action of 
 $\group$ on $\Indets^*$.
-\item There exists an algorithm which on input $n\in\N$ outputs a set
+\item There exists an algorithm which, on input $n\in\N$, outputs a set
 $A \subseteqfin \Indets^n$ such that $|A\cap U| = 1$ for every orbit
 $U \subseteq \Indets^n$.
 \end{enumerate}
@@ -244,7 +242,7 @@ monomials $\monelt[m], \monelt[n] \in \mon{\X}$, we have $\monelt[m] \revlexleq
 \monelt[n]$ if and only if $\gelem \cdot \monelt[m] \revlexleq \gelem \cdot
 \monelt[n]$.
 Our \intro{computability assumptions} on the tuple $(\Indets, \group,
-\leq)$ will therefore be that $\group$ acts \kl{effectively oligomorphic} on
+\leq)$ are that $\group$ acts \kl{effectively oligomorphic} on
 $\Indets$, and that its action is \kl(ord){compatible} with the ordering $\leq$
 on $\Indets$.
 
@@ -262,9 +260,9 @@ $\group$ on $\Indets$ when restricted to polynomials with bounded degree.
 This is because a polynomial $p \in \poly{\K}{\Indets}$
 can be seen as an element of $(\K \times \Indets^{\leq d})^n$ where $n$ is the
 number of monomials in $p$, and $d$ is the maximal degree of a monomial
-appearing in $p$. Beware that the set of all polynomials $\poly{\K}{\Indets}$ is
+appearing in $p$. Note that the set of all polynomials $\poly{\K}{\Indets}$ is
 not \kl{orbit finite}, precisely because the orbit of a polynomial $p$ under 
-the action of $\group$ cannot change the degree of $p$, and that there are 
+the action of $\group$ cannot change the degree of $p$, and because there are 
 polynomials of arbitrarily large degree.
 
 %\subsection{Equivariant Gröbner bases}
@@ -278,7 +276,7 @@ endowed with the \intro{divisibility up-to $\group$} relation
 \group$ such that $\monelt_1$ \kl{divides} $\gelem \cdot \monelt_2$. This
 relation also extends to monomials that are functions from $\Indets$ to
 $(Y,\leq)$ with finite support, where $Y$ is any partially ordered set. We say
-that a set $\Basis \subseteq \poly{\K}{\X}$ is an \intro{equivariant Gr\"{o}bner
+that a set $\Basis \subseteq \poly{\K}{\X}$ is an \intro{equivariant Gröbner
 basis} of an equivariant ideal $\idl$ if $\Basis$ is \kl{equivariant},
 $\IdlGen{\Basis} = \idl$, and for every polynomial $p \in \idl$, there exists
 $q \in \Basis$ such that $\lm[\Indets](q) \gdivleq \lm[\Indets](p)$ and
@@ -290,7 +288,7 @@ $\dom(q) \subseteq \dom(p)$, following the definition of \cite{GHOLAS24}.
 that it is \intro{$\omega$-well-structured} if $(\mon{\Indets}, \gdivleq)$ is
 \kl{well-quasi-ordered}.
 
-Beware that even in the case of a finite set of variables, a \kl{Gröbner basis}
+Note that even in the case of a finite set of variables, a \kl{Gröbner basis}
 is not necessarily an \kl{equivariant Gröbner basis}, because of the
 \kl(polynomial){domain} condition. However, every \kl{equivariant Gröbner
 basis} is a \kl{Gröbner basis}.
