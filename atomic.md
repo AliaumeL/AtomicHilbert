@@ -1,6 +1,6 @@
 ---
 bibliography: papers.bib
-draft: true
+draft: false
 camera-ready: false
 anonymous: true 
 acmart:
@@ -10,6 +10,8 @@ libraries:
     - lib/arka
     - lib/maths
     - lib/knowledges.kl
+header-includes: |
+    \graphicspath{ {./tree_amal/} }
 appendix:
     - src/appendix.tex
 ---

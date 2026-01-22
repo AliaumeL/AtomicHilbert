@@ -8,13 +8,11 @@
 %   in the `src` directory.
 % - If you want to update the template itself (e.g., change the layout), please
 %   edit the `defaults/asmart/asmart-small.tex` file instead.
-\documentclass[sigconf,anonymous,review,screen]{acmart}
+\documentclass[sigconf,anonymous,review,,screen]{acmart}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-\usepackage{graphicx}
-\graphicspath{ {./tree_amal/} }
 
 \setcopyright{acmlicensed}
 \copyrightyear{2018}
@@ -28,7 +26,6 @@
 \acmMonth{8}
 
 
-\usepackage{todonotes}
 
 % babel for language settings
 \usepackage[english]{babel}
@@ -88,7 +85,7 @@
 % links inside the document
 \usepackage{hyperref}
 \usepackage[capitalise,noabbrev,nameinlink]{cleveref}
-\usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
+\usepackage[electronic,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
 
 
@@ -119,6 +116,7 @@
 \knowledgestyle{notion}{color={KLB1}}
 
 % we include whatever the user wants to include in the header
+\graphicspath{ {./tree_amal/} }
 
 % we include libraries (tex files) usually written in the `lib` directory
 \input{lib/aliaume}
@@ -164,10 +162,7 @@
 
 \begin{document}
 
-\title[Equivariant Gröbner bases]{Computability of Equivariant Gröbner bases \\
-       main f369f4760fe0b481cd2a22f1ce6928c7eb2ed43e \\
-       2026-01-20 15:46:49 +0100
-}
+\title[Equivariant Gröbner bases]{Computability of Equivariant Gröbner bases}
 
 
 \author{
