@@ -1,10 +1,10 @@
-%!TEX root = ../atomic.sigconf.tex
+%!TEX root = ../atomic_lipics.tex
 % LTeX: language=en
 \section{Preliminaries}
 \label{sec:preliminaries}
 
 %\subsection{Well-quasi-orders}
-\para{Partial orders, ordinals, well-founded sets, and well-quasi-ordered sets.}
+\subsection{Partial orders, ordinals, well-founded sets, and well-quasi-ordered sets.}
 \AP We assume basic familiarity with partial orders, well-founded sets,
 and ordinals. We use the notation $\intro*\om$ for the first infinite
 ordinal (that is, $(\N, \leq)$), and write $X \intro*\ordplus Y$ for the
@@ -25,7 +25,7 @@ any ordering, or $\N \times \N$ with the product ordering. We refer the reader
 to \cite{SCSC17} for a comprehensive introduction to \kl{well-quasi-orderings}
 and their applications in computer science.
 
-\para{Polynomials, monomials, divisibility.} \AP 
+\subsection{Polynomials, monomials, divisibility.} \AP 
 We assume basic familiarity with the theory of
 commutative algebra and polynomials. We use the notation $\poly{\K}{\Indets}$
 for the ring of polynomials with coefficients from a field $\K$ and
@@ -47,6 +47,8 @@ $\monelt[m](x) \leq \monelt[n](x)$. We write $\intro*\mon[\om \ordplus
 1]{\Indets}$ (resp. $\mon[\om^2]{\Indets}$) for the set of monomials that are
 functions from $\Indets$ to $\om \ordplus \ordfin{1}$ (resp. $\om^2$).
 
+\arka{example here? why not $\mon[Y]{\Indets}$?}
+
 \AP Unless otherwise specified, we assume that the set of indeterminates
 $\Indets$ comes equipped with a total ordering $\varleq$. Using this order, we
 define the \intro{reverse lexicographic} (revlex) ordering on monomials as
@@ -55,6 +57,9 @@ indeterminate $x \in \Indets$ such that $\monelt[n](x) < \monelt[m](x)$, and suc
 that for every $y \in \Indets$, if $x \varlt y$ then $\monelt[n](y) =
 \monelt[m](y)$. Note that if $\monelt[n] \divleq \monelt[m]$, then in
 particular $\monelt[n] \revlexleq \monelt[m]$. 
+
+\arka{example here?}
+\arka{remark that reverse is important and point to where we explain why}
 
 \AP We can now use the \kl{reverse lexicographic} ordering to identify particular elements in
 a given polynomial. Namely, for a polynomial $p \in \poly{\K}{\X}$, we define
@@ -73,7 +78,10 @@ highlight the precise ordered set of variables that was used to compute the
 \kl{leading monomial} of $p$. We extend $\dom$ from 
 monomials to polynomials by defining $\dom(p)$ as 
 the union of the \kl(monomial){domains} of all monomials appearing in $p$.
+\arka{examples}
 
+
+\arka{push this remark later and make it more concrete}
 \begin{remark}\label{rem:other-monomial-orderings}
 In the case of a finite set of indeterminates, one can choose any total ordering
 on $\mon{\Indets}$, as long as it contains the \kl{divisibility}
@@ -90,7 +98,7 @@ already at the core of the classical \emph{elimination theorems} \cite[Chapter 3
 \end{remark}
 
 %\subsection{Ideals and Gr\"{o}bner Bases}
-\para{Ideals, and Gröbner Bases.}
+\subsection{Ideals, and Gröbner Bases.}
 \AP An \intro{ideal} $\idl$ of
 $\poly{\K}{\X}$ is a non-empty subset of $\poly{\K}{\X}$ that is closed under
 addition and multiplication by elements of $\poly{\K}{\X}$. Given a set $H
