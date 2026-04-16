@@ -1,5 +1,5 @@
 % Little math macros
-%!TEX root = ../atomic.sigconf.tex
+%!TEX root = ../atomic_lipics.tex
 
 
 \newcommand{\Grbs}{\kl{Gröbner bases}}
@@ -111,6 +111,8 @@
 
 
 \NewDocumentOrdering{revlex}{\sqsubseteq^{\mathsf{RevLex}}}{\sqsubset^{\mathsf{RevLex}}}
+\NewDocumentOrdering{colex}{\sqsubseteq^{\mathsf{CoLex}}}
+{\sqsubset^{\mathsf{CoLex}}}
 \NewDocumentOrdering{grevlex}{\sqsubseteq^{\mathsf{RevLex}}_\group}{\sqsubset^{\mathsf{RevLex}}_\group}
 \NewDocumentOrdering{lex}{\sqsubseteq_{\mathsf{Lex}}}{\sqsubset_{\mathsf{Lex}}}
 \NewDocumentOrdering{shortlex}{\sqsubseteq_{\mathsf{ShortLex}}}{\sqsubset_{\mathsf{ShortLex}}}
@@ -278,3 +280,5 @@
 \newcommand{\lexGroupAction}{\mathbin{\kl[\lexGroupAction]{\otimes}}}
 \knowledge{\lexGroupAction}{notion}
 \newcommand{\reduct}[1]{\trianglelefteq^{#1}}
+
+\SetKwInOut{KwQ}{Question}
