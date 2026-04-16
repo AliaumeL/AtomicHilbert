@@ -207,6 +207,7 @@ which means $f$ can not be divided further using $P$ and  $f \xrightarrow[P]{}^*
 \subsubsection{Gr\"{o}bner bases}\label{sec:grfin}
 %
 A \intro{Gr\"{o}bner basis} for an ideal $\idl[I]$ with respect to a term order $\sqsubset$ is a subset $B\subseteq\idl[I]$ such that for every $f\in\idl[I]$ there exists $b\in B$ such that $\lm[\sqsubset]{b}$ divides $\lm[\sqsubset]{f}$.
+We say $B\subseteq\poly{\K}{X}$ is a \intro{Gr\"{o}bner basis} if it is a \kl{Gr\"{o}bner basis} for $\IdlGen{B}$.
 
 For the remainder of \Cref{sec:grfin} we fix a term order $\sqsubseteq$.
 %
@@ -234,32 +235,140 @@ and for every polynomial $f\in\poly{\K}{X}$ if $f'$ is a remainder of division o
 \end{corollary}
 %
 The above corollary says that the multivariate division algorithm can be used to decide the membership problem for $\IdlGen{B}$ when $B$ is \kl{Gr\"{o}bner basis}.
-Note that the multivariate division algorithm as defined is non-deterministic.
-Below we give a determinisation of it.
+Note that the above corollary also says that the choice of polynomials $b\in B$ to be used for dividing does not matter:
+either all sequences of division of $f$ using $B$ leads to $0$,
+or none does. 
+%Note that the multivariate division algorithm as defined is non-deterministic.
+%Below we give a determinisation of it.
 %
-\begin{algorithm}
-    \label{alg:det div}
-    \KwIn{A polynomial $f\in\poly{\K}{X}$ and a finite list of polynomials $P = [p_1,\dots,p_n]\subseteqfin \poly{\K}{X}$.}
-    \KwOut{A \kl{remainder} of division of $f$ using $P$.}
-    \Begin{
-        $f' \gets f$\;
-        \While{
-        $\lm[\sqsubset](f')$ is divisible by some monomial in $\lm[\sqsubset](P)$
-        }
-        {
-        $j \gets \min\setof{i}{\lm[\sqsubset](p_i)\text{ divides }\lm[\sqsubset](f')}$\;
-        $f' = f' - \frac{\lt[\sqsubset](f')}{\lt[\sqsubset](p_j)}p_j$
-        }
-        \Return{$f'$}\;
-    }
-\end{algorithm}
+%\begin{algorithm}
+%    \label{alg:det div}
+%    \KwIn{A polynomial $f\in\poly{\K}{X}$ and a finite list of polynomials $P = [p_1,\dots,p_n]\subseteqfin \poly{\K}{X}$.}
+%    \KwOut{A \kl{remainder} of division of $f$ using $P$.}
+%    \Begin{
+%        $f' \gets f$\;
+%        \While{
+%        $\lm[\sqsubset](f')$ is divisible by some monomial in $\lm[\sqsubset](P)$
+%        }
+%        {
+%        $j \gets \min\setof{i}{\lm[\sqsubset](p_i)\text{ divides }\lm[\sqsubset](f')}$\;
+%        $f' = f' - \frac{\lt[\sqsubset](f')}{\lt[\sqsubset](p_j)}p_j$
+%        }
+%        \Return{$f'$}\;
+%    }
+%\end{algorithm}
 %
+
 At this point there are three pressing questions.
 %
 \begin{enumerate}
 \item Does every ideal $\idl[I]\subseteq\poly{\K}{X}$ have a finite Gr\"{o}bner basis?
-\item Is there an algorithm to check whether a $B\subseteqfin\poly{\K}{X}$ is a Gr\"{o}bner basis?
-\item Is there an algorithm to check whether a $B\subseteqfin\poly{\K}{X}$ is a Gr\"{o}bner basis?
+\item Is there a computable criterion for a finite set $B\subseteqfin\poly{\K}{X}$ to be a Gr\"{o}bner basis?
+\item Is there an algorithm that takes a finite set $P\subseteqfin\poly{\K}{X}$ as input and computes a Gr\"{o}bner basis for $\IdlGen{P}$?
 \end{enumerate}
 %
+The answers to all of the above questions are YES.
+The next lemma deals with the first question.
+The other two questions are dealt with in \Cref{sec:buchfin}.
+%
+\begin{lemma}
+Every ideal $\idl[I]\subseteq \poly{\K}{X}$ has a finite Gr\"{o}bner basis.
+\end{lemma}
+%
+\begin{proof}
+First we show that that divisibility relation defines a well-partial-order on $\mon{X}$.
+Let $X = \{x_1,\dots,x_n\}$.
+A monomial $x_1^{k_1}\dots x_n^{k_n}$ divides another monomial $x_1^{\ell_1}\dots x_n^{\ell_n}$ if and only if $k_i \leq \ell_i$ for all $i$.
+The relation
+\[
+(k_1,\dots,k_n) \preceq (\ell_1,\dots,\ell_n)
+\text{ iff $k_i \leq \ell_i$ for all $i$}
+\]
+defines a partial order on $\N^n$.
+Dickson's lemma says that $\preceq$ is a well-partial-order.  
+Monomials $x_1^{k_1}\dots x_n^{k_n}\in\min{X}$ are in bijective correspondence with vectors $(k_1,\dots,k_n)\in\N^n$.
+Therefore the divisibility relation defines a well-partial-order on $\mon{X}$.
+
+Now let $\idl[I]\subseteq\poly{\K}{X}$ be an ideal.
+Since ideals are closed under multiplication by any polynomial,
+the set $\lm[\sqsubseteq](\idl[I])$ is upward closed under the divisibility ordering:
+if $\monelt[p]\in\lm[\sqsubseteq](\idl[I])$ divides $\monelt[q]\in\mon{X}$ then $\monelt[q]\in\lm[\sqsubseteq](\idl[I])$.
+Using the fact that the divisibility relation is a well-partial-order,
+we can pick a finite set $\monelt[B]\subseteqfin\lm[\sqsubseteq](\idl[I])$ such that every element in $\lm[\sqsubseteq](\idl[I])$ is divisible by some element in $\monelt[B]$.
+For every $\monelt[b]\in\monelt[B]$ pick $b_{\monelt[b]}\in \idl[I]$ such that $\lm[\sqsubseteq](b_{\monelt[b]}) = \monelt[b]$.
+Then $\setof{b_{\monelt[b]}}{\monelt[b]\in\monelt[B]}$ is a finite Gr\"{o}bner basis of $\idl[I]$.
+\end{proof}
+%
 \subsubsection{Buchberger's criterion and algorithm}\label{sec:buchfin}
+%
+Buchberger's criterion is a computable criterion for a finite set $B\subseteqfin\poly{\K}{X}$ to be a Gr\"{o}bner basis.
+
+The \intro{$\lcm$} of two monomials $\monelt[p] = x_1^{k_1}\dots x_n^{k_n}$ and $\monelt[q] = x_1^{\ell_1}\dots x_n^{\ell_n}$ is the monomial $x_1^{\max(k_1,\ell_1)}\dots x_n^{\max(k_n,\ell_n)}$.
+It can be equivalently defined to be the smallest monomial w.r.t.\ the divisibility ordering that is divisible by both $\monelt[p]$ and $\monelt[q]$.
+
+For $f,g\in\poly{\K}{X}$, the \intro{S-polynomial} of $f$ and $g$ is defined as
+\begin{equation}
+    \label{eq:spoly fin}
+    \intro*\spoly{f}{g} \defined
+    \frac{\lcm(\lm(f), \lm(g))}{\lt(f)} \times f
+    - \frac{\lcm(\lm(f), \lm(g))}{\lt(g)} \times g
+    \quad .
+\end{equation}
+%
+\begin{theorem}[Buchberger's criterion]\label{thm:buch cr fin}
+$B\subseteq \poly{\K}{X}$ is a Gr\"{o}bner basis if and only if
+$\spoly{f}{g} \xrightarrow[B]{}^* 0$ for every $f,g\in B$.
+\end{theorem}
+%
+\begin{example}
+Let $P = \{xy - x, x^2 - y\}$.
+Let $f = x(xy - x) - y(x^2 - y) = - x^2 + y^2$.
+Dividing $f$ using $P$ with respect to the $\lexlt$ order we get the non-zero remainder $y^2 - y$,
+which means that $P$ is not a Gr\"{o}bener basis.
+Interestingly, $P\cup\{f\}$ is a Gr\"{o}bner basis,
+which can be verified using \Cref{thm:buch cr fin}.
+We leave it to the reader to do the computations.
+\end{example}
+%
+For $f\in\poly{\K}{X}$ and $P\subseteqfin\poly{\K}{X}$ define $\intro*\rem{P}{f}$ to the set of possible non-zero remainders resulted by dividing $f$ using $P$.
+A simple application of K\"{o}nig's lemma gives us:
+%
+\begin{lemma}
+$\rem{P}{f}$ is finite whenever $P$ is finite.
+\end{lemma}
+%
+For $P\subseteqfin\poly{\K}{X}$ define
+$\spolyset(B) \defined \bigcup_{p,q \in B}
+\rem{B}{\spoly{p}{q}}$.
+%
+Buchberger's criterion gives rise to an obvious algorithm.
+%
+\begin{algorithm}
+  \caption{Buchberger's algorithm.}
+    \label{alg:buch fin}
+    \KwIn{A finite set $P$ of polynomials}
+    \KwOut{A \kl{Gr\"{o}bner basis} $B$ of
+      $\IdlGen{P}$}
+    \Begin{
+        $B \gets P$\;
+        \Repeat{$B$ stabilizes}{
+            $B \gets B \cup \spolyset(B)$\;
+        }
+        \Return{$B$}\;
+    }
+\end{algorithm}
+Buchberger's algorithm 
+%
+\begin{theorem}
+On every input $P\subseteqfin\poly{\K}{X}$,
+Buchberger's algorithm terminates and computes a Gr\"{o}bner basis of $\IdlGen{P}$.
+\end{theorem}
+%
+The termination of the algorithm follows from the fact that if $\spolyset(B)$ is non-empty then none of the elements in $\lm[\sqsubseteq](\spolyset(B))$ is divisible by $\lm[\sqsubseteq](B)$.
+Therefore, the upward closure of $\lm[\sqsubseteq](B)$ strictly increases with every iteration of the while loop.
+Since the divisibility ordering is a well-quasi-order,
+this can not happen infinitely many time.
+
+The correctness of Buchberger's algorithm follows from the fact that once it terminates,
+$B$ must satisfy Buchberger's criterion.
+%
