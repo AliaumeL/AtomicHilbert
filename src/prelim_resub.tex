@@ -374,6 +374,47 @@ $B$ must satisfy Buchberger's criterion.
 %
 \section{Polynomial rings with infinitely many variables}
 %
+In this article we are interested in polynomial rings whose variables are elements of a \kl{countable relational structure}.
+
+A \intro{countable relational structure} $\Indets = (X,R_1,R_2,\dots,f_1,f_2,\dots)$ is given by a countable set $X$ with relations $R_i \subseteq X^{m_i}$ and functions $f_j : X^{n_j}\to X$ defined on it.
+By an \intro{element} of the relational structure $\Indets$,
+we mean an element of the underlying set $X$.
+Similarly, we use $\Indets^n$ to denote the set $X^n$.
+
+To illustrate our definitions and results we will mainly use two following relational structures:
+%
+\begin{enumerate}
+\item The relational structure $\EqualityAtoms = (\Q,=)$ of rational numbers with equality.
+\item The relational structure $\OrderAtoms = (\Q,<)$ of rational numbers with order.
+\end{enumerate}
+%
+More examples of relational structures can be found in \arka{cite}
+%
+An \intro{automorphism} $\pi$ of $\Indets$ is a bijection of the underlying set that preserves and reflects all relations and commutes with all functions:
+\[
+R_i(x_1,\dots,x_{m_i}) \iff
+R_i(\pi(x_1),\dots,\pi(x_{m_i}))
+\text{ for all } (x_1,\dots,x_{m_i})\in \Indets^{m_i}, \text{ and}
+\]
+%
+\[
+\pi(f_j(x_1,\dots,x_{n_j})) \iff
+f_j(\pi(x_1),\dots,\pi(x_{m_i}))
+\text{ for all } (x_1,\dots,x_{n_j})\in \Indets^{n_j}.
+\]
+%
+\begin{example}
+
+\end{example}
+%
+
+We use \intro{$\poly{\K}{\X}$} to denote the polynomial ring over $\K$ which uses elements of $\X$ as variables.
+An ideal $\idl[I] \subseteq \poly{\K}{\Indets}$ is equivariant if it is invariant under automorphisms of $\Indets$.
+%
+\begin{example}
+Both ideals $\idl[I]_0^{\EqualityAtoms}$ and $\idl[I]_1^{\EqualityAtoms}$ are equivariant.
+\end{example}
+%
 Hilbert's basis theorem does not extend to ideals in polynomial rings $\poly{K}{X}$ when $X$ is infinite.
 Even ideals such as $\idl[I]_0^X$ and $\idl[I]_1^X$ (cf.\ \Cref{eg:I0,eg:I1}) that are simple to describe,
 are not finitely generated.
@@ -382,5 +423,16 @@ Both $\idl[I]_0^X$ and $\idl[I]_1^X$ can not satisfy this condition since they c
 
 However, finite generation is regained when one considers ideals up to symmetry.
 For instance, $\idl[I]_1^X$ is the smallest ideal that contains the polynomial $x - 1$ and is invariant up to permutations of the variables.
-In fact, Cohen proved in \cite{COHEN67}
+In fact, Cohen has shown in \cite{COHEN67} that every ideal in $\poly{K}{X}$ that is invariant under permutations of the variables is finitely generated.
+
+
+
+
+The articles \cite{LauSno23,GHOLAS24} considered the generalisation of this theorem to the setting when the set of variables are also the elements of an infinite \kl{relational structure} and the ideals equivariant: invariant under the automorphisms of the structure.
+They characterised structures having the \kl{Hilbert's basis property}: every
+
+
+
+
+
 %
