@@ -132,38 +132,66 @@ does not.
 \end{example}
 
 \subsection{Group actions and equivariance} 
+%
+In this article we are interested in polynomial rings whose variables are identified with elements of a \kl{countable relational structure}.
 
-\arka{Variables are identified with elements from a rel str}
+A \intro{countable relational structure} $\Indets = (X,R_1,R_2,\dots,f_1,f_2,\dots)$ is given by a countable set $X$ with relations $R_i \subseteq X^{m_i}$ and functions $f_j : X^{n_j}\to X$ defined on it.
+By an \intro{element} of the relational structure $\Indets$,
+we mean an element of the underlying set $X$.
+Similarly, we use $\Indets^n$ to denote the set $X^n$.
 
-\AP A \intro{group} $\group$ is a set equipped with a binary operation that is
-associative, has an identity element and has inverses. In our setting, we are
-interested in infinite sets $\X$ of indeterminates that is equipped with a
-\intro{group action} $\group \actson \X$. This means that for each $\gelem \in
-\group$, we have a bijection $\X \tobij \X$ that we denote by $x \mapsto \gelem
-\cdot x$. A set $S \subseteq \X$ is \intro{equivariant} under the action of
-$\group$ if for all $\gelem \in \group$ and $x \in S$, we have $\gelem \cdot x
-\in S$. We give in \cref{ex:idl-equiv} an example and a non-example
-of \intro{equivariant ideals}.
-
-\arka{add the homomorphism part}
-
+To illustrate our definitions and results we will mainly use two following relational structures:
+%
+\begin{enumerate}
+\item The relational structure $\EqualityAtoms = (\Q,=)$ of rational numbers with equality.
+\item The relational structure $\OrderAtoms = (\Q,<)$ of rational numbers with order.
+\end{enumerate}
+%
+More examples of relational structures can be found in \arka{cite}
+%
+An \intro{automorphism} $\pi$ of $\Indets$ is a bijection of the underlying set that preserves and reflects all relations and commutes with all functions:
+\[
+R_i(x_1,\dots,x_{m_i}) \iff
+R_i(\pi(x_1),\dots,\pi(x_{m_i}))
+\text{ for all } (x_1,\dots,x_{m_i})\in \Indets^{m_i}, \text{ and}
+\]
+%
+\[
+\pi(f_j(x_1,\dots,x_{n_j})) \iff
+f_j(\pi(x_1),\dots,\pi(x_{m_i}))
+\text{ for all } (x_1,\dots,x_{n_j})\in \Indets^{n_j}.
+\]
+%
+We use \intro{$\aut{\Indets}$} to denote the set of automorphisms of the relational structure $\Indets$.
+%
+\begin{example}
+An automorphism of $\EqualityAtoms$ is simply a bijection from the set $\N$ to itself.
+An automorphism of $\OrderAtoms$ is an order preserving bijection from $\Q$ to itself.
+\end{example}
+%
+We use \intro{$\poly{\K}{\X}$} to denote the polynomial ring over $\K$ which uses elements of $\X$ as variables.
+A subset $S \subseteq \poly{\K}{\Indets}$ is equivariant if it is invariant under automorphisms of $\Indets$.
+%
+%\begin{example}
+%Both ideals $\idl[I]_0^{\EqualityAtoms}$ and $\idl[I]_1^{\EqualityAtoms}$ are equivariant.
+%\end{example}
+%
 \begin{example}
     \label{ex:idl-equiv}
-    Let $\Indets$ be any infinite set, and $\group$ be the 
-    group of all bijections of $\Indets$. 
-    Then the set $S_0 \subset \poly{\K}{\Indets}$ of all polynomials 
+    Then the set $S_0 \subset \poly{\K}{\EqualityAtoms}$ of all polynomials 
     whose set of coefficients sums to $0$ is an equivariant ideal.
     Conversely, the set of all polynomials that are multiple
-    of $x \in X$ is an \kl{ideal} that is not \kl{equivariant}.
+    of $x \in \EqualityAtoms$ is an \kl{ideal} that is not \kl{equivariant}.
 \end{example}
+%
 \begin{proof}
-    Let $p,q\in S_0$, and $r \in \poly{\K}{\Indets}$.
+    Let $p,q\in S_0$, and $r \in \poly{\K}{\EqualityAtoms}$.
     Then, $p \times r + q$ is in $S_0$. Remark that 
-    $p,r$ and $q$ belong to a subset $\poly{\K}{\Indets}$ of the 
+    $p,r$ and $q$ belong to a subset $\poly{\K}{\EqualityAtoms}$ of the 
     polynomials that uses only finitely many indeterminates.
     In this subset, the sum of all coefficients is obtained
     by applying the polynomials to the value $1$ for every indeterminate
-    $y \in \Indets$. We conclude that
+    $y \in \EqualityAtoms$. We conclude that
     $(p \times r + q)(1,\dots, 1) 
     = p(1,\dots,1) \times r(1,\dots,1) + q(1,\dots,1)
     = 0 \times r(1, \dots, 1) + 0 = 0$, hence that
@@ -174,26 +202,26 @@ of \intro{equivariant ideals}.
     the sum of the coefficients of $p$, hence is $0$ too.
     This shows that $S_0$ is \kl(ideal){equivariant}.
 
-    It is clear that all multiples of a given polynomial $x \in \Indets$
-    is an ideal of $\poly{\K}{\Indets}$. This is not an \kl{equivariant ideal}:
-    take any bijection $\gelem \in \group$ that does not map $x$ to $x$ (it
-    exists because $\Indets$ is infinite and $\group$ is all permutations),
-    then $\gelem \cdot x$ is not a multiple of $x$, and therefore does 
-    not belong to the ideal.
+    It is clear that all multiples of a given polynomial $x \in \EqualityAtoms$
+    is an ideal of $\poly{\K}{\EqualityAtoms}$.
+    This is not an \kl{equivariant ideal}:
+    take any bijection $\gelem \in \aut{\EqualityAtoms}$ that does not map
+    $x$ to $x$ (it exists because $\EqualityAtoms$ is infinite and
+    $\aut{\EqualityAtoms}$ is all permutations), then $\gelem(x)$ is not a 
+    multiple of $x$, and therefore does not belong to the ideal.
 \end{proof}
-
+%
 \subsection{Orbit finiteness}
 %
-\AP An \kl{equivariant set} is said to be \intro{orbit finite} if it is the
-union of finitely many \intro{orbits} under the action of $\group$. We denote
-$\intro*\orbit[\group]{E}$ for the set of all elements $\gelem \cdot x$ for
-$\gelem \in \group$ and $x \in E$. Equivalently, an \reintro{orbit finite set}
-is a set of the form $\orbit[\group]{E}$ for some finite set $E$. Not every
-\kl{equivariant subset} is \kl{orbit finite}, as shown in
-\cref{ex:orbit-finite}. However, \kl{orbit finite sets} are
-robust in the sense that \kl{equivariant subsets} of \kl{orbit finite sets} are
-also \kl{orbit finite}, and similarly, an \kl{equivariant subset} of $E^n$ is
-\kl{orbit finite} whenever $E$ is \kl{orbit finite} and $n \in \N$ is finite.
+\AP An \kl{equivariant subset $S\subseteq \poly{\K}{\Indets}$} is said to be \intro{orbit finite} if it is the union of finitely many \intro{orbits} under the action of $\aut{\Indets}$.
+We denote $\intro*\orbit{E}$ for the set of all elements $\gelem(x)$ for $\gelem \in \aut{\Indets}$ and $x \in E$. Equivalently, an \reintro{orbit finite set}
+is a set of the form $\orbit{E}$ for some finite set $E\subseteq \poly{\K}{\Indets}$.
+%Not every \kl{equivariant subset} is \kl{orbit finite}, as shown in \cref{ex:orbit-finite}.
+%However, \kl{orbit finite sets} are
+%robust in the sense that \kl{equivariant subsets} of \kl{orbit finite sets} are
+%also \kl{orbit finite}, and similarly, an \kl{equivariant subset} of $E^n$ is
+%\kl{orbit finite} whenever $E$ is \kl{orbit finite} and $n \in \N$ is finite.
+%\arka{only for oligomorphic}
 For algorithmic purposes, \kl{orbit finite sets} are those that can be taken
 as input as a finite set of representatives (one for each orbit). The notions
 of \kl{equivariance} and \kl{orbit finite sets} from a computational
@@ -210,17 +238,15 @@ $\intro*\EqIdlGen{H}$ generated by $H$.
 
 \arka{define the notation $\EqIdlGen{H}$}.
 
-
-
-\begin{example}
-  \label{ex:orbit-finite}
-  Let $\Indets = \N$, and $\group$ be all permutations 
-  that fixes prime numbers. The
-  set of all polynomials whose coefficients sum to $0$ is an 
-  \kl{equivariant ideal}, but it is not \kl{orbit finite},
-  since all the polynomials $x_p - x_q$ for $p \neq q$ primes
-  are in distinct orbits under the action of $\group$.
-\end{example}
+%\begin{example}
+%  \label{ex:orbit-finite}
+%  Let $\Indets = \N$, and $\group$ be all permutations 
+%  that fixes prime numbers. The
+%  set of all polynomials  whose coefficients sum to $0$ is an 
+%  \kl{equivariant ideal}, but it is not \kl{orbit finite},
+%  since all the polynomials $x_p - x_q$ for $p \neq q$ primes
+%  are in distinct orbits under the action of $\group$.
+%\end{example}
 
 \AP A function $f \colon X \to Y$ between two sets $X$ and $Y$ equipped with
 actions $\group \actson X$ and $\group \actson Y$ is said to be
@@ -233,23 +259,26 @@ an \kl{equivariant function} is \kl{orbit finite}, and that the algorithms that
 we will develop in this paper are all \kl(func){equivariant}.
 
 \subsection{Computability assumptions.}
-\AP We say that the action is
-\intro{effectively oligomorphic} if:
+%
+We identify a tuple $(x_1,\dots,x_n)\in \Indets^n$ with the monomial $x_1 x_2^2 \dots x_n^{2^n} \in \mon{\Indets}$.
+We say that $\Indets$ is \intro{effectively oligomorphic} if:
 %
 \begin{enumerate}
 \item It is \intro{oligomorphic}, i.e.\ for every $n \in \N$,
 $\Indets^n$ is \kl{orbit finite},
 \item There exists an algorithm that decides whether two elements $\vec{x},
-\vec{y} \in \Indets^*$ are in the same orbit under the action of 
-$\group$ on $\Indets^*$.
+\vec{y} \in \Indets^n$ are in the same orbit under the action of 
+$\group$ on $\Indets^n$.
 \item There exists an algorithm which, on input $n\in\N$, outputs a set
 $A \subseteqfin \Indets^n$ such that $|A\cap U| = 1$ for every orbit
 $U \subseteq \Indets^n$.
 \end{enumerate}
-In particular, $\Indets$ itself is \kl{orbit finite} under the action of $\group$.
+%In particular, $\Indets$ itself is \kl{orbit finite} under the action of $\group$.
+The structure $\Indets$ is called \intro{ordered} if one of the relations of $\Indets$ is a total order.
 
 
-A group action $\group \actson \X$ is said to be \intro(ord){compatible}
+
+$\group \actson \X$ is said to be \intro(ord){compatible}
 with an ordering $\leq$ on $\X$ if for all $\gelem \in \group$ and $x,y \in
 \X$, we have $x \leq y$ if and only if $\gelem \cdot x \leq \gelem \cdot y$.
 Let us point out that in this case, $\revlexleq$ is also \kl(ord){compatible} with
