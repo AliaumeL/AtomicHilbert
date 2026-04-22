@@ -24,6 +24,7 @@ jobs:
           root_file: |
             atomic.tex
             atomic.sigconf.tex
+            atomic.lipics.tex
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
@@ -31,3 +32,4 @@ jobs:
           path: |
             atomic.pdf
             atomic.sigconf.pdf
+            atomic.lipics.tex
