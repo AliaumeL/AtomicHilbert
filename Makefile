@@ -24,6 +24,14 @@ $(PAPER).tex: $(SRC) ./paper-meta.yaml
 		   -o $(PAPER).tex \
 		   $(PAPER).md
 
+atomic.lipics.tex: $(SRC) ./paper-meta.yaml
+	pandoc -t latex \
+		   --output $(PAPER).lipics.tex \
+		   --defaults lipics \
+		   --metadata-file=./paper-meta.yaml \
+		   --wrap=none \
+		   $(PAPER).md
+
 $(PAPER).sigconf.tex: $(SRC) ./paper-meta.yaml
 	pandoc -t latex \
 		     --output $(PAPER).sigconf.tex \
