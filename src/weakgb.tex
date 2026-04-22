@@ -3,16 +3,13 @@
 \section{Weak Equivariant Gröbner Bases}
 \label{sec:weakgb}
 %
-\AP In this section we prove that a natural adaptation of \kl{Buchberger's
-algorithm} to the equivariant setting computes a \kl{weak equivariant Gröbner
-basis} of an \kl{equivariant ideal}. This can be seen as an analysis of the
-classical algorithm in the equivariant setting. We assume for the rest of
-the section that $\Indets$ is a set of indeterminates equipped with a group
-$\group$ acting \kl{effectively oligomorphically} on $\X$, and that $\X$ is
-equipped with a total ordering $\varleq$ that is \kl(ord){compatible} with the
-action of $\group$. The crucial object of this section is the notion of
-\kl{decomposition} of a polynomial with respect to a set $H$.
+\AP In this section we prove that a natural adaptation of \kl{Buchberger's algorithm} to the equivariant setting computes a \kl{weak equivariant Gröbner basis} of an \kl{equivariant ideal}.
+This can be seen as an analysis of the classical algorithm in the equivariant setting.
+We assume for the rest of the section that $\Indets$ is an \kl{effectively oligomorphic} \kl{ordered relational structure}.
+The crucial object of this section is the notion of \kl{decomposition} of a polynomial with respect to a set $H$.
 
+We also assume that the monomials are ordered by some \kl{term order} such as the \kl{lexicographic ordering}.
+%
 \begin{definition}
   \label{def:decomposition}
   Let $H$ be a set of polynomials. A \intro{decomposition} of $p$
@@ -53,25 +50,23 @@ r$ if and only if there exists $q \in H$, $a \in \K$, and $\monelt \in
 \mon{\X}$ such that $p = a \monelt q + r$, $\dom(r) \subseteq \dom(p)$, and
 $\lm[\Indets](r) \revlexlt \lm[\Indets](p)$. To simplify the
 notations, we write $r \intro*\pmonlt p$ to denote $\dom(r) \subseteq
-\dom(p)$, and $\lm[\Indets](r) \revlexlt \lm[\Indets](p)$, leaving the
+\dom(p)$, and $\lm[\Indets](r) \colexlt \lm[\Indets](p)$, leaving the
 ordered set of indeterminates $\Indets$ implicit.
 The relation $\pmonleq$ is extended to decompositions by using 
 the analogues of $\dom$ and $\lm$ for decompositions.
 
 \begin{lemma}
   \label{lem:chm}
-  The quasi-ordering $\pmonleq$ is \kl(ord){compatible} with the action of $\group$,
+  The quasi-ordering $\pmonleq$ is equivariant,
   and is well-founded on polynomials, and on \kl{decompositions} of polynomials.
 \end{lemma}
 \begin{proof}
-  The first property is immediate because $\dom$, $\lm$, and $\revlexleq$ are
-  compatible with the group action $\group$. 
-  The second property follows from the fact that $\revlexlt$ is a total
-  well-founded ordering whenever one has fixed finitely many possible 
-  indeterminates. In a decreasing sequence, the support of the leading 
-  monomials is also decreasing, so that sequence contains only finitely many 
-  indeterminates, hence we conclude.
-  The same proof works for decompositions.
+  The first property is immediate because $\dom$, $\lm$, and $\revlexleq$ are equivariant. 
+  The second property follows from the fact that $\revlexlt$ is a total well-founded ordering whenever one has fixed finitely many possible indeterminates.
+In a decreasing sequence, the support of the leading monomials is also decreasing,
+so that sequence contains only finitely many indeterminates,
+hence we conclude.
+The same proof works for decompositions.
 \end{proof}
 
 \AP As a consequence of \cref{lem:chm}, we know that the rewriting relation
@@ -132,15 +127,14 @@ as in \cref{eq:spoly}.
 \end{lemma}
 
 
-Remark that the \kl{S-polynomial} is equivariant: if $\gelem \in \group$, then
-$\spoly{\gelem \cdot p}{\gelem \cdot q} = \gelem \cdot \spoly{p}{q}$. Given a
-set $H$, we write $\intro*\spolyset(H) \defined \bigcup_{p,q \in H}
-\rem{H}{\spoly{p}{q}}$. We are now ready to define the saturation algorithm
-that computes \kl{weak equivariant Gröbner bases}, described in
-\cref{alg:weakgb}.
-Let us remark that \cref{alg:weakgb}
-is an actual algorithm (\cref{lem:weakgb-computable}) that is
-\kl(func){equivariant}.
+Remark that the \kl{S-polynomial} is equivariant:
+if $\gelem \in \aut{\Indets}$,
+then $\spoly{\gelem(p)}{\gelem(q)} = \gelem(\spoly{p}{q})$.
+Given a set $H$, we write $\intro*\spolyset(H) \defined \bigcup_{p,q \in H}
+\rem{H}{\spoly{p}{q}}$.
+We are now ready to define the saturation algorithm that computes \kl{weak equivariant Gröbner bases},
+described in \cref{alg:weakgb}.
+Let us remark that \cref{alg:weakgb} is an actual algorithm (\cref{lem:weakgb-computable}) that is \kl(func){equivariant}.
 
 \begin{algorithm}
   \caption{Computing \kl{weak equivariant Gröbner bases} using the algorithm \intro{weakgb}.}
