@@ -51,6 +51,19 @@ classification:
     - id: "10003752.10003766.10003770"
       priority: 500
       desc: "Theory of computation Automata over infinite objects"
+  acm_12:
+  - id: "10002950.10003714.10003715.10003720.10003747"
+    desc: "Gröbner bases and other special bases"
+  - id: "10010147.10010148.10010164.10010168"
+    desc: "Representation of polynomials"
+  - id: "10003752.10010124.10010138.10010142"
+    desc: "Program verification"
+  - id: "10003752.10003790.10011192"
+    desc: "Verification by model checking"
+  - id: "10003752.10003766.10003770"
+    desc: "Automata over infinite objects"
+  - id: "10003752.10003766.10003773"
+    desc: "Automata extensions"
 keywords:
   - equivariant ideal
   - Hilbert basis
