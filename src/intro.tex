@@ -3,22 +3,20 @@
 %
 \section{Introduction}
 %
-Let $\K$ be a field and $\Indets$ be an infinite set of variables.
-Let $\monoid$ be a monoid acting injectively on $\Indets$ (i.e.\
-the function $x\mapsto \gelem\cdot x$ is injective for every $\gelem\in\monoid$.
+Let $\K$ be a field and $\Indets$ be a countably infinite set of variables.
+Let $\monoid$ be a monoid acting injectively on $\Indets$
+(i.e., the function $x\mapsto \gelem\cdot x$ is injective for every $\gelem\in\monoid$.
 An ideal in $\poly{\K}{\Indets}$ is called $\monoid$-equivariant if it is invariant under the action of $\monoid$.
-
-No example in intro
-
-Orbit-finite gen set
-
-Cohen
-
-Aschenbrenner
-
-Hillar Sullivant
-
-Snowden and GL24
+In \cite{COHEN67} Cohen showed finite generation of $\inc{\N}$-equivariant ideals where $\inc{\N}$ is the monoid of strictly monotonic functions from $\N$ to itself and the action on $\Indets = \{x_1,x_2,\dots\}$ is defined as$\gelem \cdot x_i = x_{\gelem(i)}$ for $\gelem \in \inc{\N}$ and $x_i\in \Indets$.
+Let $\symgr{\Indets}$ denote the group of all permutations of permutations $\Indets$.As a corollary of Cohen's result one gets that $\symgr{\Indets}$-equivariant ideals are also finitely generated since every $\symgr{\Indets}$-equivariant ideal is also $\inc{\N}$-equivariant.
+The results of Cohen was rediscovered in \cite{AH07} and generalised in \cite{HISU12} which proved finite generation of $\monoid$-equivariant ideals when the action of $\monoid$ preserves an well-order $\prec$ on $\Indets$(i.e., $\gelem \cdot x \prec \gelem \cdot y$ for every $x \prec y$) and the divisibility up to $\monoid$ relation is a well-quasi-order on the set $\mon{\Indets}$ of monomials in $\Indets$.
+This result was further generalised in \cite{LAUSNO23} and \cite{GHOLAS24} which showed that:
+\begin{enumerate}
+\item $\monoid$-equivariant ideals are finite generated when the action of $\monoid$ preserves an total order (which need not be well-founded) $\prec$ on $\Indets$ and the divisibility up to $\monoid$ relation is a well-quasi-order on $\mon{\Indets}$.
+\item Conversely, if $\monoid$-equivariant ideals are finite generated then the divisibility up to $\monoid$ relation is a well-quasi-order on $\mon{\Indets}$.
+\end{enumerate}
+%
+It has been conjectured by Pouzet that   ... only with monomials (div is refined) ....
 
 
 %
