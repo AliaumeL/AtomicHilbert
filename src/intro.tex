@@ -6,18 +6,72 @@
 Let $\K$ be a field and $\Indets$ be a countably infinite set of variables.
 Let $\monoid$ be a monoid acting injectively on $\Indets$
 (i.e., the function $x\mapsto \gelem\cdot x$ is injective for every $\gelem\in\monoid$.
+
+\arka{Would it make the notations easier if $\monoid$ is considered as a sub-monoid of injections}
+
 An ideal in $\poly{\K}{\Indets}$ is called $\monoid$-equivariant if it is invariant under the action of $\monoid$.
-In \cite{COHEN67} Cohen showed finite generation of $\inc{\N}$-equivariant ideals where $\inc{\N}$ is the monoid of strictly monotonic functions from $\N$ to itself and the action on $\Indets = \{x_1,x_2,\dots\}$ is defined as$\gelem \cdot x_i = x_{\gelem(i)}$ for $\gelem \in \inc{\N}$ and $x_i\in \Indets$.
-Let $\symgr{\Indets}$ denote the group of all permutations of permutations $\Indets$.As a corollary of Cohen's result one gets that $\symgr{\Indets}$-equivariant ideals are also finitely generated since every $\symgr{\Indets}$-equivariant ideal is also $\inc{\N}$-equivariant.
-The results of Cohen was rediscovered in \cite{AH07} and generalised in \cite{HISU12} which proved finite generation of $\monoid$-equivariant ideals when the action of $\monoid$ preserves an well-order $\prec$ on $\Indets$(i.e., $\gelem \cdot x \prec \gelem \cdot y$ for every $x \prec y$) and the divisibility up to $\monoid$ relation is a well-quasi-order on the set $\mon{\Indets}$ of monomials in $\Indets$.
-This result was further generalised in \cite{LAUSNO23} and \cite{GHOLAS24} which showed that:
+In \cite{COHEN67} Cohen showed finite generation of $\inc{\N}$-equivariant ideals where $\inc{\N}$ is the monoid of strictly monotonic functions from $\N$ to itself and the action on $\Indets = \{x_1,x_2,\dots\}$ is defined as $\gelem \cdot x_i = x_{\gelem(i)}$ for $\gelem \in \inc{\N}$ and $x_i\in \Indets$.
+Let $\symgr{\Indets}$ denote the group of all permutations of permutations $\Indets$.
+As a corollary of Cohen's result one gets that $\symgr{\Indets}$-equivariant ideals are also finitely generated since every $\symgr{\Indets}$-equivariant ideal is also $\inc{\N}$-equivariant.
+The results of Cohen were rediscovered in \cite{AH07} and generalised in \cite{HISU12,LAUSNO23,GHOLAS24}.
+
+To explain the results we need to give a few definitions.
+We say that the action $\monoid\actson\Indets$ is:
 \begin{enumerate}
-\item $\monoid$-equivariant ideals are finite generated when the action of $\monoid$ preserves an total order (which need not be well-founded) $\prec$ on $\Indets$ and the divisibility up to $\monoid$ relation is a well-quasi-order on $\mon{\Indets}$.
-\item Conversely, if $\monoid$-equivariant ideals are finite generated then the divisibility up to $\monoid$ relation is a well-quasi-order on $\mon{\Indets}$.
+\item \intro{ordered} if it respects a total order $\prec$ on $\Indets$ (i.e., $\gelem \cdot x \prec \gelem \cdot y$ for every $x \prec y$ and $\gelem\in\monoid$),
+\item \intro{well-ordered} if it respects a well-order on $\Indets$,
+\item \intro{nice} if the the divisibility up to $\monoid$ relation ($\monelt[p] \gdivleq[\monoid] \monelt[q]$ if there exists $\pi\in\monoid$ such that $\pi\cdot\monelt[p]$ divides $\monelt[q]$) is a well-quasi-order on the set $\mon{\Indets}$ of monomials in $\Indets$,
+\item \intro{nicely ordered} if it is \kl{nice} and \kl{ordered},
+\item \intro{nicely well-ordered} if it is \kl{nice} and \kl{well-ordered}.
 \end{enumerate}
 %
-It has been conjectured by Pouzet that   ... only with monomials (div is refined) ....
+The article \cite{HISU12} showed proved $\monoid$-equivariant ideals are finitely generated when $\monoid\actson\Indets$ is \kl{nicely well-ordered}.
+This result was further generalised in \cite{LAUSNO23,GHOLAS24} which showed that:
+\begin{enumerate}
+\item $\monoid$-equivariant ideals are finite generated when $\monoid\actson\Indets$ is \kl{nicely ordered} (i.e., they get rid of the well-foundedness condition on the ordering on variables).
+\item Conversely, if $\monoid$-equivariant ideals are finite generated then $\monoid\actson\Indets$ is \kl{nice}.
+\end{enumerate}
+%
+It has been conjectured by Pouzet that if $\monoid\actson\Indets$ is \kl{nice},
+then there exists another monoid $\mathcal{N}$ acting on $\Indets$ such that 
+\begin{enumerate}
+\item $\monelt[p] \gdivleq[\mathcal{N}] \monelt[q]$ implies $\monelt[p] \gdivleq[\monoid] \monelt[q]$,
+\item $\mathcal{N}\actson\Indets$ is \kl{nicely ordered}. 
+\end{enumerate}
+%
+Monoid actions $\monoid\actson\Indets$ satisfying these conditions will be called \intro{nicely orderable}.
+\begin{remark}
+It is tempting to conjecture that $\mathcal{N}$ can even be a sub-monoid of $\monoid$.
+However this stronger conjecture would be false as there is no sub-monoid $\mathcal{N}$ of the group of finitary permutations of $\Indets$ (permutations $\pi$ that $\pi(x) \neq x$ only for finitely many $x\in\Indets$) that satisfy the two above conditions.
+Observe however $\inc{\N}$ is a monoid that satisfies these conditions but is not a sub-monoid of the group of finitary permutations.
+\end{remark}
+%
+\begin{example}
+We give an example of a \kl{nicely ordered} action that is not well-ordered.
+Let $\prec$ be a dense linear order on $\Indets$ without endpoints (such an order can be constructed from a bijection of $\Indets$ with the set of rational numbers), and $\monoid$ be the set of all strictly monotonic bijections from $\Indets$ to itself.
+Clearly $\monoid\actson\Indets$ is not well-ordered.
+However $\gdivleq[\monoid]$ is a well-quasi-order on $\mon{\Indets}$ due to Higman's lemma.
+\end{example}
+%
+The result of \cite{HISU12} was extended in \cite{BRDR11} which defined Gr\"{o}bner bases for $\monoid$-equivariant ideals and showed that they are finite and computable by an appropriate extension of the classical Buchberger's algorithm in the equivariant setting when $\monoid\actson\Indets$ is \kl{nicely well-ordered} and satisfies certain computability conditions that are necessary for running the equivariant Buchberger's algorithm.
+This paper aims to extend the results of \cite{LAUSNO23,GHOLAS24} and generalise the results of \cite{BRDR11} to the case when the action of $\monoid$ preserves a total order on $\Indets$ (which need not be well-founded) and $\gdivleq[\monoid]$ is a well-quasi-order.
+%
+\subsection{Contributions}
+\arka{cite theorems and sections}
 
+As our first main result we define Gr\"{o}bner bases for $\monoid$-equivariant ideals and show that when $\monoid\actson\Indets$ is \kl{nicely ordered} and satisfies certain computability criterions,
+every $\monoid$-equivariant ideal has a finite Gr\"{o}bner basis and
+there is an algorithm that takes a finite set $H\subseteq\poly{\K}{\Indets}$ as input and outputs a finite Gr\"{o}bner base for $\monoid$-equivariant ideal generated by $H$.
+As a corollary of our results we get that the $\monoid$-equivariant ideal membership problem is decidable.
+Moreover, given finite Gr\"{o}bner bases for $\monoid$-equivariant ideals $\idl[I]$ and $\idl[J]$ one can compute finite Gr\"{o}bner bases for $\monoid$-equivariant ideals generated by $\idl[I]\cup\idl[J]$, $\idl[I]\cap\idl[J]$ and $\idl[I]\idl[J]$.
+
+We complement our positive results by giving a sufficient condition on $\monoid\actson\Indets$ for the undecidability of the $\monoid$-equivariant ideal membership problem.
+This sufficient condition is satisfied by most common actions $\monoid\actson\Indets$ which are not \kl{nice} (and hence there are $\monoid$-equivariant ideals that are not finitely generated). 
+
+Finally, we sketch some applications of our results for solving the membership problem for orbit-finitely spanned vector spaces that has received the attention of the theoretical computer science community in recent years.
+%
+\subsection{Comparison with previous work}
+%
 
 %
 \section{Introduction}
