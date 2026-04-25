@@ -70,11 +70,20 @@ Finally, we sketch some applications of our results for solving the membership p
 %
 \subsection{Comparison with previous work}
 %
-only ideal memb, no undec, no grob,
+We quickly describe how we improve the state of the art on Gr\"{o}bner bases by comparing our results to our immediate predecessors \cite{GHOLAS24,BRDR11}
 
-dense tree does not work
+In addition to proving finite generation of $\monoid$-equivariant ideals \cite{GHOLAS24} also show that for some specific \kl{nicely ordered} actions $\monoid\actson\Indets$,
+one can reduce the $\monoid$-equivariant ideal membership problem to the $\mathcal{N}$-equivariant ideal membership problem for some nicely well-ordered action $\mathcal{N}\actson\Indets$ (we point the reader to \arka{refer} for more details).
+However, it is unclear whether their technique can be generalised to the class of \kl{nicely ordered} actions,
+at least the authors of \cite{GHOLAS24} do not claim that to be the case.
+In particular, it seems difficult to extend the technique of \cite{GHOLAS24} to \kl{nicely ordered} actions $\monoid\actson\Indets$ where $\Indets$ is the structure of a densely coloured linear order/the ordered dense meet tree and $\monoid$ is the group of automorphisms of the structure.
+ 
+Furthermore, the reduction to the nicely well-ordered actions only solves the ideal membership problem.
+Extending the notion of Gr\"{o}bner base to the general setting of \kl{nicely ordered} actions allows us to also show effectivity of simple operations as sum and intersection of equivariant ideals,
+which would not be possible using the results of \cite{GHOLAS24}.
+At the same time it opens up the opportunity to extend complicated operations such as computing the primary decomposition and radical of ideals to the equivariant setting. 
 
-example with dlo and dense tree that naive buchberger does not work
+
 
 diff with well-order
 %
