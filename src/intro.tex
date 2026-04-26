@@ -5,11 +5,12 @@
 %
 Let $\K$ be a field and $\Indets$ be a countably infinite set of variables.
 Let $\monoid$ be a monoid acting injectively on $\Indets$
-(i.e., the function $x\mapsto \gelem\cdot x$ is injective for every $\gelem\in\monoid$.
+(i.e., the function $x\mapsto \gelem\cdot x$ is injective for every $\gelem\in\monoid$).
 
 An ideal in $\poly{\K}{\Indets}$ is called $\monoid$-equivariant if it is invariant under the action of $\monoid$.
+For instance, the ideal of polynomials in $\poly{\K}{\Indets}$ whose coefficients add up to zero is a $\symgr{\Indets}$-equivariant ideal,
+where $\symgr{\Indets}$ denotes the group of all permutations of permutations $\Indets$.
 In \cite{COHEN67} Cohen showed finite generation of $\inc{\N}$-equivariant ideals where $\inc{\N}$ is the monoid of strictly monotonic functions from $\N$ to itself and the action on $\Indets = \{x_1,x_2,\dots\}$ is defined as $\gelem \cdot x_i = x_{\gelem(i)}$ for $\gelem \in \inc{\N}$ and $x_i\in \Indets$.
-Let $\symgr{\Indets}$ denote the group of all permutations of permutations $\Indets$.
 As a corollary of Cohen's result one gets that $\symgr{\Indets}$-equivariant ideals are also finitely generated since every $\symgr{\Indets}$-equivariant ideal is also $\inc{\N}$-equivariant.
 The results of Cohen were rediscovered in \cite{AH07} and generalised in \cite{HISU12,LAUSNO23,GHOLAS24}.
 
@@ -23,6 +24,11 @@ We say that the action $\monoid\actson\Indets$ is:
 \item \intro{nicely well-ordered} if it is \kl{nice} and \kl{well-ordered}.
 \end{enumerate}
 %
+The action $\symgr{\Indets}\actson\Indets$ is \kl{nice} but is not \kl{ordered}.
+The action of $\inc{\N}$ mentioned above is \kl{nicely well-ordered}.
+In \arka{refer sec} we discuss several examples of monoid actions and discuss which of the above properties they satisfy.
+
+
 The article \cite{HISU12} showed proved $\monoid$-equivariant ideals are finitely generated when $\monoid\actson\Indets$ is \kl{nicely well-ordered}.
 This result was further generalised in \cite{LAUSNO23,GHOLAS24} which showed that:
 \begin{enumerate}
@@ -83,9 +89,32 @@ Extending the notion of Gr\"{o}bner base to the general setting of \kl{nicely or
 which would not be possible using the results of \cite{GHOLAS24}.
 At the same time it opens up the opportunity to extend complicated operations such as computing the primary decomposition and radical of ideals to the equivariant setting. 
 
+Let us now explain the difficulty in generalising the concepts of \kl{Gr\"{o}bner bases} and \kl{Buchberger's algorithm} from \kl{nicely well-ordered} actions to \kl{nicely ordered actions}.
+When the action $\monoid\actson\Indets$ preserves an well-order $\prec$ on $\Indets$,
+one can define a well-order on $\mon{\Indets}$ which is compatible with the monoid action and divisibility,
+by extending $\prec$ to $\mon{\Indets}$ by the co-lex ordering or grevlex ordering
+(one must be careful here since some other monomial ordering such as lex are not well-order on $\mon{\Indets}$ when $\Indets$ is infinite).
+In the case when the action $\monoid\actson\Indets$ is \kl{nicely ordered} and neither the order $\prec$ preserved by $\monoid\actson\Indets$ nor its reverse is well-founded,
+it is not possible to define a well-order on $\Indets$ which is compatible with the action as any such order must agree with $\prec$ or its reverse
+(for instance co-lex agrees with $\prec$ and lex agrees with its reverse).
+This means that sequence of reductions may not terminate.
+%
+\arka{maybe it's too early for an example}
+\begin{example}
+Assume $(\Indets,\prec)$ is a dense linear order without endpoints.
+If we try to reduce any polynomial $x\in\poly{\K}{\Indets}$ using the set of polynomials $\setof{y - z}{y \prec z}$ we get an infinite sequence
+$x \xrightarrow{} x_1 \xrightarrow{} x_2 \xrightarrow{}\dots$
+for some $x \succ x_1 \succ x_2 \succ\dots$. 
+\end{example}
+%
+\arka{fin-gen not possible, so orb-fin gen}
 
 
-diff with well-order
+To make reductions terminating we disallow reductions to introduce new variables.
+But now for a set $\basis$ of polynomials to be a Gr\"{o}bner basis of an ideal $\idl[I]$,
+the leading monomial of $\idl[I]$
+%
+\subsection{Related research}
 %
 \subsection{Organisation of the article}
 %
