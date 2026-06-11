@@ -1,5 +1,35 @@
 %!TEX root = ../atomic_jsc.tex
 % LTeX: language=en
+\section{Equivariant Gr\"{o}bner bases}
+%
+In this section we give the definition and study basic properties of equivariant Gr\"{o}bner bases of $\monoid$-equivariant ideals in $\poly{\K}{\Indets}$ where $\monoid\actson\Indets$ is a \kl{nicely ordered} monoid action.
+To illustrate the definition and the properties,
+we use the action $\inc{\OrderAtoms}\actson{\OrderAtoms}$.
+\arka{use the same notation in the intro?}
+Here, $\OrderAtoms$ denotes the set of rational numbers and $\inc{\OrderAtoms}$ denotes the set of strictly monotonic functions from $\OrderAtoms$ to itself.
+We use the symbol $\OrderAtoms$ to emphasise the fact that here it is considered as a set with a linear order and not a field.
+In the latter case we use the symbol $\Q$.
+The action $\inc{\OrderAtoms}\actson{\OrderAtoms}$ is \kl{ordered} by definition,
+but clearly not \kl{well ordered}.
+It is however \kl{nicely ordered}.
+For an intuitive argument,
+$x^{k_1}_1\dots x^{k_m}_m\gdivleq[\inc{\OrderAtoms}]y^{\ell_1}_1\dots y^{\ell_n}_n$ for monomials $x^{k_1}_1\dots x^{k_m}_m$ and $y^{\ell_1}_1\dots y^{\ell_n}_n$ in $\poly{\K}{\OrderAtoms}$ with $x_1 < \dots < x_m \in\OrderAtoms$ and $y_1 < \dots y_n \in\OrderAtoms$
+(i.e., there exists $\pi\in\inc{\OrderAtoms}$ such that $\pi(x_1)^{k_1}\dots \pi(x_m)^{k_m}$ divides $y^{\ell_1}_1\dots y^{\ell_n}_n$)
+if and only if the sequence $k_1\dots k_m$ is smaller than the sequence $\ell_1\dots \ell_n$ in the subsequence ordering (i.e., there exists $1 \leq r_1 < \dots < r_m \leq n$ such that $k_i \leq \ell_{r_i}$ for all $i\in\{1,\dots,m\}$).
+Since the subsequence ordering is a \kl{well-quasi-order},
+$\gdivleq[\inc{\OrderAtoms}]$ is also so.
+ 
+In \arka{cite section} we make this intuitive argument formal and show how it can be generalised to prove that some other monoid actions are also \kl{nicely ordered}.
+%
+\arka{push later}
+\begin{lemma}
+The action $\inc{\OrderAtoms}\actson{\OrderAtoms}$ is \kl{nicely ordered}.
+\end{lemma}
+%
+\begin{proof}
+through an equivariant map from monomials to a wqo 
+\end{proof}
+%
 \section{Weak Equivariant Gröbner Bases}
 \label{sec:weakgb}
 
