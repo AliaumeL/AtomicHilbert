@@ -43,6 +43,56 @@ There must exist $i < j$ such that $\varphi(\monelt[p]_i) \leq \varphi(\monelt[p
 But then $\monelt[p]_i \gdivleq \monelt[p]_j$.
 \end{proof}
 %
+Let $\varleq$ denote the total order on $\Indets$ that is preserved by $\monoid\actson\Indets$.
+A monomial $\monelt[p]\in\mon{\Indets}$ is sometimes considered as a function from $\Indets$ to $\N$,
+where $\monelt[p](x)$ is the exponent of $x$ in $\monelt[p]$.
+For instance, if $\monelt[p] = x^2y$ then $\monelt[p](x) = 2$, $\monelt[p](y) = 1$ and $\monelt[p](z) = 0$ for all $z\neq x,y$.
+Using $\varleq$, we define the \intro{co-lexicographic} (colex) ordering on monomials as
+follows: $\monelt[n] \intro*\revlexlt \monelt[m]$ if there exists an
+indeterminate $x \in \Indets$ such that $\monelt[n](x) < \monelt[m](x)$, and such
+that for every $y \in \Indets$, if $x \varlt y$ then $\monelt[n](y) =
+\monelt[m](y)$.
+For example,
+for $x \varlt y \varlt z \in\Indets$ we have
+$x^2 y \revlexlt xy^2 \revlexlt z \revlexlt y^2z$.
+%
+Since $\varleq$ is not assumed to be a well-order and $x \varlt y$ implies $x \revlexlt y$ for $x,y\in\Indets$,
+$\revlexleq$ can not be guaranteed to be a well-order.
+However, it is still well-behaved with respect to multiplication.
+\begin{lemma}
+For every $\monelt[p],\monelt[q],\monelt[r]$ we have
+\begin{enumerate}
+\item $1 \revlexleq \monelt[p]$, and
+\item if $\monelt[p] \revlexleq \monelt[q]$ then $\monelt[p]\monelt[r] \revlexleq \monelt[q]\monelt[r]$.
+\end{enumerate}
+\end{lemma}
+%
+In particular if $\monelt[n] \divleq \monelt[m]$ then $\monelt[n] \revlexleq \monelt[m]$. 
+
+\AP We can now use the \kl{reverse lexicographic} ordering to identify particular elements in
+a given polynomial. Namely, for a polynomial $p \in \poly{\K}{\X}$, we define
+the \intro{leading monomial} $\intro*\lm(p)$ of $p$ as the largest monomial
+appearing in $p$ with respect to the \kl{revlex ordering}, and the
+\intro{leading coefficient} $\intro*\lc(p)$ of $p$ as the coefficient of
+$\lm(p)$ in $p$. We then define the \intro{leading term} $\intro*\lt(p)$ of
+$p$ as the product of its \kl{leading monomial} and its \kl{leading
+coefficient}, and the \intro{characteristic monomial} $\intro*\cm(p)$ of $p$ as
+the product of its \kl{leading monomial} and all the indeterminates appearing
+in $p$. We also define the \intro(monomial){domain} of $\monelt[m]$ as the set
+$\intro*\dom(\monelt[m])$ of indeterminates $x \in \X$ such that $\monelt[m](x) \neq
+0$. Because the coefficients and monomial in question are highly dependent on
+the ordering $\varleq$, we allow ourselves to write $\lm[\Indets](p)$ to
+highlight the precise ordered set of variables that was used to compute the
+\kl{leading monomial} of $p$. We extend $\dom$ from 
+monomials to polynomials by defining $\dom(p)$ as 
+the union of the \kl(monomial){domains} of all monomials appearing in $p$.
+%
+\begin{remark}
+The choice of the co-lexicographic ordering to order monomials is not completely arbitrary.
+In \arka{refer to section} we discuss which properties of the co-lexicographic order becomes important for computing equivariant Gr\"{o}bner bases.
+In this section we also show that some other well-known ordering of monomials such as the lexicographic ordering does not have these properties.
+\end{remark}
+%
 \section{Weak Equivariant Gröbner Bases}
 \label{sec:weakgb}
 
