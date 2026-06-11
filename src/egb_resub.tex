@@ -18,16 +18,29 @@ $x^{k_1}_1\dots x^{k_m}_m\gdivleq[\inc{\OrderAtoms}]y^{\ell_1}_1\dots y^{\ell_n}
 if and only if the sequence $k_1\dots k_m$ is smaller than the sequence $\ell_1\dots \ell_n$ in the subsequence ordering (i.e., there exists $1 \leq r_1 < \dots < r_m \leq n$ such that $k_i \leq \ell_{r_i}$ for all $i\in\{1,\dots,m\}$).
 Since the subsequence ordering is a \kl{well-quasi-order},
 $\gdivleq[\inc{\OrderAtoms}]$ is also so.
- 
+
+
 In \arka{cite section} we make this intuitive argument formal and show how it can be generalised to prove that some other monoid actions are also \kl{nicely ordered}.
 %
 \arka{push later}
 \begin{lemma}
-The action $\inc{\OrderAtoms}\actson{\OrderAtoms}$ is \kl{nicely ordered}.
+The relation $\gdivleq[\monoid]$ is a \kl{well-quasi-order} on $\mon{\Indets}$ if and only if there is an equivariant function $\varphi$ from $\mon{\Indets}$ to a well-quasi-order $(P,\leq)$ such that $\monelt[p] \gdivleq \monelt[q]$ if $\varphi(\monelt[p]) \leq \varphi(\monelt[q])$.
 \end{lemma}
 %
 \begin{proof}
-through an equivariant map from monomials to a wqo 
+($\implies$)
+Define a relation $\leq$ in $\setof{\orbit{\monelt[p]}}{\monelt[p]\in\mon{\Indets}}$ as
+\[
+\orbit{\monelt[p]} \leq \orbit{\monelt[q]}
+\quad\text{when}\quad \monelt[p] \gdivleq[\monoid] \monelt[q]
+\]
+If $\gdivleq[\monoid]$ is a \kl{well-quasi-order} then so is $\leq$.
+And the function $\varphi \defined \monelt[p] \mapsto \orbit{\monelt[p]}$ is an equivariant function from $\mon{\Indets}$ to the well-quasi-ordered set $(\setof{\orbit{\monelt[p]}}{\monelt[p]\in\mon{\Indets}},\leq)$ such that $\monelt[p] \gdivleq \monelt[q]$ if and only if $\varphi(\monelt[p]) \leq \varphi(\monelt[q])$.
+
+\noindent($\impliedby$)
+Pick an infinite sequence $\monelt[p]_1,\monelt[p]_2,\dots$ of monomials in $\mon{\Indets}$.
+There must exist $i < j$ such that $\varphi(\monelt[p]_i) \leq \varphi(\monelt[p]_j)$.
+But then $\monelt[p]_i \gdivleq \monelt[p]_j$.
 \end{proof}
 %
 \section{Weak Equivariant Gröbner Bases}
