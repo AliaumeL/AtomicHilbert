@@ -5,7 +5,7 @@
 In this section we give the definition and study basic properties of equivariant Gr\"{o}bner bases of $\monoid$-equivariant ideals in $\poly{\K}{\Indets}$ where $\monoid\actson\Indets$ is a \kl{nicely ordered} monoid action.
 To illustrate the definition and the properties,
 we use the action $\inc{\OrderAtoms}\actson{\OrderAtoms}$.
-\arka{use the same notation in the intro?}
+\arka{use the same notation in the intro? maybe move it earlier}
 Here, $\OrderAtoms$ denotes the set of rational numbers and $\inc{\OrderAtoms}$ denotes the set of strictly monotonic functions from $\OrderAtoms$ to itself.
 We use the symbol $\OrderAtoms$ to emphasise the fact that here it is considered as a set with a linear order and not a field.
 In the latter case we use the symbol $\Q$.
@@ -44,6 +44,7 @@ But then $\monelt[p]_i \gdivleq \monelt[p]_j$.
 \end{proof}
 %
 Let $\varleq$ denote the total order on $\Indets$ that is preserved by $\monoid\actson\Indets$.
+\arka{$\mon{\Indets}$ hasn't been defined yet}
 A monomial $\monelt[p]\in\mon{\Indets}$ is sometimes considered as a function from $\Indets$ to $\N$,
 where $\monelt[p](x)$ is the exponent of $x$ in $\monelt[p]$.
 For instance, if $\monelt[p] = x^2y$ then $\monelt[p](x) = 2$, $\monelt[p](y) = 1$ and $\monelt[p](z) = 0$ for all $z\neq x,y$.
@@ -69,29 +70,30 @@ For every $\monelt[p],\monelt[q],\monelt[r]$ we have
 %
 In particular if $\monelt[n] \divleq \monelt[m]$ then $\monelt[n] \revlexleq \monelt[m]$. 
 
-\AP We can now use the \kl{reverse lexicographic} ordering to identify particular elements in
-a given polynomial. Namely, for a polynomial $p \in \poly{\K}{\X}$, we define
-the \intro{leading monomial} $\intro*\lm(p)$ of $p$ as the largest monomial
-appearing in $p$ with respect to the \kl{revlex ordering}, and the
-\intro{leading coefficient} $\intro*\lc(p)$ of $p$ as the coefficient of
-$\lm(p)$ in $p$. We then define the \intro{leading term} $\intro*\lt(p)$ of
-$p$ as the product of its \kl{leading monomial} and its \kl{leading
-coefficient}, and the \intro{characteristic monomial} $\intro*\cm(p)$ of $p$ as
-the product of its \kl{leading monomial} and all the indeterminates appearing
-in $p$. We also define the \intro(monomial){domain} of $\monelt[m]$ as the set
-$\intro*\dom(\monelt[m])$ of indeterminates $x \in \X$ such that $\monelt[m](x) \neq
-0$. Because the coefficients and monomial in question are highly dependent on
-the ordering $\varleq$, we allow ourselves to write $\lm[\Indets](p)$ to
-highlight the precise ordered set of variables that was used to compute the
-\kl{leading monomial} of $p$. We extend $\dom$ from 
-monomials to polynomials by defining $\dom(p)$ as 
-the union of the \kl(monomial){domains} of all monomials appearing in $p$.
+For a polynomial $p \in \poly{\K}{\X}$,
+we define the \intro{leading monomial} $\intro*\lm(p)$ of $p$ as the largest monomial appearing in $p$ with respect to $\revlexleq$,
+and the \intro{leading coefficient} $\intro*\lc(p)$ of $p$ as the coefficient of $\lm(p)$ in $p$.
+We then define the \intro{leading term} $\intro*\lt(p)$ of $p$ as the product of its \kl{leading monomial} and its \kl{leading coefficient},
+and the \intro{characteristic monomial} $\intro*\cm(p)$ of $p$ as the product of its \kl{leading monomial} and all the indeterminates appearing in $p$.
+We also define the \intro(monomial){domain} of $\monelt[m]$ as the set $\intro*\dom(\monelt[m])$ of indeterminates $x \in \X$ such that $\monelt[m](x) \neq 0$.
+Because the coefficients and monomial in question are highly dependent on the ordering $\varleq$,
+we allow ourselves to write $\lm[\Indets](p)$ to highlight the precise ordered set of variables that was used to compute the \kl{leading monomial} of $p$.
+\arka{is this needed?}
+We extend $\dom$ from monomials to polynomials by defining $\dom(p)$ as the union of the \kl(monomial){domains} of all monomials appearing in $p$.
+%
+\begin{example}
+Say $x \varlt y \varlt z \in \Indets$.
+Let $p = x^2y^3 - \frac{1}{2}y^2z\in\poly{\Q}{\Indets}$.
+Then $\lm(p) = y^2z$, $\lc(p) = -\frac{1}{2}$ and $\lt(p) = - \frac{1}{2}y^2z$.
+\end{example}
 %
 \begin{remark}
 The choice of the co-lexicographic ordering to order monomials is not completely arbitrary.
 In \arka{refer to section} we discuss which properties of the co-lexicographic order becomes important for computing equivariant Gr\"{o}bner bases.
 In this section we also show that some other well-known ordering of monomials such as the lexicographic ordering does not have these properties.
 \end{remark}
+%
+
 %
 \section{Weak Equivariant Gröbner Bases}
 \label{sec:weakgb}
