@@ -56,12 +56,69 @@ is a set of the form $\orbit[\group]{P}$ for some finite set $P$.
 
 The action $\monoid\actson\Indets$ is called \intro{locally oligomorphic} if for every $x_1,\dots,x_n\in\Indets$,
 the subset $\setof{(y_1,\dots,y_n)}{y_k\in\orbit[\monoid]{x_k}}$ is \kl{orbit-finite}.
-The action $\monoid\actson\Indets$ is \intro{effectively locally oligomorphic} if it is \kl{locally oligomorphic} and there exists an algorithm that takes elements $x_1,\dots,x_n\Indets$ as input and outputs a finite set $P$ such that $\setof{(y_1,\dots,y_n)}{y_k\in\orbit[\monoid]{x_k}} = \orbit[\group]{P}$.
+The action $\monoid\actson\Indets$ is \intro{effectively locally oligomorphic} if:
+\begin{enumerate}
+\item it is \kl{locally oligomorphic},
+\item there exists an algorithm to check whether a tuple $(a_1,\dots,a_n)\in\Indets^n$ is inside $\orbit[\monoid]{(b_1,\dots,b_n)}$ for some $(b_1,\dots,b_n)\in\Indets^n$, and
+\item there exists an algorithm that takes elements $a_1,\dots,a_n\Indets$ as input and outputs a finite set $P$ such that $\setof{(y_1,\dots,y_n)}{y_k\in\orbit[\monoid]{x_k}} = \orbit[\group]{P}$.
+\end{enumerate}
 %
-\begin{remark}
-\kl{Local oligomorphicity} is a generalisation of the well-known notion of \kl{oligomorphicity}.
-A group action $\group\actson\Indets$ is called \intro{oligomorphic} if sets of the form $\Indets^n$ is orbit-finite for every $n$.
-\end{remark}
+The following lemma implies that \kl{local oligomorphicity} is a generalisation of the well-known notion of \kl{oligomorphicity} for group actions:
+a group action $\group\actson\Indets$ is called \intro{oligomorphic} if sets of the form $\Indets^n$ is orbit-finite for every $n$.
+This lemma will be followed by examples and non-examples of locally oligomorphic monoid actions. 
+%
+\begin{lemma}\label{lem:oligo loc oligo}
+Let $\group\actson\Indets$ be a \kl{group action}.
+\begin{enumerate}
+\item If $\group\actson\Indets$ is \kl{oligomorphic} then it is \kl{locally oligomorphic}.
+\item If $\Indets$ is \kl{orbit-finite} then $\group\actson\Indets$ is \kl{oligomorphic} if and only if it is \kl{locally oligomorphic}.
+\end{enumerate}
+\end{lemma}
+%
+\begin{lemma}\label{lem:orbit part}
+Let $\group\actson\Indets$ be a group action.
+For $(a_1,\dots,a_n),(b_1,\dots,b_n)\in\Indets^*$,
+\[
+(a_1,\dots,a_n)\in\orbit[\group]{(b_1,\dots,b_n)}
+\quad\iff\quad
+(b_1,\dots,b_n)\in\orbit[\group]{(a_1,\dots,a_n)}
+\]
+\end{lemma}
+%
+\arka{if this lemma is not used anywhere else, make it a claim and push it inside the proof of \Cref{lem:oligo loc oligo}.}
+
+\arka{Maybe we can send the proof of \Cref{lem:oligo loc oligo} to the appendix?}
+%
+\begin{proof}
+If $(a_1,\dots,a_n)\in\orbit[\group]{(b_1,\dots,b_n)}$ then there exists $\gelem\in\group$ such that
+\[
+(\gelem\cdot a_1,\dots,\gelem\cdot a_n) =
+\gelem\cdot(a_1,\dots,a_n) =
+(b_1,\dots,b_n) \ .
+\]
+This means $\gelem\cdot a_i = b_i$ for all $i$.
+This implies
+\[
+\gelem^{-1}\cdot b_i = \gelem^{-1}\cdot(\gelem\cdot a_i) =
+(\gelem^{-1}\gelem)\cdot a_i = \iden[\group]\cdot a_i  = a_i\ .
+\]
+Hence $\gelem^{-1}\cdot(b_1,\dots,b_n) = (a_1,\dots,a_n)$,
+which means $(b_1,\dots,b_n)\in\orbit[\group]{(a_1,\dots,a_n)}$
+\end{proof}
+%
+\arka{fix cleveref error}
+\begin{proof}[Proof of \Cref{lem:oligo loc oligo}]
+\begin{enumerate}
+\item \Cref{lem:orbit part} implies that for every $n$ the set $\Indets^n$ partitions into disjoint orbits.
+Since $\group\actson\Indets$ is oligomorphic we know this partition is finite.
+Let $U_1,\dots,U_N$ be the orbits inside $\Indets^n$.
+Pick $x_1,\dots,x_n\in\Indets$.
+The set $V = \setof{(y_1,\dots,y_n)\in\Indets^n}{y_k\in\orbit[\monoid]{x_k}}$ is an equivariant subset of $\Indets^n$.
+Therefore for every orbit $U_{\ell}$ inside $\Indets^n$ either $U_{\ell} \subseteq V$ or $U_{\ell} \cap V = \emptyset$.
+Therefore $V$ is also a finite union of orbits. 
+\item now
+\end{enumerate}
+\end{proof}
 %
 \begin{example}
 The action $\inc{\OrderAtoms}\actson\OrderAtoms$ is effectively locally oligomorphic.
@@ -73,16 +130,13 @@ Thus, for any subset $S\subseteq\OrderAtoms$ of size $n$,
 we have $\setof{(y_1,\dots,y_n)}{y_k\in\orbit[\monoid]{x_k}} = \OrderAtoms^n = \orbit[\inc{\OrderAtoms}]{S^n}$.
 \end{example}
 %
-\arka{oligo implies localigo for groups. Converse true if transitive. small lemma}
-%
 \begin{example}
 Let $\calZ$ denote the structure of integers with the usual ordering and $\aut{\calZ}$ the group of all order preserving bijections of $\calZ$.
 Then $\aut{\calZ}\actson\calZ$ is not locally oligomorphic.
 For every $a,b,c,d\in\calZ$ we have $(c,d) \in \orbit[\aut{\calZ}]((a,b))$ if and only if $a - b = c - d$.
 Therefore the set $\calZ^2$ splits into infinitely many orbits
-Since $\orbit[\aut{\calZ}]((a,b))
+Since $\orbit[\aut{\calZ}]((a,b))$
 \end{example}
-
 %
 The action $\monoid\actson\Indets$ extends to an action $\monoid\actson\poly{\K}{\Indets}$ in the obvious way.
 For illustration, $\pi\cdot (x^2 + 2y) = (\pi\cdot x)^2 + 2(\pi\cdot y)$.
