@@ -4,6 +4,8 @@
 \label{sec:preliminaries}
 
 %\subsection{Well-quasi-orders}
+\arka{shift just before existence?}
+
 \subsection{Partial orders, ordinals, well-founded sets, and well-quasi-ordered sets.}
 \AP We assume basic familiarity with partial orders, well-founded sets, and ordinals.
 We use the notation $\intro*\om$ for the first infinite ordinal (that is, $(\N, \leq)$), and write $X \intro*\ordplus Y$ for the lexicographic sum of two partial orders $X$ and $Y$
@@ -180,6 +182,7 @@ Usually, we will be interested in actions $\monoid\actson\Indets$ where $\Indets
 For instance, $\inc{\OrderAtoms}\actson\OrderAtoms$ denote the obvious action of the order preserving one-to-one endofunctions on the structure $\OrderAtoms$ of rational numbers with order.
 In \arka{cite sec} we give some more examples of such actions.  
 
+\arka{shift to computability assumptions? Just after writing down theorem?}
 The action $\monoid\actson\Indets$ extends to actions $\monoid\actson\Indets^n$ for $n\in\N$ in the obvious way:
 $\gelem\cdot(x_1,\dots,x_n) = (\gelem\cdot x_1,\dots,\gelem\cdot x_n)$ for $\gelem\in\monoid$ and $x_1,\dots,x_n\in\Indets$.
 A subset $S \subseteq \Indets^n$ is called \intro{$\monoid$-equivariant} if for all $\gelem \in \monoid$ and $f \in S$, we have $\gelem \cdot f\in S$.
@@ -308,30 +311,32 @@ making $\aut{\calZ}\actson\calZ$ not oligomorphic.
 %
 \arka{merge with next section}
 %
+\subsection{Monoid actions}
+%
+A \intro{monoid} $\monoid$ is a set equipped with a binary operation that is associative, and has an identity element.
+In our setting, we are interested in polynomial rings of the form $\poly{\K}{\Indets}$ where $\Indets$ is an infinite set of indeterminates that are equipped with an injective \intro{monoid action} $\monoid \actson \Indets$.
+This means that there is monoid homomorphism $\psi_{\monoid}$ from $\monoid$ to the monoid of one to one endofunctions on $\Indets$.
+Obviously, the same monoid $\monoid$ can act differently on a set $\Indets$.
+However, usually the action $\psi_{\monoid}$ will be clear from the choice of $\monoid$ and $\Indets$ and we will use $\monoid\actson\Indets$ to specify this choice.
+For each $\gelem \in \monoid$, we use $\gelem\cdot x$ to denote $\psi_{\monoid}(\gelem)(x)$.
+Usually, we will be interested in actions $\monoid\actson\Indets$ where $\Indets$ comes with some additional structure and $\monoid$ is the monoid of all structure preserving injective endofunctions/group of all structure preserving bijections on $\Indets$.
+For instance, $\inc{\OrderAtoms}\actson\OrderAtoms$ denote the obvious action of the order preserving one-to-one endofunctions on the structure $\OrderAtoms$ of rational numbers with order.
+In \arka{cite sec} we give some more examples of such actions.
+%
 \subsection{Equivariant ideals}
 %
+We use the notation $\poly{\K}{\Indets}$ for the ring of polynomials with coefficients from a field $\K$ and indeterminates from a set $\Indets$.
 The action $\monoid\actson\Indets$ extends to an action $\monoid\actson\poly{\K}{\Indets}$ in the obvious way.
 For illustration, $\pi\cdot (x^2 + 2y) = (\pi\cdot x)^2 + 2(\pi\cdot y)$.
 A subset $S \subseteq \poly{\K}{\Indets}$ is called \intro{$\monoid$-equivariant} if for all $\gelem \in \monoid$ and $f \in S$,
 we have $\gelem \cdot f\in S$.
-We give in \cref{ex:idl-equiv} an example and a non-example of \intro{equivariant ideals}.
-
-We denote $\intro*\orbit[\monoid]{P}$ for the set of all elements $\gelem \cdot p$ for $\gelem \in \monoid$ and $p \in P$.
-When $E$ is a singleton set ${p}$,
-we write $\orbit[\monoid]{p}$ instead of $\orbit[\monoid]{\{p\}}$.
-An \kl{equivariant set} is said to be \intro{orbit finite} if it is the
-union of finitely many \intro{orbits} under the action of $\monoid$.
-Equivalently, an \reintro{orbit finite set}
-is a set of the form $\orbit[\group]{P}$ for some finite set $P$.
-
+We give in \Cref{ex:idl-equiv} examples and non-examples of $\monoid$-\intro{equivariant ideals}.
+%
 \begin{example}\label{ex:idl-equiv}
-Let $\Indets$ be any infinite set, and $\monoid$ be the 
-    group of all bijections of $\Indets$. 
-    Then the set $S_0 \subset \poly{\K}{\Indets}$ of all polynomials 
-    whose set of coefficients sums to $0$ is an equivariant ideal.
-    Conversely, the set of all polynomials that are multiple
-    of $x \in X$ is an \kl{ideal} that is not \kl{equivariant}.
+The set $S_0 \subset \poly{\K}{\Indets}$ of all polynomials whose set of coefficients sums to $0$ is an $\symgr{\Indets}$-equivariant ideal.
+The set of all polynomials that are multiple of a fixed $x \in \Indets$ is an \kl{ideal} that is not \kl{equivariant}.
 \end{example}
+%
 \begin{proof}
     Let $p,q\in S_0$, and $r \in \poly{\K}{\Indets}$.
     Then, $p \times r + q$ is in $S_0$. Remark that 
@@ -358,23 +363,26 @@ Let $\Indets$ be any infinite set, and $\monoid$ be the
     not belong to the ideal.
 \end{proof}
 \AP
-We denote $\intro*\orbit[\monoid]{P}$ for the set of all elements $\gelem \cdot p$ for $\gelem \in \monoid$ and $p \in P$.
-When $E$ is a singleton set ${p}$,
-we write $\orbit[\monoid]{p}$ instead of $\orbit[\monoid]{\{p\}}$.
-An \kl{equivariant set} is said to be \intro{orbit finite} if it is the
-union of finitely many \intro{orbits} under the action of $\monoid$.
-Equivalently, an \reintro{orbit finite set}
-is a set of the form $\orbit[\group]{P}$ for some finite set $P$. Not every
-\kl{equivariant subset} is \kl{orbit finite}, as shown in
-\cref{ex:orbit-finite}. However, \kl{orbit finite sets} are
-robust in the sense that \kl{equivariant subsets} of \kl{orbit finite sets} are
-also \kl{orbit finite}, and similarly, an \kl{equivariant subset} of $E^n$ is
-\kl{orbit finite} whenever $E$ is \kl{orbit finite} and $n \in \N$ is finite.
-For algorithmic purposes, \kl{orbit finite sets} are those that can be taken
-as input as a finite set of representatives (one for each orbit). The notions
-of \kl{equivariance} and \kl{orbit finite sets} from a computational
-perspective are discussed in \cite{BOJAN16inf}, and we refer the reader to this
-book for a more comprehensive introduction to the topic.
+%
+The orbit of an element $p$ in $\poly{\K}{\Indets}$ is defined as
+\[
+\intro*\orbit[\monoid]{p} \defined
+\setof{\gelem\cdot p}{\gelem\in\monoid} \ .
+\]
+For $P\subseteq \poly{\K}{\Indets}$ we use $\intro*\orbit[\monoid]{P}$ to denote the union of the orbits $\orbit[\monoid]{p}$ for elements in $p$:
+\[
+\orbit[\monoid]{P} = \bigcup_{p\in P}\orbit[\monoid]{p} \ .
+\]
+An \kl{$\monoid$-equivariant set} is said to be \intro{orbit finite} if it is the union of finitely many \intro{orbits} under the action of $\monoid$,
+equivalently, it is a set of the form $\orbit[\group]{P}$ for some finite set $P$.
+Obviously, not every \kl{equivariant subset} is \kl{orbit finite}.
+For instance, $\setof{x^n}{x\in\Indets, n\in\N} \subseteq \poly{\K}{\Indets}$ is $\symgr{\Indets}$-equivariant but is orbit-finite since $x^n$ and $y^m$ can not be in the same orbit when $n=m$.
+
+An
+
+
+
+%
 
 \AP We will mostly be interested in \intro{orbit-finitely generated}
 \kl{equivariant ideals}, i.e.\ \kl{equivariant ideals} that are generated by an
@@ -387,17 +395,6 @@ $\intro*\EqIdlGen{H}$ generated by $H$.
 \arka{define the notation $\EqIdlGen{H}$}.
 
 
-
-\begin{example}
-  \label{ex:orbit-finite}
-  Let $\Indets = \N$, and $\group$ be all permutations 
-  that fixes prime numbers. The
-  set of all polynomials whose coefficients sum to $0$ is an 
-  \kl{equivariant ideal}, but it is not \kl{orbit finite},
-  since all the polynomials $x_p - x_q$ for $p \neq q$ primes
-  are in distinct orbits under the action of $\group$.
-\end{example}
-
 \AP A function $f \colon X \to Y$ between two sets $X$ and $Y$ equipped with
 actions $\group \actson X$ and $\group \actson Y$ is said to be
 \intro(func){equivariant} if for all $\gelem \in \group$ and $x \in X$, we have
@@ -408,10 +405,9 @@ $f(\gelem \cdot x) = \gelem \cdot f(x)$. For instance, the
 an \kl{equivariant function} is \kl{orbit finite}, and that the algorithms that
 we will develop in this paper are all \kl(func){equivariant}.
 %
-\subsection{Existence of equivariant Gröbner bases}
-
-
-\subsection{Divisibility and reduction}
+\subsection{Equivariant Gröbner bases}
+%
+\subsubsection{Divisibility and reduction}
 
 \AP
 We use the notation $\poly{\K}{\Indets}$ for the ring of polynomials with coefficients from a field $\K$ and indeterminates from a set $\Indets$,
@@ -463,6 +459,15 @@ basis} is a \kl{Gröbner basis}.
 \subsection{Computability of equivariant Gr\"{o}bner bases}
 %
 \arka{detailed description of our results}
+
+We denote $\intro*\orbit[\monoid]{P}$ for the set of all elements $\gelem \cdot p$ for $\gelem \in \monoid$ and $p \in P$.
+When $E$ is a singleton set ${p}$,
+we write $\orbit[\monoid]{p}$ instead of $\orbit[\monoid]{\{p\}}$.
+An \kl{equivariant set} is said to be \intro{orbit finite} if it is the
+union of finitely many \intro{orbits} under the action of $\monoid$.
+Equivalently, an \reintro{orbit finite set}
+is a set of the form $\orbit[\group]{P}$ for some finite set $P$.
+%
 %
 %
 %\arka{Does not satisfy the domain condition}
