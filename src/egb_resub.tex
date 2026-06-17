@@ -95,6 +95,18 @@ In this section we also show that some other well-known ordering of monomials su
 %
 \section{Equivariant Buchberger's algorithm}
 %
+
+
+\AP A function $f \colon X \to Y$ between two sets $X$ and $Y$ equipped with
+actions $\group \actson X$ and $\group \actson Y$ is said to be
+\intro(func){equivariant} if for all $\gelem \in \group$ and $x \in X$, we have
+$f(\gelem \cdot x) = \gelem \cdot f(x)$. For instance, the
+\kl(monomial){domain} of a monomial is an \kl{equivariant function}: if $\gelem
+\in \group$, then $\gelem \cdot \dom(\monelt[m]) = \dom(\gelem \cdot
+\monelt[m])$. Let us point out that the image of an \kl{orbit finite set} under
+an \kl{equivariant function} is \kl{orbit finite}, and that the algorithms that
+we will develop in this paper are all \kl(func){equivariant}.
+%
 \section{Weak Equivariant Gröbner Bases}
 \label{sec:weakgb}
 
