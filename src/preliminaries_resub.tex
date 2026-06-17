@@ -187,7 +187,7 @@ Computability follows from the rule of thumb that equivariant functions can be e
 We show how this rule of thumb formalises in our setting.
 Maybe even formalise it?
 Sets with atoms? Takes a lot of formalisms.
-We take a shortcut. Input -> a fixed numbers of (Tuple,string in binary). output similar.
+We take a shortcut. Input = a fixed numbers of (Tuple,string in binary). output similar.
 But which kind of sets. maybe only lower levels in the hierarchy? bounded branching? heriditary finite sets or their orbits}
 The action $\monoid\actson\Indets$ extends to actions $\monoid\actson\Indets^n$ for $n\in\N$ in the obvious way:
 $\gelem\cdot(x_1,\dots,x_n) = (\gelem\cdot x_1,\dots,\gelem\cdot x_n)$ for $\gelem\in\monoid$ and $x_1,\dots,x_n\in\Indets$.
@@ -259,7 +259,6 @@ Hence $\gelem^{-1}\cdot(b_1,\dots,b_n) = (a_1,\dots,a_n)$,
 which means $(b_1,\dots,b_n)\in\orbit[\group]{(a_1,\dots,a_n)}$
 \end{proof}
 %
-\arka{fix cleveref error}
 \begin{proof}[Proof of \Cref{lem:oligo loc oligo}]
 \begin{enumerate}
 \item \Cref{lem:orbit part} implies that for every $n$ the set $\Indets^n$ partitions into disjoint orbits.
@@ -336,38 +335,49 @@ The action $\monoid\actson\Indets$ extends to an action $\monoid\actson\poly{\K}
 For illustration, $\pi\cdot (x^2 + 2y) = (\pi\cdot x)^2 + 2(\pi\cdot y)$.
 A subset $S \subseteq \poly{\K}{\Indets}$ is called \intro{$\monoid$-equivariant} if for all $\gelem \in \monoid$ and $f \in S$,
 we have $\gelem \cdot f\in S$.
-We give in \Cref{ex:idl-equiv} examples and non-examples of $\monoid$-\intro{equivariant ideals}.
+An \intro{$\monoid$-ideal} of $\poly{\K}{\Indets}$ is an ideal of $\poly{\K}{\Indets}$ that is $\monoid$-equivariant.
+We give in \Cref{ex:idl-equiv} examples and non-examples of \kl{$\monoid$-ideals}.
 %
 \begin{example}\label{ex:idl-equiv}
-The set $S_0 \subset \poly{\K}{\Indets}$ of all polynomials whose set of coefficients sums to $0$ is an $\symgr{\Indets}$-equivariant ideal.
-The set $M_x$ of all polynomials that are multiple of a fixed $x \in \Indets$ is an \kl{ideal} that is not \kl{equivariant}.
+\arka{Notational convension for ideal used here}
+The set $\idl[S]_0 \subset \poly{\K}{\Indets}$ of all polynomials whose set of coefficients sums to $0$ is an $\symgr{\Indets}$-ideal.
+The set $\idl[M]_x$ of all polynomials that are multiple of a fixed $x \in \Indets$ is an \kl{ideal} that is not a $\symgr{\Indets}$-ideal.
 \end{example}
 %
 \begin{proof}
-    Let $p,q\in S_0$, and $r \in \poly{\K}{\Indets}$.
-    Then, $p \times r + q$ is in $S_0$. Remark that 
-    $p,r$ and $q$ belong to a subset $\poly{\K}{\Indets}$ of the 
-    polynomials that uses only finitely many indeterminates.
-    In this subset, the sum of all coefficients is obtained
-    by applying the polynomials to the value $1$ for every indeterminate
-    $y \in \Indets$. We conclude that
-    $(p \times r + q)(1,\dots, 1) 
-    = p(1,\dots,1) \times r(1,\dots,1) + q(1,\dots,1)
-    = 0 \times r(1, \dots, 1) + 0 = 0$, hence that
-    $p \times r + q$ belongs to $S_0$. 
-    Because $0$ is in $S_0$, we conclude that $S_0$ is an \kl{ideal}.
-    Furthermore, if $\gelem \in \group$ and $p \in S_0$, then
-    the sum of the coefficients $\gelem \cdot p$ is exactly
-    the sum of the coefficients of $p$, hence is $0$ too.
-    This shows that $S_0$ is \kl(ideal){equivariant}.
+We leave it to the reader to verify that $\idl[S]_0$ is indeed a $\symgr{\Indets}$-ideal.
 
-    It is clear that all multiples of a given polynomial $x \in \Indets$
-    is an ideal of $\poly{\K}{\Indets}$. This is not an \kl{equivariant ideal}:
-    take any bijection $\gelem \in \group$ that does not map $x$ to $x$ (it
-    exists because $\Indets$ is infinite and $\group$ is all permutations),
-    then $\gelem \cdot x$ is not a multiple of $x$, and therefore does 
-    not belong to the ideal.
+To see that $\idl[M]_x$ is not a $\symgr{\Indets}$-ideal pick any variable $y\neq x$.
+Let $\pi_{x,y}\in\symgr{\Indets}$ be the permutation that swaps $x$ and $y$ acts as identity everywhere else.
+Then $\pi_{x,y}\cdot x = y \notin \idl[M]_x$.
 \end{proof}
+
+%
+%\begin{proof}
+%    Let $p,q\in \idl[S]_0$, and $r \in \poly{\K}{\Indets}$.
+%    Then, $p \times r + q$ is in $S_0$. Remark that 
+%    $p,r$ and $q$ belong to a subset $\poly{\K}{\Indets}$ of the 
+%    polynomials that uses only finitely many indeterminates.
+%    In this subset, the sum of all coefficients is obtained
+%    by applying the polynomials to the value $1$ for every indeterminate
+%    $y \in \Indets$. We conclude that
+%    $(p \times r + q)(1,\dots, 1) 
+%    = p(1,\dots,1) \times r(1,\dots,1) + q(1,\dots,1)
+%    = 0 \times r(1, \dots, 1) + 0 = 0$, hence that
+%    $p \times r + q$ belongs to $S_0$. 
+%    Because $0$ is in $S_0$, we conclude that $S_0$ is an \kl{ideal}.
+%    Furthermore, if $\gelem \in \group$ and $p \in S_0$, then
+%    the sum of the coefficients $\gelem \cdot p$ is exactly
+%    the sum of the coefficients of $p$, hence is $0$ too.
+%    This shows that $S_0$ is \kl(ideal){equivariant}.
+%
+%    It is clear that all multiples of a given polynomial $x \in \Indets$
+%    is an ideal of $\poly{\K}{\Indets}$. This is not an \kl{equivariant ideal}:
+%    take any bijection $\gelem \in \group$ that does not map $x$ to $x$ (it
+%    exists because $\Indets$ is infinite and $\group$ is all permutations),
+%    then $\gelem \cdot x$ is not a multiple of $x$, and therefore does 
+%    not belong to the ideal.
+%\end{proof}
 \AP
 %
 The orbit of an element $p$ in $\poly{\K}{\Indets}$ is defined as
@@ -395,6 +405,20 @@ However, as the next example shows,
 this statement does not hold in general for every monoid actions.
 %
 \begin{example}
+Consider the action $\monoid_0\actson\Indets$ where $\monoid_0$ is the trivial monoid,
+i.e., a monoid with identity as its only element.
+Since $\monoid_0$-orbits are singletons,
+any ideal in $\poly{\Q}{\Indets}$ is an $\monoid_0$-ideal
+and an ideal is orbit-finitely generated if and only if it is finitely generated.
+However, if $\Indets$ is infinite,
+there are ideals in $\poly{\Q}{\Indets}$ that are not finitely generated.
+
+For instance, consider the ideal $\idl[I]$ of all polynomials in $\poly{\Q}{\Indets}$ without any constant term.
+Any finite subset $F$ of $\idl[I]$ can not generate $\idl[I]$ since every non-zero polynomial in $\IdlGen{F}$ must use some variable that is used by some polynomial in $F$.
+Therefore, $y\in\idl[I]\setminus\IdlGen{F}$ for any variable $y$ that is not used by any polynomial in $F$.
+\end{example}
+%
+\begin{example}
 Consider the action $\symgr{A}\actson A^2$ where $A$ is an countably infinite set defined as: $\pi\cdot (a,b) = (\pi\cdot a, \pi\cdot b)$.
 We give an example of an $\symgr{A}$-equivariant ideal in $\poly{\Q}{A^2}$ which is not orbit-finitely generated.
 
@@ -410,7 +434,7 @@ Then $\calC$ does not have any orbit-finite set of generators.
 
 \arka{orbit $\mapsto$ $\monoid$-orbit}
 
-\arka{$\monoid$-equivariant ideal $\mapsto$ $\monoid$-ideal}
+\arka{$\monoid$-equivariant ideal $\mapsto$ $\monoid$-ideal?}
 
 \end{example}
 %
