@@ -492,13 +492,36 @@ which leads to a contradiction.
 %
 \section{Hilbert's basis property}
 %
-A monoid action $\monoid\actson\Indets$ is said to satisfy the \intro{Hilbert's basis property} if every \kl{$\monoid$-ideal} in $\poly{\K}{\Indets}$ is \kl{orbit-finitely generated}.
+A monoid action $\monoid\actson\Indets$ is said to satisfy the \intro{Hilbert's basis property} if every \kl{$\monoid$-ideal} in $\poly{\K}{\Indets}$ is \kl{orbit-finitely generated},
+equivalently,
+every strictly increasing sequence of $\monoid$-ideals is finite.
+The equivalence of two definitions can be proven by a minor modification of the proof of equivalence of two definitions of Noetherianity \arka{cite wiki}.
+The meticulous reader can find a proof in the \arka{move the proof to appendix and refer to it}.
+%
+\begin{proof}[Proof of equivalence of two definitions of the Hilbert's basis property]
+
+\end{proof}
+
+%
+
+
 The papers \cite{LAUSNO23,GHOLAS24} give necessary and sufficient conditions for an action $\monoid\actson\Indets$ to have the Hilbert's basis property.
 Below we describe these conditions.
 
 Define the \intro{divisibility up-to $\monoid$} relation ($\intro*\gdivleq[\monoid]$) as follows:
 for $\monelt[p], \monelt[q] \in\mon{\X}$, we write $\monelt[p] \gdivleq \monelt[q]$ if there exists $\gelem \in \monoid$ such that $\gelem \cdot \monelt[p]$ \kl{divides} $\monelt[q]$.
+We say that a monoid action $\monoid \actson \Indets$ is \kl{nice} if $\gdivleq[\monoid]$ is a \kl{well-quasi-order} on $\mon{\Indets}$.
+%
+\begin{theorem}[{\cite[Theorem 11]{GHOLAS24}}]
+If $\monoid\actson\Indets$ has the Hilbert's basis property then it is \kl{nice}.
+\end{theorem}
+%
+The ideas used to prove this theorem will be useful in many of our proofs.
+Thus, we do a quick recall of the proof.
+%
+\begin{proof}
 
+<<<<<<< HEAD
 \AP A monoid action $\monoid \actson \Indets$ is called \intro{nice} if $(\mon{\Indets}, \gdivleq_{\monoid})$ is \kl{well-quasi-ordered}.
 %
 \begin{theorem}[{\cite[Theorem 11]{GHOLAS24}}]
@@ -511,6 +534,11 @@ It is \intro{nicely ordered} if it is \kl{nice} and \kl{ordered}.
 \begin{theorem}[{\cite[Theorem 12]{GHOLAS24}, \cite[theorem ??]{LAUSNO23}}]
 If a monoid action is \kl{nicely ordered} then it has the \kl{Hilbert's basis property}.
 \end{theorem}
+=======
+\end{proof}
+%
+The action $\monoid\actson\Indets$ is said to \intro{preserve a total order} $\varlt$ on $\Indets$ if 
+>>>>>>> d7098fa (conflicting changes)
 %
 \section{Equivariant Gröbner bases}
 %
