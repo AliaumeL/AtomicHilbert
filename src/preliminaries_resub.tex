@@ -314,12 +314,15 @@ making $\aut{\calZ}\actson\calZ$ not oligomorphic.
 %
 \section{Equivariant ideals}
 %
-\arka{merge with next section}
-%
 %\subsection{Monoid actions}
 %
 A \intro{monoid} $\monoid$ is a set equipped with a binary operation that is associative, and has an identity element.
 In our setting, we are interested in polynomial rings of the form $\poly{\K}{\Indets}$ where $\Indets$ is an infinite set of indeterminates that are equipped with an injective \intro{monoid action} $\monoid \actson \Indets$.
+%
+\begin{convention}
+Unless otherwise specified, monoid actions will be assumed to be injective.
+\end{convention}
+%
 This means that there is monoid homomorphism $\psi_{\monoid}$ from $\monoid$ to the monoid of one to one endofunctions on $\Indets$.
 Obviously, the same monoid $\monoid$ can act differently on a set $\Indets$.
 However, usually the action $\psi_{\monoid}$ will be clear from the choice of $\monoid$ and $\Indets$ and we will use $\monoid\actson\Indets$ to specify this choice.
@@ -496,12 +499,18 @@ Below we describe these conditions.
 Define the \intro{divisibility up-to $\monoid$} relation ($\intro*\gdivleq[\monoid]$) as follows:
 for $\monelt[p], \monelt[q] \in\mon{\X}$, we write $\monelt[p] \gdivleq \monelt[q]$ if there exists $\gelem \in \monoid$ such that $\gelem \cdot \monelt[p]$ \kl{divides} $\monelt[q]$.
 
-\AP We say that a group action $\group \actson \Indets$ is
-\intro{well-structured} if the set $(\mon[Y]{\Indets}, \gdivleq)$ is
-\kl{well-quasi-ordered}, for every \kl{well-quasi-order} $(Y,\leq)$. We say
-that it is \intro{$\omega$-well-structured} if $(\mon{\Indets}, \gdivleq)$ is
-\kl{well-quasi-ordered}.
-
+\AP A monoid action $\monoid \actson \Indets$ is called \intro{nice} if $(\mon{\Indets}, \gdivleq_{\monoid})$ is \kl{well-quasi-ordered}.
+%
+\begin{theorem}[{\cite[Theorem 11]{GHOLAS24}}]
+If a monoid action has the \kl{Hilbert's basis property} then it is \kl{nice}
+\end{theorem}
+%
+A monoid action $\monoid \actson \Indets$ is called \intro{ordered} if it respects a total order $\varlt$ on $\Indets$ (i.e., $\gelem \cdot x \prec \gelem \cdot y$ for every $x \varlt y$ and $\gelem\in\monoid$).
+It is \intro{nicely ordered} if it is \kl{nice} and \kl{ordered}.
+%
+\begin{theorem}[{\cite[Theorem 12]{GHOLAS24}, \cite[theorem ??]{LAUSNO23}}]
+If a monoid action is \kl{nicely ordered} then it has the \kl{Hilbert's basis property}.
+\end{theorem}
 %
 \section{Equivariant Gröbner bases}
 %
