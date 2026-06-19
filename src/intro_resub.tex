@@ -15,7 +15,7 @@ which forms a single orbit under the action of $\inc{\N}$.
 Let $\symgr{\Indets}$ denote the group of all permutations of $\Indets$.
 Since every $\symgr{\Indets}$-equivariant ideal is also $\inc{\N}$-equivariant,
 as a corollary of Cohen's result one gets that $\symgr{\Indets}$-equivariant ideals are also finitely generated.
-The results of Cohen were rediscovered in \cite{AH07} and generalised in \cite{HISU12,LAUSNO23,GHOLAS24}.
+The results of Cohen were rediscovered in \cite{AH07} and generalised in \cite{HISU12,LauSno26,GHOLAS24}.
 
 To explain the results we need to give a few definitions.
 We say that the action $\monoid\actson\Indets$ is:
@@ -35,7 +35,7 @@ In \arka{refer sec} we discuss several examples of monoid actions and discuss wh
 
 The article \cite{HISU12} showed proved $\monoid$-equivariant ideals are orbit-finitely generated when $\monoid\actson\Indets$ is \kl{nicely well-ordered},
 and used it to prove the independent set conjecture in algebraic statistics.
-This result was further generalised in \cite{LAUSNO23,GHOLAS24} which showed that:
+This result was further generalised in \cite{LauSno26,GHOLAS24} which showed that:
 \begin{enumerate}
 \item $\monoid$-equivariant ideals are orbit-finitely generated when $\monoid\actson\Indets$ is \kl{nicely ordered} (i.e., they get rid of the well-foundedness condition on the ordering on variables).
 \item Conversely, if $\monoid$-equivariant ideals are orbit-finitely generated then $\monoid\actson\Indets$ is \kl{nice}.
@@ -44,7 +44,8 @@ This result was further generalised in \cite{LAUSNO23,GHOLAS24} which showed tha
 It has been conjectured by Pouzet that if $\monoid\actson\Indets$ is \kl{nice},
 then there exists another monoid $\mathcal{N}$ acting on $\Indets$ such that 
 \begin{enumerate}
-\item $\monelt[p] \gdivleq[\mathcal{N}] \monelt[q]$ implies $\monelt[p] \gdivleq[\monoid] \monelt[q]$,
+\item for every finite subset $S$ of $\Indets$ and $\gelem\in\mathcal{N}$,
+there exists $\sigma\in\monoid$ such that $\sigma\cdot x = \gelem\cdot x$ for every $x\in S$.
 \item $\mathcal{N}\actson\Indets$ is \kl{nicely ordered}. 
 \end{enumerate}
 %
@@ -64,7 +65,7 @@ However $\gdivleq[\monoid]$ is a well-quasi-order on $\mon{\Indets}$ due to Higm
 \end{example}
 %
 The result of \cite{HISU12} was extended in \cite{BRDR11} which defined Gr\"{o}bner bases for $\monoid$-equivariant ideals and showed that they are finite and computable by an appropriate extension of the classical Buchberger's algorithm in the equivariant setting when $\monoid\actson\Indets$ is \kl{nicely well-ordered} and satisfies certain computability conditions that are necessary for running the equivariant Buchberger's algorithm.
-Our paper extends the results of \cite{LAUSNO23,GHOLAS24} and generalise the results of \cite{BRDR11} to the case when the action of $\monoid\actson\Indets$ is \kl{nicely ordered}.
+Our paper extends the results of \cite{LauSno26,GHOLAS24} and generalise the results of \cite{BRDR11} to the case when the action of $\monoid\actson\Indets$ is \kl{nicely ordered}.
 %
 \subsection{Contributions}
 \arka{cite theorems and sections}
@@ -151,8 +152,9 @@ such as register automata and data Petri nets
 \cite{Boj13,BoSt20,Ste24,BFKM24,YBK26,GHL22,GHL25,Gho25,ramsey}.
 To properly discuss this connection we need to set up some background material which is done in \arka{refer}.
 The algebraic structures and their connections to automata theory has been discussed in \arka{refer}.
-
-
+%
+\subsection{Finite groups???????}
+%
 %In this setting one considers algebraic structures (monoids, vector spaces, polynomial rings) built from $\omega$-categorical relational structures $\Indets$.
 %
 %For instance, if $\Indets$ is the structure of \kl{equality atoms} (infinite set without any additional structure) $\aut{\Indets} = \symgr{\Indets}$.

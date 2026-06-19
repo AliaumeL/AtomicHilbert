@@ -18,8 +18,7 @@
 \usepackage{tikz-cd}
 
 % Maths
-\usepackage{amssymb,stmaryrd,amsthm,amsmath}
-
+\usepackage{amssymb,stmaryrd,amsthm,amsmath,thmtools} %thmtools fixes the cleveref error
 % links inside the document
 \usepackage[electronic,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
@@ -33,6 +32,9 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{convention}[theorem]{Convention}
+
+% links inside the document
+
 % Tables 
 \usepackage{booktabs}
 \usepackage{varwidth}
