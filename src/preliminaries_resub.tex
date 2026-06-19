@@ -613,6 +613,7 @@ For $S\subseteq\Indets$, we use $\mon{S}$ to denote the subset of $\mon{\Indets}
 \[
 \mon{S} \defined \setof{x_1^{k_1}\dots x_n^{k_n}}{x_i\in S} \ .
 \]
+\begin{definition}\label{def:equiv mord}
 A total order $\sqsubset$ on $\mon{\Indets}$ is called a $\monoid$-\intro{monomial ordering} if:
 \begin{enumerate}
 \item $\sqsubseteq$ is $\monoid$-equivariant, i.e., $\gelem\cdot\monelt[p]\sqsubseteq\gelem\cdot\monelt[q]$ for every $\monelt[p]\sqsubseteq\monelt[q]$,
@@ -620,21 +621,40 @@ A total order $\sqsubset$ on $\mon{\Indets}$ is called a $\monoid$-\intro{monomi
 \item for every $\monelt,\monelt[p],\monelt[q]\in\mon{\Indets}$, if $\monelt[p]\sqsubseteq\monelt[q]$ then $\monelt\monelt[p]\sqsubseteq\monelt\monelt[q]$.
 \item the restriction of $\sqsubset$ to $\mon{S}$ is a well-order for any finite $S\subseteq\Indets$.
 \end{enumerate}
+\end{definition}
 %
 Extensions of many well-known monomial orderings for polynomial rings with finitely many variables to $\poly{\K}{\Indets}$ are $\monoid$-monomial orderings.
 We recall some examples.
 %
 \begin{example}[Equivariant monomial orderings]
+\AP
 \begin{enumerate}
-\item \textbf{Lexicographic ordering}
-\item \textbf{Co-lexicographic ordering}
-\item \textbf{
+\item \textbf{Lexicographic ordering:} $x_1^{k_1}\dots x_n^{k_n} \lexlt x_1^{\ell_1}\dots x_n^{\ell_n}$ if there exists $i\in\{1,\dots,n\}$ such that $k_i < \ell_i$ and $k_j = \ell_j$ for all $j < i$.
+\item \textbf{Co-lexicographic ordering:} $x_1^{k_1}\dots x_n^{k_n} \colexlt x_1^{\ell_1}\dots x_n^{\ell_n}$ if there exists $i\in\{1,\dots,n\}$ such that $k_i < \ell_i$ and $k_j = \ell_j$ for all $j > i$
 \end{enumerate}
 \end{example}
 %
-\arka{remark on why we can not assume well-ordering globally, and that this is a difference with the well-ordered case which makes this case more difficult}
+\begin{remark}
+We cannot strengthen the last condition in the definition for $\monoid$-monomial orderings (\Cref{def:equiv mord}).
+An $\monoid$-monomial ordering $\sqsubset$ must induce a total order $<$ on $\Indets$ that is equivariant ($x < y$ if and only if $\gelem\cdot x < \gelem \cdot y$).
+This ordering $<$ must either be $\varlt$ or its reverse (for instance $\colexlt$ induces $\varlt$ and $\lexlt$ induces the reverse of $\varlt$).
+Therefore, if $\sqsubset$ is a total order either $\varlt$ or its reverse must be a well-order.
+This is not true even \kl{nicely ordered} actions such as $\inc{\OrderAtoms}\actson\OrderAtoms$.
+
+If $\varlt$ is a well-order then $\colexlt$ is a $\monoid$-monomial order which is also a well-order.
+This fact allows easy extensions of results regarding existence and computability of Gr\"{o}bner basis to the setting when $\monoid\actson\Indets$ is \kl{nicely well-ordered} (\cite{HISU12}).
+\end{remark}
+%
+\subsection{Reduction algorithm}
+%
+
 %
 \subsection{Existence of orbit-finite equivariant Gr\"{o}bner bases}
+%
+\begin{theorem}\label{thm:nice grob}
+If $\monoid\actson\Indets$ is \kl{nicely ordered},
+then every 
+\end{theorem}
 %
 \arka{add Gr\"{o}bner bases for nicely orderable actions as well}.
 \subsubsection{Divisibility and reduction}

@@ -111,11 +111,13 @@
 
 \NewDocumentOrdering{var}{\leq_\X}{<_\X}
 
-
-\NewDocumentOrdering{revlex}{\sqsubseteq^{\mathsf{RevLex}}}{\sqsubset^{\mathsf{RevLex}}}
-\NewDocumentOrdering{grevlex}{\sqsubseteq^{\mathsf{RevLex}}_\group}{\sqsubset^{\mathsf{RevLex}}_\group}
 \NewDocumentOrdering{lex}{\sqsubseteq_{\mathsf{Lex}}}{\sqsubset_{\mathsf{Lex}}}
-\NewDocumentOrdering{shortlex}{\sqsubseteq_{\mathsf{ShortLex}}}{\sqsubset_{\mathsf{ShortLex}}}
+%\NewDocumentOrdering{shortlex}{\sqsubseteq_{\mathsf{ShortLex}}}
+\NewDocumentOrdering{revlex}{\sqsubseteq^{\mathsf{RevLex}}}{\sqsubset^{\mathsf{RevLex}}}
+\NewDocumentOrdering{colex}{\sqsubseteq_{\mathsf{CoLex}}}{\sqsubset_{\mathsf{CoLex}}}
+%\NewDocumentOrdering{glex}{\sqsubseteq_{\mathsf{GrLex}}}{\sqsubset_{\mathsf{GrLex}}}
+
+
 
 \NewDocumentOrdering{pmon}{\preceq}{\prec}
 \NewDocumentCommand{\pmoneq}{}{\mathrel{\kl[pmon]{\equiv}}}
