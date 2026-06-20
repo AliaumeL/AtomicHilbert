@@ -26,6 +26,7 @@
 %Theorem environments
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{observation}[theorem]{Observation}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{convention}[theorem]{Convention}
@@ -130,10 +131,13 @@ a \kl[kl-usage]{notion} points to its \intro[kl-usage]{definition}.
 % Include the content of the paper
 \input{src/intro_resub.tex}
 %\input{src/intro.tex}
-\input{src/preliminaries_resub.tex}
+%\input{src/preliminaries_resub.tex}
+\input{src/equiv_ideals}
+\input{src/hbp.tex}
+\input{src/equiv_gb.tex}
 %\input{src/preliminaries.tex}
-\input{src/egb_resub.tex}
-%\input{src/weakgb.tex}
+%\input{src/egb_resub.tex}
+\input{src/weakgb.tex}
 \input{src/fullbasis.tex}
 \input{src/examples.tex}
 \input{src/applications.tex}

@@ -37,12 +37,18 @@
 % \prefleq and \preflt
 % that will respectively expand to
 % \mathrel{\kl[\pref]{\preceq}} and \mathrel{\kl[\pref]{\prec}}
-\NewDocumentCommand{\NewDocumentOrdering}{ m m m }{
+\NewDocumentCommand{\NewDocumentOrdering}{ m m m m m }{
     \expandafter\newcommand\csname #1leq\endcsname{
         \mathrel{\kl[#1]{#2}}
     }
     \expandafter\newcommand\csname #1lt\endcsname{
         \mathrel{\kl[#1]{#3}}
+    }
+    \expandafter\newcommand\csname #1geq\endcsname{
+        \mathrel{\kl[#1]{#4}}
+    }
+    \expandafter\newcommand\csname #1gt\endcsname{
+        \mathrel{\kl[#1]{#4}}
     }
     \knowledge{#1}{notion}
 }
@@ -109,18 +115,18 @@
 
 \NewDocumentCommand{\monord}{}{\sqsubseteq}
 
-\NewDocumentOrdering{var}{\leq_\X}{<_\X}
+\NewDocumentOrdering{var}{\leq_{\Indets}}{<_{\Indets}}{\geq_{\Indets}}{>_{\Indets}}
 
-\NewDocumentOrdering{mon}{\sqsubseteq}{\sqsubset}
-\NewDocumentOrdering{lex}{\sqsubseteq_{\mathsf{Lex}}}{\sqsubset_{\mathsf{Lex}}}
+\NewDocumentOrdering{mon}{\sqsubseteq}{\sqsubset}{\sqsupseteq}{\sqsupset}
+\NewDocumentOrdering{lex}{\sqsubseteq_{\mathsf{Lex}}}{\sqsubset_{\mathsf{Lex}}}{\sqsupseteq_{\mathsf{Lex}}}{\sqsupset_{\mathsf{Lex}}}
 %\NewDocumentOrdering{shortlex}{\sqsubseteq_{\mathsf{ShortLex}}}
-\NewDocumentOrdering{revlex}{\sqsubseteq^{\mathsf{RevLex}}}{\sqsubset^{\mathsf{RevLex}}}
-\NewDocumentOrdering{colex}{\sqsubseteq_{\mathsf{CoLex}}}{\sqsubset_{\mathsf{CoLex}}}
+\NewDocumentOrdering{revlex}{\sqsubseteq^{\mathsf{RevLex}}}{\sqsubset^{\mathsf{RevLex}}}{\sqsupseteq^{\mathsf{RevLex}}}{\sqsupset^{\mathsf{RevLex}}}
+\NewDocumentOrdering{colex}{\sqsubseteq_{\mathsf{CoLex}}}{\sqsubset_{\mathsf{CoLex}}}{\sqsupseteq_{\mathsf{CoLex}}}{\sqsupset_{\mathsf{CoLex}}}
 %\NewDocumentOrdering{glex}{\sqsubseteq_{\mathsf{GrLex}}}{\sqsubset_{\mathsf{GrLex}}}
 
 
 
-\NewDocumentOrdering{pmon}{\preceq}{\prec}
+\NewDocumentOrdering{pmon}{\preceq}{\prec}{\succeq}{\succ}
 \NewDocumentCommand{\pmoneq}{}{\mathrel{\kl[pmon]{\equiv}}}
 
 
@@ -212,6 +218,8 @@
   \mathrel{\kl[\toeucl]{\to_{#1}}}
 }
 \knowledge{\toeucl}{notion}
+
+
 
 \NewDocumentCommand{\CancelPoly}{ m m }{\kl[\CancelPoly]{\mathsf{C}_{#1,#2}}}
 \knowledge{\CancelPoly}{notion}

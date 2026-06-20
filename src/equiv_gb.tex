@@ -1,0 +1,250 @@
+%!TEX root = ../atomic_jsc.tex
+% LTeX: language=en
+\section{Equivariant Gr\"{o}bner bases}
+%
+In this section we define equivariant Gr\"{o}bner bases for equivariant ideals and show that ideals that are equivariant with respect to a nicely ordered group action have orbit-finite equivariant Gr\"{o}bner bases.
+
+Throughout this section we assume $\monoid\actson\Indets$ to be an \kl{ordered} \kl{monoid action} and let $\varlt$ denote the total order preserved by $\Indets$.
+%
+\arka{brief description of the structure of this section}
+%
+\subsection{Equivariant monomial ordering}
+%
+For $S\subseteq\Indets$, we use $\mon{S}$ to denote the subset of $\mon{\Indets}$ containing monomials that uses variables from $S$:
+\[
+\mon{S} \defined \setof{x_1^{k_1}\dots x_n^{k_n}}{x_i\in S} \ .
+\]
+\begin{definition}\label{def:equiv mord}
+A total order $\sqsubset$ on $\mon{\Indets}$ is called a $\monoid$-\intro{monomial ordering} if:
+\begin{enumerate}
+\item $\sqsubseteq$ is $\monoid$-equivariant, i.e., $\gelem\cdot\monelt[p]\sqsubseteq\gelem\cdot\monelt[q]$ for every $\monelt[p]\sqsubseteq\monelt[q]$,
+\item $1 \sqsubset \monelt$ for every $\monelt\in\mon{\Indets}\setminus\{1\}$,
+\item for every $\monelt,\monelt[p],\monelt[q]\in\mon{\Indets}$, if $\monelt[p]\sqsubseteq\monelt[q]$ then $\monelt\monelt[p]\sqsubseteq\monelt\monelt[q]$.
+\item the restriction of $\sqsubset$ to $\mon{S}$ is a well-order for any finite $S\subseteq\Indets$.
+\end{enumerate}
+\end{definition}
+%
+Extensions of many well-known monomial orderings for polynomial rings with finitely many variables to $\poly{\K}{\Indets}$ are $\monoid$-monomial orderings.
+We recall two examples.
+%
+\begin{example}[Equivariant monomial orderings]
+\AP
+\begin{enumerate}
+\item \textbf{Lexicographic ordering:} $x_1^{k_1}\dots x_n^{k_n} \lexlt x_1^{\ell_1}\dots x_n^{\ell_n}$ if there exists $i\in\{1,\dots,n\}$ such that $k_i < \ell_i$ and $k_j = \ell_j$ for all $j < i$.
+\item \textbf{Co-lexicographic ordering:} $x_1^{k_1}\dots x_n^{k_n} \colexlt x_1^{\ell_1}\dots x_n^{\ell_n}$ if there exists $i\in\{1,\dots,n\}$ such that $k_i < \ell_i$ and $k_j = \ell_j$ for all $j > i$
+\end{enumerate}
+\end{example}
+%
+Using the fact that $\monlt$ is $\monoid$-equivariant we get:
+\begin{observation}\label{lem:lm equiv}
+The functions $\lm[\monlt]$, $\lc[\monlt]$ and $\lc[\monlt]$ are equivariant,
+i.e.,
+for every $f\in\poly{\K}{\Indets}$ and $\gelem\in\monoid$,
+$\lm[\monlt](\gelem\cdot f) = \gelem\cdot\lm[\monlt](f)$,
+$\lc[\monlt](\gelem\cdot f) = \lc[\monlt](f)$ and
+$\lt[\monlt](\gelem\cdot f) = \gelem\cdot\lt[\monlt](f)$.
+\end{observation}
+%
+\begin{observation}\label{lem:lm mult}
+The functions $\lm[\monlt]$, $\lc[\monlt]$ and $\lc[\monlt]$ commute with multiplication,
+i.e.,
+for every $f,g\in\poly{\K}{\Indets}$,
+$\lm[\monlt](fg) = \lm[\monlt](f)\lm[\monlt](g)$,
+$\lc[\monlt](fg) = \lc[\monlt](f)\lc[\monlt](g)$ and
+$\lt[\monlt](fg) = \lt[\monlt](f)\lt[\monlt](g)$.
+\end{observation}
+%
+\begin{remark}
+We cannot strengthen the last condition in the definition for $\monoid$-monomial orderings (\Cref{def:equiv mord}).
+An $\monoid$-monomial ordering $\sqsubset$ must induce a total order $<$ on $\Indets$ that is equivariant ($x < y$ if and only if $\gelem\cdot x < \gelem \cdot y$).
+This ordering $<$ must either be $\varlt$ or its reverse (for instance $\colexlt$ induces $\varlt$ and $\lexlt$ induces the reverse of $\varlt$).
+Therefore, if $\sqsubset$ is a total order either $\varlt$ or its reverse must be a well-order.
+This is not true even \kl{nicely ordered} actions such as $\inc{\OrderAtoms}\actson\OrderAtoms$.
+
+If $\varlt$ is a well-order then $\colexlt$ is a $\monoid$-monomial order which is also a well-order.
+This fact allows easy extensions of results regarding existence and computability of Gr\"{o}bner basis to the setting when $\monoid\actson\Indets$ is \kl{nicely well-ordered} (\cite{HISU12}).
+\end{remark}
+%
+
+%
+\subsection{Reduction algorithm}
+%
+From now on we assume $\monlt$ to be an arbitrary $\monoid$-monomial ordering.
+For a polynomial $f \in \poly{\K}{\X}$,
+we define the \intro{leading monomial} $\intro*\lm[\monlt](f)$ of $f$ as the largest monomial appearing in $f$ with respect to $\monlt$,
+and the \intro{leading coefficient} $\intro*\lc[\monlt](f)$ of $f$ as the coefficient of $\lm[\monlt](f)$ in $p$.
+We then define the \intro{leading term} $\intro*\lt\monlt(p)$ of $p$ as the product of its \kl{leading monomial} and its \kl{leading coefficient}.
+We define the \intro{domain} $\dom(f)$ of a polynomial to be the set of all variables appearing in $f$.
+%
+\begin{example}
+Say $x \varlt y \varlt z \in \Indets$.
+Let $f = x^2y^3 - \frac{1}{2}y^2z\in\poly{\Q}{\Indets} + x^4yt$.
+Then ${\lm[\colexlt](f) = y^2z}$, $\lc[\colexlt](f) = -\frac{1}{2}$, $\lt[\colexlt](f) = - \frac{1}{2}y^2z$ and $\dom(f) = \{x,y,z\}$.
+\end{example}
+%
+Now we define the reduction algorithm.
+Given $f,f' \in \poly{\K}{\X}$ and an $\monoid$-equivariant subset $H$ of $\poly{\K}{\Indets}$,
+we write $f \intro*\toeucl{H} f'$ if and only if there exists $q \in H$,
+$r \in \K$, and $\monelt \in \mon{\X}$ such that
+\begin{enumerate}
+\item $f' = f - r \monelt q$,
+\item $\dom(q)\subseteq \dom(f)$, and
+\item $\lm[\monlt](f') \monlt \lm[\monlt](f)$.
+\end{enumerate}
+%
+Using the observations that the addition and multiplication operations of $\poly{\K}{\Indets}$, and $\lm[\monlt]$, $\lc[\monlt]$ and $\lt[\monlt]$ are \kl{$\monoid$-equivariant} functions, we get
+%
+\begin{observation}
+The relation $\toeucl{H}$ is an $\monoid$-equivariant relation for every $\monoid$-equivariant subset $H$ of $\poly{\K}{\Indets}$,
+i.e.,
+for every $\gelem\in\monoid$ and $f,f'\in\poly{\K}{\Indets}$ if $f \toeucl{H} f'$ then $\gelem\cdot f \toeucl{H} \gelem\cdot f'$.
+\end{observation}
+%
+\begin{remark}
+The definition of the reduction relation in our case is slightly different compared to the definition of reduction relation (also called division) in polynomial rings with finitely many variables \cite[Section 2.3]{CLO15}.
+In particular, the second condition ($\dom(q)\subseteq \dom(f)$) disallows reductions that introduce new variables.
+This is extremely important to guarantee termination of sequence of reductions.
+For instance, take $H = \setof{y - z}{z < y\in\poly{\Q}{\OrderAtoms}}$ and an infinite decreasing sequence $x_1 > x_2 > \dots\in\OrderAtoms$.
+Without the second condition, we have an infinite sequence of reductions
+\[
+x_1 \toeucl{H} x_2 \toeucl{H} \dots \ .
+\]
+However, as the next lemma shows,
+adding the second condition guarantees that every sequence of reductions terminates.
+\end{remark}
+%
+\begin{lemma}
+The relation $\toeucl{H}$ is well-founded for every $\monoid$-equivariant subset $H$ of $\poly{\K}{\Indets}$,
+i.e., there is no infinite sequence $f_1,f_2,\dots$ of polynomials in $\poly{\K}{\Indets}$ such that
+\[
+f_0 \toeucl{H} f_1 \toeucl{H} f_2 \toeucl{H} \dots
+\]
+\end{lemma}
+%
+\begin{proof}
+Consider an sequence of reductions
+\[
+f_0 \toeucl{H} f_1 \toeucl{H} f_2 \toeucl{H} \dots \ .
+\]
+For $k\in\N$ let $r_k\in\K$, $q_k\in H$ and $\monelt_k\in\mon{\Indets}$ be such that
+$f_{k+1} = f_k + r_k\monelt_k q_k$.
+By definition of $\toeucl{H}$ we have $\dom(q_k)\subseteq\dom(f_k)$.
+Since $\lm[\monlt](f_k) = \lm[\monlt](\monelt_k q_k) = \lm[\monlt](\monelt_k)\lm[\monlt](q_k) = $ we conclude $\dom(\monelt_k)\subseteq\dom(f_k)$.
+Therefore $\dom(f_{k+1}) \subseteq \dom(f_k)$ for every $k\in\N$.
+Let $S = \dom(f_0)$.
+Since reduction must decrease the leading monomial,
+we have a decreasing sequence $\lm(f_0) \mongt \lm(f_1) \mongt \dots$
+of monomials in $\mon{S}$.
+Since $\monlt$ is a $\monoid$-monomial ordering and hence by definition well-founded restricted to $\mon{S}$,
+the sequence $\lm(f_0) \mongt \lm(f_1) \mongt \dots$ must be finite.
+Therefore the sequence
+\[
+f_0 \toeucl{H} f_1 \toeucl{H} f_2 \toeucl{H} \dots \ .
+\]
+must be finite as well.
+\end{proof}
+%
+Note that \kl{$\toeucl{H}$} is a relation and not a function since there can be more than one choice of $q\in H$ for the same $f$.
+For instance, take $x_1 < x_2 < x_3\in\OrderAtoms$,
+$f = x_1 + 2x_2 + x_3$ and $H = \setof{y - z}{y < z\in\OrderAtoms}$.
+Then we can take $q$ to be both $x_1 - x_3$ and $x_2 - x_3$.
+And hence we have both $f \toeucl{H} 2x_1 + 2x_2$ and $f \toeucl{H} x_1 + 3x_2$.
+Now we show that when $H$ is orbit-finite, $\toeucl{H}$ can be refined to an $\monoid$-equivariant function.
+
+\arka{useful because now we make it work on orbits...}
+%
+
+\arka{first intersection of each orbit with finite subring is finite}
+%
+\subsection{Existence of orbit-finite equivariant Gr\"{o}bner bases}
+%
+\begin{theorem}\label{thm:nice grob}
+If $\monoid\actson\Indets$ is \kl{nicely ordered},
+then every 
+\end{theorem}
+%
+\arka{add Gr\"{o}bner bases for nicely orderable actions as well}.
+\subsubsection{Divisibility and reduction}
+Note that even in the case of a finite set of variables,
+a \kl{Gröbner basis} in the classical sense \arka{cite book} is not necessarily an \kl{equivariant Gröbner basis},
+because of the \kl(polynomial){domain} condition.
+However, every \kl{equivariant Gröbner basis} is a \kl{Gröbner basis}.
+
+
+
+\AP
+We use the notation $\poly{\K}{\Indets}$ for the ring of polynomials with coefficients from a field $\K$ and indeterminates from a set $\Indets$,
+and $\mon{\Indets}$ for the set of monomials in $\poly{\K}{\Indets}$.
+Letters $p,q,r$ denote polynomials,
+$\monelt,\monelt[n]$ denote monomials, and $a,b,\alpha,\beta$ denote coefficients in $\K$.
+\arka{reserve one of them for variables or check instances where $a,b$ are used for variables}
+
+
+We know from \cite{GHOLAS24} that a
+necessary condition for the \kl{equivariant Hilbert basis property} to hold is
+that the set  $\mon{\X}$  of monomials is a \kl{well-quasi-ordering} when
+endowed with the \intro{divisibility up-to $\group$} relation
+($\intro*\gdivleq$), which is defined as follows: for $\monelt_1, \monelt_2 \in
+\mon{\X}$, we write $\monelt_1 \gdivleq \monelt_2$ if there exists $\gelem \in
+\group$ such that $\monelt_1$ \kl{divides} $\gelem \cdot \monelt_2$. This
+relation also extends to monomials that are functions from $\Indets$ to
+$(Y,\leq)$ with finite support, where $Y$ is any partially ordered set. We say
+that a set $\Basis \subseteq \poly{\K}{\X}$ is an \intro{equivariant Gröbner
+basis} of an equivariant ideal $\idl$ if $\Basis$ is \kl{equivariant},
+$\IdlGen{\Basis} = \idl$, and for every polynomial $p \in \idl$, there exists
+$q \in \Basis$ such that $\lm[\Indets](q) \gdivleq \lm[\Indets](p)$ and
+$\dom(q) \subseteq \dom(p)$, following the definition of \cite{GHOLAS24}.
+
+\AP We say that a group action $\group \actson \Indets$ is
+\intro{well-structured} if the set $(\mon[Y]{\Indets}, \gdivleq)$ is
+\kl{well-quasi-ordered}, for every \kl{well-quasi-order} $(Y,\leq)$. We say
+that it is \intro{$\omega$-well-structured} if $(\mon{\Indets}, \gdivleq)$ is
+\kl{well-quasi-ordered}.
+
+Note that even in the case of a finite set of variables, a \kl{Gröbner basis}
+is not necessarily an \kl{equivariant Gröbner basis}, because of the
+\kl(polynomial){domain} condition. However, every \kl{equivariant Gröbner
+basis} is a \kl{Gröbner basis}.
+
+\begin{example}
+  \label{ex:equivariant-gb}
+  Let $\Indets \defined \set{ x_1, x_2 }$,
+  with $x_1 \varleq x_2$,
+  and $\group$ be the trivial group.
+  Let us furthermore consider the ideal $\idl$ \kl(idl){generated by}
+  $\set{ x_1, x_2 }$.
+  Then, the set $\Basis \defined \set{ x_2 - x_1, x_1 }$ is a
+  \kl{Gröbner basis} of $\idl$, but not an \kl{equivariant Gröbner basis}.
+  Indeed, $x_2 \in \idl$, but there is no polynomial $q \in \Basis$
+  such that $\lm(q) \divleq x_2$ and $\dom(q) \subseteq \dom(x_2)$.
+\end{example}
+
+\subsection{Computability}
+%
+This relation also extends to monomials that are functions from $\Indets$ to
+$(Y,\leq)$ with finite support, where $Y$ is any partially ordered set. We say
+that a set $\Basis \subseteq \poly{\K}{\X}$ is an \intro{equivariant Gröbner
+basis} of an equivariant ideal $\idl$ if $\Basis$ is \kl{equivariant},
+$\IdlGen{\Basis} = \idl$, and for every polynomial $p \in \idl$, there exists
+$q \in \Basis$ such that $\lm[\Indets](q) \gdivleq \lm[\Indets](p)$ and
+$\dom(q) \subseteq \dom(p)$, following the definition of \cite{GHOLAS24}.
+
+
+
+\arka{detailed description of our results}
+
+We denote $\intro*\orbit[\monoid]{P}$ for the set of all elements $\gelem \cdot p$ for $\gelem \in \monoid$ and $p \in P$.
+When $E$ is a singleton set ${p}$,
+we write $\orbit[\monoid]{p}$ instead of $\orbit[\monoid]{\{p\}}$.
+An \kl{equivariant set} is said to be \intro{orbit finite} if it is the
+union of finitely many \intro{orbits} under the action of $\monoid$.
+Equivalently, an \reintro{orbit finite set}
+is a set of the form $\orbit[\group]{P}$ for some finite set $P$.
+%
+%
+%
+%\arka{Does not satisfy the domain condition}
+%In the finite case, one can always compute an \kl{equivariant Gröbner basis} by
+%computing \kl{Gröbner bases} for every possible ordering of the indeterminates,
+%and taking their union.\footnote{This algorithm is correct because we are
+%  considering the \kl{reverse lexicographic} ordering.}

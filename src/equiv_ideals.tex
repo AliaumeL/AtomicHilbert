@@ -1,0 +1,198 @@
+%!TEX root = ../atomic_jsc.tex
+% LTeX: language=en
+\section{Equivariant ideals}
+%
+%\subsection{Monoid actions}
+%
+A \intro{monoid} $\monoid$ is a set equipped with a binary operation that is associative, and has an identity element.
+In our setting, we are interested in polynomial rings of the form $\poly{\K}{\Indets}$ where $\Indets$ is an infinite set of indeterminates that are equipped with an injective \intro{monoid action} $\monoid \actson \Indets$
+(i.e., $\gelem\cdot x\neq\gelem\cdot y$ for all $\gelem\in\monoid$ and $x\neq y\in\Indets$).
+%
+\begin{convention}
+Unless otherwise specified, monoid actions will be assumed to be injective.
+\end{convention}
+%
+This means that there is monoid homomorphism $\psi_{\monoid}$ from $\monoid$ to the monoid of one to one endofunctions on $\Indets$.
+Obviously, the same monoid $\monoid$ can act differently on a set $\Indets$.
+However, usually the action $\psi_{\monoid}$ will be clear from the choice of $\monoid$ and $\Indets$ and we will use $\monoid\actson\Indets$ to specify this choice.
+For each $\gelem \in \monoid$, we use $\gelem\cdot x$ to denote $\psi_{\monoid}(\gelem)(x)$.
+Usually, we will be interested in actions $\monoid\actson\Indets$ where $\Indets$ comes with some additional structure and $\monoid$ is the monoid of all structure preserving injective endofunctions/group of all structure preserving bijections on $\Indets$.
+For instance, $\inc{\OrderAtoms}\actson\OrderAtoms$ denote the obvious action of the order preserving one-to-one endofunctions on the structure $\OrderAtoms$ of rational numbers with order.
+In \arka{cite sec} we give some more examples of such actions.
+%
+%\subsection{Equivariant ideals}
+
+We use the notation $\poly{\K}{\Indets}$ for the ring of polynomials with coefficients from a field $\K$ and indeterminates from a set $\Indets$.
+The action $\monoid\actson\Indets$ extends to an action $\monoid\actson\poly{\K}{\Indets}$ in a variable-wise way.
+For illustration, $\pi\cdot (x^2 + 2y) = (\pi\cdot x)^2 + 2(\pi\cdot y)$.
+
+A relation $R\subseteq \poly{\K}{\Indets}^n$ is called \intro{$\monoid$-equivariant} if for all $(f_1,\dots,f_n)\in \poly{\K}{\Indets}^n$ and $\gelem\in\monoid$,
+\[
+(f_1,\dots,f_n)\in R \implies (\gelem\cdot f_1,\dots,\gelem\cdot f_n)\in R \ .
+\
+\]
+In particular, a subset $S \subseteq \poly{\K}{\Indets}$ is \kl{$\monoid$-equivariant} if $\gelem \cdot f\in S$ for all $\gelem \in \monoid$ and $f \in S$;
+and a function $ : \poly{\K}{\Indets}^n \to \poly{\K}{\Indets}$ is \kl{$\monoid$-equivariant} if
+\[
+F(\gelem\cdot f_1,\dots,\gelem\cdot f_n) = \gelem\cdot F(f_1,\dots,f_n)
+\]
+for all $\gelem \in \monoid$ and $f_1,\dots,f_n \in \poly{\K}{\Indets}$.
+%
+\begin{observation}
+The addition and multiplication operations of $\poly{\K}{\Indets}$ commutes with the monoid action $\monoid\actson\Indets$,
+i.e., for every $f,g\in\poly{\K}{\Indets}$ and $\gelem\in\monoid$ we have
+$\gelem\cdot(f + g) = \gelem\cdot f + \gelem\cdot g$.
+\end{observation}
+%
+An \intro{$\monoid$-ideal} of $\poly{\K}{\Indets}$ is an ideal of $\poly{\K}{\Indets}$ that is $\monoid$-equivariant.
+We give in \Cref{ex:idl-equiv} examples and non-examples of \kl{$\monoid$-ideals}.
+%
+\begin{example}\label{ex:idl-equiv}
+\arka{Notational convension for ideal used here}
+The set $\idl[S]_0 \subset \poly{\K}{\Indets}$ of all polynomials whose set of coefficients sums to $0$ is an $\symgr{\Indets}$-ideal.
+The set $\idl[M]_x$ of all polynomials that are multiple of a fixed $x \in \Indets$ is an \kl{ideal} that is not a $\symgr{\Indets}$-ideal.
+\end{example}
+%
+\begin{proof}[Proof of statements in \Cref{ex:idl-equiv}]
+We leave it to the reader to verify that $\idl[S]_0$ is indeed a $\symgr{\Indets}$-ideal.
+
+To see that $\idl[M]_x$ is not a $\symgr{\Indets}$-ideal pick any variable $y\neq x$.
+Let $\pi_{x,y}\in\symgr{\Indets}$ be the permutation that swaps $x$ and $y$ acts as identity everywhere else.
+Then $\pi_{x,y}\cdot x = y \notin \idl[M]_x$.
+\end{proof}
+
+%
+%\begin{proof}
+%    Let $p,q\in \idl[S]_0$, and $r \in \poly{\K}{\Indets}$.
+%    Then, $p \times r + q$ is in $S_0$. Remark that 
+%    $p,r$ and $q$ belong to a subset $\poly{\K}{\Indets}$ of the 
+%    polynomials that uses only finitely many indeterminates.
+%    In this subset, the sum of all coefficients is obtained
+%    by applying the polynomials to the value $1$ for every indeterminate
+%    $y \in \Indets$. We conclude that
+%    $(p \times r + q)(1,\dots, 1) 
+%    = p(1,\dots,1) \times r(1,\dots,1) + q(1,\dots,1)
+%    = 0 \times r(1, \dots, 1) + 0 = 0$, hence that
+%    $p \times r + q$ belongs to $S_0$. 
+%    Because $0$ is in $S_0$, we conclude that $S_0$ is an \kl{ideal}.
+%    Furthermore, if $\gelem \in \group$ and $p \in S_0$, then
+%    the sum of the coefficients $\gelem \cdot p$ is exactly
+%    the sum of the coefficients of $p$, hence is $0$ too.
+%    This shows that $S_0$ is \kl(ideal){equivariant}.
+%
+%    It is clear that all multiples of a given polynomial $x \in \Indets$
+%    is an ideal of $\poly{\K}{\Indets}$. This is not an \kl{equivariant ideal}:
+%    take any bijection $\gelem \in \group$ that does not map $x$ to $x$ (it
+%    exists because $\Indets$ is infinite and $\group$ is all permutations),
+%    then $\gelem \cdot x$ is not a multiple of $x$, and therefore does 
+%    not belong to the ideal.
+%\end{proof}
+\AP
+%
+The orbit of an element $p$ in $\poly{\K}{\Indets}$ is defined as
+\[
+\intro*\orbit[\monoid]{p} \defined
+\setof{\gelem\cdot p}{\gelem\in\monoid} \ .
+\]
+For $P\subseteq \poly{\K}{\Indets}$ we use $\intro*\orbit[\monoid]{P}$ to denote the union of the orbits $\orbit[\monoid]{p}$ for elements in $p$:
+\[
+\orbit[\monoid]{P} = \bigcup_{p\in P}\orbit[\monoid]{p} \ .
+\]
+An \kl{$\monoid$-equivariant set} is said to be \intro{orbit finite} if it is the union of finitely many \intro{orbits} under the action of $\monoid$,
+equivalently, it is a set of the form $\orbit[\group]{P}$ for some finite set $P$.
+Obviously, not every \kl{equivariant subset} is \kl{orbit finite}.
+For instance, $\setof{x^n}{x\in\Indets, n\in\N} \subseteq \poly{\K}{\Indets}$ is $\symgr{\Indets}$-equivariant but is orbit-finite since $x^n$ and $y^m$ can not be in the same orbit when $n=m$.
+
+The ideal \intro*{$\IdlGen{G}$} generated by a subset $G\subseteq \poly{\K}{\Indets}$ is the smallest ideal containing $G$.
+For instance, the ideals $\idl[S]_0$ and $M_x$ in \Cref{ex:idl-equiv} are generated by the sets $\setof{y - 1}{y\in\Indets}$ and $\{x\}$, respectively.
+An ideal is called \intro{orbit-finitely generated} if it is generated by an orbit-finite set.
+For example, the generating set $\setof{y - 1}{y\in\Indets}$ of $\idl[S]_0$ forms a single orbit under $\symgr{\Indets}$.
+Since orbit-finite sets are equivariant by definition,
+orbit-finitely generated ideals are also equivariant.
+Cohen showed in \cite{COHEN67} that every $\symgr{\Indets}$-equivariant ideal in $\poly{\K}{\Indets}$ is orbit-finitely generated.
+However, as the next example shows,
+this statement does not hold in general for every monoid actions.
+%
+\begin{example}
+Consider the action $\monoid_0\actson\Indets$ where $\monoid_0$ is the trivial monoid,
+i.e., a monoid with identity as its only element.
+Since $\monoid_0$-orbits are singletons,
+any ideal in $\poly{\Q}{\Indets}$ is an $\monoid_0$-ideal
+and an ideal is orbit-finitely generated if and only if it is finitely generated.
+However, if $\Indets$ is infinite,
+there are ideals in $\poly{\Q}{\Indets}$ that are not finitely generated.
+
+For instance, consider the ideal $\idl[I]$ of all polynomials in $\poly{\Q}{\Indets}$ without any constant term.
+Any finite subset $F$ of $\idl[I]$ can not generate $\idl[I]$ since every non-zero polynomial in $\IdlGen{F}$ must use some variable that is used by some polynomial in $F$.
+Therefore, $y\in\idl[I]\setminus\IdlGen{F}$ for any variable $y$ that is not used by any polynomial in $F$.
+\end{example}
+%
+\begin{example}\label{ex:cycles}
+Consider the action $\symgr{A}\actson A^2$ where $A$ is an countably infinite set defined as: $\pi\cdot (a,b) = (\pi\cdot a, \pi\cdot b)$.
+We give an example of an $\symgr{A}$-equivariant ideal in $\poly{\Q}{A^2}$ which is not orbit-finitely generated.
+
+For $n\geq 3$, define
+\[
+C_n \defined \setof{(a_0,a_1)(a_1,a_2)\dots(a_{n-2},a_{n-1})(a_{n-1},a_0) \in \poly{\Q}{A^2}}{a_i\neq a_j \text{ for all }i\neq j}
+\]
+The set $C_n$ is an $\symgr{A}$-orbit for every $n$.
+Let $\calC$ be the $\symgr{A}$-ideal generated by $\cup_{n \geq 3} C_n$.
+Then $\calC$ does not have any orbit-finite set of generators.
+
+\arka{orbit $\mapsto$ $\monoid$-orbit}
+
+\arka{$\monoid$-equivariant ideal $\mapsto$ $\monoid$-ideal?}
+
+\end{example}
+%
+\begin{proof}[Proof that the ideal $\calC$ defined in \Cref{ex:cycles} is not orbit-finitely generated]
+
+Pick an arbitrary orbit-finite subset $F$ of $\calC$.
+We show $\IdlGen{F} \subsetneq \calC$.
+Since the group $\symgr{A}$ acts in a variable-wise manner on $\poly{\Q}{A^2}$,
+every polynomial in a $\symgr{A}$-orbit inside $\poly{\Q}{A^2}$ uses the same number of variables.
+Since $F$ is orbit-finite,
+there exists $N\in\N$ such that every polynomial in $F$ uses at most $N$-variables.
+Therefore, $F\subseteq \IdlGen{\cup_{n = 3}^N C_n}$, and as a consequence $\IdlGen{F}\subseteq \IdlGen{\cup_{n = 3}^N C_n}$.
+We show that for any $m > N$ we have $C_m \subseteq \calC \setminus \IdlGen{\cup_{n = 3}^N C_n} 
+\subseteq \calC \setminus \IdlGen{F}$.
+
+\arka{notation for monomials used here}
+
+Pick $\monelt[p] \in C_m$ for some $m > N$.
+If $\monelt[p]\in \IdlGen{\cup_{n = 3}^N C_n}$ then
+\[
+\monelt[p] = \sum_{i = 1}^k r_i \monelt[q]_i\monelt[p]_i
+\]
+for some $r_i\in\Q$, $\monelt[q]_i\in\mon{A^2}$ and $\monelt[p]_i\in \cup_{n = 3}^N C_n$.
+The equality can hold only if $\monelt[p] = \monelt[q]_i\monelt[p]_i$ for some $i$.
+This implies $\monelt[p]_i$ divides $\monelt[p]$.
+We show that this leads to a contradiction.
+
+Let
+\[
+\monelt[p] = (a_0,a_1)(a_1,a_2)\dots(a_{m-2}a_{m-1})(a_{m-1},a_0)
+\]
+and
+\[
+\monelt[p]_i = (b_0,b_1)(b_1,b_2)\dots(b_{n-2}b_{n-1})(b_{n-1},b_0) \ .
+\]
+Let $V = \{a_0,\dots,a_{n-1}\}$ and $V' = \{b_0,\dots,b_{m-1}\}$.
+Since $\monelt[p]_i$ divides $\monelt[p]$, we have $V' \subseteq V$.
+Define graphs $G = (V,E)$ and $G' = (V',E')$ as $E = \{(a_0,a_1),\dots,(a_{n-2},a_{n-1}),(a_{n-1},a_0)\}$ and $E' = \{(b_0,b_1),\dots,(b_{m-2},b_{m-1}),(b_{m-1},b_0)\}$.
+Since $\monelt[p]_i$ divides $\monelt[p]$,
+$E'$ must be a subset of $E$,
+equivalently, $G'$ must be a subgraph of $G$.
+However, $G$ and $G'$ are cycles of length $n$ and $m$, respectively.
+Since $m \leq N < n$,
+$G'$ can not be a subgraph of $G$,
+which leads to a contradiction.
+%For positive integers $k$, Let $\oplus_k$ denote the addition of integers modulo $k$.
+%Since $\monelt[p]_i$ divides $\monelt[p]$, $(b_0,b_1) = (a_j,a_{j\oplus_m 1})$ for some $j$.
+%But then $(b_1,b_2) = (a_{j\oplus_m 1},a_{j\oplus_m 2})$,
+%By induction, we must have $(b_{0\oplus_n\ell},b_{1\oplus_n\ell}) = (a_{j\oplus \ell},a_{(j\oplus_m (\ell+1)})$ for every $\ell$.
+%The LHS of this equality takes at most $m$-values but the RHS takes $n$.
+%Since $n > N \geq m$, this leads to a contradiction.
+\end{proof}
+%
+\arka{define the notation $\EqIdlGen{H}$ where it is used the first time}.
