@@ -624,7 +624,7 @@ A total order $\sqsubset$ on $\mon{\Indets}$ is called a $\monoid$-\intro{monomi
 \end{definition}
 %
 Extensions of many well-known monomial orderings for polynomial rings with finitely many variables to $\poly{\K}{\Indets}$ are $\monoid$-monomial orderings.
-We recall some examples.
+We recall two examples.
 %
 \begin{example}[Equivariant monomial orderings]
 \AP
@@ -647,7 +647,29 @@ This fact allows easy extensions of results regarding existence and computabilit
 %
 \subsection{Reduction algorithm}
 %
-
+From now on we assume $\monlt$ to be an arbitrary $\monoid$-monomial ordering.
+For a polynomial $f \in \poly{\K}{\X}$,
+we define the \intro{leading monomial} $\intro*\lm[\monlt](f)$ of $f$ as the largest monomial appearing in $f$ with respect to $\monlt$,
+and the \intro{leading coefficient} $\intro*\lc[\monlt](f)$ of $f$ as the coefficient of $\lm[\monlt](f)$ in $p$.
+We then define the \intro{leading term} $\intro*\lt\monlt(p)$ of $p$ as the product of its \kl{leading monomial} and its \kl{leading coefficient}.
+We define the \intro{domain} $\dom(f)$ of a polynomial to be the set of all variables appearing in $f$.
+%
+\begin{example}
+Say $x \varlt y \varlt z \in \Indets$.
+Let $f = x^2y^3 - \frac{1}{2}y^2z\in\poly{\Q}{\Indets} + x^4yt$.
+Then ${\lm[\colexlt](f) = y^2z}$, $\lc[\colexlt](f) = -\frac{1}{2}$, $\lt[\colexlt](f) = - \frac{1}{2}y^2z$ and $\dom(f) = \{x,y,z\}$.
+\end{example}
+%
+Now we define the reduction algorithm.
+Given $f,f' \in \poly{\K}{\X}$ and an $\monoid$-equivariant subset $H$ of $\poly{\K}{\Indets}$,
+we write $f \intro*\toeucl{H} f'$ if and only if there exists $q \in H$,
+$a \in \K$, and $\monelt \in \mon{\X}$ such that
+\begin{enumerate}
+\item $f' = f - a \monelt q$,
+\item $\dom(q)\subseteq \dom(f)$, and
+\item $\lm[\monlt](f') \revlexlt \lm[\monlt](f)$.
+\end{enumerate}
+%
 %
 \subsection{Existence of orbit-finite equivariant Gr\"{o}bner bases}
 %
