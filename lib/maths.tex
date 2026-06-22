@@ -17,6 +17,7 @@
 
 \newcommand{\subfin}{\subset_{\text{fin}}}
 \newcommand{\subseteqfin}{\subseteq_{\text{fin}}}
+\newcommand{\msubseteq}[1]{\subseteq_{#1}}
 
 \NewDocumentCommand{\EXPTIME}{}{\ensuremath{\mathsf{EXPTIME}}}
 
@@ -218,6 +219,18 @@
   \mathrel{\kl[\toeucl]{\to_{#1}}}
 }
 \knowledge{\toeucl}{notion}
+
+\NewDocumentCommand{\redtr}{m}{
+  \mathrel{\kl[\redtr]{\to^*_{#1}}}
+}
+\knowledge{\redtr}{notion}
+
+
+\NewDocumentCommand{\redfun}{m}{
+  \mathop{\kl[\redfun]{\textsc{reduce}_{#1}}}
+}
+\knowledge{\redfun}{notion}
+
 
 
 

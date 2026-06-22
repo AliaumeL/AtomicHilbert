@@ -1,5 +1,6 @@
 %!TEX root = ../atomic_jsc.tex
 % LTeX: language=en
+%
 \section{Equivariant Gr\"{o}bner bases}
 %
 In this section we define equivariant Gr\"{o}bner bases for equivariant ideals and show that ideals that are equivariant with respect to a nicely ordered group action have orbit-finite equivariant Gr\"{o}bner bases.
@@ -10,10 +11,18 @@ Throughout this section we assume $\monoid\actson\Indets$ to be an \kl{ordered} 
 %
 \subsection{Equivariant monomial ordering}
 %
-For $S\subseteq\Indets$, we use $\mon{S}$ to denote the subset of $\mon{\Indets}$ containing monomials that uses variables from $S$:
-\[
-\mon{S} \defined \setof{x_1^{k_1}\dots x_n^{k_n}}{x_i\in S} \ .
-\]
+%
+\subsubsection{Equivariant monomial orderings}
+%
+For $S\subseteq\Indets$, we use $\poly{\K}{S}$ to denote the subring of polynomials that uses variables from $S$,
+and $\mon{S}$ to denote the subset of $\mon{\Indets}$ containing monomials that uses variables from $S$.
+%:
+%\[
+%\mon{S} \defined \setof{x_1^{k_1}\dots x_n^{k_n}}{x_i\in S} \ .
+%\]
+
+
+%
 \begin{definition}\label{def:equiv mord}
 A total order $\sqsubset$ on $\mon{\Indets}$ is called a $\monoid$-\intro{monomial ordering} if:
 \begin{enumerate}
@@ -34,6 +43,14 @@ We recall two examples.
 \item \textbf{Co-lexicographic ordering:} $x_1^{k_1}\dots x_n^{k_n} \colexlt x_1^{\ell_1}\dots x_n^{\ell_n}$ if there exists $i\in\{1,\dots,n\}$ such that $k_i < \ell_i$ and $k_j = \ell_j$ for all $j > i$
 \end{enumerate}
 \end{example}
+%
+\begin{lemma}
+A total ordering $\monlt$ of $\mon{\Indets}$ is a $\group$-monomial ordering if and only if
+\begin{enumerate}
+\item $\monlt$ is equivariant, and
+\item $(\mon{S},\monlt)$ is a monomial ordering for every finite $S\subseteqfin \Indets$.
+\end{enumerate}
+\end{lemma}
 %
 Using the fact that $\monlt$ is $\monoid$-equivariant we get:
 \begin{observation}\label{lem:lm equiv}
@@ -83,8 +100,9 @@ Then ${\lm[\colexlt](f) = y^2z}$, $\lc[\colexlt](f) = -\frac{1}{2}$, $\lt[\colex
 \end{example}
 %
 Now we define the reduction algorithm.
-Given $f,f' \in \poly{\K}{\X}$ and an $\monoid$-equivariant subset $H$ of $\poly{\K}{\Indets}$,
-we write $f \intro*\toeucl{H} f'$ if and only if there exists $q \in H$,
+For the remainder of this subsection,
+we assume $H$ to be an arbitrary $\monoid$-equivariant subset of $\poly{\K}{\Indets}$.
+Given $f,f' \in \poly{\K}{\X}$ we write $f \intro*\toeucl{H} f'$ if and only if there exists $q \in H$,
 $r \in \K$, and $\monelt \in \mon{\X}$ such that
 \begin{enumerate}
 \item $f' = f - r \monelt q$,
@@ -94,13 +112,16 @@ $r \in \K$, and $\monelt \in \mon{\X}$ such that
 %
 Using the observations that the addition and multiplication operations of $\poly{\K}{\Indets}$, and $\lm[\monlt]$, $\lc[\monlt]$ and $\lt[\monlt]$ are \kl{$\monoid$-equivariant} functions, we get
 %
-\begin{observation}
-The relation $\toeucl{H}$ is an $\monoid$-equivariant relation for every $\monoid$-equivariant subset $H$ of $\poly{\K}{\Indets}$,
+\begin{fact}\label{fact:red equiv}
+The relation $\toeucl{H}$ is an $\group$-equivariant relation,
 i.e.,
-for every $\gelem\in\monoid$ and $f,f'\in\poly{\K}{\Indets}$ if $f \toeucl{H} f'$ then $\gelem\cdot f \toeucl{H} \gelem\cdot f'$.
-\end{observation}
+for every $\gelem\in\monoid$ and $f,f'\in\poly{\K}{\Indets}$ we have $f \toeucl{H} f'$ if and only if $\gelem\cdot f \toeucl{H} \gelem\cdot f'$.
+\end{fact}
+%
+\arka{this is not if and only if in the case when we have a monoid instead of group. Put a remark explaning this with an example.}
 %
 \begin{remark}
+%
 The definition of the reduction relation in our case is slightly different compared to the definition of reduction relation (also called division) in polynomial rings with finitely many variables \cite[Section 2.3]{CLO15}.
 In particular, the second condition ($\dom(q)\subseteq \dom(f)$) disallows reductions that introduce new variables.
 This is extremely important to guarantee termination of sequence of reductions.
@@ -114,7 +135,7 @@ adding the second condition guarantees that every sequence of reductions termina
 \end{remark}
 %
 \begin{lemma}
-The relation $\toeucl{H}$ is well-founded for every $\monoid$-equivariant subset $H$ of $\poly{\K}{\Indets}$,
+The relation $\toeucl{H}$ is well-founded,
 i.e., there is no infinite sequence $f_1,f_2,\dots$ of polynomials in $\poly{\K}{\Indets}$ such that
 \[
 f_0 \toeucl{H} f_1 \toeucl{H} f_2 \toeucl{H} \dots
@@ -144,16 +165,117 @@ f_0 \toeucl{H} f_1 \toeucl{H} f_2 \toeucl{H} \dots \ .
 must be finite as well.
 \end{proof}
 %
+A polynomial $p \in \poly{\K}{\X}$ is said to be \intro{normalised} with respect to $H$ if there are no transitions $p\toeucl{H} p'$.
+An easy application of \Cref{fact:red equiv} gives us:
+%
+\begin{fact}\label{fact:norm equiv}
+For every polynomial $p$ and $\gelem\in\group$,
+$p$ is \kl{normalised} with respect to $H$ if and only if $\gelem\cdot p$ is \kl{normalised} with respect to $H$.
+\end{fact}
+%
+We use $\redtr{H}$ to denote the transitive closure of $\toeucl{H}$
+The set of \intro{remainders} of $f$ with respect to $H$,
+denoted as $\intro*\rem{H}{f}$,
+is defined to be the set of all polynomials $p$ such that $f \redtr{H} p$ and $p$ is \kl{normalised} with respect to $H$.
+%
+\begin{example}
+\arka{todo}
+\end{example}
+%
+\begin{remark}
 Note that \kl{$\toeucl{H}$} is a relation and not a function since there can be more than one choice of $q\in H$ for the same $f$.
 For instance, take $x_1 < x_2 < x_3\in\OrderAtoms$,
 $f = x_1 + 2x_2 + x_3$ and $H = \setof{y - z}{y < z\in\OrderAtoms}$.
 Then we can take $q$ to be both $x_1 - x_3$ and $x_2 - x_3$.
 And hence we have both $f \toeucl{H} 2x_1 + 2x_2$ and $f \toeucl{H} x_1 + 3x_2$.
-Now we show that when $H$ is orbit-finite, $\toeucl{H}$ can be refined to an $\monoid$-equivariant function.
-
-\arka{useful because now we make it work on orbits...}
+\end{remark}
+%
+\begin{lemma}
+If $H$ is orbit-finite,
+then there exists a $\group$-equivariant function \intro*{$\redfun{H}$} such that for every $f\in\poly{\K}{\Indets}$:
+\begin{enumerate}
+\item if $f$ is normalised with respect to $H$ then $\redfun{H}(f) = f$,
+\item otherwise $f \toeucl{H} \redfun{F}(f)$.
+\end{enumerate}
+\end{lemma}
 %
 
+
+%
+\kl{$\redfun{H}$} can be applied to orbits by simply computing its result
+%
+\arka{useful because now we make it work on orbits...}
+%
+\subsubsection{Other option: computing the set}
+A polynomial $p \in \poly{\K}{\X}$ is said to be \intro{normalised} with respect to $H$ if there are no transitions $p\toeucl{H} p'$.
+An easy application of \Cref{fact:red equiv} gives us:
+%
+\begin{fact}\label{fact:norm equiv}
+For every polynomial $p$ and $\gelem\in\group$,
+$p$ is \kl{normalised} with respect to $H$ if and only if $\gelem\cdot p$ is \kl{normalised} with respect to $H$.
+\end{fact}
+%
+We use $\redtr{H}$ to denote the transitive closure of $\toeucl{H}$
+The set of \intro{remainders} of $f$ with respect to $H$,
+denoted as $\intro*\rem{H}{f}$,
+is defined to be the set of all polynomials $p$ such that $f \redtr{H} p$ and $p$ is \kl{normalised} with respect to $H$.
+%
+\begin{lemma}
+If $H$ is orbit-finite then the set $\rem{H}{f}$ is finite for every $f\in\poly{\K}{\Indets}$.
+\end{lemma}
+%
+\begin{proof}
+%
+We actually show that $P = \setof{p\in\poly{\K}{\Indets}}{f\redtr{H} p}\supseteq\rem{H}{f}$ is finite.
+Consider a tree $\mathcal{T}$ such that
+\begin{enumerate}
+\item the root of $\mathcal{T}$ is labelled by $f$,
+\item if a node of $\mathcal{T}$ is labelled by $p$ and $p\toeucl{H}p'$,
+then the node has exactly one child labelled by $p'$.
+\end{enumerate}
+Observe that there is a one to one correspondence between branches in $\mathcal{T}$ and reduction sequences $f\toeucl{H} p_1 \toeucl{H} \dots \toeucl{H} p_n$.
+Therefore, for every polynomial $p'$ in $P$,
+there is at least one node in $\mathcal{T}$ that is labelled by $p$ 
+(two nodes can have the same label $p$ of there are two different reduction sequences $f\toeucl{H} p_1 \toeucl{H} \dots \toeucl{H} p_n = p$ and $f\toeucl{H} p'_1 \toeucl{H} \dots \toeucl{H} p'_m = p$).
+We show that $\mathcal{T}$ is finite.
+Finiteness of $P$ follows as a consequence.
+
+Since every sequence of reductions terminate, every branch of $\mathcal{T}$ is finite.
+Due to K\"{o}nig's lemma \cite{konig},
+to show finiteness of $\mathcal{T}$,
+it is enough to prove that $\mathcal{T}$ is finitely branching  (i.e., every node has finitely many children).
+
+Pick a node in $\mathcal{T}$.
+Say it is labelled by $p$.
+We show that there are only finitely many $p'$ such that $p\toeucl{H} p'$.
+Let $S = \dom(f)$.
+If we have $p\toeucl{H} p'$ for some polynomial $p'$ then
+\[
+p' = p + r\monelt[q] h
+\]
+for some $r\in\K$, $\monelt[q]\in\mon[S]$ and $h\in H\cap\poly{\K}{S}$.
+%
+\begin{claim}
+The set $S\cap H$ is finite.
+\end{claim}
+%
+Before proving the claim we show how it implies finiteness of $\rem{H}{f}$.
+
+leveraging König's lemma. This is because 
+  $p \toeucl{H} r$ implies that 
+  $p = \alpha \monelt[n] (\gelem\cdot q) + r$ for some $q \in H'$, 
+  $\alpha \in \K$, $\monelt[n] \in \mon{\X}$, and $\gelem \in \group$.
+  Because, $\lm(r) \revlexlt \lm(p)$, we  
+  conclude that $\lm(p) = \lm(\alpha \monelt[n] (\gelem\cdot q))$, and 
+  therefore $r$ is uniquely determined by the choice of $q \in H'$ and the
+  choice of $\gelem \in \group$ that maps the \kl(poly){domain} of $q$ to
+  the \kl(poly){domain} of
+  $p$. There are finitely elements in $H'$ and finitely many such functions
+  from $\dom(q)$ to $\dom(p)$
+  because both domains are finite.
+%
+\end{proof}
+%
 \arka{first intersection of each orbit with finite subring is finite}
 %
 \subsection{Existence of orbit-finite equivariant Gr\"{o}bner bases}
