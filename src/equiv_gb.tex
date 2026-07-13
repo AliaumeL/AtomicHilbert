@@ -90,7 +90,7 @@ From now on we assume $\monlt$ to be an arbitrary $\monoid$-monomial ordering.
 For a polynomial $f \in \poly{\K}{\X}$,
 we define the \intro{leading monomial} $\intro*\lm[\monlt](f)$ of $f$ as the largest monomial appearing in $f$ with respect to $\monlt$,
 and the \intro{leading coefficient} $\intro*\lc[\monlt](f)$ of $f$ as the coefficient of $\lm[\monlt](f)$ in $p$.
-We then define the \intro{leading term} $\intro*\lt\monlt(p)$ of $p$ as the product of its \kl{leading monomial} and its \kl{leading coefficient}.
+We then define the \intro{leading term} $\intro*\lt[\monlt](p)$ of $p$ as the product of its \kl{leading monomial} and its \kl{leading coefficient}.
 We define the \intro{domain} $\dom(f)$ of a polynomial to be the set of all variables appearing in $f$.
 %
 \begin{example}
@@ -117,8 +117,6 @@ The relation $\toeucl{H}$ is an $\group$-equivariant relation,
 i.e.,
 for every $\gelem\in\monoid$ and $f,f'\in\poly{\K}{\Indets}$ we have $f \toeucl{H} f'$ if and only if $\gelem\cdot f \toeucl{H} \gelem\cdot f'$.
 \end{fact}
-%
-\arka{this is not if and only if in the case when we have a monoid instead of group. Put a remark explaning this with an example.}
 %
 \begin{remark}
 %
@@ -195,16 +193,18 @@ If $H$ is orbit-finite,
 then there exists a $\group$-equivariant function \intro*{$\redfun{H}$} such that for every $f\in\poly{\K}{\Indets}$:
 \begin{enumerate}
 \item if $f$ is normalised with respect to $H$ then $\redfun{H}(f) = f$,
-\item otherwise $f \toeucl{H} \redfun{F}(f)$.
+\item otherwise $f \toeucl{H} \redfun{H}(f)$.
 \end{enumerate}
 \end{lemma}
 %
-
-
+For every $f\in\poly{\K}{\Indets}$ there exists unique $r$ and such that $r = \redfun{H}^n(f)$ for some $n$ and $\redfun{H}(f)$.
+This $r$ will be called \intro{the remainder} of reducing $f$ with respect to $H$ and denoted as $\rem{H}(f)$.
+%
+\begin{proof}
+Define a total order $\prec$ on $\poly{\K}{\Indets}$ as $g \prec g'$ if there exists $\monelt\in\mon{\Indets}$ such that the coefficient of $\monelt$ in strictly
+\end{proof}
 %
 \kl{$\redfun{H}$} can be applied to orbits by simply computing its result
-%
-\arka{useful because now we make it work on orbits...}
 %
 \subsubsection{Other option: computing the set}
 A polynomial $p \in \poly{\K}{\X}$ is said to be \intro{normalised} with respect to $H$ if there are no transitions $p\toeucl{H} p'$.
@@ -247,36 +247,31 @@ it is enough to prove that $\mathcal{T}$ is finitely branching  (i.e., every nod
 
 Pick a node in $\mathcal{T}$.
 Say it is labelled by $p$.
+Let $T = \dom(p)$
 We show that there are only finitely many $p'$ such that $p\toeucl{H} p'$.
 Let $S = \dom(f)$.
 If we have $p\toeucl{H} p'$ for some polynomial $p'$ then
 \[
-p' = p + r\monelt[q] h
+p' = p + r\monelt h
 \]
-for some $r\in\K$, $\monelt[q]\in\mon[S]$ and $h\in H\cap\poly{\K}{S}$.
-%
-\begin{claim}
-The set $S\cap H$ is finite.
-\end{claim}
-%
-Before proving the claim we show how it implies finiteness of $\rem{H}{f}$.
+for some $r\in\K$, $\monelt\in\mon{T}$ and $h\in H\cap\poly{\K}{T}$ such that $\lt[\monlt](p) = r\monelt\lt[\monlt](h)$.
+Observe that both $r$ and $\monelt$ are entirely determined by the choice of $h$.
+Therefore, the number of possible $p'$ such that $p\toeucl{H} p'$ is smaller than the cardinality of the set $H\cap\poly{\K}{T}$.
+We show that the latter set is finite.
 
-leveraging König's lemma. This is because 
-  $p \toeucl{H} r$ implies that 
-  $p = \alpha \monelt[n] (\gelem\cdot q) + r$ for some $q \in H'$, 
-  $\alpha \in \K$, $\monelt[n] \in \mon{\X}$, and $\gelem \in \group$.
-  Because, $\lm(r) \revlexlt \lm(p)$, we  
-  conclude that $\lm(p) = \lm(\alpha \monelt[n] (\gelem\cdot q))$, and 
-  therefore $r$ is uniquely determined by the choice of $q \in H'$ and the
-  choice of $\gelem \in \group$ that maps the \kl(poly){domain} of $q$ to
-  the \kl(poly){domain} of
-  $p$. There are finitely elements in $H'$ and finitely many such functions
-  from $\dom(q)$ to $\dom(p)$
-  because both domains are finite.
+Let $h_1,\dots,h_n\in H$ be such that
+$H = \orbit[\group]{h_1}\cup\dots\cup\orbit[\group]{h_n}$.
+We show that $\orbit[\group]{h_i}\cap\poly{\K}{S}$ is finite for every $i$.
+Let $\Pi$ be the set of all $\gelem\in\group$ such that $\gelem\cdot \dom(h_i) = \dom(\gelem\cdot h_i) \subseteq T$.
+We have $\orbit[\group]{h_i}\cap\poly{\K}{S} = \setof{\gelem\cdot h_i}{\gelem\in\Pi}$.
+%
+
+Define an equivalence relation $\sim$ on $\Pi$ as $\gelem\sim\sigma$ if $\gelem\cdot a = \sigma\cdot a$ for every $a\in \dom(h_i)$.
+Then $\gelem \sim \sigma$ implies $\gelem\cdot h_i = \sigma\cdot h_i$.
+Therefore the cardinality of $\orbit[\group]{h_i}\cap\poly{\K}{S}$ can not be bigger than the number of equivalence classes of $\sim$ in $\Pi$.
+Observe that the latter can not be bigger than $|T|^{|\dom(h_i)|}$.
 %
 \end{proof}
-%
-\arka{first intersection of each orbit with finite subring is finite}
 %
 \subsection{Existence of orbit-finite equivariant Gr\"{o}bner bases}
 %
