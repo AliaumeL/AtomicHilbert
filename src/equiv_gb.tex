@@ -11,17 +11,12 @@ Throughout this section we assume $\monoid\actson\Indets$ to be an \kl{ordered} 
 %
 \subsection{Equivariant monomial ordering}
 %
-%
-\subsubsection{Equivariant monomial orderings}
-%
 For $S\subseteq\Indets$, we use $\poly{\K}{S}$ to denote the subring of polynomials that uses variables from $S$,
 and $\mon{S}$ to denote the subset of $\mon{\Indets}$ containing monomials that uses variables from $S$.
 %:
 %\[
 %\mon{S} \defined \setof{x_1^{k_1}\dots x_n^{k_n}}{x_i\in S} \ .
 %\]
-
-
 %
 \begin{definition}\label{def:equiv mord}
 A total order $\sqsubset$ on $\mon{\Indets}$ is called a $\monoid$-\intro{monomial ordering} if:
@@ -32,6 +27,28 @@ A total order $\sqsubset$ on $\mon{\Indets}$ is called a $\monoid$-\intro{monomi
 \item the restriction of $\sqsubset$ to $\mon{S}$ is a well-order for any finite $S\subseteq\Indets$.
 \end{enumerate}
 \end{definition}
+%
+\begin{remark}
+Since we do not restrict an $\monoid$-monomial ordering to be a well-ordering on $\mon{\Indets}$,
+such an ordering is not a monomial ordering in the classical sense (\arka{cite cox}).
+This relaxation is necessary as for many common examples of monoid actions $\monoid\actson\Indets$ it is not possible to define a monomial ordering on $\mon{\Indets}$ that is $\monoid$-equivariant.
+
+For example, consider the action $\inc{\OrderAtoms}\actson\OrderAtoms$.
+Let $\monlt$ be a monomial ordering on $\mon{\OrderAtoms}$ that is $\monoid$-equivariant.
+Pick $x < y \in \OrderAtoms$.
+If $x \monlt y$, then $x' < y'$ for every $x' < y'\in \OrderAtoms$, because for every such $x'$ and $y'$ there exists some $\pi\in\inc{\OrderAtoms}$ such that $\pi\cdot x = x'$ and $\pi\cdot y = y'$.
+But then $\monlt$ agrees with $<$ and hence cannot be a well-order.
+Similarly, if $x \monlt y$ then $\monlt$ agrees with the reverse of $\prec$ and hence cannot be a well-order.
+%
+%
+%An $\monoid$-monomial ordering $\sqsubset$ must induce a total order $<$ on $\Indets$ that is equivariant ($x < y$ if and only if $\gelem\cdot x < \gelem \cdot y$).
+%This ordering $<$ must either be $\varlt$ or its reverse (for instance $\colexlt$ induces $\varlt$ and $\lexlt$ induces the reverse of $\varlt$).
+%Therefore, if $\sqsubset$ is a total order either $\varlt$ or its reverse must be a well-order.
+%This is not true even \kl{nicely ordered} actions such as $\inc{\OrderAtoms}\actson\OrderAtoms$.
+
+If $\varlt$ is a well-order then $\colexlt$ is a $\monoid$-monomial order which is also a well-order.
+This fact allows easy extensions of results regarding existence and computability of Gr\"{o}bner basis to the setting when $\monoid\actson\Indets$ is \kl{nicely well-ordered} (\cite{HISU12}).
+\end{remark}
 %
 Extensions of many well-known monomial orderings for polynomial rings with finitely many variables to $\poly{\K}{\Indets}$ are $\monoid$-monomial orderings.
 We recall two examples.
@@ -48,7 +65,7 @@ We recall two examples.
 A total ordering $\monlt$ of $\mon{\Indets}$ is a $\group$-monomial ordering if and only if
 \begin{enumerate}
 \item $\monlt$ is equivariant, and
-\item $(\mon{S},\monlt)$ is a monomial ordering for every finite $S\subseteqfin \Indets$.
+\item $(\mon{S},\monlt)$ is a monomial ordering \arka{cite the definition of monomial ordering} for every finite $S\subseteqfin \Indets$.
 \end{enumerate}
 \end{lemma}
 %
@@ -70,19 +87,6 @@ $\lm[\monlt](fg) = \lm[\monlt](f)\lm[\monlt](g)$,
 $\lc[\monlt](fg) = \lc[\monlt](f)\lc[\monlt](g)$ and
 $\lt[\monlt](fg) = \lt[\monlt](f)\lt[\monlt](g)$.
 \end{observation}
-%
-\begin{remark}
-We cannot strengthen the last condition in the definition for $\monoid$-monomial orderings (\Cref{def:equiv mord}).
-An $\monoid$-monomial ordering $\sqsubset$ must induce a total order $<$ on $\Indets$ that is equivariant ($x < y$ if and only if $\gelem\cdot x < \gelem \cdot y$).
-This ordering $<$ must either be $\varlt$ or its reverse (for instance $\colexlt$ induces $\varlt$ and $\lexlt$ induces the reverse of $\varlt$).
-Therefore, if $\sqsubset$ is a total order either $\varlt$ or its reverse must be a well-order.
-This is not true even \kl{nicely ordered} actions such as $\inc{\OrderAtoms}\actson\OrderAtoms$.
-
-If $\varlt$ is a well-order then $\colexlt$ is a $\monoid$-monomial order which is also a well-order.
-This fact allows easy extensions of results regarding existence and computability of Gr\"{o}bner basis to the setting when $\monoid\actson\Indets$ is \kl{nicely well-ordered} (\cite{HISU12}).
-\end{remark}
-%
-
 %
 \subsection{Reduction algorithm}
 %
