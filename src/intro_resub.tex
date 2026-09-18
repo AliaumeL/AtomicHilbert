@@ -104,17 +104,22 @@ Extending the notion of Gr\"{o}bner base to the general setting of \kl{nicely or
 which would not be possible using the results of \cite{GHOLAS24}.
 At the same time it opens up the opportunity to extend complicated operations such as computing the primary decomposition and radical of ideals to the equivariant setting. 
 
-Let us now explain the difficulty in generalising the concepts of \kl{Gr\"{o}bner bases} and \kl{Buchberger's algorithm} from \kl{nicely well-ordered} actions to \kl{nicely ordered actions}.
-When the action $\monoid\actson\Indets$ preserves an well-order $\prec$ on $\Indets$,
-one can define a well-order on $\mon{\Indets}$ which is compatible with the monoid action and divisibility,
-by extending $\prec$ to $\mon{\Indets}$ with some suitable ordering such as co-lex or grevlex \arka{refer to defintions}.
+Let us now explain the difficulties in generalising the concepts of \kl{Gr\"{o}bner bases} and \kl{Buchberger's algorithm} from \kl{nicely well-ordered} actions to \kl{nicely ordered actions}.
+
+When the action $\monoid\actson\Indets$ preserves an order $\varlt$ on $\Indets$
+one can define a total order $\monlt$ on $\mon{\Indets}$ by taking one of the common extensions (lexicographic, co-lexicographic, graded reverse lexicographic, etc) of $\varlt$ to $\mon{\Indets}$,
+that are compatible with divisibility ($1 \monlt x$ for every $x\in\Indets$,
+and $\monelt[p]_1\monelt[q] \monlt \monelt[p]_2\monelt[q]$ for every $\monelt[p]_1, \monelt[p]_2,\monelt[q]$ such that $\monelt[p]_1 \monlt \monelt[p]_2$).
+All of these extensions are compatible with the action of the monoid,
+i.e., for every $\monelt[p],\monelt[q]\in\mon{\Indets}$ and $\pi\in\monoid$ if $\monelt[p] \monlt \monelt[q]$ then $\pi\cdot\monelt[p] \monlt \pi\cdot\monelt[q]$.
+
+If $\varlt$ is an well-order,
+then some of these extensions also become well-order.
+In particular the co-lexicographic and graded reverse lexicographic extension does and the lexicographic extension does not.
+Observe that the extensions that do become well-orders define an monomial ordering on $\mon{\Indets}$ (\arka{cite def}) that is compatible with the action of the monoid.
+This allows one to extend concepts such as leading monomial, leading coefficient, leading term to polynomials in $\poly{\K}{\Indets}$.
+
 However the same is not possible for all \kl{nicely ordered} actions.
-%In the case when the action $\monoid\actson\Indets$ is \kl{nicely ordered} and neither the order $\prec$ preserved by $\monoid\actson\Indets$ nor its reverse is well-founded,
-%it is not possible to define a well-order on $\Indets$ which is compatible with the action as any such order must agree with $\prec$ or its reverse
-%(for instance co-lex agrees with $\prec$ and lex agrees with its reverse
-%\arka{this is not always true. But it is true for ordered atoms. Change later as well}).
-This means that sequence of reductions that merely decreases a ordering of monomials based on $\prec$ may not terminate.
-%
 \begin{example}
 For example, consider the action $\inc{\OrderAtoms}\actson\OrderAtoms$.
 Let $\monlt$ be a monomial ordering on $\mon{\OrderAtoms}$ that is $\monoid$-equivariant.
@@ -129,6 +134,13 @@ If we try to reduce any polynomial $x\in\poly{\K}{\Indets}$ using the set of pol
 $x \xrightarrow{} x_1 \xrightarrow{} x_2 \xrightarrow{}\dots$
 for some $x \succ x_1 \succ x_2 \succ\dots$. 
 \end{example}
+%In the case when the action $\monoid\actson\Indets$ is \kl{nicely ordered} and neither the order $\prec$ preserved by $\monoid\actson\Indets$ nor its reverse is well-founded,
+%it is not possible to define a well-order on $\Indets$ which is compatible with the action as any such order must agree with $\prec$ or its reverse
+%(for instance co-lex agrees with $\prec$ and lex agrees with its reverse
+%\arka{this is not always true. But it is true for ordered atoms. Change later as well}).
+This means that sequence of reductions that merely decreases a ordering of monomials based on $\prec$ may not terminate.
+%
+
 %
 \arka{drop either equivariance or well-order.
 We make an educated guess and choose to drop the latter.

@@ -61,10 +61,10 @@ We recall two examples.
 \end{enumerate}
 \end{example}
 %
-\begin{lemma}
+\begin{lemma}\label{lem:monlt loc}
 A total ordering $\monlt$ of $\mon{\Indets}$ is a $\group$-monomial ordering if and only if
 \begin{enumerate}
-\item $\monlt$ is equivariant, and
+\item $\monlt$ is $\monoid$-equivariant, and
 \item $(\mon{S},\monlt)$ is a monomial ordering \arka{cite the definition of monomial ordering} for every finite $S\subseteqfin \Indets$.
 \end{enumerate}
 \end{lemma}
@@ -99,11 +99,12 @@ We define the \intro{domain} $\dom(f)$ of a polynomial to be the set of all vari
 %
 \begin{example}
 Say $x \varlt y \varlt z \in \Indets$.
-Let $f = x^2y^3 - \frac{1}{2}y^2z\in\poly{\Q}{\Indets} + x^4yt$.
+Let $f = x^2y^3 - \frac{1}{2}y^2z\in\poly{\Q}{\Indets}$.
 Then ${\lm[\colexlt](f) = y^2z}$, $\lc[\colexlt](f) = -\frac{1}{2}$, $\lt[\colexlt](f) = - \frac{1}{2}y^2z$ and $\dom(f) = \{x,y,z\}$.
 \end{example}
 %
 Now we define the reduction algorithm.
+\arka{reduction $\mapsto$ multivariate division?}
 For the remainder of this subsection,
 we assume $H$ to be an arbitrary $\monoid$-equivariant subset of $\poly{\K}{\Indets}$.
 Given $f,f' \in \poly{\K}{\X}$ we write $f \intro*\toeucl{H} f'$ if and only if there exists $q \in H$,
@@ -114,12 +115,12 @@ $r \in \K$, and $\monelt \in \mon{\X}$ such that
 \item $\lm[\monlt](f') \monlt \lm[\monlt](f)$.
 \end{enumerate}
 %
-Using the observations that the addition and multiplication operations of $\poly{\K}{\Indets}$, and $\lm[\monlt]$, $\lc[\monlt]$ and $\lt[\monlt]$ are \kl{$\monoid$-equivariant} functions, we get
+Using the observations that the addition and multiplication operations of $\poly{\K}{\Indets}$, and $\lm[\monlt]$, $\lc[\monlt]$ and $\lt[\monlt]$ are \kl{$\monoid$-equivariant} functions, we get:
 %
 \begin{fact}\label{fact:red equiv}
-The relation $\toeucl{H}$ is an $\group$-equivariant relation,
+The relation $\toeucl{H}$ is an $\monoid$-equivariant relation,
 i.e.,
-for every $\gelem\in\monoid$ and $f,f'\in\poly{\K}{\Indets}$ we have $f \toeucl{H} f'$ if and only if $\gelem\cdot f \toeucl{H} \gelem\cdot f'$.
+for every $\gelem\in\monoid$ and $f,f'\in\poly{\K}{\Indets}$ if $f \toeucl{H} f'$ then $\gelem\cdot f \toeucl{H} \gelem\cdot f'$.
 \end{fact}
 %
 \begin{remark}
@@ -168,14 +169,17 @@ must be finite as well.
 \end{proof}
 %
 A polynomial $p \in \poly{\K}{\X}$ is said to be \intro{normalised} with respect to $H$ if there are no transitions $p\toeucl{H} p'$.
-An easy application of \Cref{fact:red equiv} gives us:
+
+\arka{Put a remark that being normalised is not an equivariant property}
+
+%An easy application of \Cref{fact:red equiv} gives us:
 %
-\begin{fact}\label{fact:norm equiv}
-For every polynomial $p$ and $\gelem\in\group$,
-$p$ is \kl{normalised} with respect to $H$ if and only if $\gelem\cdot p$ is \kl{normalised} with respect to $H$.
-\end{fact}
-%
-We use $\redtr{H}$ to denote the transitive closure of $\toeucl{H}$
+%\begin{fact}\label{fact:norm equiv}
+%For every polynomial $p$ and $\gelem\in\group$,
+%$p$ is \kl{normalised} with respect to $H$ if and only if $\gelem\cdot p$ is \kl{normalised} with respect to $H$.
+%\end{fact}
+
+We use $\redtr{H}$ to denote the transitive closure of $\toeucl{H}$.
 The set of \intro{remainders} of $f$ with respect to $H$,
 denoted as $\intro*\rem{H}{f}$,
 is defined to be the set of all polynomials $p$ such that $f \redtr{H} p$ and $p$ is \kl{normalised} with respect to $H$.
@@ -194,97 +198,155 @@ And hence we have both $f \toeucl{H} 2x_1 + 2x_2$ and $f \toeucl{H} x_1 + 3x_2$.
 %
 \begin{lemma}
 If $H$ is orbit-finite,
-then there exists a $\group$-equivariant function \intro*{$\redfun{H}$} such that for every $f\in\poly{\K}{\Indets}$:
+then there exists a $\monoid$-equivariant function \intro*{$\redfun{H}$} such that for every $f\in\poly{\K}{\Indets}$:
 \begin{enumerate}
 \item if $f$ is normalised with respect to $H$ then $\redfun{H}(f) = f$,
 \item otherwise $f \toeucl{H} \redfun{H}(f)$.
 \end{enumerate}
 \end{lemma}
 %
-For every $f\in\poly{\K}{\Indets}$ there exists unique $r$ and such that $r = \redfun{H}^n(f)$ for some $n$ and $\redfun{H}(f)$.
-This $r$ will be called \intro{the remainder} of reducing $f$ with respect to $H$ and denoted as $\rem{H}(f)$.
+For every $f\in\poly{\K}{\Indets}$ there exists unique $r$ and such that $r = \redfun{H}^n(f)$ for some $n$ and $\redfun{H}(r) = r$.
+This $r$ will be called \intro{the remainder} of reducing $f$ with respect to $H$ and denoted as $\rem{H}{f}$.
 %
 \begin{proof}
 Define a total order $\prec$ on $\poly{\K}{\Indets}$ as $g \prec g'$ if there exists $\monelt\in\mon{\Indets}$ such that the coefficient of $\monelt$ in strictly
 \end{proof}
 %
-\kl{$\redfun{H}$} can be applied to orbits by simply computing its result
+%\kl{$\redfun{H}$} can be applied to orbits by simply computing its result
 %
-\subsubsection{Other option: computing the set}
-A polynomial $p \in \poly{\K}{\X}$ is said to be \intro{normalised} with respect to $H$ if there are no transitions $p\toeucl{H} p'$.
-An easy application of \Cref{fact:red equiv} gives us:
+%\subsubsection{Other option: computing the set}
+%A polynomial $p \in \poly{\K}{\X}$ is said to be \intro{normalised} with respect to $H$ if there are no transitions $p\toeucl{H} p'$.
+%An easy application of \Cref{fact:red equiv} gives us:
+%%
+%\begin{fact}\label{fact:norm equiv}
+%For every polynomial $p$ and $\gelem\in\group$,
+%$p$ is \kl{normalised} with respect to $H$ if and only if $\gelem\cdot p$ is \kl{normalised} with respect to $H$.
+%\end{fact}
+%%
+%We use $\redtr{H}$ to denote the transitive closure of $\toeucl{H}$
+%The set of \intro{remainders} of $f$ with respect to $H$,
+%denoted as $\intro*\rem{H}{f}$,
+%is defined to be the set of all polynomials $p$ such that $f \redtr{H} p$ and $p$ is \kl{normalised} with respect to $H$.
+%%
+%\begin{lemma}
+%If $H$ is orbit-finite then the set $\rem{H}{f}$ is finite for every $f\in\poly{\K}{\Indets}$.
+%\end{lemma}
+%%
+%\begin{proof}
+%%
+%We actually show that $P = \setof{p\in\poly{\K}{\Indets}}{f\redtr{H} p}\supseteq\rem{H}{f}$ is finite.
+%Consider a tree $\mathcal{T}$ such that
+%\begin{enumerate}
+%\item the root of $\mathcal{T}$ is labelled by $f$,
+%\item if a node of $\mathcal{T}$ is labelled by $p$ and $p\toeucl{H}p'$,
+%then the node has exactly one child labelled by $p'$.
+%\end{enumerate}
+%Observe that there is a one to one correspondence between branches in $\mathcal{T}$ and reduction sequences $f\toeucl{H} p_1 \toeucl{H} \dots \toeucl{H} p_n$.
+%Therefore, for every polynomial $p'$ in $P$,
+%there is at least one node in $\mathcal{T}$ that is labelled by $p$ 
+%(two nodes can have the same label $p$ of there are two different reduction sequences $f\toeucl{H} p_1 \toeucl{H} \dots \toeucl{H} p_n = p$ and $f\toeucl{H} p'_1 \toeucl{H} \dots \toeucl{H} p'_m = p$).
+%We show that $\mathcal{T}$ is finite.
+%Finiteness of $P$ follows as a consequence.
 %
-\begin{fact}\label{fact:norm equiv}
-For every polynomial $p$ and $\gelem\in\group$,
-$p$ is \kl{normalised} with respect to $H$ if and only if $\gelem\cdot p$ is \kl{normalised} with respect to $H$.
-\end{fact}
+%Since every sequence of reductions terminate, every branch of $\mathcal{T}$ is finite.
+%Due to K\"{o}nig's lemma \cite{konig},
+%to show finiteness of $\mathcal{T}$,
+%it is enough to prove that $\mathcal{T}$ is finitely branching  (i.e., every node has finitely many children).
 %
-We use $\redtr{H}$ to denote the transitive closure of $\toeucl{H}$
-The set of \intro{remainders} of $f$ with respect to $H$,
-denoted as $\intro*\rem{H}{f}$,
-is defined to be the set of all polynomials $p$ such that $f \redtr{H} p$ and $p$ is \kl{normalised} with respect to $H$.
+%Pick a node in $\mathcal{T}$.
+%Say it is labelled by $p$.
+%Let $T = \dom(p)$
+%We show that there are only finitely many $p'$ such that $p\toeucl{H} p'$.
+%Let $S = \dom(f)$.
+%If we have $p\toeucl{H} p'$ for some polynomial $p'$ then
+%\[
+%p' = p + r\monelt h
+%\]
+%for some $r\in\K$, $\monelt\in\mon{T}$ and $h\in H\cap\poly{\K}{T}$ such that $\lt[\monlt](p) = r\monelt\lt[\monlt](h)$.
+%Observe that both $r$ and $\monelt$ are entirely determined by the choice of $h$.
+%Therefore, the number of possible $p'$ such that $p\toeucl{H} p'$ is smaller than the cardinality of the set $H\cap\poly{\K}{T}$.
+%We show that the latter set is finite.
+%
+%Let $h_1,\dots,h_n\in H$ be such that
+%$H = \orbit[\group]{h_1}\cup\dots\cup\orbit[\group]{h_n}$.
+%We show that $\orbit[\group]{h_i}\cap\poly{\K}{S}$ is finite for every $i$.
+%Let $\Pi$ be the set of all $\gelem\in\group$ such that $\gelem\cdot \dom(h_i) = \dom(\gelem\cdot h_i) \subseteq T$.
+%We have $\orbit[\group]{h_i}\cap\poly{\K}{S} = \setof{\gelem\cdot h_i}{\gelem\in\Pi}$.
+%%
+%
+%Define an equivalence relation $\sim$ on $\Pi$ as $\gelem\sim\sigma$ if $\gelem\cdot a = \sigma\cdot a$ for every $a\in \dom(h_i)$.
+%Then $\gelem \sim \sigma$ implies $\gelem\cdot h_i = \sigma\cdot h_i$.
+%Therefore the cardinality of $\orbit[\group]{h_i}\cap\poly{\K}{S}$ can not be bigger than the number of equivalence classes of $\sim$ in $\Pi$.
+%Observe that the latter can not be bigger than $|T|^{|\dom(h_i)|}$.
+%%
+%\end{proof}
+%%
+\subsection{Definition of strong Gr\"{o}bner bases}
+%
+\arka{No need to assume $\monoid$-ideal. Put a remark in the end.}
+A subset $\Basis$ of an ideal $\idl[I]$ in $\poly{\K}{\Indets}$ is called an \intro{strong Gr\"{o}bner basis} of $\idl[I]$ if for every $f\in\idl[I]$ there exists $b\in\Basis$ such that
+\begin{enumerate}
+\item $\dom(b) \subseteq \dom(f)$ and,
+\item $\lm[\monlt](b) \divleq \lm[\monlt]{}(f)$.
+\end{enumerate}  
+%
+\begin{example}
+The set $\setof{x - 1}{x\in\OrderAtoms}$ is a \kl{strong Gr\"{o}bner basis} of the ideal $\idl[S]_0\subseteq \poly{\Q}{\OrderAtoms}$ containing all polynomials whose coefficients sum up to $0$.
+
+The set $\Basis[C] = \setof{x^2 - 1}{y \in \OrderAtoms}\cup\setof{x^2 - y}{x < y \in \OrderAtoms}$ is subset of $\idl[S]_0$ that generated $\idl[S]_0$ but is not a \kl{strong Gr\"{o}bner basis} of $\idl[S]_0$.
+In particular, for $u \in \OrderAtoms$,
+the polynomial $u - 1$ is in $\idl[S]_0$ but there does not exists $g\in\Basis[C]$ such that $\dom(g) \subseteq \{u\}$ and,
+$\lm[\monlt](g) \divleq u$.
+\end{example}
+%
+\begin{lemma}\label{lem:grob gen idl}
+If $\Basis$ is an \kl{strong Gr\"{o}bner basis} of $\idl[I]$,
+then $\IdlGen{\Basis} = \idl[I]$.
+\end{lemma}
+%
+The following definition will be used in the proof of the above lemma and will be crucial in the rest of the paper.
+%
+\begin{definition}\label{def:ch mon}
+The \intro{characteristic} monomial of a polynomial $f\in\poly{\K}{\Indets}$ with 
+$\dom{f} = \{x_1,\dots,x_n\}$ and $\lm[\monlt](f) = x_1^{k_1} \dots x_n^{k_n}$ is defined as
+\[
+\cm[\monlt](f) = x_1^{k_1 + 1} \dots x_n^{k_n + 1}
+\] 
+\end{definition}
+%
+\begin{example}
+For $x \varlt y \varlt z$,
+$\cm[\colexlt](x^2y^3z + yz^3) = xy^2z^4$.
+\end{example}
+%
+\begin{proof}[Proof of \Cref{lem:grob gen idl}]
+\arka{TODO}
+\end{proof}
+%
+As noted in \Cref{lem:monlt loc},
+for every finite subset $S$ of $\Indets$,
+the restriction of $\monlt$ to $\mon{S}$ is a monomial ordering.
+\arka{maybe worth repeating the definition in the appendix}
+Therefore, one can talk about Gr\"{o}bner bases of ideals in $\poly{\K}{S}$ for finite subsets $S$ of $\Indets$.
+
+The next lemma gives a local criterion for a subset of an $\monoid$-ideal to be an $\monoid$-Gr\"{o}bner basis.
 %
 \begin{lemma}
-If $H$ is orbit-finite then the set $\rem{H}{f}$ is finite for every $f\in\poly{\K}{\Indets}$.
+$\Basis$ is an $\monoid$-Gr\"{o}bner basis of an $\monoid$-ideal $\idl[I]$,
+if and only if $\Basis\cap\poly{\K}{S}$ is a Gr\"{o}bner basis of $\idl[I]\cap\poly{\K}{S}$ for every finite subset $S$ of $\Indets$.
 \end{lemma}
 %
 \begin{proof}
-%
-We actually show that $P = \setof{p\in\poly{\K}{\Indets}}{f\redtr{H} p}\supseteq\rem{H}{f}$ is finite.
-Consider a tree $\mathcal{T}$ such that
-\begin{enumerate}
-\item the root of $\mathcal{T}$ is labelled by $f$,
-\item if a node of $\mathcal{T}$ is labelled by $p$ and $p\toeucl{H}p'$,
-then the node has exactly one child labelled by $p'$.
-\end{enumerate}
-Observe that there is a one to one correspondence between branches in $\mathcal{T}$ and reduction sequences $f\toeucl{H} p_1 \toeucl{H} \dots \toeucl{H} p_n$.
-Therefore, for every polynomial $p'$ in $P$,
-there is at least one node in $\mathcal{T}$ that is labelled by $p$ 
-(two nodes can have the same label $p$ of there are two different reduction sequences $f\toeucl{H} p_1 \toeucl{H} \dots \toeucl{H} p_n = p$ and $f\toeucl{H} p'_1 \toeucl{H} \dots \toeucl{H} p'_m = p$).
-We show that $\mathcal{T}$ is finite.
-Finiteness of $P$ follows as a consequence.
-
-Since every sequence of reductions terminate, every branch of $\mathcal{T}$ is finite.
-Due to K\"{o}nig's lemma \cite{konig},
-to show finiteness of $\mathcal{T}$,
-it is enough to prove that $\mathcal{T}$ is finitely branching  (i.e., every node has finitely many children).
-
-Pick a node in $\mathcal{T}$.
-Say it is labelled by $p$.
-Let $T = \dom(p)$
-We show that there are only finitely many $p'$ such that $p\toeucl{H} p'$.
-Let $S = \dom(f)$.
-If we have $p\toeucl{H} p'$ for some polynomial $p'$ then
-\[
-p' = p + r\monelt h
-\]
-for some $r\in\K$, $\monelt\in\mon{T}$ and $h\in H\cap\poly{\K}{T}$ such that $\lt[\monlt](p) = r\monelt\lt[\monlt](h)$.
-Observe that both $r$ and $\monelt$ are entirely determined by the choice of $h$.
-Therefore, the number of possible $p'$ such that $p\toeucl{H} p'$ is smaller than the cardinality of the set $H\cap\poly{\K}{T}$.
-We show that the latter set is finite.
-
-Let $h_1,\dots,h_n\in H$ be such that
-$H = \orbit[\group]{h_1}\cup\dots\cup\orbit[\group]{h_n}$.
-We show that $\orbit[\group]{h_i}\cap\poly{\K}{S}$ is finite for every $i$.
-Let $\Pi$ be the set of all $\gelem\in\group$ such that $\gelem\cdot \dom(h_i) = \dom(\gelem\cdot h_i) \subseteq T$.
-We have $\orbit[\group]{h_i}\cap\poly{\K}{S} = \setof{\gelem\cdot h_i}{\gelem\in\Pi}$.
-%
-
-Define an equivalence relation $\sim$ on $\Pi$ as $\gelem\sim\sigma$ if $\gelem\cdot a = \sigma\cdot a$ for every $a\in \dom(h_i)$.
-Then $\gelem \sim \sigma$ implies $\gelem\cdot h_i = \sigma\cdot h_i$.
-Therefore the cardinality of $\orbit[\group]{h_i}\cap\poly{\K}{S}$ can not be bigger than the number of equivalence classes of $\sim$ in $\Pi$.
-Observe that the latter can not be bigger than $|T|^{|\dom(h_i)|}$.
-%
+\arka{TODO}
 \end{proof}
-%
 \subsection{Existence of orbit-finite equivariant Gr\"{o}bner bases}
 %
 \begin{theorem}\label{thm:nice grob}
 If $\monoid\actson\Indets$ is \kl{nicely ordered},
-then every 
+then every $\monoid$-ideal $\idl[I]\subseteq \poly{\K}{\Indets}$ has an $\monoid$-orbit-finite $\monoid$-Gr\"{o}bner basis.
 \end{theorem}
 %
-\arka{add Gr\"{o}bner bases for nicely orderable actions as well}.
+\arka{add setwise Gr\"{o}bner bases for nicely orderable actions as well}.
 \subsubsection{Divisibility and reduction}
 Note that even in the case of a finite set of variables,
 a \kl{Gröbner basis} in the classical sense \arka{cite book} is not necessarily an \kl{equivariant Gröbner basis},
